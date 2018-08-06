@@ -1,0 +1,14 @@
+<adapter-config name="Fetch_EbondingsPriorityMappingInbound" adapter="db" wsdlLocation="Fetch_EbondingsPriorityMappingInbound.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ESBDevDB" location="eis/DB/ESBDevDB"/>
+  <endpoint-interaction portType="Fetch_EbondingsPriorityMappingInbound_ptt" operation="Fetch_EbondingsPriorityMappingInboundSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="Fetch_EbondingsPriorityMappingInbound.EbondingsPriorityMapping"/>
+      <property name="QueryName" value="Fetch_EbondingsPriorityMappingInboundSelect"/>
+      <property name="MappingsMetaDataURL" value="Fetch_EbondingsPriorityMappingInbound-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

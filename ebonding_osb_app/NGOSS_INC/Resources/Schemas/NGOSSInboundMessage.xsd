@@ -1,0 +1,39 @@
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="IncidentXML">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="IncidentId" type="xsd:string" />
+        <xsd:element name="Category" type="xsd:string" />
+        <xsd:element name="ElementId" type="xsd:string" />
+        <xsd:element name="Owner">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="EmailAddress" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+       <xsd:element type="xsd:string" name="Severity"/>
+        <xsd:element type="xsd:string" name="Impact"/>
+        <xsd:element type="xsd:string" name="EventID"/>
+        <xsd:element type="xsd:string" name="Active"/>
+        <xsd:element type="xsd:string" name="SiteReference"/>
+        <xsd:element type="xsd:string" name="EventLogComment"/>
+        <xsd:element type="xsd:string" name="TimeLogComment"/>
+        <xsd:element type="xsd:string" name="Acknowledged"/>
+        <xsd:element type="xsd:string" name="InMaintenance"/>
+        <xsd:element type="xsd:string" name="IncidentDescription"/>
+        <xsd:element type="xsd:string" name="sitaTrilliumGroup"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>   	
+   <xsd:element name="IncidentResponseXML">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element type="xsd:string" name="EventID"/>
+        <xsd:element type="xsd:string" name="Status"/>
+        <xsd:element type="xsd:string" minOccurs ="0" name="ErrorCode"/>
+        <xsd:element type="xsd:string" name="Description"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

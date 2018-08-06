@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="Common/Resources/WSDLs/AuditPS"/>
+            <con:binding>
+                <con:name>execute_bind</con:name>
+                <con:namespace>http://xmlns.oracle.com/SITA_Ebondings/Common/AuditPS</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:flow>
+            <con:route-node name="RouteNode1">
+                <con:context>
+                    <con2:userNsDecl prefix="aud" namespace="http://www.sita.aero/schema/AuditPSMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con1:route>
+                        <con2:id>_ActionId-a013dc6.N208622f7.0.1633b365cf8.N7f5b</con2:id>
+                        <con1:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>insert</con1:operation>
+                        <con1:outboundTransform>
+                            <con3:assign varName="ESBTranIdFetch">
+                                <con2:id>_ActionId-a013dc6.N208622f7.0.1633b365cf8.N7f65</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryText>&lt;RESULT>{
+fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('TRANID'),
+'select ESB_AUDIT_TRAN_ID_SEQ.nextval from dual')}&lt;/RESULT></con2:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:assign varName="ESBTranId">
+                                <con2:id>_ActionId-a013dc6.N208622f7.0.1633b365cf8.N7f62</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryText>$ESBTranIdFetch/TRANID/NEXTVAL/text()</con2:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:assign varName="AuditRequest">
+                                <con2:id>_ActionId-a013dc6.N208622f7.0.1633b365cf8.N7ec0</con2:id>
+                                <con3:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="Common/Resources/XQueries/CreateAuditBSRequest"/>
+                                        <con2:param name="ESBTranId">
+                                            <con2:path>$ESBTranId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="AuditPSRequestMessage">
+                                            <con2:path>$body/*</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-a013dc6.N208622f7.0.1633b365cf8.N7f28</con2:id>
+                                <con3:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con3:location>
+                                <con3:expr>
+                                    <con2:xqueryText>&lt;ins:EsbAuditCollection xmlns:ins="http://xmlns.oracle.com/pcbpel/adapter/db/top/Insert_ESB_Audit">{
+$AuditRequest}
+&lt;/ins:EsbAuditCollection></con2:xqueryText>
+                                </con3:expr>
+                            </con3:replace>
+                        </con1:outboundTransform>
+                        <con1:responseTransform/>
+                    </con1:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

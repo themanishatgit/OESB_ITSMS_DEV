@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="ITServicesMessageHeader">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageIdentifier" type="xsd:string"/>
+        <xsd:element name="MessageDateTime" type="xsd:string"/>
+        <xsd:element name="OriginatingSystem" type="xsd:string"/>
+        <xsd:element name="DestinationSystem" type="xsd:string"/>
+        <xsd:element name="LinkedRecord" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="MessageFunction" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

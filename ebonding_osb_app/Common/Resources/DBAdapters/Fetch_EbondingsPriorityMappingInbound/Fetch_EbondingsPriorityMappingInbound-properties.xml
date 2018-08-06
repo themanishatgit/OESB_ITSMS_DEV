@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.PRIORITY:db_column_type">VARCHAR2</entry>
+   <entry key="root_descriptor_alias">EBONDINGS_PRIORITY_MAPPING</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.UPDATE_TIME:db_column_not_null">false</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.REC_TYPE:db_column_size">80</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.CREATED_BY:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.IMPACT:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.PRIORITY:db_column_size">40</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.UPDATE_TIME:db_column_type">TIMESTAMP</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.IS_ACTIVE:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.SN_ID:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.UPDATED_BY:db_column_not_null">false</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.ESB_TRAN_ID:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.SN_ID:db_column_size">32</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.URGENCY:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.CREATE_TIME:db_column_type">TIMESTAMP</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_table_type">TABLE</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.PRIORITY:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.IS_ACTIVE:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.UPDATE_TIME:db_column_scale">6</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.CREATED_BY:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.IMPACT:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.ESB_TRAN_ID:db_column_size">20</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.URGENCY:db_column_size">40</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.UPDATED_BY:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.IS_ACTIVE:db_column_size">40</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.REC_TYPE:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_10">ESB_TRAN_ID</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.ESB_TRAN_ID:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.CREATED_BY:db_column_size">40</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.CREATE_TIME:db_column_scale">6</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.IMPACT:db_column_size">40</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_9">IS_ACTIVE</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_8">SN_ID</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.URGENCY:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_7">UPDATED_BY</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.SN_ID:db_column_not_null">true</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_6">CREATED_BY</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.UPDATED_BY:db_column_size">40</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_5">UPDATE_TIME</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_4">CREATE_TIME</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_3">URGENCY</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_2">IMPACT</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.REC_TYPE:db_column_type">VARCHAR2</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_1">PRIORITY</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING:db_column_0">REC_TYPE</entry>
+   <entry key="EBONDINGS_PRIORITY_MAPPING.CREATE_TIME:db_column_not_null">true</entry>
+</properties>

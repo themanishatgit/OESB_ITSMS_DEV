@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsPriorityMappingOutbound" name="Fetch_EbondingsPriorityMappingOutbound-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="Fetch_EbondingsPriorityMappingOutbound.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsPriorityMappingOutbound"/>
+    <wsdl:binding name="Fetch_EbondingsPriorityMappingOutbound_ptt-binding" type="fet:Fetch_EbondingsPriorityMappingOutbound_ptt" xmlns:fet="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsPriorityMappingOutbound">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="Fetch_EbondingsPriorityMappingOutboundSelect">
+            <soap:operation soapAction="Fetch_EbondingsPriorityMappingOutboundSelect"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

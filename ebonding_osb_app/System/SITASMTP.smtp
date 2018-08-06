@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:con="http://www.bea.com/wli/sb/resources/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <con:serverURL>mx07-001e2a01.pphosted.com</con:serverURL>
+  <con:description/>
+  <con:portNumber>25</con:portNumber>
+</xml-fragment>

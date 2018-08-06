@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+    <con:coreEntry>
+        <con:binding type="Any XML"/>
+        <con:transactions isRequired="true" sameTxForResponse="true"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-a013dca.Ne983b99.0.16344c3ab33.N7e9b">
+            <con:stage id="_StageId-a013dca.N3f03c63d.0.1636e00b530.N7b7f" name="FetchVariables">
+                <con:context>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con2:assign varName="IncomingRequest" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.68323751.0.163ba1b9eee.N6d3e</con6:id>
+                        <con2:expr>
+                            <con1:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con1:assign varName="Message_TranId">
+                        <con2:id>_ActionId-a013b23.N22e84121.0.163d038901c.N7e9e</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="TransactionType">
+                        <con2:id>_ActionId-a013b23.N22e84121.0.163d038901c.N7e9b</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="SourceSystem">
+                        <con2:id>_ActionId-a013b23.N22e84121.0.163d038901c.N7e98</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="TicketNumber">
+                        <con2:id>_ActionId-a013b23.N22e84121.0.163d038901c.N7e95</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="RecType">
+                        <con2:id>_ActionId-a013b23.N22e84121.0.163d038901c.N7e92</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="ExtRefNumber">
+                        <con2:id>_ActionId-a013b23.N22e84121.0.163d038901c.N7e8f</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.68323751.0.163ba1b9eee.N726a" name="AuditStart">
+                <con:context/>
+                <con:actions>
+                    <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.68323751.0.163ba1b9eee.N7269</con7:id>
+                        <con4:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>insert</con4:operation>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.68323751.0.163ba1b9eee.N7268</con7:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con7:xqueryTransform xmlns:con7="http://www.bea.com/wli/sb/stages/config">
+                                        <con7:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                        <con7:param name="TranType">
+                                            <con7:path>$TransactionType</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Message_TranId">
+                                            <con7:path>$Message_TranId</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Destination">
+                                            <con7:path>'NGOSS'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ExtRefNumber">
+                                            <con7:path>$ExtRefNumber</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ErrMessage">
+                                            <con7:path>''</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Source">
+                                            <con7:path>$SourceSystem</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ErrCode">
+                                            <con7:path>''</con7:path>
+                                        </con7:param>
+                                        <con7:param name="TicketNumber">
+                                            <con7:path>$TicketNumber</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ProxyService">
+                                            <con7:path>'NGOSSOutboundIncAsyncPS'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Event">
+                                            <con7:path>'START'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="RecType">
+                                            <con7:path>$RecType</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Payload">
+                                            <con7:path>$body/*</con7:path>
+                                        </con7:param>
+                                    </con7:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                            <con7:routing-options xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dca.25ce7699.0.164c5f7f57c.N7ec4</con2:id>
+                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                            </con7:routing-options>
+                        </con4:outboundTransform>
+                    </con4:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013b23.N22e84121.0.163d038901c.N7fce" name="Transform">
+                <con:context/>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-a013b23.N22e84121.0.163d038901c.N7e8c</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="NGOSS_INC/Resources/XQueries/CreateNGOSSRequest"/>
+                                <con2:param name="IncidentRequestMessage">
+                                    <con2:path>$IncomingRequest/*</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013b23.N22e84121.0.163d038901c.N7fcd" name="AuditRequestSent">
+                <con:context/>
+                <con:actions>
+                    <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.68323751.0.163ba1b9eee.N719e</con7:id>
+                        <con4:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>insert</con4:operation>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b23.N22e84121.0.163d038901c.N7e58</con7:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con7:xqueryTransform xmlns:con7="http://www.bea.com/wli/sb/stages/config">
+                                        <con7:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                        <con7:param name="TranType">
+                                            <con7:path>$TransactionType</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Message_TranId">
+                                            <con7:path>$Message_TranId</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Destination">
+                                            <con7:path>'NGOSS'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ExtRefNumber">
+                                            <con7:path>$ExtRefNumber</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ErrMessage">
+                                            <con7:path>''</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Source">
+                                            <con7:path>$SourceSystem</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ErrCode">
+                                            <con7:path>''</con7:path>
+                                        </con7:param>
+                                        <con7:param name="TicketNumber">
+                                            <con7:path>$TicketNumber</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ProxyService">
+                                            <con7:path>'NGOSSOutboundIncAsyncPS'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Event">
+                                            <con7:path>'REQUEST_SENT'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="RecType">
+                                            <con7:path>$RecType</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Payload">
+                                            <con7:path>$body/*</con7:path>
+                                        </con7:param>
+                                    </con7:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                            <con7:routing-options xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dca.25ce7699.0.164c5f7f57c.N7ec1</con2:id>
+                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                            </con7:routing-options>
+                        </con4:outboundTransform>
+                    </con6:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dca.Ne983b99.0.16344c3ab33.N7e9a">
+            <con:stage id="_StageId-a013dca.68323751.0.163ba1b9eee.N7102" name="AuditResponseReceived">
+                <con:context/>
+                <con:actions>
+                    <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.N29b7e246.0.163c966c01c.N7efe</con7:id>
+                        <con4:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>insert</con4:operation>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b23.N22e84121.0.163d038901c.N7e24</con7:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con7:xqueryTransform xmlns:con7="http://www.bea.com/wli/sb/stages/config">
+                                        <con7:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                        <con7:param name="TranType">
+                                            <con7:path>$TransactionType</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Message_TranId">
+                                            <con7:path>$Message_TranId</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Destination">
+                                            <con7:path>'NGOSS'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ExtRefNumber">
+                                            <con7:path>$ExtRefNumber</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ErrMessage">
+                                            <con7:path>''</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Source">
+                                            <con7:path>$SourceSystem</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ErrCode">
+                                            <con7:path>''</con7:path>
+                                        </con7:param>
+                                        <con7:param name="TicketNumber">
+                                            <con7:path>$TicketNumber</con7:path>
+                                        </con7:param>
+                                        <con7:param name="ProxyService">
+                                            <con7:path>'NGOSSOutboundIncAsyncPS'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Event">
+                                            <con7:path>'RESPONSE_RECEIVED'</con7:path>
+                                        </con7:param>
+                                        <con7:param name="RecType">
+                                            <con7:path>$RecType</con7:path>
+                                        </con7:param>
+                                        <con7:param name="Payload">
+                                            <con7:path>$body/*</con7:path>
+                                        </con7:param>
+                                    </con7:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                            <con7:routing-options xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dca.25ce7699.0.164c5f7f57c.N7ebf</con2:id>
+                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                            </con7:routing-options>
+                        </con4:outboundTransform>
+                    </con6:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-a013dca.Ne983b99.0.16344c3ab33.N7e9b</con:request>
+                <con:response>response-a013dca.Ne983b99.0.16344c3ab33.N7e9a</con:response>
+            </con:pipeline-node>
+            <con:route-node name="To NGOSS System">
+                <con:context/>
+                <con:actions>
+                    <con4:route>
+                        <con2:id>_ActionId-a013dca.N158059d0.0.1634efcf3cf.N7e50</con2:id>
+                        <con4:service ref="NGOSS_INC/BusinessServices/Outbound/NGOSSIncReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:outboundTransform>
+                            <con1:routing-options>
+                                <con2:id>_ActionId-a013dca.c28432d.0.16440f2c55a.N7f0a</con2:id>
+                                <con1:restOptions>
+                                    <con1:verb>POST</con1:verb>
+                                </con1:restOptions>
+                            </con1:routing-options>
+                        </con4:outboundTransform>
+                        <con4:responseTransform>
+                            <con3:log>
+                                <con2:id>_ActionId-a013dca.40f1cdc4.0.16436d3ec6f.N7d7d</con2:id>
+                                <con3:logLevel>warning</con3:logLevel>
+                                <con3:expr>
+                                    <con2:xqueryText>$body/*</con2:xqueryText>
+                                </con3:expr>
+                                <con3:message>Response</con3:message>
+                            </con3:log>
+                        </con4:responseTransform>
+                    </con4:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

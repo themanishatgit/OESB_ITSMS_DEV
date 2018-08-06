@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+    <con:coreEntry>
+        <con:binding type="Any XML"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N3f57d45a.4ccebf95.0.16372a61423.N7eb8">
+        <con:pipeline type="request" name="request-N3f57d45a.4ccebf95.0.16372a61423.N7f28"/>
+        <con:pipeline type="response" name="response-N3f57d45a.4ccebf95.0.16372a61423.N7f27">
+            <con:stage id="_StageId-N3f57d45a.4ccebf95.0.16372a61423.N7f25" name="Stage1">
+                <con:context>
+                    <con2:userNsDecl prefix="ns1" namespace="http://sita.ba.integration.axiossystems.com/"/>
+                </con:context>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57d45a.4ccebf95.0.16372a61423.N7ef1</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText><![CDATA[<RESPONSE>
+          <STATUS>0</STATUS>
+          <ERROR_DESCRIPTION>{
+          if(fn:not($body/ns1:TRANSACTION/ns1:TRANSACTION_TYPE/text()='CREATE'))
+          then(
+          'Incident Updated Successfully'
+          )
+          else('New Incident Successfully Created (4213107).')
+          }
+          </ERROR_DESCRIPTION>
+          {
+          if($body/ns1:TRANSACTION/ns1:TRANSACTION_TYPE/text()='CREATE')
+          then(<SR_ID>12345(Assyst_Reference)</SR_ID>)
+          else()
+          }
+</RESPONSE>]]></con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57d45a.4ccebf95.0.16372a61423.N7eb8"/>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-N3f57d45a.4ccebf95.0.16372a61423.N7f28</con:request>
+                <con:response>response-N3f57d45a.4ccebf95.0.16372a61423.N7f27</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

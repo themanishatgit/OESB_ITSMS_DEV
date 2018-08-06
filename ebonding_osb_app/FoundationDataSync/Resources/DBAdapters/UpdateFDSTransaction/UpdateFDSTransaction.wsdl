@@ -1,0 +1,20 @@
+<wsdl:definitions name="UpdateFDSTransaction" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/FoundationDataSync/UpdateFDSTransaction" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/FoundationDataSync/UpdateFDSTransaction" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateFDSTransaction" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="UpdateFDSTransaction_plt">
+    <plt:role name="UpdateFDSTransaction_role">
+      <plt:portType name="tns:UpdateFDSTransaction_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateFDSTransaction" schemaLocation="UpdateFDSTransaction_table.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="FdsTransactionsCollection_msg">
+        <wsdl:part name="FdsTransactionsCollection" element="top:FdsTransactionsCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="UpdateFDSTransaction_ptt">
+        <wsdl:operation name="merge">
+            <wsdl:input message="tns:FdsTransactionsCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="DataMappingLoad/Resources/WSDLs/EbondingsCategoryMappingLoad"/>
+            <con:binding>
+                <con:name>execute_bind</con:name>
+                <con:namespace>http://xmlns.oracle.com/ServiceBusApplication_X/DataMappingLoad/EbondingsCategory</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-a013dca.2398d79f.0.163d8f431f0.N7b0a">
+        <con:pipeline type="request" name="request-a013dca.2398d79f.0.163d8f431f0.N7eb9">
+            <con:stage id="_StageId-a013dca.2398d79f.0.163d8f431f0.N7eb7" name="Validation" errorHandler="error-a013dca.2398d79f.0.163d8f431f0.N7a71">
+                <con:context/>
+                <con:actions>
+                    <con2:assign varName="IncomingRequest" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.2398d79f.0.163d8f431f0.N7e82</con3:id>
+                        <con2:expr>
+                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$body</con5:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con3:log>
+                        <con2:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7dae</con2:id>
+                        <con2:disabled>true</con2:disabled>
+                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:expr>
+                            <con2:xqueryText>$IncomingRequest</con2:xqueryText>
+                        </con3:expr>
+                        <con3:message>IncomingRequest</con3:message>
+                    </con3:log>
+                    <con1:validate>
+                        <con2:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7e7f</con2:id>
+                        <con1:schema ref="DataMappingLoad/Resources/Schemas/EbondingsCategoryMappingLoadMessage"/>
+                        <con1:schemaElement xmlns:ebon="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1">ebon:EbondingsCategoryMappingLoadReq</con1:schemaElement>
+                        <con1:varName>IncomingRequest</con1:varName>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                    </con1:validate>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.2398d79f.0.163d8f431f0.N7de4" name="Check Existing Record" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con1:userNsDecl prefix="ebon" namespace="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con2:assign varName="ExistingRecord" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7de3</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>&lt;RECORDS>{
+fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('RECORD'),
+'select SN_ID from EBONDINGS_CATEGORY_MAPPING where SN_ID =?',
+xs:string($IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:SnId/text())
+)}&lt;/RECORDS></con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="Record_Exists" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7de2</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>if($ExistingRecord/RECORD/SN_ID)
+then('Y')
+else('N')</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con3:log>
+                        <con1:id>_ActionId-a013dca.36121359.0.164121be226.N7df3</con1:id>
+                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:expr>
+                            <con1:xqueryText>$Record_Exists</con1:xqueryText>
+                        </con3:expr>
+                        <con3:message>Record_Exists</con3:message>
+                    </con3:log>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013b64.34b37e2.0.163ee8ffcb3.N7f2e" name="GetESBTranIDSeq" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config">
+                <con:context/>
+                <con:actions>
+                    <con5:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b64.34b37e2.0.163ee8ffcb3.N7f07</con6:id>
+                        <con5:case id="_BranchId-a013b64.34b37e2.0.163ee8ffcb3.N7f06">
+                            <con5:condition>
+                                <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$Record_Exists='N'</con6:xqueryText>
+                            </con5:condition>
+                            <con5:actions>
+                                <con3:assign varName="ESBTranIdFetch" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                                    <con2:id>_ActionId-a013b64.34b37e2.0.163ee8ffcb3.N7f2d</con2:id>
+                                    <con3:expr>
+                                        <con2:xqueryText>&lt;RESULT>{
+fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('TRANID'),
+'select EBONDINGS_CATEGORY_MAPPING_TRAN_ID_SEQ.nextval from dual')}&lt;/RESULT></con2:xqueryText>
+                                    </con3:expr>
+                                </con3:assign>
+                                <con3:assign varName="ESBTranId" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                                    <con2:id>_ActionId-a013b64.34b37e2.0.163ee8ffcb3.N7f25</con2:id>
+                                    <con3:expr>
+                                        <con2:xqueryText>$ESBTranIdFetch/TRANID/NEXTVAL/text()</con2:xqueryText>
+                                    </con3:expr>
+                                </con3:assign>
+                            </con5:actions>
+                        </con5:case>
+                        <con5:default/>
+                    </con5:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dca.2398d79f.0.163d8f431f0.N7eb8">
+            <con:stage id="_StageId-a013dca.2398d79f.0.163d8f431f0.N7d11" name="PrepareResponse" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+                <con:context/>
+                <con:actions>
+                    <con2:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7d10</con1:id>
+                        <con2:location>
+                            <con1:xpathText>.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con1:xqueryText><![CDATA[<EbondingsCategoryMappingLoadRes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                             xsi:schemaLocation="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1 Resources/Schemas/EbondingsCategoryMappingLoadMessage.xsd"
+                             xmlns="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1">
+	<TransactionId>{$IncomingRequest/EbondingsCategoryMappingLoadReq/TransactionId/text()}</TransactionId>
+	<Status>Success</Status>
+	<Description>Record Inserted/Updated Successfully</Description>
+</EbondingsCategoryMappingLoadRes>]]></con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                    <con3:log>
+                        <con1:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7b3c</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:expr>
+                            <con1:xqueryText>$body</con1:xqueryText>
+                        </con3:expr>
+                        <con3:message>bodyResponse:</con3:message>
+                    </con3:log>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dca.2398d79f.0.163d8f431f0.N7b0a">
+            <con:stage id="_StageId-a013dca.2398d79f.0.163d8f431f0.N7b09" name="Pipeline.EH">
+                <con:context/>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7ad4</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText><![CDATA[<EbondingsCategoryMappingLoadRes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                             xsi:schemaLocation="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1 Resources/Schemas/EbondingsCategoryMappingLoadMessage.xsd"
+                             xmlns="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1">
+	<TransactionId>{$IncomingRequest/EbondingsCategoryMappingLoadReq/TransactionId/text()}</TransactionId>
+	<Status>Failure</Status>
+	<Description>Technical Failure</Description>
+</EbondingsCategoryMappingLoadRes>]]></con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dca.2398d79f.0.163d8f431f0.N7a71">
+            <con:stage id="_StageId-a013dca.2398d79f.0.163d8f431f0.N7a70" name="Validation.EH">
+                <con:context/>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7a6d</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText><![CDATA[<EbondingsCategoryMappingLoadRes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                             xsi:schemaLocation="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1 Resources/Schemas/EbondingsCategoryMappingLoadMessage.xsd"
+                             xmlns="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1">
+	<TransactionId>{$IncomingRequest/EbondingsCategoryMappingLoadReq/TransactionId/text()}</TransactionId>
+	<Status>Failure</Status>
+	<Description>Schema Validation Failure</Description>
+</EbondingsCategoryMappingLoadRes>]]></con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                    <con5:reply xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                        <con5:id>_ActionId-a013b64.34b37e2.0.163ee8ffcb3.N7ffe</con5:id>
+                    </con5:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-a013dca.2398d79f.0.163d8f431f0.N7eb9</con:request>
+                <con:response>response-a013dca.2398d79f.0.163d8f431f0.N7eb8</con:response>
+            </con:pipeline-node>
+            <con:route-node name="UpdateTable">
+                <con:context>
+                    <con2:userNsDecl prefix="ebon" namespace="http://www.sita.aero/schema/EbondingsCategoryMappingLoadMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con4:route>
+                        <con2:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7c3b</con2:id>
+                        <con4:service ref="DataMappingLoad/BusinessServices/Insert_Ebondings_Category_Mapping" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>merge</con4:operation>
+                        <con4:outboundTransform>
+                            <con5:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7d77</con2:id>
+                                <con5:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con5:location>
+                                <con5:expr>
+                                    <con2:xqueryText><![CDATA[<ins:EbondingsCategoryMappingCollection xmlns:ins="http://xmlns.oracle.com/pcbpel/adapter/db/top/Insert_Ebondings_Category_Mapping">
+    <ins:EbondingsCategoryMapping>
+        {
+          if(fn:upper-case($IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:RecType/text())='INCIDENT')then
+            <ins:recType>{'INC'}</ins:recType>
+        else(<ins:recType>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:RecType/text()}</ins:recType>)
+        }
+        <ins:shCategory>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:SH_Category/text()}</ins:shCategory>
+        <ins:snCategory>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:SN_Category/text()}</ins:snCategory>
+		<ins:snSubcategory>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:SN_SubCategory/text()}</ins:snSubcategory>
+		
+         {
+                if($Record_Exists='N')
+					then(<ins:createTime>{fn:current-dateTime()}</ins:createTime>)
+					else(<ins:updateTime>{fn:current-dateTime()}</ins:updateTime>)
+        }
+			
+        {
+				if($Record_Exists='N')
+					then(<ins:createdBy>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:UpdatedBy/text()}</ins:createdBy>)
+					else(<ins:updatedBy>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:UpdatedBy/text()}</ins:updatedBy>)
+		}
+				
+        <ins:snId>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:SnId/text()}</ins:snId>
+        <ins:isActive>{$IncomingRequest/ebon:EbondingsCategoryMappingLoadReq/ebon:IsActive/text()}</ins:isActive>
+        {
+                if($Record_Exists='N')
+					then(<ins:esbTranId>{$ESBTranId}</ins:esbTranId>)
+					else()
+        }
+		
+    </ins:EbondingsCategoryMapping>
+</ins:EbondingsCategoryMappingCollection>]]></con2:xqueryText>
+                                </con5:expr>
+                            </con5:replace>
+                            <con5:log xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con1:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.2398d79f.0.163d8f431f0.N7c37</con1:id>
+                                <con6:disabled xmlns:con6="http://www.bea.com/wli/sb/stages/config">true</con6:disabled>
+                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:expr>
+                                    <con1:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con1:xqueryText>
+                                </con4:expr>
+                                <con4:message>body</con4:message>
+                            </con5:log>
+                        </con4:outboundTransform>
+                        <con4:responseTransform/>
+                    </con4:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

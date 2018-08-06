@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+	<xs:element name="ITServicesDataMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ITServicesMessageHeader">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="MessageIdentifier" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="MessageDateTime" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="OriginatingSystem" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="DestinationSystem" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="LinkedRecord" type="xs:string" minOccurs="0" maxOccurs="1"/>
+							<xs:element name="MessageFunction" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- INCIDENT -->
+				<xs:element name="IncidentRecord">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IncidentDetails">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="IncidentIdentifier" type="xs:string" minOccurs="1" maxOccurs="1"/>
+										<xs:element name="IncidentStatus" type="xs:string" minOccurs="1" maxOccurs="1"/>
+										<xs:element name="IncidentTitle" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="IncidentDescription" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="PrimaryAssignGroup" type="xs:string" minOccurs="1" maxOccurs="1"/>
+										<xs:element name="Severity" type="xs:string" minOccurs="1" maxOccurs="1"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="IncidentActivities">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="CorrectiveActions" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="ResolutionSummary" type="xs:string" minOccurs="0" maxOccurs="1"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="IncidentContact">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ContactFirstName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="ContactLastName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="ContactEmail" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="ContactPhone" type="xs:string" minOccurs="0" maxOccurs="1"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="IncidentAsset">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="AffectedAsset" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="ServiceLocation" type="xs:string" minOccurs="0" maxOccurs="1"/>
+										<xs:element name="CurrentDetails" type="xs:string" minOccurs="0" maxOccurs="1"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="IncidentHistory">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ResolvedAt" type="xs:string" minOccurs="0" maxOccurs="1"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="IncidentSpecificData">
+								<xs:complexType>
+									<xs:sequence>
+										<!--xs:element name="Location" type="xs:string"/-->
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RESPONSE" xmlns="">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="STATUS" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="ERROR_DESCRIPTION" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="REC_TYPE" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="EXTERNAL_ID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="SITA_ID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="SR_ID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

@@ -1,0 +1,15 @@
+<adapter-config name="Insert_Ebondings_Category_Mapping" adapter="db" wsdlLocation="Insert_Ebondings_Category_Mapping.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="130.61.80.186" location="eis/DB/ESBDevDB"/>
+  <endpoint-interaction portType="Insert_Ebondings_Category_Mapping_ptt" operation="merge">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="Insert_Ebondings_Category_Mapping.EbondingsCategoryMapping"/>
+      <property name="DmlType" value="merge"/>
+      <property name="MappingsMetaDataURL" value="Insert_Ebondings_Category_Mapping-or-mappings.xml"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="OptimizeMerge" value="true"/>
+      <property name="DetectOmissions" value="true"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

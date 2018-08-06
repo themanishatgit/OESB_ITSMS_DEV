@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:fcm="http://www.sita.aero/schema/FetchCategoryMappingMessageV1"
+            targetNamespace="http://www.sita.aero/schema/FetchCategoryMappingMessageV1" elementFormDefault="qualified">
+  <xsd:element name="FetchCategoryMappingRequest">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="RecType" type="xsd:string"/>
+        <xsd:element name="SNCategory" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="SNSubCategory" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="SHCategory" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FetchCategoryMappingResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Status" type="xsd:string"/>
+        <xsd:element name="Description" minOccurs="0" type="xsd:string"/>
+        <xsd:element name="Result" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RecType" type="xsd:string"/>
+              <xsd:element name="SNCategory" type="xsd:string"/>
+              <xsd:element name="SNSubCategory" type="xsd:string"/>
+              <xsd:element name="SHCategory" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

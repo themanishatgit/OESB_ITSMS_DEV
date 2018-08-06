@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="IncidentRecord">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="IncidentDetails">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="IncidentIdentifier" type="xsd:string"/>
+              <xsd:element name="IncidentStatus" type="xsd:string"/>
+              <xsd:element name="IncidentTitle" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="IncidentDescription" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="PrimaryAssignGroup" type="xsd:string"/>
+              <xsd:element name="Severity" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="IncidentActivities">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="CorrectiveActions" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ResolutionSummary" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="IncidentContact">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="ContactFirstName" type="xsd:string"/>
+              <xsd:element name="ContactLastName" type="xsd:string"/>
+              <xsd:element name="ContactEmail" type="xsd:string"/>
+              <xsd:element name="ContactPhone" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="IncidentAsset">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="AffectedAsset" type="xsd:string"/>
+              <xsd:element name="ServiceLocation" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="CurrentDetails" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="IncidentHistory">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="ResolvedAt" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="IncidentSpecificData"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

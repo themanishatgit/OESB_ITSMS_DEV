@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd">
+   <name>Fetch_EbondingsCategoryMappingOutbound-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>Fetch_EbondingsCategoryMappingOutbound.EbondingsCategoryMapping</class>
+         <alias>EBONDINGS_CATEGORY_MAPPING</alias>
+         <primary-key>
+            <field table="EBONDINGS_CATEGORY_MAPPING" name="REC_TYPE" xsi:type="column"/>
+            <field table="EBONDINGS_CATEGORY_MAPPING" name="SN_CATEGORY" xsi:type="column"/>
+            <field table="EBONDINGS_CATEGORY_MAPPING" name="SN_SUBCATEGORY" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="Fetch_EbondingsCategoryMappingOutboundSelect" xsi:type="read-all-query">
+                  <criteria operator="and" xsi:type="logic-expression">
+                     <left operator="and" xsi:type="logic-expression">
+                        <left operator="and" xsi:type="logic-expression">
+                           <left operator="equal" xsi:type="relation-expression">
+                              <left name="recType" xsi:type="query-key-expression">
+                                 <base xsi:type="base-expression"/>
+                              </left>
+                              <right xsi:type="parameter-expression">
+                                 <parameter name="recType" xsi:type="column"/>
+                              </right>
+                           </left>
+                           <right operator="equal" xsi:type="relation-expression">
+                              <left name="snCategory" xsi:type="query-key-expression">
+                                 <base xsi:type="base-expression"/>
+                              </left>
+                              <right xsi:type="parameter-expression">
+                                 <parameter name="snCategory" xsi:type="column"/>
+                              </right>
+                           </right>
+                        </left>
+                        <right operator="equal" xsi:type="relation-expression">
+                           <left name="snSubcategory" xsi:type="query-key-expression">
+                              <base xsi:type="base-expression"/>
+                           </left>
+                           <right xsi:type="parameter-expression">
+                              <parameter name="snSubCategory" xsi:type="column"/>
+                           </right>
+                        </right>
+                     </left>
+                     <right operator="equal" xsi:type="relation-expression">
+                        <left name="isActive" xsi:type="query-key-expression">
+                           <base xsi:type="base-expression"/>
+                        </left>
+                        <right xsi:type="parameter-expression">
+                           <parameter name="isActive" xsi:type="column"/>
+                        </right>
+                     </right>
+                  </criteria>
+                  <arguments>
+                     <argument name="recType">
+                        <type>java.lang.Object</type>
+                     </argument>
+                     <argument name="snCategory">
+                        <type>java.lang.Object</type>
+                     </argument>
+                     <argument name="snSubCategory">
+                        <type>java.lang.Object</type>
+                     </argument>
+                     <argument name="isActive">
+                        <type>java.lang.Object</type>
+                     </argument>
+                  </arguments>
+                  <reference-class>Fetch_EbondingsCategoryMappingOutbound.EbondingsCategoryMapping</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>recType</attribute-name>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="REC_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>shCategory</attribute-name>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="SH_CATEGORY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>snCategory</attribute-name>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="SN_CATEGORY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>snSubcategory</attribute-name>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="SN_SUBCATEGORY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>createTime</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="CREATE_TIME" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>updateTime</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="UPDATE_TIME" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>createdBy</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="CREATED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>updatedBy</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="UPDATED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>snId</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="SN_ID" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>isActive</attribute-name>
+               <field table="EBONDINGS_CATEGORY_MAPPING" name="IS_ACTIVE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="EBONDINGS_CATEGORY_MAPPING"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.oracle.Oracle9Platform</platform-class>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

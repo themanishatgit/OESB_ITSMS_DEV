@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsCategoryMappingInbound" name="Fetch_EbondingsCategoryMappingInbound-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="Fetch_EbondingsCategoryMappingInbound.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsCategoryMappingInbound"/>
+    <wsdl:binding name="Fetch_EbondingsCategoryMappingInbound_ptt-binding" type="fet:Fetch_EbondingsCategoryMappingInbound_ptt" xmlns:fet="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsCategoryMappingInbound">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="Fetch_EbondingsCategoryMappingInboundSelect">
+            <soap:operation soapAction="Fetch_EbondingsCategoryMappingInboundSelect"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>
