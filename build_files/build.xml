@@ -16,7 +16,5 @@
       </filterreader>
      </filterchain>
     </copy>
-
-  
    </target>
 </project>
