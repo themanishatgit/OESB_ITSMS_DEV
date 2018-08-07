@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config">
     <con:coreEntry>
         <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
             <con:wsdl ref="OBS_INC/Resources/WSDL/ServiceHubInboundWSDL"/>
@@ -19,7 +19,7 @@
                     <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
                 </con:context>
                 <con:actions>
-                    <con1:replace contents-only="true" varName="body" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:replace contents-only="true" varName="body">
                         <con2:id>_ActionId-a013dc6.N58c75b7c.0.164f61508f7.N7ffe</con2:id>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
@@ -28,13 +28,13 @@
                             <con2:xqueryText>fn-bea:inlinedXML($body/tem:processTransaction/tem:transactionData/text())</con2:xqueryText>
                         </con1:expr>
                     </con1:replace>
-                    <con1:assign varName="IncomingRequest" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="IncomingRequest">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f0b</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="TransactionType" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="TransactionType">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f0a</con2:id>
                         <con1:expr>
                             <con2:xqueryText>if($body/TRANSACTION/TRANSACTION_TYPE/text() eq 'Creation') then('CREATE')
@@ -43,25 +43,25 @@ else if($body/TRANSACTION/TRANSACTION_TYPE/text() eq 'Ack' and $body/TRANSACTION
 else('UPDATE')</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="Message_TranId" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="Message_TranId">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f09</con2:id>
                         <con1:expr>
                             <con2:xqueryText>fn:concat('OBS_MsgTranId_',fn:current-dateTime())</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="TicketNumber" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="TicketNumber">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f08</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$body/TRANSACTION/SR_ID/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="ExtRefNumber" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="ExtRefNumber">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f07</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$body/TRANSACTION/EXTERNAL_ID/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:validate xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:validate>
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f06</con2:id>
                         <con1:schema ref="OBS_INC/Resources/Schemas/OBS_INC_ClarifySchema"/>
                         <con1:schemaElement>TRANSACTION</con1:schemaElement>
@@ -136,7 +136,7 @@ else('UPDATE')</con2:xqueryText>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
                 </con:context>
                 <con:actions>
-                    <con1:assign varName="DefaultValues" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="DefaultValues">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7df2</con2:id>
                         <con1:expr>
                             <con2:xqueryTransform>
@@ -144,7 +144,7 @@ else('UPDATE')</con2:xqueryText>
                             </con2:xqueryTransform>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="Priority" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="Priority">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7df1</con2:id>
                         <con1:expr>
                             <con2:xqueryText>if(fn:exists($IncomingRequest/SEVERITY/text()))
@@ -152,7 +152,7 @@ then($IncomingRequest/SEVERITY/text())
 else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7df0</con2:id>
                         <con1:service ref="Common/ProxyServices/FetchPriorityMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con1:operation>execute</con1:operation>
@@ -182,7 +182,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N7d7d" name="FetchDataMapping" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context/>
                 <con:actions>
-                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7d7c</con2:id>
                         <con1:service ref="Common/ProxyServices/FetchDataMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con1:operation>execute</con1:operation>
@@ -229,7 +229,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                     <con2:userNsDecl prefix="fetcm" namespace="http://www.sita.aero/schema/FetchCategoryMappingMessageV1"/>
                 </con:context>
                 <con:actions>
-                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                         <con2:id>_ActionId-a013dc6.N4a5f3b08.0.164f9f5c9af.N7ef6</con2:id>
                         <con1:service ref="Common/ProxyServices/FetchCategoryMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con1:operation>execute</con1:operation>
@@ -261,7 +261,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                     <con2:userNsDecl prefix="fetch" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                 </con:context>
                 <con:actions>
-                    <con1:assign varName="ResolvedValues" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:assign varName="ResolvedValues">
                         <con2:id>_ActionId-N3f57d45a.N36cd38a9.0.164c1e07cc7.N7fef</con2:id>
                         <con1:expr>
                             <con2:xqueryText><![CDATA[<ResolvedValues>
@@ -275,7 +275,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 </ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7d10</con2:id>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
@@ -339,7 +339,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 </RESPONSE>]]></con5:xqueryText>
                         </con2:expr>
                     </con2:replace>
-                    <con1:replace contents-only="true" varName="body" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:replace contents-only="true" varName="body">
                         <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f27</con2:id>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
@@ -351,15 +351,15 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                             </con2:xsltTransform>
                         </con1:expr>
                     </con1:replace>
-                    <con1:replace contents-only="true" varName="body" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con1:replace contents-only="true" varName="body">
                         <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f2a</con2:id>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
                         </con1:location>
                         <con1:expr>
                             <con2:xqueryText>&lt;tem:processTransactionResponse>
-         &lt;tem:processTransactionResult>{fn-bea:serialize($body/*)}&lt;/tem:processTransactionResult>
-      &lt;/tem:processTransactionResponse></con2:xqueryText>
+  &lt;tem:processTransactionResult>{fn-bea:serialize($body/*)}&lt;/tem:processTransactionResult>
+&lt;/tem:processTransactionResponse></con2:xqueryText>
                         </con1:expr>
                     </con1:replace>
                 </con:actions>
@@ -477,29 +477,17 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 </RESPONSE>]]></con6:xqueryText>
                         </con2:expr>
                     </con2:replace>
-                    <con6:replace contents-only="true" varName="body" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
-                        <con2:id>_ActionId-a013dc6.599b5fe3.0.1651377f063.N7ffe</con2:id>
-                        <con1:location>
-                            <con2:xpathText>.</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText>&lt;tem:processTransactionResponse>
-         &lt;tem:processTransactionResult>{fn-bea:serialize($body/*)}&lt;/tem:processTransactionResult>
-      &lt;/tem:processTransactionResponse></con2:xqueryText>
-                        </con1:expr>
-                    </con6:replace>
-                    <con3:replace contents-only="true" varName="body" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
-                        <con2:id>_ActionId-a013dc6.N12003f8f.0.165136dc0f7.N7ffe</con2:id>
-                        <con1:location>
-                            <con2:xpathText>.</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText>&lt;tem:processTransactionResponse>
-         &lt;!--Optional:-->
-         &lt;tem:processTransactionResult>{fn-bea:serialize($body/*)}&lt;/tem:processTransactionResult>
-      &lt;/tem:processTransactionResponse></con2:xqueryText>
-                        </con1:expr>
-                    </con3:replace>
+                    <con2:replace contents-only="true" varName="body">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N6f4933a9.0.16513b26200.N7ffe</con6:id>
+                        <con2:location>
+                            <con6:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con6:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">&lt;tem:processTransactionResponse>
+  &lt;tem:processTransactionResult>{fn-bea:serialize($body/*)}&lt;/tem:processTransactionResult>
+&lt;/tem:processTransactionResponse></con6:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
                     <con1:reply xmlns:con6="http://www.bea.com/wli/sb/stages/config">
                         <con6:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f00</con6:id>
                     </con1:reply>
@@ -555,17 +543,17 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 </RESPONSE>]]></con2:xqueryText>
                         </con5:expr>
                     </con5:replace>
-                    <con6:replace contents-only="true" varName="body" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dc6.N12003f8f.0.165136dc0f7.N7ffb</con2:id>
+                    <con1:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-a013dc6.N6f4933a9.0.16513b26200.N7ffa</con2:id>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
                         </con1:location>
                         <con1:expr>
                             <con2:xqueryText>&lt;tem:processTransactionResponse>
-         &lt;tem:processTransactionResult>{fn-bea:serialize($body/*)}&lt;/tem:processTransactionResult>
-      &lt;/tem:processTransactionResponse></con2:xqueryText>
+  &lt;tem:processTransactionResult>{fn-bea:serialize($body/*)}&lt;/tem:processTransactionResult>
+&lt;/tem:processTransactionResponse></con2:xqueryText>
                         </con1:expr>
-                    </con6:replace>
+                    </con1:replace>
                     <con2:reply xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7b65</con2:id>
                     </con2:reply>
