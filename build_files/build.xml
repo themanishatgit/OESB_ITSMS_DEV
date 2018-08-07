@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="replacetokens" default="set.build.properties">
+  <property environment="env"/> 
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    <classpath>
+      <pathelement location="../lib/ant-contrib/ant-contrib-1.0b3.jar"/>
+    </classpath>
+  </taskdef>
+ <target name="set.build.properties">
+  <copy file="${basedir}/${OLD_CUSTOMIZATION_FILE}" tofile="${NEW_CUSTOMIZATION_FILE}">
+     <filterchain>
+     <filterreader classname="org.apache.tools.ant.filters.ReplaceTokens">
+             <param type="propertiesfile" value="${basedir}/${ENV_TYPE}_build.properties"/>
+             <param type="tokenchar" name="begintoken" value="@"/>
+             <param type="tokenchar" name="endtoken" value="@"/>
+      </filterreader>
+     </filterchain>
+    </copy>
+   </target>
+</project>
