@@ -15,6 +15,7 @@
               <xsd:element name="IncidentDescription" type="xsd:string" minOccurs="0"/>
               <xsd:element name="PrimaryAssignGroup" type="xsd:string"/>
               <xsd:element name="Severity" type="xsd:string"/>
+              <xsd:element name="Category" type="xsd:string"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
@@ -23,6 +24,7 @@
             <xsd:sequence>
               <xsd:element name="CorrectiveActions" type="xsd:string" minOccurs="0"/>
               <xsd:element name="ResolutionSummary" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="JournalUpdates" type="xsd:string" minOccurs="0"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
@@ -45,14 +47,14 @@
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
-        <xsd:element name="IncidentHistory">
+        <xsd:element name="IncidentHistory" minOccurs="0">
           <xsd:complexType>
             <xsd:sequence>
               <xsd:element name="ResolvedAt" type="xsd:string" minOccurs="0"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
-        <xsd:element name="IncidentSpecificData"/>
+        <xsd:element name="IncidentSpecificData" minOccurs="0"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

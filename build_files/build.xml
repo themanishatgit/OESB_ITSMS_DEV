@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <project name="replacetokens" default="set.build.properties">
-  <property environment="env"/> 
+  <property environment="env"/>
   <taskdef resource="net/sf/antcontrib/antcontrib.properties">
     <classpath>
       <pathelement location="../lib/ant-contrib/ant-contrib-1.0b3.jar"/>
@@ -16,5 +16,7 @@
       </filterreader>
      </filterchain>
     </copy>
+
+
    </target>
 </project>

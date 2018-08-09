@@ -30,6 +30,7 @@
 										<xs:element name="IncidentDescription" type="xs:string" minOccurs="0" maxOccurs="1"/>
 										<xs:element name="PrimaryAssignGroup" type="xs:string" minOccurs="1" maxOccurs="1"/>
 										<xs:element name="Severity" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                                                                <xs:element name="Category" type="xs:string" minOccurs="1" maxOccurs="1"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -38,6 +39,7 @@
 									<xs:sequence>
 										<xs:element name="CorrectiveActions" type="xs:string" minOccurs="0" maxOccurs="1"/>
 										<xs:element name="ResolutionSummary" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                                                                <xs:element name="JournalUpdates" type="xs:string" minOccurs="0" maxOccurs="1"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -60,14 +62,14 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="IncidentHistory">
+							<xs:element name="IncidentHistory" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="ResolvedAt" type="xs:string" minOccurs="0" maxOccurs="1"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="IncidentSpecificData">
+							<xs:element name="IncidentSpecificData" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
 										<!--xs:element name="Location" type="xs:string"/-->

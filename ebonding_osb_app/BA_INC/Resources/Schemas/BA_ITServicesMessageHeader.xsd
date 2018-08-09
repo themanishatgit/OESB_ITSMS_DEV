@@ -11,7 +11,7 @@
         <xsd:element name="OriginatingSystem" type="xsd:string"/>
         <xsd:element name="DestinationSystem" type="xsd:string"/>
         <xsd:element name="LinkedRecord" type="xsd:string" minOccurs="0"/>
-        <xsd:element name="MessageFunction" type="xsd:string"/>
+        <xsd:element name="MessageFunction" type="xsd:string" />
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

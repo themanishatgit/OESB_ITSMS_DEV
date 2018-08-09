@@ -113,6 +113,31 @@
             </xt:replace>
         </cus:actions>
     </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>OBS_INC/ProxyServices/Outbound/OBSSimulatorPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/OBS_INC/OBSSimulatorPS</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
     <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
         <cus:description/>
         <cus:query>
@@ -139,6 +164,10 @@
                 <xt:type>ProxyService</xt:type>
                 <xt:path>OBS_INC/ProxyServices/Outbound/OBSOutboundIncAsyncPS</xt:path>
             </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>OBS_INC/ProxyServices/Outbound/OBSSimulatorPS</xt:path>
+            </xt:refsToSearch>
             <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
             <xt:searchString>Search String</xt:searchString>
             <xt:isCompleteMatch>false</xt:isCompleteMatch>
@@ -147,6 +176,10 @@
     </cus:customization>
     <cus:customization xsi:type="cus:ReferenceCustomizationType">
         <cus:description/>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>OBS_INC/BusinessServices/Outbound/OBSIncReqHTTPBS</xt:path>
+        </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
             <xt:path>OBS_INC/ProxyServices/Inbound/OBSInboundIncSyncPS</xt:path>
@@ -162,6 +195,14 @@
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Pipeline</xt:type>
             <xt:path>OBS_INC/ProxyServices/Outbound/OBSOutboundIncAsyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>OBS_INC/ProxyServices/Outbound/OBSSimulatorPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>OBS_INC/ProxyServices/Outbound/OBSSimulatorPSPipeline</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Xquery</xt:type>
@@ -194,6 +235,16 @@
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/FetchCategoryMapping</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/FetchCategoryMapping</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>ProxyService</xt:type>
                 <xt:path>Common/ProxyServices/FetchDataMapping</xt:path>
             </xt:oldRef>
             <xt:newRef>
@@ -219,6 +270,16 @@
             <xt:newRef>
                 <xt:type>ProxyService</xt:type>
                 <xt:path>SN_INC/ProxyServices/SNInboundIncReqSyncPS</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>XSLT</xt:type>
+                <xt:path>BA_INC/Resources/XSLT/RemoveNameSpace</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>XSLT</xt:type>
+                <xt:path>BA_INC/Resources/XSLT/RemoveNameSpace</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
@@ -269,6 +330,16 @@
             <xt:newRef>
                 <xt:type>Pipeline</xt:type>
                 <xt:path>OBS_INC/ProxyServices/Outbound/OBSOutboundIncAsyncPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>OBS_INC/ProxyServices/Outbound/OBSSimulatorPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>OBS_INC/ProxyServices/Outbound/OBSSimulatorPSPipeline</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>

@@ -8,7 +8,7 @@
                 <con:namespace>urn:ws.solvedirect.com/webservices/custom</con:namespace>
             </con:port>
         </con1:binding>
-        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+        <oper:operations enabled="true">
             <oper:throttling enabled="false"/>
             <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
         </oper:operations>
@@ -22,8 +22,8 @@
     <con:endpointConfig>
         <tran:provider-id>http</tran:provider-id>
         <tran:inbound>false</tran:inbound>
-        <tran:URI weight="0">
-            <env:value>http://130.61.81.206/CISCO_INC/CISCOSimulatorPS</env:value>
+        <tran:URI>
+            <env:value>https://sdcall-sta.solvedirect.com:443/ws/soap/custom/CallService</env:value>
         </tran:URI>
         <tran:outbound-properties>
             <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>
