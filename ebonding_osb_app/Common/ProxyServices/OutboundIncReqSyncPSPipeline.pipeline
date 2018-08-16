@@ -85,6 +85,12 @@ else('CREATE')</con2:xqueryText>
                     <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con2:assign varName="DestinationSystem">
+                        <con1:id>_ActionId-N3f57fefd.6b40e81c.0.163ab77910b.N7fbe</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
                     <con2:ifThenElse>
                         <con1:id>_ActionId-a013b5c.N20bd7cd8.0.163bb455dec.N7d83</con1:id>
                         <con2:case id="_BranchId-a013b5c.N20bd7cd8.0.163bb455dec.N7d82">
@@ -129,6 +135,30 @@ else(
                             </con2:assign>
                         </con2:default>
                     </con2:ifThenElse>
+                    <con2:assign varName="Message_TranId">
+                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ef8</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId/text()</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="SourceSystem">
+                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ef5</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="TicketNumber">
+                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ef2</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="RecType">
+                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7eef</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
                     <con2:assign varName="ExtRefNumber">
                         <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7eec</con1:id>
                         <con2:expr>

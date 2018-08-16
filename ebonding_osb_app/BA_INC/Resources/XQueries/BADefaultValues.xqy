@@ -1,14 +1,7 @@
 <DefaultValues>
   <Inbound>
-    <Impact>1</Impact>
-    <Urgency>1</Urgency>
+    <Priority>1</Priority>
     <Category>Hardware</Category>
-    <Group>SSD-DEL</Group>
-    <ServiceCI>DESKTOP SERVICES</ServiceCI>
-    <Type>Incident</Type>
-    <DefLocation>GENERIC_BA_LOCATION</DefLocation>
-    <DefContact_Email>ba.qqq@noemail.com</DefContact_Email>
-    <InterfaceName>BA</InterfaceName>
   </Inbound>
   <Outbound>
     <UserLastName>BA-SITAWAN-CNT</UserLastName>

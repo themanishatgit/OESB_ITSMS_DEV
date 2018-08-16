@@ -16,7 +16,6 @@ declare variable $RecType as xs:string external;
 declare variable $DestinationSystem as xs:string external;
 declare variable $ExtRefNumber as xs:string external;
 declare variable $TicketNumber as xs:string external;
-declare variable $Priority as xs:string external;
 
 declare function local:func($IncidentRecord as element() (:: schema-element(IncidentRecord) ::), 
                             $ResolvedValues as element(*), 
@@ -26,7 +25,7 @@ declare function local:func($IncidentRecord as element() (:: schema-element(Inci
                             $RecType as xs:string,
                             $DestinationSystem as xs:string,
                             $ExtRefNumber as xs:string,
-                            $TicketNumber as xs:string,$Priority as xs:string) 
+                            $TicketNumber as xs:string) 
                             as element() (:: schema-element(ns1:IncidentRequestMessage) ::) {
     <ns1:IncidentRequestMessage>
 	<ns1:IncidentRequestHeader>
@@ -44,47 +43,34 @@ declare function local:func($IncidentRecord as element() (:: schema-element(Inci
                         else(<ns1:TicketNumber>{$TicketNumber}</ns1:TicketNumber>)
                         }
 			<ns1:Status>{$ResolvedValues/Status/text()}</ns1:Status>
-			{
-                        if($TransactionType='CREATE')
-                        then(
-                          if(fn:exists($ResolvedValues/Group/text()))
-                          then(<ns1:AssignmentGroup>{$ResolvedValues/Group/text()}</ns1:AssignmentGroup>)
-                          else(<ns1:AssignmentGroup>{$DefaultValues/Group/text()}</ns1:AssignmentGroup>)
-                          )
-                        else(
+			<ns1:AssignmentGroup>{
                         if(fn:exists($ResolvedValues/Group/text()))
-                        then(<ns1:AssignmentGroup>{$ResolvedValues/Group/text()}</ns1:AssignmentGroup>)
-                        else()
-                        )
-                        }
-			{
-                        if($TransactionType='CREATE')
-                        then(<ns1:Description>{$IncidentRecord/IncidentDetails/IncidentDescription/text()}</ns1:Description>)
-                        else()
-                        }
-                        {
-                        if($TransactionType='CREATE')
-                        then(<ns1:ShortDescription>{$IncidentRecord/IncidentDetails/IncidentTitle/text()}</ns1:ShortDescription>)
-                        else()
-                        }
-                        <ns1:Priority>{$Priority}</ns1:Priority>
+                        then($ResolvedValues/Group/text())
+                        else($IncidentRecord/IncidentDetails/PrimaryAssignGroup/text())
+                        }</ns1:AssignmentGroup>
+			<ns1:Description>{$IncidentRecord/IncidentDetails/IncidentDescription/text()}</ns1:Description>
+                        <ns1:ShortDescription>{$IncidentRecord/IncidentDetails/IncidentTitle/text()}</ns1:ShortDescription>
+                        <ns1:Priority>{
+                        if(fn:exists($ResolvedValues/Priority/text()))
+                        then($ResolvedValues/Priority/text())
+                        else($DefaultValues/Priority/text())
+                        }</ns1:Priority>
 			<ns1:Category>{$DefaultValues/Category/text()}</ns1:Category>
-			<ns1:Impact>{
-                        if(fn:exists($ResolvedValues/Impact/text()))
-                        then($ResolvedValues/Impact/text())
-                        else($DefaultValues/Impact/text())
-                        }</ns1:Impact>
-			<ns1:Urgency>{
-                        if(fn:exists($ResolvedValues/Urgency/text()))
-                        then($ResolvedValues/Urgency/text())
-                        else($DefaultValues/Urgency/text())
-                        }
-                        </ns1:Urgency>
 			<ns1:Customer>
 				<ns1:Name>BA</ns1:Name>
 				<ns1:RefNumber>{$ExtRefNumber}</ns1:RefNumber>
 			</ns1:Customer>
-                        <ns1:AdditionalComments>{$IncidentRecord/IncidentActivities/CorrectiveActions/text()}</ns1:AdditionalComments>
+                        <ns1:AdditionalComments>{fn:concat('Category: ',$IncidentRecord/IncidentDetails/Category/text(),'. Corrective Actions: ',$IncidentRecord/IncidentActivities/CorrectiveActions/text())}</ns1:AdditionalComments>
+                        {
+                        if(fn:exists($IncidentRecord/IncidentActivities/ResolutionSummary/text()))
+                        then(<ns1:ResolutionSummary>{$IncidentRecord/IncidentActivities/ResolutionSummary/text()}</ns1:ResolutionSummary>)
+                        else()
+                        }
+                        {
+                        if(fn:exists($IncidentRecord/IncidentHistory/ResolvedAt/text()))
+                        then(<ns1:ResolvedAt>{$IncidentRecord/IncidentHistory/ResolvedAt/text()}</ns1:ResolvedAt>)
+                        else()
+                        }
 		</ns1:IncidentDetails>
                 <ns1:IncidentContact>
                         {
@@ -100,7 +86,7 @@ declare function local:func($IncidentRecord as element() (:: schema-element(Inci
                         <ns1:EmailAddress>{
                             if(fn:exists($IncidentRecord/IncidentContact/ContactEmail/text()))
                             then($IncidentRecord/IncidentContact/ContactEmail/text())
-                            else($DefaultValues/DefContact_Email/text())
+                            else()
                         }</ns1:EmailAddress>
                         {
                             if(fn:exists($IncidentRecord/IncidentContact/ContactPhone/text()))
@@ -114,12 +100,16 @@ declare function local:func($IncidentRecord as element() (:: schema-element(Inci
                           then(<ns1:CI>{$IncidentRecord/IncidentAsset/AffectedAsset/text()}</ns1:CI>)
                           else()
                           }
-                          <ns1:BusinessService>{$DefaultValues/ServiceCI/text()}</ns1:BusinessService>
                 </ns1:IncidentAsset>
 		<ns1:IncidentLocation>
+                {
+                          if(fn:exists($IncidentRecord/IncidentAsset/ServiceLocation/text()))
+                          then(<ns1:Location>{$IncidentRecord/IncidentAsset/ServiceLocation/text()}</ns1:Location>)
+                          else()
+                          }
 		</ns1:IncidentLocation>
 	</ns1:IncidentRequestBody>
 </ns1:IncidentRequestMessage>
 };
 
-local:func($IncidentRecord, $ResolvedValues, $DefaultValues, $Message_TranId, $TransactionType, $RecType, $DestinationSystem, $ExtRefNumber, $TicketNumber,$Priority)
+local:func($IncidentRecord, $ResolvedValues, $DefaultValues, $Message_TranId, $TransactionType, $RecType, $DestinationSystem, $ExtRefNumber, $TicketNumber)

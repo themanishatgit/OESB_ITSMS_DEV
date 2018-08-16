@@ -30,7 +30,7 @@
 										<xs:element name="IncidentDescription" type="xs:string" minOccurs="0" maxOccurs="1"/>
 										<xs:element name="PrimaryAssignGroup" type="xs:string" minOccurs="1" maxOccurs="1"/>
 										<xs:element name="Severity" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                                                                                <xs:element name="Category" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                                                                <xs:element name="Category" type="xs:string" minOccurs="0" maxOccurs="1"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>

@@ -25,20 +25,6 @@
                             <con2:xqueryText>$body/*</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con5:assign varName="CorrectiveActions" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dca.N26aa2854.0.1650e0452eb.N7ffa</con2:id>
-                        <con5:expr>
-                            <con2:xqueryText>$IncidentRecord/IncidentActivities/CorrectiveActions/text()</con2:xqueryText>
-                        </con5:expr>
-                    </con5:assign>
-                    <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
-                        <con2:id>_ActionId-a013dca.N26aa2854.0.1650e0452eb.N7ff7</con2:id>
-                        <con5:logLevel>warning</con5:logLevel>
-                        <con5:expr>
-                            <con2:xqueryText>$IncidentRecord/IncidentActivities/CorrectiveActions/text()</con2:xqueryText>
-                        </con5:expr>
-                        <con5:message>CorrectiveActions</con5:message>
-                    </con5:log>
                     <con1:assign varName="TransactionType" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013b5c.21fa6e06.0.163cad9c471.N7e98</con2:id>
                         <con1:expr>
@@ -53,12 +39,16 @@ else('UPDATE')</con2:xqueryText>
                             <con2:xqueryText>$body/ba:ITServicesDataMessage/ITServicesMessageHeader/MessageIdentifier/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
+                    <con5:assign varName="SourceSystem" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dce.N3b50c4cf.0.1651f483693.N7f62</con2:id>
+                        <con5:expr>
+                            <con2:xqueryText>'BA'</con2:xqueryText>
+                        </con5:expr>
+                    </con5:assign>
                     <con1:assign varName="DestinationSystem" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013b5c.21fa6e06.0.163cad9c471.N7e92</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>if(fn:starts-with($body/ba:ITServicesDataMessage/ITServicesMessageHeader/DestinationSystem/text(),'ServiceHub'))
-then('SN')
-else('')</con2:xqueryText>
+                            <con2:xqueryText>'SN'</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:assign varName="TicketNumber" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
@@ -79,14 +69,6 @@ else('')</con2:xqueryText>
                             <con2:xqueryText>$body/ba:ITServicesDataMessage/IncidentRecord/IncidentDetails/IncidentIdentifier/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
-                        <con2:id>_ActionId-a013dca.5ef5460.0.164ef21367f.N7d03</con2:id>
-                        <con5:logLevel>warning</con5:logLevel>
-                        <con5:expr>
-                            <con2:xqueryText>fn:string-length($IncomingRequest/IncidentRecord/IncidentDetails/PrimaryAssignGroup/text())</con2:xqueryText>
-                        </con5:expr>
-                        <con5:message>LENGTH</con5:message>
-                    </con5:log>
                     <con1:validate xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013b5c.21fa6e06.0.163cad9c471.N7e85</con2:id>
                         <con1:schema ref="BA_INC/Resources/Schemas/BA_ITServicesMessageHeader"/>
@@ -130,34 +112,6 @@ else('')</con2:xqueryText>
                                 <con6:id>_ActionId-a013dc6.N366183fe.0.164403ca73f.N7fb1</con6:id>
                             </con6:reply>
                         </con5:default>
-                    </con5:ifThenElse>
-                    <con5:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dca.N4e6f6e15.0.164f47b3a2c.N7ec1</con2:id>
-                        <con5:case id="_BranchId-a013dca.N4e6f6e15.0.164f47b3a2c.N7ec0">
-                            <con5:condition>
-                                <con2:xqueryText>fn:string-length($body/ba:ITServicesDataMessage/ITServicesMessageHeader/MessageIdentifier/text()) &lt;= 0
-or fn:string-length($body/ba:ITServicesDataMessage/IncidentRecord/IncidentDetails/IncidentIdentifier/text()) &lt;= 0
-or fn:string-length($body/ba:ITServicesDataMessage/ITServicesMessageHeader/MessageFunction/text()) &lt;= 0</con2:xqueryText>
-                            </con5:condition>
-                            <con5:actions>
-                                <con6:replace contents-only="true" varName="body" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                                    <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.N4e6f6e15.0.164f47b3a2c.N7ebf</con7:id>
-                                    <con6:location>
-                                        <con7:xpathText xmlns:con7="http://www.bea.com/wli/sb/stages/config">.</con7:xpathText>
-                                    </con6:location>
-                                    <con6:expr>
-                                        <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config"><![CDATA[<RESPONSE>
-	<STATUS>100</STATUS>
-	<ERROR_DESCRIPTION>There is some problem while trying to transform the incoming xml into BA XML</ERROR_DESCRIPTION>
-</RESPONSE>]]></con7:xqueryText>
-                                    </con6:expr>
-                                </con6:replace>
-                                <con6:reply xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/config">
-                                    <con6:id>_ActionId-a013dca.N4e6f6e15.0.164f47b3a2c.N7ebe</con6:id>
-                                </con6:reply>
-                            </con5:actions>
-                        </con5:case>
-                        <con5:default/>
                     </con5:ifThenElse>
                 </con:actions>
             </con:stage>
@@ -222,20 +176,7 @@ or fn:string-length($body/ba:ITServicesDataMessage/ITServicesMessageHeader/Messa
                     </con3:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013dca.N4927119.0.164d6369f16.N7ecc" name="Log">
-                <con:context/>
-                <con:actions>
-                    <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
-                        <con2:id>_ActionId-a013dca.N4927119.0.164d6369f16.N7ecb</con2:id>
-                        <con5:logLevel>warning</con5:logLevel>
-                        <con5:expr>
-                            <con2:xqueryText>$body</con2:xqueryText>
-                        </con5:expr>
-                        <con5:message>body</con5:message>
-                    </con5:log>
-                </con:actions>
-            </con:stage>
-            <con:stage id="_StageId-N3f57d45a.N23e4f0e2.0.163bb15afed.N7ea3" name="FetchStatusAndAssignmentGroup">
+            <con:stage id="_StageId-N3f57d45a.N23e4f0e2.0.163bb15afed.N7ea3" name="FetchStatus,PriorityAndAssignmentGroup">
                 <con:context>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
@@ -257,7 +198,7 @@ or fn:string-length($body/ba:ITServicesDataMessage/ITServicesMessageHeader/Messa
                                 <con1:expr>
                                     <con2:xqueryText><![CDATA[<fet:FetchDataMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchDataMappingMessageV1">
     <fet:RecType>{$RecType}</fet:RecType>
-    <fet:Source>BA</fet:Source>
+    <fet:Source>{$SourceSystem}</fet:Source>
     <fet:Destination>{$DestinationSystem}</fet:Destination>
     <fet:FetchData>
         <fet:ObjectName>STATUS</fet:ObjectName>
@@ -279,19 +220,6 @@ or fn:string-length($body/ba:ITServicesDataMessage/ITServicesMessageHeader/Messa
                     </con1:wsCallout>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013dca.N4927119.0.164d6369f16.N7e96" name="Stage2">
-                <con:context>
-                    <con2:userNsDecl prefix="fetch" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
-                </con:context>
-                <con:actions>
-                    <con5:assign varName="Priority" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dca.N4927119.0.164d6369f16.N7e95</con2:id>
-                        <con5:expr>
-                            <con2:xqueryText>$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='PRIORITY']/fetch:DestinationValue/text()</con2:xqueryText>
-                        </con5:expr>
-                    </con5:assign>
-                </con:actions>
-            </con:stage>
             <con:stage id="_StageId-N3f57d45a.N23e4f0e2.0.163bb15afed.N7e96" name="Transform">
                 <con:context>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
@@ -305,6 +233,7 @@ or fn:string-length($body/ba:ITServicesDataMessage/ITServicesMessageHeader/Messa
                             <con2:xqueryText><![CDATA[<ResolvedValues>
   <Status>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()}</Status>
   <Group>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='ASSIGNMENT_GROUP']/fetch:DestinationValue/text()}</Group>
+  <Priority>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='PRIORITY']/fetch:DestinationValue/text()}</Priority>
 </ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
@@ -338,9 +267,6 @@ or fn:string-length($body/ba:ITServicesDataMessage/ITServicesMessageHeader/Messa
                                 </con2:param>
                                 <con2:param name="TicketNumber">
                                     <con2:path>$TicketNumber</con2:path>
-                                </con2:param>
-                                <con2:param name="Priority">
-                                    <con2:path>$Priority</con2:path>
                                 </con2:param>
                                 <con2:param name="IncidentRecord">
                                     <con2:path>$IncomingRequest//IncidentRecord</con2:path>
@@ -561,7 +487,7 @@ else($Response/inc:IncidentResponseMessage/inc:TicketNumber/text())</con2:path>
 		<TransactionType>{$TransactionType}</TransactionType>
 		<RecType>{$RecType}</RecType>
 		<ProxyService>BAInboundIncSyncPS</ProxyService>
-		<Payload>{$IncomingRequest/*}</Payload>
+		<Payload>{$IncomingRequest}</Payload>
 		<Source>BA</Source>
 		<Destination>{$DestinationSystem}</Destination>
 		<IncidentId>{$TicketNumber}</IncidentId>
@@ -570,6 +496,14 @@ else($Response/inc:IncidentResponseMessage/inc:TicketNumber/text())</con2:path>
 </ErrorHandlerRequest>]]></con1:xqueryText>
                                 </con2:expr>
                             </con2:replace>
+                            <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con1:id>_ActionId-a013dce.N3b50c4cf.0.1651f483693.N7f65</con1:id>
+                                <con5:logLevel>error</con5:logLevel>
+                                <con5:expr>
+                                    <con1:xqueryText>$body</con1:xqueryText>
+                                </con5:expr>
+                                <con5:message>****ErrorHandlerRequest****</con5:message>
+                            </con5:log>
                         </con3:outboundTransform>
                     </con3:route>
                     <con3:replace contents-only="true" varName="body">
@@ -603,16 +537,7 @@ else($Response/inc:IncidentResponseMessage/inc:TicketNumber/text())</con2:path>
                         <con2:service ref="SN_INC/ProxyServices/SNInboundIncReqSyncPS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con2:operation>execute</con2:operation>
                         <con2:outboundTransform/>
-                        <con2:responseTransform>
-                            <con4:log>
-                                <con1:id>_ActionId-a013dc6.N366183fe.0.164403ca73f.N7fae</con1:id>
-                                <con4:logLevel>error</con4:logLevel>
-                                <con4:expr>
-                                    <con1:xqueryText>$body/*</con1:xqueryText>
-                                </con4:expr>
-                                <con4:message>&lt;&lt; Canonical Response >></con4:message>
-                            </con4:log>
-                        </con2:responseTransform>
+                        <con2:responseTransform/>
                     </con2:route>
                 </con:actions>
             </con:route-node>

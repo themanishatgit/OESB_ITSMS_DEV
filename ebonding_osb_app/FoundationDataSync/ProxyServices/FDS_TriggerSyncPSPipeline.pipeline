@@ -144,6 +144,27 @@ xs:QName('TRANID'),
             </con:stage>
         </con:pipeline>
         <con:pipeline type="error" name="error-N3f57e0b8.N3cea576.0.1649d5be40d.N8000">
+            <con:stage id="_StageId-a013dc6.4ba03875.0.165332d2611.N7fc7" name="Log">
+                <con:context/>
+                <con:actions>
+                    <con5:log>
+                        <con1:id>_ActionId-a013dc6.4ba03875.0.165332d2611.N7fc6</con1:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con1:xqueryText>$body</con1:xqueryText>
+                        </con5:expr>
+                        <con5:message>****TriggerSync.Login.Fault.Body****</con5:message>
+                    </con5:log>
+                    <con5:log>
+                        <con1:id>_ActionId-a013dc6.4ba03875.0.165332d2611.N7fc3</con1:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con1:xqueryText>$fault</con1:xqueryText>
+                        </con5:expr>
+                        <con5:message>****TriggerSync.Login.Fault****</con5:message>
+                    </con5:log>
+                </con:actions>
+            </con:stage>
             <con:stage id="_StageId-N3f57e0b8.N3cea576.0.1649d5be40d.N7fff" name="RouteNode.EH">
                 <con:context/>
                 <con:actions>

@@ -9,48 +9,48 @@
         <xsd:element name="IncidentDetails">
           <xsd:complexType>
             <xsd:sequence>
-              <xsd:element name="IncidentIdentifier" type="xsd:string"/>
-              <xsd:element name="IncidentStatus" type="xsd:string"/>
-              <xsd:element name="IncidentTitle" type="xsd:string" minOccurs="0"/>
-              <xsd:element name="IncidentDescription" type="xsd:string" minOccurs="0"/>
-              <xsd:element name="PrimaryAssignGroup" type="xsd:string"/>
-              <xsd:element name="Severity" type="xsd:string"/>
-              <xsd:element name="Category" type="xsd:string"/>
+              <xsd:element name="IncidentIdentifier" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="IncidentStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="IncidentTitle" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="IncidentDescription" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="PrimaryAssignGroup" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="Severity" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="Category" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
         <xsd:element name="IncidentActivities">
           <xsd:complexType>
             <xsd:sequence>
-              <xsd:element name="CorrectiveActions" type="xsd:string" minOccurs="0"/>
-              <xsd:element name="ResolutionSummary" type="xsd:string" minOccurs="0"/>
-              <xsd:element name="JournalUpdates" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="CorrectiveActions" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="ResolutionSummary" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="JournalUpdates" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
         <xsd:element name="IncidentContact">
           <xsd:complexType>
             <xsd:sequence>
-              <xsd:element name="ContactFirstName" type="xsd:string"/>
-              <xsd:element name="ContactLastName" type="xsd:string"/>
-              <xsd:element name="ContactEmail" type="xsd:string"/>
-              <xsd:element name="ContactPhone" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ContactFirstName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="ContactLastName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="ContactEmail" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="ContactPhone" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
         <xsd:element name="IncidentAsset">
           <xsd:complexType>
             <xsd:sequence>
-              <xsd:element name="AffectedAsset" type="xsd:string"/>
-              <xsd:element name="ServiceLocation" type="xsd:string" minOccurs="0"/>
-              <xsd:element name="CurrentDetails" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="AffectedAsset" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="ServiceLocation" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="CurrentDetails" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
         <xsd:element name="IncidentHistory" minOccurs="0">
           <xsd:complexType>
             <xsd:sequence>
-              <xsd:element name="ResolvedAt" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ResolvedAt" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
