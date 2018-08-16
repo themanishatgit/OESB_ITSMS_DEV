@@ -2,6 +2,8 @@
   <Inbound>
     <Priority>1</Priority>
     <Category>Hardware</Category>
+    <ResolutionCode>No Fault Found</ResolutionCode>
+    <Issue>Failure</Issue>
   </Inbound>
   <Outbound>
     <UserLastName>BA-SITAWAN-CNT</UserLastName>

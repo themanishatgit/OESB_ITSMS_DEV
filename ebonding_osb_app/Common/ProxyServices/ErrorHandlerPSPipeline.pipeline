@@ -171,8 +171,15 @@ else($body/ErrorHandlerRequest/MessageDetails/Destination/text())</con2:xqueryTe
 	<ns1:IncidentRequestBody>
 		<ns1:IncidentDetails>
 			<ns1:TicketNumber>{$body/ErrorHandlerRequest/MessageDetails/IncidentId/text()}</ns1:TicketNumber>
+			{
+            if($body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text()='ERR-APP')
+			then(
+			<ns1:AdditionalComments>{fn:concat($body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text(),': ',$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text())}</ns1:AdditionalComments>
+			)
+			else(
 			<ns1:WorkNotes>{fn:concat($body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text(),': ',$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text())}</ns1:WorkNotes>
-                        
+            )
+			}
 		</ns1:IncidentDetails>
 	</ns1:IncidentRequestBody>
 </ns1:IncidentRequestMessage>]]></con2:xqueryText>
@@ -198,10 +205,6 @@ else(
 </ns1:Supplier>)]]></con2:xqueryText>
                                     </con1:expr>
                                 </con1:insert>
-                                <con2:reply>
-                                    <con2:id>_ActionId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7eb5</con2:id>
-                                    <con2:disabled>true</con2:disabled>
-                                </con2:reply>
                                 <con1:replace contents-only="true" varName="body">
                                     <con2:id>_ActionId-a013dc6.N1282bc14.0.16459cee56b.N7dd6</con2:id>
                                     <con1:location>

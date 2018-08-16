@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://www.service-now.com/Sita_inbound" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.service-now.com/Sita_inbound" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.service-now.com/Sita_inbound" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.service-now.com/Sita_inbound">
 	<wsdl:types>
 		<xsd:schema elementFormDefault="unqualified" targetNamespace="http://www.service-now.com/Sita_inbound">
 			<xsd:element name="execute">
@@ -44,8 +44,12 @@
 						<xsd:element maxOccurs="1" minOccurs="0" name="business_service" type="xsd:string"/>
 						<xsd:element maxOccurs="1" minOccurs="0" name="location" type="xsd:string"/>
 						<xsd:element maxOccurs="1" minOccurs="0" name="automation_reroute" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="sd_owner_group" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="report_method" type="xsd:string"/>
 						<xsd:element maxOccurs="1" minOccurs="0" name="issue" type="xsd:string"/>
 						<xsd:element maxOccurs="1" minOccurs="0" name="error_code" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="downtime_end_time" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="atd" type="xsd:string"/>
 						<xsd:element maxOccurs="1" minOccurs="0" name="element_ci_id" type="xsd:string"/>
 						<xsd:element maxOccurs="1" minOccurs="0" name="transaction_type" type="xsd:string"/>
 					</xsd:sequence>
@@ -64,19 +68,15 @@
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="executeSoapIn">
-		<wsdl:part name="Sita_inbound" element="tns:execute">
-		</wsdl:part>
+		<wsdl:part name="Sita_inbound" element="tns:execute"> </wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="executeSoapOut">
-		<wsdl:part name="Sita_inbound" element="tns:executeResponse">
-		</wsdl:part>
+		<wsdl:part name="Sita_inbound" element="tns:executeResponse"> </wsdl:part>
 	</wsdl:message>
 	<wsdl:portType name="ServiceNowSoap">
 		<wsdl:operation name="execute">
-			<wsdl:input message="tns:executeSoapIn">
-			</wsdl:input>
-			<wsdl:output message="tns:executeSoapOut">
-			</wsdl:output>
+			<wsdl:input message="tns:executeSoapIn"> </wsdl:input>
+			<wsdl:output message="tns:executeSoapOut"> </wsdl:output>
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="ServiceNowSoap" type="tns:ServiceNowSoap">

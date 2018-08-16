@@ -115,58 +115,13 @@
                             </con2:replace>
                             <con1:routing-options>
                                 <con2:id>_ActionId-a013dc6.N51379d8b.0.1647e93fb26.N7f96</con2:id>
-                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
                             </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N3f57fefe.N66711172.0.1635e1337e3.N7f32" name="EnrichPriority">
-                <con:context>
-                    <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
-                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
-                </con:context>
-                <con:actions>
-                    <con1:wsCallout>
-                        <con2:id>_ActionId-N3f57fefe.N66711172.0.1635e1337e3.N7f1e</con2:id>
-                        <con1:service ref="Common/ProxyServices/FetchPriorityMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con1:operation>execute</con1:operation>
-                        <con1:request>
-                            <con1:body wrapped="false">FetchPriorityMappingRequest</con1:body>
-                            <con1:header/>
-                        </con1:request>
-                        <con1:response>
-                            <con1:body wrapped="false">FetchPriorityMappingResponse</con1:body>
-                        </con1:response>
-                        <con1:requestTransform>
-                            <con1:assign varName="FetchPriorityMappingRequest">
-                                <con2:id>_ActionId-N3f57fefe.N66711172.0.1635e1337e3.N7f19</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText><![CDATA[<fet:FetchPriorityMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchPriorityMappingMessageV1">
-	<fet:RecType>{fn:upper-case($RecType)}</fet:RecType>
-	<fet:Source>{fn:upper-case($SourceSystem)}</fet:Source>
-	<fet:Destination>BA</fet:Destination>
-	<fet:Impact>{fn:upper-case(data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Impact))}</fet:Impact>
-	<fet:Urgency>{fn:upper-case(data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Urgency))}</fet:Urgency>
-</fet:FetchPriorityMappingRequest>]]></con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
-                        </con1:requestTransform>
-                        <con1:responseTransform/>
-                    </con1:wsCallout>
-                    <con1:insert varName="body">
-                        <con2:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7e64</con2:id>
-                        <con1:location>
-                            <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Category</con2:xpathText>
-                        </con1:location>
-                        <con1:where>before</con1:where>
-                        <con1:expr>
-                            <con2:xqueryText>&lt;inc:Priority>{$FetchPriorityMappingResponse/fet:Result/fet:Priority/text()}&lt;/inc:Priority></con2:xqueryText>
-                        </con1:expr>
-                    </con1:insert>
-                </con:actions>
-            </con:stage>
-            <con:stage id="_StageId-N3f57fefe.N66711172.0.1635e1337e3.N7ee4" name="MapStatusAndAssignmentGroup">
+            <con:stage id="_StageId-N3f57fefe.N66711172.0.1635e1337e3.N7ee4" name="MapStatus" errorHandler="error-a013dce.2cafda84.0.165337dfb1c.N7f6a">
                 <con:context>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
@@ -193,11 +148,7 @@
     <!--1 or more repetitions:-->
     <fet:FetchData>
         <fet:ObjectName>STATUS</fet:ObjectName>
-        <fet:SourceValue>{data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status)}</fet:SourceValue>
-    </fet:FetchData>
-	<fet:FetchData>
-        <fet:ObjectName>ASSIGNMENT_GROUP</fet:ObjectName>
-        <fet:SourceValue>{data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:AssignmentGroup)}</fet:SourceValue>
+        <fet:SourceValue>{fn:upper-case(data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status))}</fet:SourceValue>
     </fet:FetchData>
 </fet:FetchDataMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
@@ -214,15 +165,6 @@
                             <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='INCIDENT_STATUS']/fet:DestinationValue/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:replace>
-                    <con1:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7dc3</con2:id>
-                        <con1:location>
-                            <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:AssignmentGroup</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='ASSIGNMENT_GROUP']/fet:DestinationValue/text()</con2:xqueryText>
-                        </con1:expr>
-                    </con1:replace>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-N3f57fefe.N66711172.0.1635e1337e3.N7ea0" name="Transform">
@@ -235,11 +177,9 @@
                     <con1:assign varName="ResolvedValues">
                         <con2:id>_ActionId-a013b56.694ddddd.0.163f4e355c3.N7fce</con2:id>
                         <con1:expr>
-                            <con2:xqueryText><![CDATA[<ResolvedValues>
-  <Priority>{$FetchPriorityMappingResponse/fet:Result/fet:Priority/text()}</Priority>
-  <Status>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()}</Status>
-  <AssignmentGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='ASSIGNMENT_GROUP']/fetch:DestinationValue/text()}</AssignmentGroup>
-</ResolvedValues>]]></con2:xqueryText>
+                            <con2:xqueryText>&lt;ResolvedValues>
+  &lt;Status>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()}&lt;/Status>
+&lt;/ResolvedValues></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:assign varName="DefaultValues">
@@ -331,7 +271,7 @@
                             </con2:replace>
                             <con1:routing-options>
                                 <con2:id>_ActionId-a013dc6.N51379d8b.0.1647e93fb26.N7f93</con2:id>
-                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
                             </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
@@ -384,7 +324,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                             <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'BAOutboundIncASyncPS'</con6:path>
+                                            <con6:path>'BAOutboundIncAsyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'RESPONSE_RECEIVED'</con6:path>
@@ -400,13 +340,13 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                             </con2:replace>
                             <con1:routing-options>
                                 <con2:id>_ActionId-a013dc6.N51379d8b.0.1647e93fb26.N7f8c</con2:id>
-                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
                             </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N3f57d45a.N5baf3314.0.163638a66d3.N7ece" name="PrepareAssignRefNumResponse" errorHandler="error-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ce2">
+            <con:stage id="_StageId-N3f57d45a.N5baf3314.0.163638a66d3.N7ece" name="CheckResponse">
                 <con:context>
                     <con2:userNsDecl prefix="axio" namespace="http://sita.ba.integration.axiossystems.com/"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
@@ -482,16 +422,49 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                             </con1:replace>
                                         </con1:actions>
                                     </con1:case>
-                                    <con1:default/>
+                                    <con1:default>
+                                        <con2:reply>
+                                            <con2:id>_ActionId-N3f57e0b8.N227bba7d.0.165385b886c.N7ffe</con2:id>
+                                        </con2:reply>
+                                    </con1:default>
                                 </con1:ifThenElse>
                             </con1:actions>
                         </con1:case>
                         <con1:default>
-                            <con1:Error>
-                                <con2:id>_ActionId-a013b5c.21fa6e06.0.163cad9c471.N7fee</con2:id>
-                                <con1:errCode>ERR002</con1:errCode>
-                                <con1:message>Technical Failure</con1:message>
-                            </con1:Error>
+                            <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57d45a.N1cfdbc33.0.1636d9afdc2.N7f4c</con5:id>
+                                <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con3:outboundTransform>
+                                    <con2:replace contents-only="true" varName="body">
+                                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57d45a.N1cfdbc33.0.1636d9afdc2.N7f4b</con5:id>
+                                        <con2:location>
+                                            <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                                        </con2:location>
+                                        <con2:expr>
+                                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
+	<ErrorDetails>
+		<ErrorCode>ERR-APP</ErrorCode>
+		<ErrorMsg>{$body/axio:RESPONSE/axio:STATUS/axio:ERROR_DESCRIPTION/text()}</ErrorMsg>
+	</ErrorDetails>
+	<MessageDetails>
+		<Message_TransactionId>{$Message_TranId}</Message_TransactionId>
+		<TransactionType>{$TransactionType}</TransactionType>
+		<RecType>{$RecType}</RecType>
+		<ProxyService>BAOutboundIncAsyncPS</ProxyService>
+                <Payload>{$CanonicalInput/*}</Payload>
+		<Source>{$SourceSystem}</Source>
+		<Destination>BA</Destination>
+		<IncidentId>{$TicketNumber}</IncidentId>
+		<ExternalRefNum>{$ExtRefNumber}</ExternalRefNum>
+	</MessageDetails>
+</ErrorHandlerRequest>]]></con6:xqueryText>
+                                        </con2:expr>
+                                    </con2:replace>
+                                </con3:outboundTransform>
+                            </con3:route>
+                            <con5:reply xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                                <con5:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7c47</con5:id>
+                            </con5:reply>
                         </con1:default>
                     </con1:ifThenElse>
                 </con:actions>
@@ -553,7 +526,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                             </con2:replace>
                             <con1:routing-options>
                                 <con2:id>_ActionId-a013dc6.N51379d8b.0.1647e93fb26.N7f8a</con2:id>
-                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
                             </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
@@ -591,21 +564,21 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                 </con:actions>
             </con:stage>
         </con:pipeline>
-        <con:pipeline type="error" name="error-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ce2">
-            <con:stage id="_StageId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ce1" name="PushResponseToQ.EH">
+        <con:pipeline type="error" name="error-a013dce.2cafda84.0.165337dfb1c.N7f6a">
+            <con:stage id="_StageId-a013dce.2cafda84.0.165337dfb1c.N7f69" name="MapStatus.EH">
                 <con:context/>
                 <con:actions>
                     <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57d45a.N1cfdbc33.0.1636d9afdc2.N7f4c</con5:id>
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dce.2cafda84.0.165337dfb1c.N7f01</con6:id>
                         <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:outboundTransform>
                             <con2:replace contents-only="true" varName="body">
-                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57d45a.N1cfdbc33.0.1636d9afdc2.N7f4b</con5:id>
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dce.2cafda84.0.165337dfb1c.N7f00</con6:id>
                                 <con2:location>
                                     <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
                                 </con2:location>
                                 <con2:expr>
-                                    <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
+                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
 	<ErrorDetails>
 		<ErrorCode>ERR002</ErrorCode>
 		<ErrorMsg>Technical Failure</ErrorMsg>
@@ -615,20 +588,35 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
 		<TransactionType>{$TransactionType}</TransactionType>
 		<RecType>{$RecType}</RecType>
 		<ProxyService>BAOutboundIncAsyncPS</ProxyService>
-                <Payload>{$CanonicalInput/*}</Payload>
+                <Payload>{$fault}</Payload>
 		<Source>{$SourceSystem}</Source>
 		<Destination>BA</Destination>
 		<IncidentId>{$TicketNumber}</IncidentId>
 		<ExternalRefNum>{$ExtRefNumber}</ExternalRefNum>
 	</MessageDetails>
-</ErrorHandlerRequest>]]></con5:xqueryText>
+</ErrorHandlerRequest>]]></con6:xqueryText>
                                 </con2:expr>
                             </con2:replace>
                         </con3:outboundTransform>
                     </con3:route>
-                    <con5:reply xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/config">
-                        <con5:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7c47</con5:id>
-                    </con5:reply>
+                    <con2:reply>
+                        <con2:id>_ActionId-a013dce.2cafda84.0.165337dfb1c.N7efd</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dce.2cafda84.0.165337dfb1c.N7efc">
+            <con:stage id="_StageId-a013dce.2cafda84.0.165337dfb1c.N7efb" name="Route.EH">
+                <con:context/>
+                <con:actions>
+                    <con5:log>
+                        <con2:id>_ActionId-a013dce.2cafda84.0.165337dfb1c.N7ef8</con2:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>$fault</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>****BAOutboundIncAsyncPS.RouteNode.EH****</con5:message>
+                    </con5:log>
                 </con:actions>
             </con:stage>
         </con:pipeline>
@@ -637,7 +625,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                 <con:request>request-N3f57d45a.23576526.0.16320a038f4.N7da1</con:request>
                 <con:response>response-N3f57d45a.23576526.0.16320a038f4.N7da0</con:response>
             </con:pipeline-node>
-            <con:route-node name="RouteNode1">
+            <con:route-node name="RouteNode1" error-handler="error-a013dce.2cafda84.0.165337dfb1c.N7efc">
                 <con:context/>
                 <con:actions>
                     <con4:route>

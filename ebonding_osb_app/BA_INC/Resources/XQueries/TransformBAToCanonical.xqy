@@ -62,6 +62,11 @@ declare function local:func($IncidentRecord as element() (:: schema-element(Inci
 			</ns1:Customer>
                         <ns1:AdditionalComments>{fn:concat('Category: ',$IncidentRecord/IncidentDetails/Category/text(),'. Corrective Actions: ',$IncidentRecord/IncidentActivities/CorrectiveActions/text())}</ns1:AdditionalComments>
                         {
+                        if($ResolvedValues/Status/text()='Resolved')
+                        then(<ns1:ResolutionCode>{$DefaultValues/ResolutionCode/text()}</ns1:ResolutionCode>)
+                        else()
+                        }
+                        {
                         if(fn:exists($IncidentRecord/IncidentActivities/ResolutionSummary/text()))
                         then(<ns1:ResolutionSummary>{$IncidentRecord/IncidentActivities/ResolutionSummary/text()}</ns1:ResolutionSummary>)
                         else()
@@ -107,6 +112,11 @@ declare function local:func($IncidentRecord as element() (:: schema-element(Inci
                           then(<ns1:Location>{$IncidentRecord/IncidentAsset/ServiceLocation/text()}</ns1:Location>)
                           else()
                           }
+                          {
+                        if($ResolvedValues/Status/text()='Resolved')
+                        then(<ns1:Issue>{$DefaultValues/Issue/text()}</ns1:Issue>)
+                        else()
+                        }
 		</ns1:IncidentLocation>
 	</ns1:IncidentRequestBody>
 </ns1:IncidentRequestMessage>

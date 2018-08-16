@@ -154,6 +154,12 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
         }
         
         {
+            if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ReportMethod)
+            then <report_method>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ReportMethod)}</report_method>
+            else ()
+        }
+        
+        {
             if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Issue)
             then <issue>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Issue)}</issue>
             else ()

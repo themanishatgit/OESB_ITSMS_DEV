@@ -26,7 +26,9 @@ declare function local:func($CanonicalFormatInput as element(),
         else()}
         
         
-        <ns1:REC_TYPE>{fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:RecType)}</ns1:REC_TYPE>
+        <ns1:REC_TYPE>{if(fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:RecType)='INC')
+        then('Inc')
+        else(fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:RecType))}</ns1:REC_TYPE>
         <ns1:TRANSACTION_ID>{fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:TransactionId)}</ns1:TRANSACTION_ID>
         <ns1:INTERFACE>British Airways-SITA</ns1:INTERFACE>
         <ns1:SR_ID>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TicketNumber)}</ns1:SR_ID>
@@ -43,10 +45,10 @@ declare function local:func($CanonicalFormatInput as element(),
         then
         (<ns1:DESCRIPTION>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Description)}</ns1:DESCRIPTION>)
         else()}
-        <ns1:GROUP>{fn:data($ResolvedValues/AssignmentGroup)}</ns1:GROUP>
+        <ns1:GROUP>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AssignmentGroup)}</ns1:GROUP>
         {if(fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')
         then
-        (<ns1:PRIORITY>{fn:data($ResolvedValues/Priority)}</ns1:PRIORITY>)
+        (<ns1:PRIORITY>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority)}</ns1:PRIORITY>)
         else()}
         <ns1:ACT_LOG>
           <ns1:DESCRIPTION>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments)}</ns1:DESCRIPTION>
