@@ -584,7 +584,7 @@ else(xs:integer($ListLength) - 1)</con2:xqueryText>
                 <SessionId>{$SessionId}</SessionId>
 		<ObjectName>{$ObjectName}</ObjectName>
 		<LastRecord>{
-		if($a=$b)
+		if($a=$b and $i=$c)
 		then('Y')
 		else('N')
 		}</LastRecord>
@@ -593,7 +593,12 @@ else(xs:integer($ListLength) - 1)</con2:xqueryText>
 		then('N')
 		else('Y')
 		}</LastObject>
-                <SplitCount>{fn:concat($i,'/',$c)}</SplitCount>
+                <LastRecordInSplit>{
+		if($a=$b)
+		then('Y')
+		else('N')
+		}</LastRecordInSplit>
+		<SplitCount>{fn:concat($i,'/',$c)}</SplitCount>
 	</MessageMetaData>
         <MessageContent>{$udsobject/*}</MessageContent>
 </SNPublishPSRequest>]]></con2:xqueryText>
@@ -681,10 +686,10 @@ else(xs:integer($ListLength) - 1)</con2:xqueryText>
                         <con2:expr>
                             <con1:xqueryText>if(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select TRANSACTION_ID from FDS_TRANSACTIONS where BATCH_ID=? AND OBJECT_NAME=?',$BatchId,'OVERALL')//TRANSACTION_ID/text())
+'select TRANSACTION_ID from FDS_TRANSACTIONS where BATCH_ID=? AND OBJECT_NAME=?',$BatchId,$ObjectName)//TRANSACTION_ID/text())
 then(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select TRANSACTION_ID from FDS_TRANSACTIONS where BATCH_ID=? AND OBJECT_NAME=?',$BatchId,'OVERALL')//TRANSACTION_ID/text())
+'select TRANSACTION_ID from FDS_TRANSACTIONS where BATCH_ID=? AND OBJECT_NAME=?',$BatchId,$ObjectName)//TRANSACTION_ID/text())
 else(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
 'select FDS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text())</con1:xqueryText>

@@ -56,6 +56,7 @@
     <Service>FoundationDataSync/ProxyServices/FDS_ModelSyncPS</Service>
     <Sequence>8</Sequence>
   </Object>
+  
   <Object>
     <Name>Service</Name>
     <SHName>nr</SHName>
@@ -77,13 +78,15 @@
     <Service>FoundationDataSync/ProxyServices/FDS_ContactAssetRelSyncPS</Service>
     <Sequence>11</Sequence>
   </Object>
-  <Object>
+
+<Object>
     <Name>SpecialHandling</Name>
     <SHName>special_handling</SHName>
     <AdditionalFilter></AdditionalFilter>
     <Service>FoundationDataSync/ProxyServices/FDS_VIPSyncPS</Service>
     <Sequence>12</Sequence>
   </Object>
+   
   <Object>
     <Name>SpecialHandlingContactRel</Name>
     <SHName>contact_handling</SHName>
@@ -105,4 +108,5 @@
     <Service>FoundationDataSync/ProxyServices/FDS_DeletedRecordSyncPS</Service>
     <Sequence>15</Sequence>
   </Object>
+  
 </Lookup>
