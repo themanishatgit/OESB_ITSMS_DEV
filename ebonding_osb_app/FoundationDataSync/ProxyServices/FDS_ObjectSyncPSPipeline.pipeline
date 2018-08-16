@@ -245,7 +245,7 @@ xs:QName('TRANID'),
                                             <con5:expr>
                                                 <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con6:xqueryText>
                                             </con5:expr>
-                                            <con5:message>****ObjectSyncPS.UpdateFDSTransactions.1****</con5:message>
+                                            <con5:message>****ObjectSyncPS.UpdateFDSTransactions.1*** *</con5:message>
                                         </con5:log>
                                     </con4:outboundTransform>
                                 </con4:route>

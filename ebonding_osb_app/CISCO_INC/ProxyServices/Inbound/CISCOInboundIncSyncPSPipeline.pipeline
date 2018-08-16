@@ -112,7 +112,7 @@
 else if($InputRequest/incidentData/TRANSACTION_TYPE/text()='ASSIGNREFNUM')then
 'UPDATE_REFNUMBER'
 else if($InputRequest/incidentData/TRANSACTION_TYPE/text()='Error_Msg')then
-'UPDATE'
+'ERROR'
 else if($InputRequest/incidentData/TRANSACTION_TYPE/text()='LOGCOMMENT')then
 'UPDATE'
 else if($InputRequest/incidentData/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS')then

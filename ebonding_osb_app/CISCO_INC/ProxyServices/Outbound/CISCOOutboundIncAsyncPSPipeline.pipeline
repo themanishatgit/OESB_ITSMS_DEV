@@ -10,7 +10,9 @@
     <con:router>
         <con:pipeline type="request" name="request-a013b5e.3ef098c8.0.163ab1a1dd6.N7fe0">
             <con:stage id="_StageId-a013b5e.3ef098c8.0.163ab1a1dd6.N7fde" name="Init_Request_Stg">
-                <con:context/>
+                <con:context>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
                 <con:actions>
                     <con1:assign varName="InputRequest">
                         <con2:id>_ActionId-a013b5e.3ef098c8.0.163ab1a1dd6.N7e29</con2:id>
@@ -21,7 +23,7 @@
                     <con1:assign varName="MsgTranId">
                         <con2:id>_ActionId-a013dc6.N1282bc14.0.16459cee56b.N7dc5</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>fn-bea:uuid()</con2:xqueryText>
+                            <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:TransactionId/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                 </con:actions>
