@@ -64,21 +64,51 @@ declare function local:func($MsgTranId as xs:string,
                         else()
                       }
                         {
-                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER' and fn:data($CISCORequest/ACTLOG_DESC)!='')
+                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER')
                         then
                         <ns1:AdditionalComments>{fn:data($CISCORequest/ACTLOG_DESC)}</ns1:AdditionalComments>
                         else()
                       }
                       
                       {
-                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER' and fn:data($CISCORequest/ACTLOG_DESC)!='')
+                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER')
                         then
                         <ns1:SupplierComments>{fn:data($CISCORequest/ACTLOG_DESC)}</ns1:SupplierComments>
                         else()
                       }
                 </ns1:IncidentDetails>
               </ns1:IncidentRequestBody>
-            else(
+            else()
+        }
+        {
+            if($CISCORequest/TRANSACTION_TYPE/text()='Error_Msg')then
+              <ns1:IncidentRequestBody>
+                <ns1:IncidentDetails>
+                  <ns1:TicketNumber>{fn:data($CISCORequest/INCIDENT_NUMBER)}</ns1:TicketNumber>
+                  <ns1:Supplier>
+                     <ns1:Name>{$SourceSystem}</ns1:Name>
+                     <ns1:RefNumber>{fn:data($CISCORequest/SUPPLIER_EXTERNAL_REFERENCE)}</ns1:RefNumber>
+                  </ns1:Supplier>
+                  {
+                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER')
+                        then
+                        <ns1:AdditionalComments>{concat(fn:data($CISCORequest/ERROR_CODE),':',fn:data($CISCORequest/ERROR_DESCRIPTION))}</ns1:AdditionalComments>
+                        else()
+                      }
+                      
+                      {
+                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER')
+                        then
+                        <ns1:SupplierComments>{concat(fn:data($CISCORequest/ERROR_CODE),':',fn:data($CISCORequest/ERROR_DESCRIPTION))}</ns1:SupplierComments>
+                        else()
+                      }
+                  
+                </ns1:IncidentDetails>
+              </ns1:IncidentRequestBody>
+            else()
+        }
+        {
+            if($CISCORequest/TRANSACTION_TYPE/text()='Creation' or $CISCORequest/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS' or $CISCORequest/TRANSACTION_TYPE/text()='ASSIGNREFNUM')then
               <ns1:IncidentRequestBody>
                   <ns1:IncidentDetails>
                       
@@ -126,18 +156,11 @@ declare function local:func($MsgTranId as xs:string,
                       }
                       
                       {
-                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER' and fn:data($CISCORequest/ERROR_CODE)='' and fn:data($CISCORequest/ACTLOG_DESC)!='')
+                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER' and fn:data($CISCORequest/ACTLOG_DESC)!='')
                         then
                         <ns1:SupplierComments>{fn:data($CISCORequest/ACTLOG_DESC)}</ns1:SupplierComments>
                         else(<ns1:SupplierComments>{fn:data($CISCORequest/COMMENTS)}</ns1:SupplierComments>)
                       }
-                      {
-                        if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER' and fn:data($CISCORequest/ERROR_CODE)!='')
-                        then
-                        <ns1:SupplierComments>{concat(fn:data($CISCORequest/ERROR_CODE),': ',fn:data($CISCORequest/ERROR_DESCRIPTION))}</ns1:SupplierComments>
-                        else()
-                      }
-                      
                       
                         <ns1:TimeSpent>{fn:data($CISCORequest/TIME_SPENT)}</ns1:TimeSpent>
                         <ns1:TravelTime>{fn:data($CISCORequest/TRAVEL_TIME)}</ns1:TravelTime>
@@ -159,8 +182,9 @@ declare function local:func($MsgTranId as xs:string,
                       <ns1:Issue>{$CauseCodeDestinationValue}</ns1:Issue>
                   </ns1:IncidentLocation>
               </ns1:IncidentRequestBody>
-            )
-          }
+            else()
+        }
+        
         
     </ns1:IncidentRequestMessage>
 };
