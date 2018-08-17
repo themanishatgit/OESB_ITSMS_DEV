@@ -401,7 +401,6 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                     </con6:route>
                     <con2:reply isError="false">
                         <con2:id>_ActionId-a013dc6.a0a2c89.0.1646fcd77a6.N7f22</con2:id>
-                        <con2:disabled>true</con2:disabled>
                     </con2:reply>
                 </con:actions>
             </con:stage>
