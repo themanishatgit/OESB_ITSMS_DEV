@@ -491,16 +491,12 @@ else ''</con2:path>
 </ProcessIncidentResponse>]]></con6:xqueryText>
                         </con2:expr>
                     </con2:replace>
-                    <con2:reply>
-                        <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7cfe</con2:id>
-                    </con2:reply>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-a013dc6.N4a5f3b08.0.164f9f5c9af.N7f97" name="AuditResponseEnd_Stg" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
                 <con:context>
                     <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
                 </con:context>
-                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con3:route>
                         <con2:id>_ActionId-a013dc6.N4a5f3b08.0.164f9f5c9af.N7f96</con2:id>
@@ -541,7 +537,7 @@ else ''</con2:path>
                                             <con2:path>''</con2:path>
                                         </con2:param>
                                         <con2:param name="TicketNumber">
-                                            <con2:path>$body/*</con2:path>
+                                            <con2:path>$InputRequest/incidentData/INCIDENT_NUMBER/text()</con2:path>
                                         </con2:param>
                                         <con2:param name="ProxyService">
                                             <con2:path>fn:tokenize($inbound/@name, '\$')[last()]</con2:path>
@@ -553,14 +549,11 @@ else ''</con2:path>
                                             <con2:path>$InputRequest/incidentData/REC_TYPE/text()</con2:path>
                                         </con2:param>
                                         <con2:param name="Payload">
-                                            <con2:path>$SNRequest</con2:path>
+                                            <con2:path>$body/*</con2:path>
                                         </con2:param>
                                     </con2:xqueryTransform>
                                 </con1:expr>
                             </con1:replace>
-                            <con2:reply xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
-                                <con2:id>_ActionId-a013dc6.N4a5f3b08.0.164f9f5c9af.N7f92</con2:id>
-                            </con2:reply>
                         </con3:outboundTransform>
                     </con3:route>
                 </con:actions>

@@ -421,9 +421,6 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                             </con2:replace>
                         </con4:outboundTransform>
                     </con4:route>
-                    <con2:reply xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
-                        <con2:id>_ActionId-a013dc6.5ad09c36.0.164d0ef9e67.N7fc9</con2:id>
-                    </con2:reply>
                 </con:actions>
             </con:stage>
         </con:pipeline>
