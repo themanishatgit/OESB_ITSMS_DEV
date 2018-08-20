@@ -80,7 +80,7 @@ else(
     <fetch:recType>{$body/fet:FetchCategoryMappingRequest/fet:RecType/text()}</fetch:recType>
     <fetch:snCategory>{$body/fet:FetchCategoryMappingRequest/fet:SNCategory/text()}</fetch:snCategory>
     <fetch:snSubCategory>{$body/fet:FetchCategoryMappingRequest/fet:SNSubCategory/text()}</fetch:snSubCategory>
-    <fetch:isActive>Y</fetch:isActive>
+    <fetch:isActive>true</fetch:isActive>
 </fetch:Fetch_EbondingsCategoryMappingOutboundSelect_recType_snCategory_snSubCategory_isActiveInputParameters>]]></con1:xqueryText>
                                             </con3:expr>
                                         </con3:replace>

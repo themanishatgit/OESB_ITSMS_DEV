@@ -81,6 +81,7 @@ else(
 	<fetch:recType>{$body/fet:FetchPriorityMappingRequest/fet:RecType/text()}</fetch:recType>
 	
 	<fetch:priority>{$body/fet:FetchPriorityMappingRequest/fet:Priority/text()}</fetch:priority>
+        <fetch:isActive>true</fetch:isActive>
 </fetch:Fetch_EbondingsPriorityMappingInboundSelect_source_recType_destination_priorityInputParameters>]]></con1:xqueryText>
                                             </con3:expr>
                                         </con3:replace>
@@ -97,6 +98,7 @@ else(
 	<fetch:recType>{$body/fet:FetchPriorityMappingRequest/fet:RecType/text()}</fetch:recType>
 	<fetch:impact>{$body/fet:FetchPriorityMappingRequest/fet:Impact/text()}</fetch:impact>
 	<fetch:urgency>{$body/fet:FetchPriorityMappingRequest/fet:Urgency/text()}</fetch:urgency>
+        <fetch:isActive>true</fetch:isActive>
 </fetch:Fetch_EbondingsPriorityMappingOutboundSelect_recType_source_destination_impact_urgencyInputParameters>]]></con1:xqueryText>
                                         </con3:expr>
                                     </con3:replace>

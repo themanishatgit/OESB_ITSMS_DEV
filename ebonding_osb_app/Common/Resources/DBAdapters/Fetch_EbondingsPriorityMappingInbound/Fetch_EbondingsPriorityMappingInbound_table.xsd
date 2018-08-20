@@ -13,6 +13,7 @@
          <xs:element name="impact" type="string40" minOccurs="0"/>
          <xs:element name="urgency" type="string40" minOccurs="0"/>
          <xs:element name="snId" type="string32"/>
+         <xs:element name="isActive" type="string40" minOccurs="0"/>
       </xs:sequence>
    </xs:complexType>
    <xs:element name="Fetch_EbondingsPriorityMappingInboundSelect_rectype_priorityInputParameters" type="Fetch_EbondingsPriorityMappingInboundSelect_rectype_priority"/>

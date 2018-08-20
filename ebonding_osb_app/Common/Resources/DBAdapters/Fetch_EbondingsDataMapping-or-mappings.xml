@@ -1,69 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd">
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.4.v20160829-44060b6">
    <name>Fetch_EbondingsDataMapping-OR</name>
    <class-mapping-descriptors>
       <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
          <class>Fetch_EbondingsDataMapping.EbondingsDataMapping</class>
          <alias>EBONDINGS_DATA_MAPPING</alias>
          <primary-key>
-            <field table="EBONDINGS_DATA_MAPPING" name="DESTINATION" xsi:type="column"/>
-            <field table="EBONDINGS_DATA_MAPPING" name="OBJECT_NAME" xsi:type="column"/>
-            <field table="EBONDINGS_DATA_MAPPING" name="REC_TYPE" xsi:type="column"/>
-            <field table="EBONDINGS_DATA_MAPPING" name="SOURCE" xsi:type="column"/>
-            <field table="EBONDINGS_DATA_MAPPING" name="SOURCE_VAL" xsi:type="column"/>
+            <field table="EBONDINGS_DATA_MAPPING" name="SN_ID" xsi:type="column"/>
          </primary-key>
          <events/>
          <querying>
             <queries>
                <query name="Fetch_EbondingsDataMappingSelect" xsi:type="read-all-query">
-                  <criteria operator="and" xsi:type="logic-expression">
-                     <left operator="and" xsi:type="logic-expression">
-                        <left operator="and" xsi:type="logic-expression">
-                           <left operator="and" xsi:type="logic-expression">
-                              <left operator="equal" xsi:type="relation-expression">
-                                 <left name="objectName" xsi:type="query-key-expression">
-                                    <base xsi:type="base-expression"/>
-                                 </left>
-                                 <right xsi:type="parameter-expression">
-                                    <parameter name="objectName" xsi:type="column"/>
-                                 </right>
-                              </left>
-                              <right operator="equal" xsi:type="relation-expression">
-                                 <left name="recType" xsi:type="query-key-expression">
-                                    <base xsi:type="base-expression"/>
-                                 </left>
-                                 <right xsi:type="parameter-expression">
-                                    <parameter name="recType" xsi:type="column"/>
-                                 </right>
-                              </right>
-                           </left>
-                           <right operator="equal" xsi:type="relation-expression">
-                              <left name="source" xsi:type="query-key-expression">
-                                 <base xsi:type="base-expression"/>
-                              </left>
-                              <right xsi:type="parameter-expression">
-                                 <parameter name="source" xsi:type="column"/>
-                              </right>
-                           </right>
-                        </left>
-                        <right operator="equal" xsi:type="relation-expression">
-                           <left name="destination" xsi:type="query-key-expression">
-                              <base xsi:type="base-expression"/>
-                           </left>
-                           <right xsi:type="parameter-expression">
-                              <parameter name="destination" xsi:type="column"/>
-                           </right>
-                        </right>
-                     </left>
-                     <right operator="equal" xsi:type="relation-expression">
-                        <left name="sourceVal" xsi:type="query-key-expression">
-                           <base xsi:type="base-expression"/>
-                        </left>
-                        <right xsi:type="parameter-expression">
-                           <parameter name="sourceVal" xsi:type="column"/>
-                        </right>
-                     </right>
-                  </criteria>
                   <arguments>
                      <argument name="objectName">
                         <type>java.lang.String</type>
@@ -81,6 +29,9 @@
                         <type>java.lang.String</type>
                      </argument>
                   </arguments>
+                  <call xsi:type="sql-call">
+                     <sql>SELECT OBJECT_NAME, &quot;SOURCE&quot;, DESTINATION, REC_TYPE, SOURCE_VAL, DESTINATION_VAL, SN_ID, IS_ACTIVE FROM EBONDINGS_DATA_MAPPING WHERE (((((OBJECT_NAME = #objectName) AND (REC_TYPE = #recType)) AND (&quot;SOURCE&quot; = #source)) AND (DESTINATION = #destination)) AND (SOURCE_VAL = #sourceVal))</sql>
+                  </call>
                   <reference-class>Fetch_EbondingsDataMapping.EbondingsDataMapping</reference-class>
                   <container xsi:type="list-container-policy">
                      <collection-type>java.util.Vector</collection-type>
@@ -157,6 +108,26 @@
                   </property>
                </properties>
                <field table="EBONDINGS_DATA_MAPPING" name="UPDATED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>snId</attribute-name>
+               <field table="EBONDINGS_DATA_MAPPING" name="SN_ID" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>isActive</attribute-name>
+               <field table="EBONDINGS_DATA_MAPPING" name="IS_ACTIVE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>esbTranId</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="EBONDINGS_DATA_MAPPING" name="ESB_TRAN_ID" xsi:type="column"/>
                <attribute-classification>java.lang.String</attribute-classification>
             </attribute-mapping>
          </attribute-mappings>
