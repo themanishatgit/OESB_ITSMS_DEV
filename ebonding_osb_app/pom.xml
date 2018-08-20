@@ -12,7 +12,7 @@
     <modules>
         <module>System</module>
         <!--<module>FoundationDataSync</module>-->
-        <module>DataMappingLoad</module>-->
+        <module>DataMappingLoad</module>
         <module>Common</module>
         <module>SN_INC</module>
         <module>NGOSS_INC</module>
