@@ -51,4 +51,9 @@
     <SendLogComment>Y</SendLogComment>
     <QueueName>jms:///EbondingIncConnectionFactory/CISCOOutboundIncQ</QueueName>
   </Interface>
+<Interface>
+    <Name>OBS</Name>
+    <SendLogComment>Y</SendLogComment>
+    <QueueName>jms:///EbondingIncConnectionFactory/OBSOutboundIncQ</QueueName>
+  </Interface>
 </Lookup>

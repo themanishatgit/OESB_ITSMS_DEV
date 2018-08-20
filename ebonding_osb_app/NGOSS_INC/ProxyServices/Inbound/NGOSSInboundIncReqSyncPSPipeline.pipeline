@@ -34,7 +34,7 @@ else('CREATE')</con2:xqueryText>
                     <con1:assign varName="Message_TranId">
                         <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7ef0</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>fn:concat($body/IncidentXML/EventID/text(),fn:current-time())</con2:xqueryText>
+                            <con2:xqueryText>fn-bea:uuid()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:assign varName="TicketNumber">
@@ -47,6 +47,14 @@ else('CREATE')</con2:xqueryText>
                         <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7ee4</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$body/IncidentXML/EventID/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="DefaultValues">
+                        <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7db2</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="NGOSS_INC/Resources/XQueries/NGOSSDefaultValues"/>
+                            </con2:xqueryTransform>
                         </con1:expr>
                     </con1:assign>
                     <con1:validate>
@@ -119,7 +127,7 @@ else('CREATE')</con2:xqueryText>
                     </con4:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013b23.52efc7b5.0.163d1087539.N7dae" name="FetchPriority">
+            <con:stage id="_StageId-a013b23.52efc7b5.0.163d1087539.N7dae" name="MapPriorityAndCategory">
                 <con:context/>
                 <con:actions>
                     <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
@@ -142,61 +150,13 @@ else('CREATE')</con2:xqueryText>
     <fet:Destination>SN</fet:Destination>
      <fet:FetchData>
         <fet:ObjectName>PRIORITY</fet:ObjectName>
-        <fet:SourceValue>{fn:upper-case(data($body/IncidentXML/Severity/text()))}</fet:SourceValue>
+        <fet:SourceValue>{fn:upper-case($body/IncidentXML/Severity/text())}</fet:SourceValue>
     </fet:FetchData>
     <fet:FetchData>
         <fet:ObjectName>CATEGORY</fet:ObjectName>
         <fet:SourceValue>{fn:upper-case(data($body/IncidentXML/Category/text()))}</fet:SourceValue>
     </fet:FetchData>
-   
 </fet:FetchDataMappingRequest>]]></con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
-                        </con1:requestTransform>
-                        <con1:responseTransform/>
-                    </con1:wsCallout>
-                </con:actions>
-            </con:stage>
-            <con:stage id="_StageId-a013b23.52efc7b5.0.163d1087539.N7ee3" name="FetchImpactAndUrgency">
-                <con:context/>
-                <con:actions>
-                    <con1:assign varName="DefaultValues">
-                        <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7db2</con2:id>
-                        <con1:expr>
-                            <con2:xqueryTransform>
-                                <con2:resource ref="NGOSS_INC/Resources/XQueries/NGOSSDefaultValues"/>
-                            </con2:xqueryTransform>
-                        </con1:expr>
-                    </con1:assign>
-                    <con1:assign varName="Priority">
-                        <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7daf</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con1:expr>
-                            <con2:xqueryText>if(fn:exists($DefaultValues/Priority[@NGOSSValue=$body/IncidentXML/Severity/text()]/text()))
-then($DefaultValues/Priority[@NGOSSValue=$body/IncidentXML/Severity/text()]/text())
-else($DefaultValues/Priority[@NGOSSValue='Default']/text())</con2:xqueryText>
-                        </con1:expr>
-                    </con1:assign>
-                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
-                        <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7db7</con2:id>
-                        <con1:service ref="Common/ProxyServices/FetchPriorityMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con1:operation>execute</con1:operation>
-                        <con1:request>
-                            <con1:body wrapped="false">FetchPriorityMappingRequest</con1:body>
-                        </con1:request>
-                        <con1:response>
-                            <con1:body wrapped="false">FetchPriorityMappingResponse</con1:body>
-                        </con1:response>
-                        <con1:requestTransform>
-                            <con1:assign varName="FetchPriorityMappingRequest">
-                                <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7db6</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText><![CDATA[<fet:FetchPriorityMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchPriorityMappingMessageV1">
-	<fet:RecType>INC</fet:RecType>
-	<fet:Source>NGOSS</fet:Source>
-	<fet:Destination>SN</fet:Destination>
-	<fet:Priority>{$Priority}</fet:Priority>
-</fet:FetchPriorityMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
                             </con1:assign>
                         </con1:requestTransform>
@@ -212,60 +172,40 @@ else($DefaultValues/Priority[@NGOSSValue='Default']/text())</con2:xqueryText>
                 <con:actions>
                     <con5:assign varName="ResolvedValues" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                         <con2:id>_ActionId-a013dca.25ce7699.0.164c5f7f57c.N7bed</con2:id>
-                        <con2:disabled>true</con2:disabled>
                         <con1:expr>
                             <con2:xqueryText><![CDATA[<ResolvedValues>
-  <Impact>{$FetchPriorityMappingResponse/fet:Result/fet:Impact/text()}</Impact>
-  <Urgency>{$FetchPriorityMappingResponse/fet:Result/fet:Urgency/text()}</Urgency>
   <Category>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CATEGORY']/fetch:DestinationValue/text()}</Category>
   <Priority>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='PRIORITY']/fetch:DestinationValue/text()}</Priority>
 </ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con5:assign>
-                    <con3:log>
-                        <con2:id>_ActionId-a013dca.25ce7699.0.164c5f7f57c.N7bea</con2:id>
-                        <con3:logLevel>warning</con3:logLevel>
-                        <con3:expr>
-                            <con2:xqueryText>$ResolvedValues</con2:xqueryText>
-                        </con3:expr>
-                        <con3:message>VALUES:</con3:message>
-                    </con3:log>
                     <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-a013b23.52efc7b5.0.163d1087539.N7d41</con2:id>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
                         </con1:location>
                         <con1:expr>
-                            <con:xqueryTransform xmlns:con="http://www.bea.com/wli/sb/stages/config">
-                                <con:resource ref="NGOSS_INC/Resources/XQueries/TransformNGOSSToCanonical"/>
-                                <con:param name="Impact">
-                                    <con:path>$FetchPriorityMappingResponse/fet:Result/fet:Impact/text()</con:path>
-                                </con:param>
-                                <con:param name="Message_TranId">
-                                    <con:path>$Message_TranId</con:path>
-                                </con:param>
-                                <con:param name="IncidentXML">
-                                    <con:path>$IncomingRequest/*</con:path>
-                                </con:param>
-                                <con:param name="TransactionType">
-                                    <con:path>$TransactionType</con:path>
-                                </con:param>
-                                <con:param name="Category">
-                                    <con:path>$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CATEGORY']/fetch:DestinationValue/text()</con:path>
-                                </con:param>
-                                <con:param name="TicketNumber">
-                                    <con:path>$TicketNumber</con:path>
-                                </con:param>
-                                <con:param name="Priority">
-                                    <con:path>$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='PRIORITY']/fetch:DestinationValue/text()</con:path>
-                                </con:param>
-                                <con:param name="DefaultValues">
-                                    <con:path>$DefaultValues</con:path>
-                                </con:param>
-                                <con:param name="Urgency">
-                                    <con:path>$FetchPriorityMappingResponse/fet:Result/fet:Urgency/text()</con:path>
-                                </con:param>
-                            </con:xqueryTransform>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="NGOSS_INC/Resources/XQueries/TransformNGOSSToCanonical"/>
+                                <con2:param name="ResolvedValues">
+                                    <con2:path>$ResolvedValues</con2:path>
+                                </con2:param>
+                                <con2:param name="Message_TranId">
+                                    <con2:path>$Message_TranId</con2:path>
+                                </con2:param>
+                                <con2:param name="IncidentXML">
+                                    <con2:path>$IncomingRequest/*</con2:path>
+                                </con2:param>
+                                <con2:param name="TransactionType">
+                                    <con2:path>$TransactionType</con2:path>
+                                </con2:param>
+                                <con2:param name="TicketNumber">
+                                    <con2:path>$TicketNumber</con2:path>
+                                </con2:param>
+                                <con2:param name="DefaultValues">
+                                    <con2:path>$DefaultValues</con2:path>
+                                </con2:param>
+                            </con2:xqueryTransform>
                         </con1:expr>
                     </con1:replace>
                 </con:actions>

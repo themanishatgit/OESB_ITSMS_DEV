@@ -12,10 +12,7 @@ declare variable $TransactionType as xs:string external;
 declare variable $Message_TranId as xs:string external;
 declare variable $TicketNumber as xs:string external;
 declare variable $ExtRefNumber as xs:string external;
-declare variable $Category as xs:string external;
-declare variable $Priority as xs:string external;
-declare variable $Impact as xs:string external;
-declare variable $Urgency as xs:string external;
+declare variable $ResolvedValues as element(*) external;
 declare variable $DefaultValues as element(*) external;
 
 declare function local:func($IncidentXML as element() (:: schema-element(IncidentXML) ::),
@@ -23,10 +20,7 @@ declare function local:func($IncidentXML as element() (:: schema-element(Inciden
                             $Message_TranId as xs:string,
                             $TicketNumber as xs:string,
                             $ExtRefNumber as xs:string,
-                            $Category as xs:string,
-                            $Priority as xs:string,
-                            $Impact as xs:string,
-                            $Urgency as xs:string,
+                            $ResolvedValues as element(*),
                             $DefaultValues as element(*)) as element() (:: schema-element(ns1:IncidentRequestMessage) ::) {
     <ns1:IncidentRequestMessage>
         <ns1:IncidentRequestHeader>
@@ -43,28 +37,22 @@ declare function local:func($IncidentXML as element() (:: schema-element(Inciden
                     then()
                     else(<ns1:TicketNumber>{$TicketNumber}</ns1:TicketNumber>)
                     }
-                  <ns1:AssignmentGroup>{fn:data($IncidentXML/sitaTrilliumGroup)}</ns1:AssignmentGroup>
+                  <ns1:AssignmentGroup>{
+                    if(fn:data($IncidentXML/sitaTrilliumGroup))
+                    then(fn:data($IncidentXML/sitaTrilliumGroup))
+                    else($DefaultValues/Group/text())
+                    }</ns1:AssignmentGroup>
                     <ns1:Description>{fn:concat($IncidentXML/IncidentDescription/text(),'. Hardware CI Location : ',$IncidentXML/SiteReference/text())}</ns1:Description>
                     <ns1:Priority>{
-                     if($Priority) 
-                    then($Priority) 
+                     if($ResolvedValues/Priority/text()) 
+                    then($ResolvedValues/Priority/text()) 
                       else($DefaultValues/Priority/text())
                      }</ns1:Priority>
                     <ns1:Category>{
-                    if($Category)
-                    then($Category)
+                    if($ResolvedValues/Category/text())
+                    then($ResolvedValues/Category/text())
                     else($DefaultValues/Category/text())
                     }</ns1:Category>
-                    <ns1:Impact>{
-                    if($Impact)
-                    then($Impact)
-                    else($DefaultValues/Impact/text())
-                    }</ns1:Impact>
-                    <ns1:Urgency>{
-                    if($Urgency)
-                    then($Urgency)
-                    else($DefaultValues/Urgency/text())
-                    }</ns1:Urgency>
                     <ns1:Customer>
                           <ns1:Name>NGOSS</ns1:Name>
                           <ns1:RefNumber>{$IncidentXML/EventID/text()}</ns1:RefNumber>
@@ -91,4 +79,4 @@ declare function local:func($IncidentXML as element() (:: schema-element(Inciden
     </ns1:IncidentRequestMessage>
 };
 
-local:func($IncidentXML, $TransactionType, $Message_TranId, $TicketNumber, $ExtRefNumber, $Category, $Priority, $Impact, $Urgency, $DefaultValues)
+local:func($IncidentXML, $TransactionType, $Message_TranId, $TicketNumber, $ExtRefNumber, $ResolvedValues, $DefaultValues)
