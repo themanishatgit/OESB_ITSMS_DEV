@@ -19,6 +19,14 @@
                     <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con5:log>
+                        <con1:id>_ActionId-a013dce.N67964cee.0.16532ef7677.N7f9d</con1:id>
+                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:expr>
+                            <con1:xqueryText>$body</con1:xqueryText>
+                        </con5:expr>
+                        <con5:message>****OutboundIncReqSyncPS.IncomingRequest****</con5:message>
+                    </con5:log>
                     <con2:assign varName="IncomingRequest">
                         <con1:id>_ActionId-N3f57fefd.6b40e81c.0.163ab77910b.N7f78</con1:id>
                         <con2:expr>
@@ -52,21 +60,51 @@
                     <con6:assign varName="TransactionType" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013dca.36121359.0.164121be226.N7c5e</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>if(fn:exists($body/IncidentXML/IncidentId/text()))
-then('UPDATE')
-else('CREATE')</con2:xqueryText>
+                            <con2:xqueryText>if($body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()=$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:Name/text())
+then(
+	if(fn:exists($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text()))
+	then('UPDATE')
+	else('CREATE')
+	)
+else(
+	if(fn:exists($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text()))
+	then('UPDATE')
+	else('CREATE')
+	)</con2:xqueryText>
                         </con1:expr>
                     </con6:assign>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-a013dce.N67964cee.0.16532ef7677.N7f97</con1:id>
+                        <con2:location>
+                            <con1:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con1:xqueryText>$TransactionType</con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
                     <con6:assign varName="RecType" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013dca.36121359.0.164121be226.N7c68</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()</con2:xqueryText>
+                            <con2:xqueryText>if($body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()='incident')
+then('INC')
+else($body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text())</con2:xqueryText>
                         </con1:expr>
                     </con6:assign>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-a013dce.N67964cee.0.16532ef7677.N7f9a</con1:id>
+                        <con2:location>
+                            <con1:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con1:xqueryText>$RecType</con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
                     <con6:assign varName="ExtRefNumber" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013dca.36121359.0.164121be226.N7c65</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text()</con2:xqueryText>
+                            <con2:xqueryText>if($DestinationSystem=$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:Name/text())
+then($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text())
+else($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text())</con2:xqueryText>
                         </con1:expr>
                     </con6:assign>
                     <con2:validate>
@@ -78,95 +116,6 @@ else('CREATE')</con2:xqueryText>
                             <con1:xpathText>./*</con1:xpathText>
                         </con2:location>
                     </con2:validate>
-                </con:actions>
-            </con:stage>
-            <con:stage id="_StageId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ffb" name="FetchVariables">
-                <con:context>
-                    <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
-                </con:context>
-                <con:actions>
-                    <con2:assign varName="DestinationSystem">
-                        <con1:id>_ActionId-N3f57fefd.6b40e81c.0.163ab77910b.N7fbe</con1:id>
-                        <con2:expr>
-                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()</con1:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
-                    <con2:ifThenElse>
-                        <con1:id>_ActionId-a013b5c.N20bd7cd8.0.163bb455dec.N7d83</con1:id>
-                        <con2:case id="_BranchId-a013b5c.N20bd7cd8.0.163bb455dec.N7d82">
-                            <con2:condition>
-                                <con1:xqueryText>fn:not(fn:exists($body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType))</con1:xqueryText>
-                            </con2:condition>
-                            <con2:actions>
-                                <con2:assign varName="TransactionType">
-                                    <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7f90</con1:id>
-                                    <con2:expr>
-                                        <con1:xqueryText>if($DestinationSystem=$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:Name/text())
-then(
-	if(fn:exists($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber))
-	then('UPDATE')
-	else('CREATE')
-	)
-else(
-	if(fn:exists($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text()))
-	then('UPDATE')
-	else('CREATE')
-	)</con1:xqueryText>
-                                    </con2:expr>
-                                </con2:assign>
-                                <con2:insert varName="body">
-                                    <con1:id>_ActionId-a013b5c.N20bd7cd8.0.163bb455dec.N7d7f</con1:id>
-                                    <con2:location>
-                                        <con1:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId</con1:xpathText>
-                                    </con2:location>
-                                    <con2:where>after</con2:where>
-                                    <con2:expr>
-                                        <con1:xqueryText>&lt;inc:TransactionType>{$TransactionType}&lt;/inc:TransactionType></con1:xqueryText>
-                                    </con2:expr>
-                                </con2:insert>
-                            </con2:actions>
-                        </con2:case>
-                        <con2:default>
-                            <con2:assign varName="TransactionType">
-                                <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7f2c</con1:id>
-                                <con2:expr>
-                                    <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType/text()</con1:xqueryText>
-                                </con2:expr>
-                            </con2:assign>
-                        </con2:default>
-                    </con2:ifThenElse>
-                    <con2:assign varName="Message_TranId">
-                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ef8</con1:id>
-                        <con2:expr>
-                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId/text()</con1:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
-                    <con2:assign varName="SourceSystem">
-                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ef5</con1:id>
-                        <con2:expr>
-                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()</con1:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
-                    <con2:assign varName="TicketNumber">
-                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7ef2</con1:id>
-                        <con2:expr>
-                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con1:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
-                    <con2:assign varName="RecType">
-                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7eef</con1:id>
-                        <con2:expr>
-                            <con1:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()</con1:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
-                    <con2:assign varName="ExtRefNumber">
-                        <con1:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7eec</con1:id>
-                        <con2:expr>
-                            <con1:xqueryText>if($DestinationSystem=$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:Name/text())
-then($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text())
-else($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text())</con1:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-N3f57fefd.6b40e81c.0.163ab77910b.N7fc8" name="AuditStart">
@@ -398,14 +347,6 @@ else($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetail
                             </con2:replace>
                         </con4:outboundTransform>
                     </con4:route>
-                    <con5:log>
-                        <con1:id>_ActionId-a013dca.36121359.0.164121be226.N7c5b</con1:id>
-                        <con5:logLevel>warning</con5:logLevel>
-                        <con5:expr>
-                            <con1:xqueryText>$body</con1:xqueryText>
-                        </con5:expr>
-                        <con5:message>audit:</con5:message>
-                    </con5:log>
                     <con2:replace varName="body" contents-only="true">
                         <con1:id>_ActionId-N3f57fefd.6b40e81c.0.163ab77910b.N7e3e</con1:id>
                         <con2:location>
