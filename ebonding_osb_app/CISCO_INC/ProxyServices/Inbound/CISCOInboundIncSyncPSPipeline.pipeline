@@ -209,42 +209,6 @@ else ''</con2:path>
                     </con2:validate>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N7896" name="PriorityMapping_Stg" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
-                <con:context>
-                    <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
-                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
-                    <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
-                </con:context>
-                <con:actions>
-                    <con1:wsCallout>
-                        <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7895</con2:id>
-                        <con1:service ref="Common/ProxyServices/FetchPriorityMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con1:operation>execute</con1:operation>
-                        <con1:request>
-                            <con1:body wrapped="false">PriorityMappingRequest</con1:body>
-                        </con1:request>
-                        <con1:response>
-                            <con1:body wrapped="false">PriorityMappingResponse</con1:body>
-                        </con1:response>
-                        <con1:requestTransform>
-                            <con1:assign varName="PriorityMappingRequest">
-                                <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7894</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText><![CDATA[<fet:FetchPriorityMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchPriorityMappingMessageV1">
-	<fet:RecType>INC</fet:RecType>
-	<fet:Source>{$SourceSystem}</fet:Source>
-	<fet:Destination>{$DestinationSystem}</fet:Destination>
-	<!--<fet:Priority>{$InputRequest/incidentData/PRIORITY/text()}</fet:Priority>-->
-        <fet:Impact>{$InputRequest/incidentData/IMPACT/text()}</fet:Impact>
-        <fet:Urgency>{$InputRequest/incidentData/URGENCY/text()}</fet:Urgency>
-</fet:FetchPriorityMappingRequest>]]></con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
-                        </con1:requestTransform>
-                        <con1:responseTransform/>
-                    </con1:wsCallout>
-                </con:actions>
-            </con:stage>
             <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N77eb" name="DataMapping_Stg" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
                 <con:context>
                     <con2:userNsDecl prefix="fetdm" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
@@ -277,43 +241,17 @@ else ''</con2:path>
     </fetdm:FetchData>
 	<fetdm:FetchData>
         <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{$InputRequest/incidentData/RESOLUTION_CODE/text()}</fetdm:SourceValue>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/RESOLUTION_CODE/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
 	<fetdm:FetchData>
         <fetdm:ObjectName>CAUSE_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{$InputRequest/incidentData/CAUSE_CODE/text()}</fetdm:SourceValue>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/CAUSE_CODE/text())}</fetdm:SourceValue>
+    </fetdm:FetchData>
+    <fetdm:FetchData>
+        <fetdm:ObjectName>PRIORITY</fetdm:ObjectName>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/PRIORITY/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
-                        </con1:requestTransform>
-                        <con1:responseTransform/>
-                    </con1:wsCallout>
-                </con:actions>
-            </con:stage>
-            <con:stage id="_StageId-a013dc6.4ae34749.0.164fee26093.N7f66" name="FetchCategoryMapping" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
-                <con:context>
-                    <con2:userNsDecl prefix="fetcm" namespace="http://www.sita.aero/schema/FetchCategoryMappingMessageV1"/>
-                </con:context>
-                <con:actions>
-                    <con1:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
-                        <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f65</con2:id>
-                        <con1:service ref="Common/ProxyServices/FetchCategoryMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con1:operation>execute</con1:operation>
-                        <con1:request>
-                            <con1:body wrapped="false">CategoryMappingRequest</con1:body>
-                        </con1:request>
-                        <con1:response>
-                            <con1:body wrapped="false">CategoryMappingResponse</con1:body>
-                        </con1:response>
-                        <con1:requestTransform>
-                            <con1:assign varName="CategoryMappingRequest">
-                                <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f64</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText><![CDATA[<fetcm:FetchCategoryMappingRequest>
-         <fetcm:RecType>INC</fetcm:RecType>
-         <fetcm:SHCategory>{fn:upper-case($InputRequest/incidentData/INCIDENT_CATEGORY/text())}</fetcm:SHCategory>
-      </fetcm:FetchCategoryMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
                             </con1:assign>
                         </con1:requestTransform>
@@ -335,29 +273,20 @@ else ''</con2:path>
                         <con1:expr>
                             <con2:xqueryTransform>
                                 <con2:resource ref="CISCO_INC/Resources/XQueries/CISCORequestToSNRequest"/>
-                                <con2:param name="Impact">
-                                    <con2:path>$PriorityMappingResponse/fet:Result/fet:Impact/text()</con2:path>
-                                </con2:param>
                                 <con2:param name="TransactionType">
                                     <con2:path>$TransactionType</con2:path>
-                                </con2:param>
-                                <con2:param name="Category">
-                                    <con2:path>$CategoryMappingResponse/fetcm:Result/fetcm:SNCategory/text()</con2:path>
                                 </con2:param>
                                 <con2:param name="CISCORequest">
                                     <con2:path>$InputRequest/incidentData</con2:path>
                                 </con2:param>
+                                <con2:param name="Priority">
+                                    <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='PRIORITY']/fetdm:DestinationValue/text()</con2:path>
+                                </con2:param>
                                 <con2:param name="StatusDestinationValue">
                                     <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:path>
                                 </con2:param>
-                                <con2:param name="SubCategory">
-                                    <con2:path>$CategoryMappingResponse/fetcm:Result/fetcm:SNSubCategory/text()</con2:path>
-                                </con2:param>
                                 <con2:param name="ResolutionCodeDestinationValue">
                                     <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text()</con2:path>
-                                </con2:param>
-                                <con2:param name="Urgency">
-                                    <con2:path>$PriorityMappingResponse/fet:Result/fet:Urgency/text()</con2:path>
                                 </con2:param>
                                 <con2:param name="SourceSystem">
                                     <con2:path>$SourceSystem</con2:path>

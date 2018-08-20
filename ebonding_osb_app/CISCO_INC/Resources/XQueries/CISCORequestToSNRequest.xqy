@@ -9,27 +9,20 @@ declare namespace ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 
 declare variable $SourceSystem as xs:string external;
 declare variable $MsgTranId as xs:string external;
-declare variable $Impact as xs:string external;
-declare variable $Urgency as xs:string external;
 declare variable $StatusDestinationValue as xs:string external;
-declare variable $GroupDestinationValue as xs:string external;
 declare variable $ResolutionCodeDestinationValue as xs:string external;
 declare variable $CauseCodeDestinationValue as xs:string external;
 declare variable $TransactionType as xs:string external;
-declare variable $Category as xs:string external;
-declare variable $SubCategory as xs:string external;
+declare variable $Priority as xs:string external;
 declare variable $CISCORequest as element() (:: schema-element(incidentData) ::) external;
 
 declare function local:func($MsgTranId as xs:string,
                             $SourceSystem as xs:string,
                             $TransactionType as xs:string,
-                            $Impact as xs:string, 
-                            $Urgency as xs:string, 
                             $StatusDestinationValue as xs:string, 
                             $ResolutionCodeDestinationValue as xs:string, 
                             $CauseCodeDestinationValue as xs:string, 
-                            $Category as xs:string, 
-                            $SubCategory as xs:string, 
+                            $Priority as xs:string,
                             $CISCORequest as element() (:: schema-element(incidentData) ::)) 
                             as element() (:: schema-element(ns1:IncidentRequestMessage) ::) {
     <ns1:IncidentRequestMessage>
@@ -118,13 +111,9 @@ declare function local:func($MsgTranId as xs:string,
                         <ns1:Description>{fn:data($CISCORequest/DESCRIPTION)}</ns1:Description>
                         <ns1:ShortDescription>{fn:data($CISCORequest/SUMMARY)}</ns1:ShortDescription>
                       
-                        <ns1:Priority>{fn:data($CISCORequest/PRIORITY)}</ns1:Priority>
-                        <ns1:Category>{$Category}</ns1:Category>
-                        <ns1:SubCategory>{$SubCategory}</ns1:SubCategory>
+                        <ns1:Priority>{$Priority}</ns1:Priority>
+                        <ns1:Category>{fn:data($CISCORequest/INCIDENT_CATEGORY)}</ns1:Category>
                       
-                      
-                        <ns1:Impact>{$Impact}</ns1:Impact>
-                        <ns1:Urgency>{$Urgency}</ns1:Urgency>
                       {
                         if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER')
                         then
@@ -189,4 +178,4 @@ declare function local:func($MsgTranId as xs:string,
     </ns1:IncidentRequestMessage>
 };
 
-local:func($MsgTranId,$SourceSystem,$TransactionType,$Impact, $Urgency, $StatusDestinationValue,$ResolutionCodeDestinationValue,$CauseCodeDestinationValue,$Category,$SubCategory,$CISCORequest)
+local:func($MsgTranId,$SourceSystem,$TransactionType, $StatusDestinationValue,$ResolutionCodeDestinationValue,$CauseCodeDestinationValue,$Priority,$CISCORequest)

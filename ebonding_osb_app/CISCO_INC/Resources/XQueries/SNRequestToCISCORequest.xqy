@@ -8,14 +8,11 @@ declare namespace ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 (:: import schema at "../../../Common/Resources/Schemas/IncidentEbondingMessage.xsd" ::)
 
 
-declare variable $Priority as xs:string external;
 declare variable $StatusDestinationValue as xs:string external;
-declare variable $GroupDestinationValue as xs:string external;
 declare variable $ResolutionCodeDestinationValue as xs:string external;
 declare variable $SNRequest as element() (:: schema-element(ns1:IncidentRequestMessage) ::) external;
 
-declare function local:func($Priority as xs:string, 
-                            $StatusDestinationValue as xs:string, 
+declare function local:func($StatusDestinationValue as xs:string, 
                             $ResolutionCodeDestinationValue as xs:string, 
                             $SNRequest as element() (:: schema-element(ns1:IncidentRequestMessage) ::)) 
                             as element() (:: schema-element(typ:TRANSACTION) ::) {
@@ -76,7 +73,7 @@ declare function local:func($Priority as xs:string,
         {
           if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='CREATE')
           then
-            <SEVERITY>{fn:data($Priority)}</SEVERITY>
+            <SEVERITY>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Priority)}</SEVERITY>
           else()
         }
         {
@@ -351,4 +348,4 @@ declare function local:func($Priority as xs:string,
     </typ:TRANSACTION>
 };
 
-local:func($Priority, $StatusDestinationValue,  $ResolutionCodeDestinationValue, $SNRequest)
+local:func($StatusDestinationValue,  $ResolutionCodeDestinationValue, $SNRequest)
