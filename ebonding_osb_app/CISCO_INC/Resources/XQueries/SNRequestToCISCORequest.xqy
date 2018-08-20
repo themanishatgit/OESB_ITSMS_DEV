@@ -105,10 +105,10 @@ declare function local:func($StatusDestinationValue as xs:string,
                   else()
                 }
                 {
-                  if(fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentAsset/ns1:CI/text())>0)then
+                  if(fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentAsset/ns1:BusinessService/text())>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>SERVICE_CI</FIELD_NAME>
-                        <FIELD_VALUE>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentAsset/ns1:CI)}</FIELD_VALUE>
+                        <FIELD_VALUE>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentAsset/ns1:BusinessService)}</FIELD_VALUE>
                     </UPDATE_FIELD>
                     
                   else()
@@ -188,10 +188,15 @@ declare function local:func($StatusDestinationValue as xs:string,
                   else()
                 }
                 {
-                  if(fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments/text())>0)then
+                  if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='CUSTOMER' and fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments/text())>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>COMMENTS</FIELD_NAME>
                         <FIELD_VALUE>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)}</FIELD_VALUE>
+                    </UPDATE_FIELD>
+                  else if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='SUPPLIER' and fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments/text())>0)then
+                    <UPDATE_FIELD>
+                        <FIELD_NAME>COMMENTS</FIELD_NAME>
+                        <FIELD_VALUE>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)}</FIELD_VALUE>
                     </UPDATE_FIELD>
                     
                   else()
@@ -246,12 +251,14 @@ declare function local:func($StatusDestinationValue as xs:string,
           else()
         }
         {
-          if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='UPDATE')
+          if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='UPDATE' and dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='CUSTOMER')
           then
             <ACT_LOG>
-                <LOG_DESCRIPTION>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:WorkNotes)}</LOG_DESCRIPTION>
+                <LOG_DESCRIPTION>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)}</LOG_DESCRIPTION>
             </ACT_LOG>       
-          else()
+          else(<ACT_LOG>
+                <LOG_DESCRIPTION>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)}</LOG_DESCRIPTION>
+            </ACT_LOG>       )
         }
         {
           if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='CREATE')

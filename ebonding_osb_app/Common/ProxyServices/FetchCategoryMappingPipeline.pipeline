@@ -96,7 +96,7 @@ else(
                                             <con1:xqueryText><![CDATA[<fetch:Fetch_EbondingsCategoryMappingInboundSelect_recType_shCategory_isActiveInputParameters xmlns:fetch="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsCategoryMappingInbound">
     <fetch:recType>{$body/fet:FetchCategoryMappingRequest/fet:RecType/text()}</fetch:recType>
     <fetch:shCategory>{$body/fet:FetchCategoryMappingRequest/fet:SHCategory/text()}</fetch:shCategory>
-    <fetch:isActive>Y</fetch:isActive>
+    <fetch:isActive>true</fetch:isActive>
 </fetch:Fetch_EbondingsCategoryMappingInboundSelect_recType_shCategory_isActiveInputParameters>]]></con1:xqueryText>
                                         </con3:expr>
                                     </con3:replace>

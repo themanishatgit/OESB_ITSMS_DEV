@@ -68,7 +68,7 @@
     <fetch:source>{$body/fet:FetchDataMappingRequest/fet:Source/text()}</fetch:source>
     <fetch:destination>{$body/fet:FetchDataMappingRequest/fet:Destination/text()}</fetch:destination>
     <fetch:sourceVal>{$fetchdata/fet:SourceValue/text()}</fetch:sourceVal>
-    <fetch:isActive>true</fetch:isActive>
+    
 </fetch:Fetch_EbondingsDataMappingSelect_objectName_recType_source_destination_sourceValInputParameters>]]></con1:xqueryText>
                                         </con2:expr>
                                     </con2:assign>
