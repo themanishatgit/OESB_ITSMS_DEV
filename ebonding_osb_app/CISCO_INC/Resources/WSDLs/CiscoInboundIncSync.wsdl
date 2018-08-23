@@ -47,7 +47,7 @@
 					<s:element minOccurs="1" maxOccurs="1" name="ACTUAL_TECH_ARRIVAL" nillable="true" type="s:string"/>
 					<s:element minOccurs="1" maxOccurs="1" name="ACTUAL_FIX_TIME" nillable="true" type="s:string"/>
 					<s:element minOccurs="1" maxOccurs="1" name="COMMENTS" nillable="true" type="s:string"/>
-					<s:element minOccurs="1" maxOccurs="1" name="TIME_SPENT" nillable="true" type="s:string"/>
+					<s:element minOccurs="0" maxOccurs="1" name="TIME_SPENT" nillable="true" type="s:string"/>
 					<s:element minOccurs="1" maxOccurs="1" name="TRAVEL_TIME" nillable="true" type="s:string"/>
 					<s:element minOccurs="1" maxOccurs="1" name="RESOLUTION_CODE" nillable="true" type="s:string"/>
 					<s:element minOccurs="1" maxOccurs="1" name="CAUSE_CODE" nillable="true" type="s:string"/>

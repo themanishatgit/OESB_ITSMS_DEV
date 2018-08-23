@@ -7,6 +7,17 @@
         </con:xqConfiguration>
     </con:coreEntry>
     <con:router>
+        <con:pipeline type="response" name="response-a013dc6.605c4ac1.0.163642f697b.N7e5a"/>
+        <con:pipeline type="error" name="error-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ebc">
+            <con:stage id="_StageId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ebb" name="SendEmail.EH">
+                <con:context/>
+                <con:actions>
+                    <con2:resume>
+                        <con2:id>_ActionId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7eb8</con2:id>
+                    </con2:resume>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
         <con:pipeline type="request" name="request-a013dc6.605c4ac1.0.163642f697b.N7e5b">
             <con:stage id="_StageId-a013dc6.N51379d8b.0.1647e93fb26.N7f90" name="Stage1">
                 <con:context/>
@@ -35,45 +46,45 @@
                                     <con2:xpathText>.</con2:xpathText>
                                 </con1:location>
                                 <con1:expr>
-                                    <con2:xqueryTransform>
-                                        <con2:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
-                                        <con2:param name="TranType">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/TransactionType/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Message_TranId">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Destination">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/Destination/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ExtRefNumber">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/ExternalRefNum/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ErrMessage">
-                                            <con2:path>$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Source">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/Source/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ErrCode">
-                                            <con2:path>$body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TicketNumber">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/IncidentId/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ProxyService">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/ProxyService/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Event">
-                                            <con2:path>'ERROR'</con2:path>
-                                        </con2:param>
-                                        <con2:param name="RecType">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/RecType/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Payload">
-                                            <con2:path>$body/ErrorHandlerRequest/MessageDetails/Payload/*</con2:path>
-                                        </con2:param>
-                                    </con2:xqueryTransform>
+                                    <con:xqueryTransform xmlns:con="http://www.bea.com/wli/sb/stages/config">
+                                        <con:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                        <con:param name="TranType">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/TransactionType/text()</con:path>
+                                        </con:param>
+                                        <con:param name="Message_TranId">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text()</con:path>
+                                        </con:param>
+                                        <con:param name="Destination">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/Destination/text()</con:path>
+                                        </con:param>
+                                        <con:param name="ExtRefNumber">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/ExternalRefNum/text()</con:path>
+                                        </con:param>
+                                        <con:param name="TicketNumber">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/IncidentId/text()</con:path>
+                                        </con:param>
+                                        <con:param name="ProxyService">
+                                            <con:path>'ErrorHandlerPS'</con:path>
+                                        </con:param>
+                                        <con:param name="Event">
+                                            <con:path>'ERROR'</con:path>
+                                        </con:param>
+                                        <con:param name="RecType">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/RecType/text()</con:path>
+                                        </con:param>
+                                        <con:param name="Payload">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/Payload/*</con:path>
+                                        </con:param>
+                                        <con:param name="ErrMessage">
+                                            <con:path>$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text()</con:path>
+                                        </con:param>
+                                        <con:param name="Source">
+                                            <con:path>$body/ErrorHandlerRequest/MessageDetails/Source/text()</con:path>
+                                        </con:param>
+                                        <con:param name="ErrCode">
+                                            <con:path>$body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text()</con:path>
+                                        </con:param>
+                                    </con:xqueryTransform>
                                 </con1:expr>
                             </con1:replace>
                         </con3:outboundTransform>
@@ -230,17 +241,6 @@ else(
                         </con1:case>
                         <con1:default/>
                     </con1:ifThenElse>
-                </con:actions>
-            </con:stage>
-        </con:pipeline>
-        <con:pipeline type="response" name="response-a013dc6.605c4ac1.0.163642f697b.N7e5a"/>
-        <con:pipeline type="error" name="error-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ebc">
-            <con:stage id="_StageId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ebb" name="SendEmail.EH">
-                <con:context/>
-                <con:actions>
-                    <con2:resume>
-                        <con2:id>_ActionId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7eb8</con2:id>
-                    </con2:resume>
                 </con:actions>
             </con:stage>
         </con:pipeline>

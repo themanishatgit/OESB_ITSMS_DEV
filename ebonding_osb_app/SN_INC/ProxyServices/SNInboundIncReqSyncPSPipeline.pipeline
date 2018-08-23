@@ -510,7 +510,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                     <con1:xpathText xmlns:con7="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
                                 </con2:location>
                                 <con2:expr>
-                                    <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
+                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
 	<ErrorDetails>
 		<ErrorCode>ERR002</ErrorCode>
 		<ErrorMsg>Technical Failure</ErrorMsg>
@@ -519,7 +519,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
 		<Message_TransactionId>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId/text()}</Message_TransactionId>
 		<TransactionType>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType/text()}</TransactionType>
 		<RecType>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()}</RecType>
-		<ProxyService>OutboundIncReqSyncPS</ProxyService>
+		<ProxyService>SNInboundIncReqSyncPS</ProxyService>
 		<Payload>{$IncomingRequest/*}</Payload>
 		<Source>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()}</Source>
 		<Destination>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()}</Destination>
@@ -539,7 +539,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
 		)
                 }</ExternalRefNum>
 	</MessageDetails>
-</ErrorHandlerRequest>]]></con7:xqueryText>
+</ErrorHandlerRequest>]]></con:xqueryText>
                                 </con2:expr>
                             </con2:replace>
                         </con4:outboundTransform>
@@ -558,7 +558,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
 </inc:IncidentResponseMessage>]]></con6:xqueryText>
                         </con2:expr>
                     </con2:replace>
-                    <con2:reply>
+                    <con2:reply isError="false">
                         <con2:id>_ActionId-a013b5c.40457e0b.0.163b6d4c107.N7e0c</con2:id>
                     </con2:reply>
                 </con:actions>

@@ -71,9 +71,17 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
         }
        
         {
+			if (fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ERROR')
+			then(
             if (fn:substring-before($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments/text(), ':')!='200')
             then <sup_comments>{fn:substring-after($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments/text(), ':')}</sup_comments>
             else ()
+			)
+			else(
+			if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)
+            then <sup_comments>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)}</sup_comments>
+            else ()
+			)
         }
         
         {
