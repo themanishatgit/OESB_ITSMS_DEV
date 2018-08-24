@@ -4,6 +4,7 @@
     <Category>Hardware</Category>
     <ResolutionCode>No Fault Found</ResolutionCode>
     <Issue>Failure</Issue>
+    <Test></Test>
   </Inbound>
   <Outbound>
     <UserLastName>BA-SITAWAN-CNT</UserLastName>
