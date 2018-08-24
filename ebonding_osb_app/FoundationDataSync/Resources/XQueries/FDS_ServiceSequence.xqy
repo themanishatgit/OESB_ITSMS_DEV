@@ -12,7 +12,7 @@
     <SHName>org</SHName>
     <AdditionalFilter></AdditionalFilter>
     <Service>FoundationDataSync/ProxyServices/FDS_OrganizationSyncPS</Service>
-    <Sequence>2</Sequence>
+    <Sequence>3</Sequence>
   </Object>
   <Object>
     <Name>Vendor</Name>

@@ -79,16 +79,27 @@
                         <con1:expr>
                             <con2:xqueryText>if(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('EXECUTION_TIME'),
-'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM FDS_TRANSACTIONS WHERE OBJECT_NAME=? and STATUS=?)',$ObjectName, 'PROCESSED'
+'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE TRANSACTION_ID=(SELECT MAX(TRANSACTION_ID) FROM FDS_TRANSACTIONS WHERE OBJECT_NAME=? and STATUS=?)',$ObjectName, 'PROCESSED'
 )/EXECUTION_TIME/text())
 then(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('EXECUTION_TIME'),
-'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM FDS_TRANSACTIONS WHERE OBJECT_NAME=? and STATUS=?)',$ObjectName, 'PROCESSED'
+'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE TRANSACTION_ID=(SELECT MAX(TRANSACTION_ID) FROM FDS_TRANSACTIONS WHERE OBJECT_NAME=? and STATUS=?)',$ObjectName, 'PROCESSED'
 )/EXECUTION_TIME/text())
-else((fn-bea:execute-sql('jdbc/ESBDevDB',  
+else(
+if($ObjectName='DeletedRecords')
+then(
+(fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('EXECUTION_TIME'),
+'SELECT RECORD_COUNT FROM FDS_TRANSACTIONS WHERE BATCH_ID=?','x'
+)/RECORD_COUNT/text())
+)
+else(
+(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('EXECUTION_TIME'),
 'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE BATCH_ID=?','x'
-)/EXECUTION_TIME/text()))</con2:xqueryText>
+)/EXECUTION_TIME/text())
+)
+)</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:assign varName="EpochTime">
@@ -204,7 +215,9 @@ xs:QName('TRANID'),
                                                 <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
                                                     <con5:resource ref="FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest"/>
                                                     <con5:param name="executionTime">
-                                                        <con5:path>$EpochTime</con5:path>
+                                                        <con5:path>if($ObjectName='DeletedRecords')
+then($LastExecutionTime)
+else($EpochTime)</con5:path>
                                                     </con5:param>
                                                     <con5:param name="Status">
                                                         <con5:path>'PROCESSED'</con5:path>
@@ -374,9 +387,10 @@ xs:QName('TRANID'),
                                                 <con1:assign varName="Req">
                                                     <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7c01</con2:id>
                                                     <con1:expr>
-                                                        <con2:xqueryText>&lt;sita:execute 	xmlns:sita="http://www.service-now.com/SITA_SH_SN_Sync">
-&lt;start_sync>true&lt;/start_sync>
-&lt;/sita:execute></con2:xqueryText>
+                                                        <con2:xqueryText><![CDATA[<sita:execute 	xmlns:sita="http://www.service-now.com/SITA_SH_SN_Sync">
+<start_sync>true</start_sync>
+<batch_id>{$BatchId}</batch_id>
+</sita:execute>]]></con2:xqueryText>
                                                     </con1:expr>
                                                 </con1:assign>
                                                 <con4:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
@@ -516,7 +530,9 @@ else(xs:integer($ListLength) - 1)</con2:xqueryText>
                                                     <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
                                                         <con5:resource ref="FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest"/>
                                                         <con5:param name="executionTime">
-                                                            <con5:path>$EpochTime</con5:path>
+                                                            <con5:path>if($ObjectName='DeletedRecords')
+then($LastExecutionTime)
+else($EpochTime)</con5:path>
                                                         </con5:param>
                                                         <con5:param name="Status">
                                                             <con5:path>'IN_PROGRESS'</con5:path>
@@ -748,6 +764,75 @@ else('FDS_ERR003')</con1:path>
                             </con2:replace>
                             <con5:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con1:id>_ActionId-a013dc6.4ba03875.0.165332d2611.N7fb9</con1:id>
+                                <con5:logLevel>error</con5:logLevel>
+                                <con5:expr>
+                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con6:xqueryText>
+                                </con5:expr>
+                                <con5:message>****ObjectSyncPS.UpdateFDSTransactions.4****</con5:message>
+                            </con5:log>
+                        </con4:outboundTransform>
+                    </con5:route>
+                    <con1:assign varName="BatchTranId" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <con2:id>_ActionId-a013dce.N40ad58a0.0.165623429d7.N7f5e</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('TRANID'),
+'select TRANSACTION_ID from FDS_TRANSACTIONS where BATCH_ID=? AND OBJECT_NAME=?',$BatchId,'OVERALL')//TRANSACTION_ID/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con5:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con1:id>_ActionId-a013dce.N40ad58a0.0.165623429d7.N7f94</con1:id>
+                        <con5:service ref="FoundationDataSync/BusinessServices/UpdateFDSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con5:operation>merge</con5:operation>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-a013dce.N40ad58a0.0.165623429d7.N7f93</con1:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest"/>
+                                        <con1:param name="executionTime">
+                                            <con1:path>''</con1:path>
+                                        </con1:param>
+                                        <con1:param name="Status">
+                                            <con1:path>'ERROR'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="errCode">
+                                            <con1:path>if($fault/ctx:location/ctx:stage='doQuery')
+then('FDS_ERR002')
+else('FDS_ERR003')</con1:path>
+                                        </con1:param>
+                                        <con1:param name="BatchId">
+                                            <con1:path>$BatchId</con1:path>
+                                        </con1:param>
+                                        <con1:param name="splitCount">
+                                            <con1:path>''</con1:path>
+                                        </con1:param>
+                                        <con1:param name="errMsg">
+                                            <con1:path>fn:concat('Error occured while trying to sync ',$ObjectName)</con1:path>
+                                        </con1:param>
+                                        <con1:param name="listHandle">
+                                            <con1:path>''</con1:path>
+                                        </con1:param>
+                                        <con1:param name="Payload">
+                                            <con1:path>fn-bea:serialize($fault)</con1:path>
+                                        </con1:param>
+                                        <con1:param name="RecordCount">
+                                            <con1:path>''</con1:path>
+                                        </con1:param>
+                                        <con1:param name="TransactionId">
+                                            <con1:path>$BatchTranId</con1:path>
+                                        </con1:param>
+                                        <con1:param name="ObjectName">
+                                            <con1:path>'OVERALL'</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                            <con5:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con1:id>_ActionId-a013dce.N40ad58a0.0.165623429d7.N7f92</con1:id>
                                 <con5:logLevel>error</con5:logLevel>
                                 <con5:expr>
                                     <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con6:xqueryText>

@@ -6,7 +6,7 @@
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
     </con:coreEntry>
-    <con:router>
+    <con:router errorHandler="error-a013dce.Nc4b6a57.0.16567a59599.N7f94">
         <con:pipeline type="request" name="request-N3f57e0b8.N4011d008.0.164d28d79c7.N7f84">
             <con:stage id="_StageId-N3f57e0b8.N4011d008.0.164d28d79c7.N7f82" name="FetchVariables">
                 <con:context/>
@@ -73,6 +73,12 @@
                             <con2:xqueryText>$body/SNPublishPSRequest/MessageContent</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
+                    <con1:assign varName="DelRecordId">
+                        <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7f8d</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Record/Attributes/Attribute[AttrName/text()='id']/AttrValue/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-N3f57e0b8.N4011d008.0.164d28d79c7.N7f74" name="Transform">
@@ -96,7 +102,7 @@
             </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-N3f57e0b8.N4011d008.0.164d28d79c7.N7f83">
-            <con:stage id="_StageId-N3f57e0b8.N4011d008.0.164d28d79c7.N7f81" name="CheckFollowingActions" errorHandler="error-a013dce.N38b6bb0d.0.164f005f025.N7ffa">
+            <con:stage id="_StageId-N3f57e0b8.N4011d008.0.164d28d79c7.N7f81" name="CheckFollowingActions">
                 <con:context/>
                 <con:actions>
                     <con1:ifThenElse>
@@ -120,7 +126,9 @@
                                                 <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
                                                     <con5:resource ref="FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest"/>
                                                     <con5:param name="executionTime">
-                                                        <con5:path>''</con5:path>
+                                                        <con5:path>if($ObjectName='DeletedRecords')
+then($Record/Attributes/Attribute[AttrName/text()='id']/AttrValue/text())
+else('')</con5:path>
                                                     </con5:param>
                                                     <con5:param name="Status">
                                                         <con5:path>'PROCESSED'</con5:path>
@@ -237,9 +245,10 @@ xs:QName('TRANID'),
                                                     <con1:assign varName="Req">
                                                         <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7ffb</con2:id>
                                                         <con1:expr>
-                                                            <con2:xqueryText>&lt;sita:execute 	xmlns:sita="http://www.service-now.com/SITA_SH_SN_Sync">
-&lt;start_sync>true&lt;/start_sync>
-&lt;/sita:execute></con2:xqueryText>
+                                                            <con2:xqueryText><![CDATA[<sita:execute 	xmlns:sita="http://www.service-now.com/SITA_SH_SN_Sync">
+<start_sync>true</start_sync>
+<batch_id>{$BatchId}</batch_id>
+</sita:execute>]]></con2:xqueryText>
                                                         </con1:expr>
                                                     </con1:assign>
                                                     <con4:log>
@@ -357,7 +366,9 @@ xs:QName('TRANID'),
                                                 <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
                                                     <con5:resource ref="FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest"/>
                                                     <con5:param name="executionTime">
-                                                        <con5:path>''</con5:path>
+                                                        <con5:path>if($ObjectName='DeletedRecords')
+then($Record/Attributes/Attribute[AttrName/text()='id']/AttrValue/text())
+else('')</con5:path>
                                                     </con5:param>
                                                     <con5:param name="Status">
                                                         <con5:path>'PROCESSED'</con5:path>
@@ -401,21 +412,18 @@ xs:QName('TRANID'),
                 </con:actions>
             </con:stage>
         </con:pipeline>
-        <con:pipeline type="error" name="error-a013dce.N38b6bb0d.0.164f005f025.N7ffa">
-            <con:stage id="_StageId-a013dce.N38b6bb0d.0.164f005f025.N7ff9" name="CheckFollowingActions.EH">
+        <con:pipeline type="error" name="error-a013dce.Nc4b6a57.0.16567a59599.N7f94">
+            <con:stage id="_StageId-a013dce.Nc4b6a57.0.16567a59599.N7f93" name="Service.EH">
                 <con:context/>
                 <con:actions>
                     <con4:log>
-                        <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7ffe</con2:id>
+                        <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7f90</con2:id>
                         <con4:logLevel>error</con4:logLevel>
                         <con4:expr>
                             <con2:xqueryText>$fault</con2:xqueryText>
                         </con4:expr>
-                        <con4:message>****SNPublishPS.Fault****</con4:message>
+                        <con4:message>****FDS_SNPublish.ServiceEH.Fault****</con4:message>
                     </con4:log>
-                    <con2:reply>
-                        <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7ffb</con2:id>
-                    </con2:reply>
                 </con:actions>
             </con:stage>
         </con:pipeline>
@@ -427,31 +435,44 @@ xs:QName('TRANID'),
             <con:route-node name="RouteNode">
                 <con:context/>
                 <con:actions>
-                    <con3:route>
-                        <con2:id>_ActionId-N3f57e0b8.N4011d008.0.164d28d79c7.N7efc</con2:id>
-                        <con3:service ref="FoundationDataSync/BusinessServices/Providers/ServiceNow/SNPublishBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>insert</con3:operation>
+                    <con3:dynamic-route>
+                        <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7fcc</con2:id>
+                        <con3:service>
+                            <con2:xqueryText><![CDATA[if($ObjectName='DeletedRecords')
+then(
+<ctx:route>
+	<ctx:service isProxy="false">FoundationDataSync/BusinessServices/Providers/ServiceNow/SNPublishDeleteBS</ctx:service>
+	<ctx:operation>execute</ctx:operation>
+</ctx:route>
+)
+else(
+<ctx:route>
+	<ctx:service isProxy="false">FoundationDataSync/BusinessServices/Providers/ServiceNow/SNPublishBS</ctx:service>
+	<ctx:operation>insert</ctx:operation>
+</ctx:route>
+)]]></con2:xqueryText>
+                        </con3:service>
                         <con3:outboundTransform>
                             <con4:log>
-                                <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fa9</con2:id>
+                                <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7fc9</con2:id>
                                 <con4:logLevel>error</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$body</con2:xqueryText>
                                 </con4:expr>
-                                <con4:message>****SNPublishPS.SNRequest****</con4:message>
+                                <con4:message>****FDS_SNPublishPS.RequestSentToSN****</con4:message>
                             </con4:log>
                         </con3:outboundTransform>
                         <con3:responseTransform>
                             <con4:log>
-                                <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7b69</con2:id>
+                                <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7fc6</con2:id>
                                 <con4:logLevel>error</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$body</con2:xqueryText>
                                 </con4:expr>
-                                <con4:message>****SNPublishPS.SNResponse****</con4:message>
+                                <con4:message>****SNPublishPS.ResponseFromSN****</con4:message>
                             </con4:log>
                         </con3:responseTransform>
-                    </con3:route>
+                    </con3:dynamic-route>
                 </con:actions>
             </con:route-node>
         </con:flow>

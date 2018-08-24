@@ -32,6 +32,8 @@ declare function local:func($SessionId as xs:string,
            then(fn:concat('last_mod&gt;',$LastModifiedTime,' and last_mod&lt;',$CurrentEpochTime))
            else if($ObjectName='contact_handling')
            then(fn:concat('last_mod_date&gt;',$LastModifiedTime,' and last_mod_date&lt;',$CurrentEpochTime))
+           else if($ObjectName='zsnow_shub_sync_del')
+           then(fn:concat('id&gt;',$LastModifiedTime))
            else(fn:concat('last_mod_dt&gt;',$LastModifiedTime,' and last_mod_dt&lt;',$CurrentEpochTime))
          )
          }</whereClause>

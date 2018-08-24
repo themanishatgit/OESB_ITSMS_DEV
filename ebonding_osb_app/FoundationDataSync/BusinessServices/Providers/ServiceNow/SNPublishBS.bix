@@ -9,7 +9,7 @@
             </con:port>
             <con:WSI-compliant>false</con:WSI-compliant>
         </con1:binding>
-        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+        <oper:operations enabled="true">
             <oper:throttling enabled="false"/>
             <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
         </oper:operations>
@@ -39,6 +39,7 @@
                 <http:connection-timeout>0</http:connection-timeout>
                 <http:outbound-authentication xsi:type="http:HttpBasicAuthenticationType"/>
                 <http:service-account ref="SN_INC/Resources/ServiceAccounts/SN_ServiceAccount"/>
+                <http:proxy-server ref="System/Proxy Servers/ProxyServer"/>
                 <http:follow-redirects>false</http:follow-redirects>
                 <http:chunked-streaming-mode>true</http:chunked-streaming-mode>
                 <http:session-sctikiness enabled="false" session-id-name="JSESSIONID"/>

@@ -8,7 +8,7 @@
                 <con:namespace>http://www.ca.com/UnicenterServicePlus/ServiceDesk</con:namespace>
             </con:port>
         </con1:binding>
-        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+        <oper:operations enabled="true">
             <oper:throttling enabled="false"/>
             <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
         </oper:operations>
@@ -36,6 +36,7 @@
                 <http:request-method>POST</http:request-method>
                 <http:timeout>0</http:timeout>
                 <http:connection-timeout>0</http:connection-timeout>
+                <http:proxy-server ref="System/Proxy Servers/ProxyServer"/>
                 <http:follow-redirects>false</http:follow-redirects>
                 <http:chunked-streaming-mode>true</http:chunked-streaming-mode>
                 <http:session-sctikiness enabled="false" session-id-name="JSESSIONID"/>
