@@ -4,7 +4,6 @@
     <Category>Hardware</Category>
     <ResolutionCode>No Fault Found</ResolutionCode>
     <Issue>Failure</Issue>
-    <ToBeRemoved>Anand</ToBeRemoved>
   </Inbound>
   <Outbound>
     <UserLastName>BA-SITAWAN-CNT</UserLastName>
