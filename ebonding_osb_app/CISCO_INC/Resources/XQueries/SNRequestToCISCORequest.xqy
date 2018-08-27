@@ -221,19 +221,19 @@ declare function local:func($StatusDestinationValue as xs:string,
                 }
                 
                 {
-                  if(fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Impact/text())>0)then
+                  if(fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Priority/text())>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>IMPACT</FIELD_NAME>
-                        <FIELD_VALUE>{$SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Impact/text()}</FIELD_VALUE>
+                        <FIELD_VALUE>{dvmtr:lookup('CISCO_INC/Resources/DVMs/OutboundImpactUrgency', 'Priority', $SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Priority/text(), 'Impact', '')}</FIELD_VALUE>
                     </UPDATE_FIELD>
                   else()
                 }
                 
                 {
-                  if(fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Urgency/text())>0)then
+                  if(fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Priority/text())>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>URGENCY</FIELD_NAME>
-                        <FIELD_VALUE>{$SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Urgency/text()}</FIELD_VALUE>
+                        <FIELD_VALUE>{dvmtr:lookup('CISCO_INC/Resources/DVMs/OutboundImpactUrgency', 'Priority', $SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Priority/text(), 'Urgency', '')}</FIELD_VALUE>
                     </UPDATE_FIELD>
                   else()
                 }
@@ -317,13 +317,13 @@ declare function local:func($StatusDestinationValue as xs:string,
         {
           if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='CREATE')
           then
-            <IMPACT>{$SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Impact/text()}</IMPACT>
+            <IMPACT>{dvmtr:lookup('CISCO_INC/Resources/DVMs/OutboundImpactUrgency', 'Priority', $SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Priority/text(), 'Impact', '')}</IMPACT>
           else()
         }
         {
           if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='CREATE')
           then
-            <URGENCY>{$SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Urgency/text()}</URGENCY>
+            <URGENCY>{dvmtr:lookup('CISCO_INC/Resources/DVMs/OutboundImpactUrgency', 'Priority', $SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Priority/text(), 'Urgency', '')}</URGENCY>
           else()
         }
         {

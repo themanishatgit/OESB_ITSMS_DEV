@@ -432,14 +432,6 @@ else ''</con:path>
         <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
         <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/RESOLUTION_CODE/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
-	<fetdm:FetchData>
-        <fetdm:ObjectName>CAUSE_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/CAUSE_CODE/text())}</fetdm:SourceValue>
-    </fetdm:FetchData>
-    <fetdm:FetchData>
-        <fetdm:ObjectName>PRIORITY</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/PRIORITY/text())}</fetdm:SourceValue>
-    </fetdm:FetchData>
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
                             </con1:assign>
@@ -468,9 +460,6 @@ else ''</con:path>
                                 <con2:param name="CISCORequest">
                                     <con2:path>$InputRequest/incidentData</con2:path>
                                 </con2:param>
-                                <con2:param name="Priority">
-                                    <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='PRIORITY']/fetdm:DestinationValue/text()</con2:path>
-                                </con2:param>
                                 <con2:param name="StatusDestinationValue">
                                     <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:path>
                                 </con2:param>
@@ -479,9 +468,6 @@ else ''</con:path>
                                 </con2:param>
                                 <con2:param name="SourceSystem">
                                     <con2:path>$SourceSystem</con2:path>
-                                </con2:param>
-                                <con2:param name="CauseCodeDestinationValue">
-                                    <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='CAUSE_CODE']/fetdm:DestinationValue/text()</con2:path>
                                 </con2:param>
                                 <con2:param name="MsgTranId">
                                     <con2:path>$MsgTranId</con2:path>

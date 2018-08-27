@@ -11,9 +11,7 @@ declare variable $SourceSystem as xs:string external;
 declare variable $MsgTranId as xs:string external;
 declare variable $StatusDestinationValue as xs:string external;
 declare variable $ResolutionCodeDestinationValue as xs:string external;
-declare variable $CauseCodeDestinationValue as xs:string external;
 declare variable $TransactionType as xs:string external;
-declare variable $Priority as xs:string external;
 declare variable $CISCORequest as element() (:: schema-element(incidentData) ::) external;
 
 declare function local:func($MsgTranId as xs:string,
@@ -21,8 +19,6 @@ declare function local:func($MsgTranId as xs:string,
                             $TransactionType as xs:string,
                             $StatusDestinationValue as xs:string, 
                             $ResolutionCodeDestinationValue as xs:string, 
-                            $CauseCodeDestinationValue as xs:string, 
-                            $Priority as xs:string,
                             $CISCORequest as element() (:: schema-element(incidentData) ::)) 
                             as element() (:: schema-element(ns1:IncidentRequestMessage) ::) {
     <ns1:IncidentRequestMessage>
@@ -111,7 +107,7 @@ declare function local:func($MsgTranId as xs:string,
                         <ns1:Description>{fn:data($CISCORequest/DESCRIPTION)}</ns1:Description>
                         <ns1:ShortDescription>{fn:data($CISCORequest/SUMMARY)}</ns1:ShortDescription>
                       
-                        <ns1:Priority>{$Priority}</ns1:Priority>
+                        <ns1:Priority>{dvmtr:lookup('CISCO_INC/Resources/DVMs/InboundPriority', 'Impact_Urgency',fn:concat(fn:upper-case(fn:data($CISCORequest/IMPACT)),'_',fn:upper-case(fn:data($CISCORequest/URGENCY))) , 'Priority', '')}</ns1:Priority>
                         <ns1:Category>{fn:data($CISCORequest/INCIDENT_CATEGORY)}</ns1:Category>
                       
                       {
@@ -168,7 +164,7 @@ declare function local:func($MsgTranId as xs:string,
                       </ns1:IncidentAsset>
                      
                   <ns1:IncidentLocation>
-                      <ns1:Issue>{$CauseCodeDestinationValue}</ns1:Issue>
+                      <ns1:Issue></ns1:Issue>
                   </ns1:IncidentLocation>
               </ns1:IncidentRequestBody>
             else()
@@ -178,4 +174,4 @@ declare function local:func($MsgTranId as xs:string,
     </ns1:IncidentRequestMessage>
 };
 
-local:func($MsgTranId,$SourceSystem,$TransactionType, $StatusDestinationValue,$ResolutionCodeDestinationValue,$CauseCodeDestinationValue,$Priority,$CISCORequest)
+local:func($MsgTranId,$SourceSystem,$TransactionType, $StatusDestinationValue,$ResolutionCodeDestinationValue,$CISCORequest)
