@@ -256,9 +256,15 @@ declare function local:func($StatusDestinationValue as xs:string,
             <ACT_LOG>
                 <LOG_DESCRIPTION>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)}</LOG_DESCRIPTION>
             </ACT_LOG>       
-          else(<ACT_LOG>
+          else()
+        }
+        {
+          if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='UPDATE' and dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='SUPPLIER')
+          then
+            <ACT_LOG>
                 <LOG_DESCRIPTION>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)}</LOG_DESCRIPTION>
-            </ACT_LOG>       )
+            </ACT_LOG>       
+          else()
         }
         {
           if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='CREATE')
