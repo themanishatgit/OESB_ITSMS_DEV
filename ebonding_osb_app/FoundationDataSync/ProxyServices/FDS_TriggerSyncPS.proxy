@@ -25,7 +25,7 @@
         <tran:provider-id>http</tran:provider-id>
         <tran:inbound>true</tran:inbound>
         <tran:URI>
-            <env:value>/FoundationDataSync/ProxyServices/FDS_TriggerSyncPS1</env:value>
+            <env:value>/FoundationDataSync/FDS_TriggerSyncPS</env:value>
         </tran:URI>
         <tran:inbound-properties/>
         <tran:provider-specific xsi:type="http:HttpEndPointConfiguration" xmlns:http="http://www.bea.com/wli/sb/transports/http">
