@@ -2,10 +2,10 @@
 <con:businessServiceEntry xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http">
     <con:coreEntry>
         <con1:binding type="SOAP" xsi:type="con:SoapBindingType" isSoap12="false" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:con1="http://xmlns.oracle.com/servicebus/business/config">
-            <con:wsdl ref="FoundationDataSync/Resources/WSDLs/SNStartSync"/>
+            <con:wsdl ref="FoundationDataSync/Resources/WSDLs/SNPublish/SNSpecialHandlingContactRelPublish"/>
             <con:port>
                 <con:name>ServiceNowSoap</con:name>
-                <con:namespace>http://www.service-now.com/SITA_SH_SN_Sync</con:namespace>
+                <con:namespace>http://www.service-now.com/u_sync_user_special_handlings</con:namespace>
             </con:port>
             <con:WSI-compliant>false</con:WSI-compliant>
         </con1:binding>
@@ -24,7 +24,7 @@
         <tran:provider-id>http</tran:provider-id>
         <tran:inbound>false</tran:inbound>
         <tran:URI weight="0">
-            <env:value>https://sitaitsmsdev.service-now.com/SITA_SH_SN_Sync.do?SOAP</env:value>
+            <env:value>https://sitaitsmsdev.service-now.com/u_sync_user_special_handlings.do?SOAP</env:value>
         </tran:URI>
         <tran:outbound-properties>
             <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>

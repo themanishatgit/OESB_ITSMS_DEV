@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
     <con:coreEntry>
-        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType"/>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="FoundationDataSync/Resources/WSDLs/FDS_TriggerSyncPS"/>
+            <con:binding>
+                <con:name>execute_bind</con:name>
+                <con:namespace>http://xmlns.oracle.com/ebonding_osb_app/FoundationDataSync/FDS_TriggerSyncPS</con:namespace>
+            </con:binding>
+        </con:binding>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
     </con:coreEntry>
-    <con:router errorHandler="error-N3f57e0b8.N3cea576.0.1649d5be40d.N7ffb">
-        <con:pipeline type="request" name="request-a013dce.N61b28522.0.16417c4b101.N7f98">
-            <con:stage id="_StageId-a013dce.N61b28522.0.16417c4b101.N7f96" name="CheckProcessedFlag">
+    <con:router errorHandler="error-N3f57fef5.2139307a.0.16589fbc43e.N7b71">
+        <con:pipeline type="request" name="request-N3f57fef5.2139307a.0.16589fbc43e.N7f5e">
+            <con:stage id="_StageId-N3f57fef5.2139307a.0.16589fbc43e.N7e7d" name="CheckProcessedFlag" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                 <con:context/>
                 <con:actions>
-                    <con2:ifThenElse>
-                        <con1:id>_ActionId-a014ac1.243848d7.0.16427265375.N7f7e</con1:id>
-                        <con2:case id="_BranchId-a014ac1.243848d7.0.16427265375.N7f7d">
-                            <con2:condition>
-                                <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
+                    <con2:assign varName="LastBatchStatus">
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e7c</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('STATUS'),
 'SELECT STATUS FROM FDS_TRANSACTIONS WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM FDS_TRANSACTIONS WHERE OBJECT_NAME=?)','OVERALL'
-)/STATUS/text()='IN_PROGRESS'</con1:xqueryText>
+)/STATUS/text()</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:ifThenElse>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e7b</con1:id>
+                        <con2:case id="_BranchId-N3f57fef5.2139307a.0.16589fbc43e.N7e7a">
+                            <con2:condition>
+                                <con1:xqueryText>$LastBatchStatus='IN_PROGRESS' or $LastBatchStatus='PROCESSED'</con1:xqueryText>
                             </con2:condition>
                             <con2:actions>
                                 <con1:reply>
-                                    <con1:id>_ActionId-a014ac1.243848d7.0.16427265375.N7f7a</con1:id>
+                                    <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e79</con1:id>
                                 </con1:reply>
                             </con2:actions>
                         </con2:case>
                         <con2:default>
                             <con2:assign varName="BatchId">
-                                <con1:id>_ActionId-a013dce.N275d0d6a.0.16427ce5133.N7f96</con1:id>
+                                <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e78</con1:id>
                                 <con2:expr>
                                     <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('BATCHID'),
@@ -36,7 +48,7 @@ xs:QName('BATCHID'),
                                 </con2:expr>
                             </con2:assign>
                             <con2:assign varName="TransactionId">
-                                <con1:id>_ActionId-a013dce.N63617963.d.1643d256721.N8000</con1:id>
+                                <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e77</con1:id>
                                 <con2:expr>
                                     <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
@@ -48,17 +60,17 @@ xs:QName('TRANID'),
                 </con:actions>
             </con:stage>
         </con:pipeline>
-        <con:pipeline type="response" name="response-a013dce.N61b28522.0.16417c4b101.N7f97">
-            <con:stage id="_StageId-a013dce.N275d0d6a.0.16427ce5133.N7f99" name="UpdateTransactionTable">
+        <con:pipeline type="response" name="response-N3f57fef5.2139307a.0.16589fbc43e.N7f5d">
+            <con:stage id="_StageId-N3f57fef5.2139307a.0.16589fbc43e.N7e0d" name="UpdateTransactionTable" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                 <con:context/>
                 <con:actions>
                     <con4:route>
-                        <con1:id>_ActionId-a013dce.N275d0d6a.0.16427ce5133.N7f93</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e0c</con1:id>
                         <con4:service ref="FoundationDataSync/BusinessServices/UpdateFDSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con4:operation>merge</con4:operation>
                         <con4:outboundTransform>
                             <con2:replace varName="body" contents-only="true">
-                                <con1:id>_ActionId-a013dce.N275d0d6a.0.16427ce5133.N7f90</con1:id>
+                                <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e0b</con1:id>
                                 <con2:location>
                                     <con1:xpathText>.</con1:xpathText>
                                 </con2:location>
@@ -105,13 +117,13 @@ xs:QName('TRANID'),
                     </con4:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013dce.N61b28522.0.16417c4b101.N7f95" name="PublishToSyncService">
+            <con:stage id="_StageId-N3f57fef5.2139307a.0.16589fbc43e.N7d9c" name="PublishToSyncService" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                 <con:context>
                     <con1:userNsDecl prefix="ser" namespace="http://www.ca.com/UnicenterServicePlus/ServiceDesk"/>
                 </con:context>
                 <con:actions>
                     <con2:assign varName="ServiceLookup">
-                        <con1:id>_ActionId-a013dce.N275d0d6a.0.16427ce5133.N7f8d</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7d9b</con1:id>
                         <con2:expr>
                             <con1:xqueryTransform>
                                 <con1:resource ref="FoundationDataSync/Resources/XQueries/FDS_ServiceSequence"/>
@@ -119,7 +131,7 @@ xs:QName('TRANID'),
                         </con2:expr>
                     </con2:assign>
                     <con2:replace varName="body" contents-only="true">
-                        <con1:id>_ActionId-a013dce.N275d0d6a.0.16427ce5133.N7ffe</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7d9a</con1:id>
                         <con2:location>
                             <con1:xpathText>.</con1:xpathText>
                         </con2:location>
@@ -133,22 +145,22 @@ xs:QName('TRANID'),
                         </con2:expr>
                     </con2:replace>
                     <con4:route>
-                        <con1:id>_ActionId-a013dce.6e79a2a1.0.164469568e1.N7fab</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7d99</con1:id>
                         <con4:service ref="FoundationDataSync/ProxyServices/FDS_ObjectSyncPS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con4:outboundTransform/>
                     </con4:route>
                     <con1:reply>
-                        <con1:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fbf</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7d98</con1:id>
                     </con1:reply>
                 </con:actions>
             </con:stage>
         </con:pipeline>
-        <con:pipeline type="error" name="error-N3f57e0b8.N3cea576.0.1649d5be40d.N8000">
-            <con:stage id="_StageId-a013dc6.4ba03875.0.165332d2611.N7fc7" name="Log">
+        <con:pipeline type="error" name="error-N3f57fef5.2139307a.0.16589fbc43e.N7be7" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+            <con:stage id="_StageId-N3f57fef5.2139307a.0.16589fbc43e.N7be6" name="Log">
                 <con:context/>
                 <con:actions>
                     <con5:log>
-                        <con1:id>_ActionId-a013dc6.4ba03875.0.165332d2611.N7fc6</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7be5</con1:id>
                         <con5:logLevel>error</con5:logLevel>
                         <con5:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
@@ -156,7 +168,7 @@ xs:QName('TRANID'),
                         <con5:message>****TriggerSync.Login.Fault.Body****</con5:message>
                     </con5:log>
                     <con5:log>
-                        <con1:id>_ActionId-a013dc6.4ba03875.0.165332d2611.N7fc3</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7be4</con1:id>
                         <con5:logLevel>error</con5:logLevel>
                         <con5:expr>
                             <con1:xqueryText>$fault</con1:xqueryText>
@@ -165,95 +177,35 @@ xs:QName('TRANID'),
                     </con5:log>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N3f57e0b8.N3cea576.0.1649d5be40d.N7fff" name="RouteNode.EH">
+            <con:stage id="_StageId-N3f57fef5.2139307a.0.16589fbc43e.N7be3" name="RouteNode.EH">
                 <con:context/>
                 <con:actions>
                     <con2:Error>
-                        <con1:id>_ActionId-N3f57e0b8.N3cea576.0.1649d5be40d.N7ffc</con1:id>
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7be2</con1:id>
                         <con2:errCode>FDS_ERR001</con2:errCode>
                         <con2:message>Failure while logging in to ServiceHub</con2:message>
                     </con2:Error>
                 </con:actions>
             </con:stage>
         </con:pipeline>
-        <con:pipeline type="error" name="error-N3f57e0b8.N3cea576.0.1649d5be40d.N7ffb">
-            <con:stage id="_StageId-N3f57e0b8.N3cea576.0.1649d5be40d.N7ffa" name="Service.EH">
-                <con:context/>
-                <con:actions>
-                    <con4:route>
-                        <con1:id>_ActionId-N3f57e0b8.N3cea576.0.1649d5be40d.N7fc0</con1:id>
-                        <con4:service ref="FoundationDataSync/BusinessServices/UpdateFDSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con4:operation>merge</con4:operation>
-                        <con4:outboundTransform>
-                            <con2:replace varName="body" contents-only="true">
-                                <con1:id>_ActionId-N3f57e0b8.N3cea576.0.1649d5be40d.N7fbf</con1:id>
-                                <con2:location>
-                                    <con1:xpathText>.</con1:xpathText>
-                                </con2:location>
-                                <con2:expr>
-                                    <con1:xqueryTransform>
-                                        <con1:resource ref="FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest"/>
-                                        <con1:param name="executionTime">
-                                            <con1:path>''</con1:path>
-                                        </con1:param>
-                                        <con1:param name="Status">
-                                            <con1:path>'ERROR'</con1:path>
-                                        </con1:param>
-                                        <con1:param name="errCode">
-                                            <con1:path>$fault/ctx:errorCode/text()</con1:path>
-                                        </con1:param>
-                                        <con1:param name="BatchId">
-                                            <con1:path>$BatchId</con1:path>
-                                        </con1:param>
-                                        <con1:param name="splitCount">
-                                            <con1:path>''</con1:path>
-                                        </con1:param>
-                                        <con1:param name="errMsg">
-                                            <con1:path>$fault/ctx:reason/text()</con1:path>
-                                        </con1:param>
-                                        <con1:param name="listHandle">
-                                            <con1:path>''</con1:path>
-                                        </con1:param>
-                                        <con1:param name="Payload">
-                                            <con1:path>fn-bea:serialize($fault)</con1:path>
-                                        </con1:param>
-                                        <con1:param name="RecordCount">
-                                            <con1:path>''</con1:path>
-                                        </con1:param>
-                                        <con1:param name="TransactionId">
-                                            <con1:path>$TransactionId</con1:path>
-                                        </con1:param>
-                                        <con1:param name="ObjectName">
-                                            <con1:path>'OVERALL'</con1:path>
-                                        </con1:param>
-                                    </con1:xqueryTransform>
-                                </con2:expr>
-                            </con2:replace>
-                        </con4:outboundTransform>
-                    </con4:route>
-                    <con1:reply>
-                        <con1:id>_ActionId-N3f57e0b8.N3cea576.0.1649d5be40d.N7fae</con1:id>
-                    </con1:reply>
-                </con:actions>
-            </con:stage>
-        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57fef5.2139307a.0.16589fbc43e.N7b71"/>
         <con:flow>
             <con:pipeline-node name="Pipeline Pair Node1">
-                <con:request>request-a013dce.N61b28522.0.16417c4b101.N7f98</con:request>
-                <con:response>response-a013dce.N61b28522.0.16417c4b101.N7f97</con:response>
+                <con:request>request-N3f57fef5.2139307a.0.16589fbc43e.N7f5e</con:request>
+                <con:response>response-N3f57fef5.2139307a.0.16589fbc43e.N7f5d</con:response>
             </con:pipeline-node>
-            <con:route-node name="RouteNode" error-handler="error-N3f57e0b8.N3cea576.0.1649d5be40d.N8000">
+            <con:route-node name="RouteNode1" error-handler="error-N3f57fef5.2139307a.0.16589fbc43e.N7be7">
                 <con:context>
                     <con1:userNsDecl prefix="ser" namespace="http://www.ca.com/UnicenterServicePlus/ServiceDesk"/>
                 </con:context>
                 <con:actions>
-                    <con3:route>
-                        <con1:id>_ActionId-a014ac1.243848d7.0.16427265375.N7f76</con1:id>
+                    <con3:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7c5b</con1:id>
                         <con3:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:operation>login</con3:operation>
                         <con3:outboundTransform>
                             <con2:replace varName="body" contents-only="true">
-                                <con1:id>_ActionId-a014ac1.243848d7.0.16427265375.N7f73</con1:id>
+                                <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7c5a</con1:id>
                                 <con2:location>
                                     <con1:xpathText>.</con1:xpathText>
                                 </con2:location>
@@ -265,7 +217,7 @@ xs:QName('TRANID'),
                                 </con2:expr>
                             </con2:replace>
                             <con5:log>
-                                <con1:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fc2</con1:id>
+                                <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7c59</con1:id>
                                 <con5:logLevel>error</con5:logLevel>
                                 <con5:expr>
                                     <con1:xqueryText>$body</con1:xqueryText>
@@ -275,7 +227,7 @@ xs:QName('TRANID'),
                         </con3:outboundTransform>
                         <con3:responseTransform>
                             <con2:assign varName="SessionId">
-                                <con1:id>_ActionId-a013dce.N275d0d6a.0.16427ce5133.N7f1f</con1:id>
+                                <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7c58</con1:id>
                                 <con2:expr>
                                     <con1:xqueryText>$body/ser:loginResponse/loginReturn/text()</con1:xqueryText>
                                 </con2:expr>

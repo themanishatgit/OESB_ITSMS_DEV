@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
     <con:coreEntry>
         <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
             <con:wsdl ref="FoundationDataSync/Resources/WSDLs/FDS_MarkLoaded"/>
@@ -19,6 +19,14 @@
                     <con1:userNsDecl prefix="fds" namespace="http://www.sita.aero/FoundationDataSync/FDS_MarkLoaded"/>
                 </con:context>
                 <con:actions>
+                    <con3:log>
+                        <con1:id>_ActionId-N3f57fef5.N7021ed48.0.16586e229a8.N7e54</con1:id>
+                        <con3:logLevel>error</con3:logLevel>
+                        <con3:expr>
+                            <con1:xqueryText>$body</con1:xqueryText>
+                        </con3:expr>
+                        <con3:message>****MarkLoaded.IncomingRequest****</con3:message>
+                    </con3:log>
                     <con2:assign varName="BatchId">
                         <con1:id>_ActionId-a013dce.26a2468a.0.164ebf679b3.N7cf8</con1:id>
                         <con2:expr>
@@ -59,7 +67,7 @@ xs:QName('TRANID'),
                                                         <con1:path>''</con1:path>
                                                     </con1:param>
                                                     <con1:param name="Status">
-                                                        <con1:path>'PROCESSED'</con1:path>
+                                                        <con1:path>'LOADED'</con1:path>
                                                     </con1:param>
                                                     <con1:param name="errCode">
                                                         <con1:path>''</con1:path>
