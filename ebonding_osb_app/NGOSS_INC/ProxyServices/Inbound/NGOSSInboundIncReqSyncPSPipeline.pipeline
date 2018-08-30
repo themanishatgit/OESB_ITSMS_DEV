@@ -109,7 +109,7 @@ else('CREATE')</con2:xqueryText>
                                             <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'NGOSSInboundIncReqAsyncPS'</con6:path>
+                                            <con6:path>'NGOSSInboundIncReqSyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'START'</con6:path>
@@ -383,7 +383,7 @@ else('CREATE')</con2:xqueryText>
                                             <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'NGOSSInboundIncReqAsyncPS'</con6:path>
+                                            <con6:path>'NGOSSInboundIncReqSyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'END'</con6:path>
