@@ -9,7 +9,7 @@
             </con:port>
             <con:WSI-compliant>false</con:WSI-compliant>
         </con1:binding>
-        <oper:operations enabled="true">
+        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
             <oper:throttling enabled="false"/>
             <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
         </oper:operations>

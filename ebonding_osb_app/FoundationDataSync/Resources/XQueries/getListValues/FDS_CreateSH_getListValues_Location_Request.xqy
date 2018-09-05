@@ -20,7 +20,7 @@ declare function local:func($SessionId as xs:string,
             <!--1 or more repetitions:-->
             <string>id</string>
             <string>name</string>
-            <string>site</string>
+            <string>site.name</string>
             <string>address1</string>
             <string>address2</string>
             <string>address3</string>
@@ -29,9 +29,9 @@ declare function local:func($SessionId as xs:string,
             <string>address6</string>
             <string>description</string>
             <string>city</string>
-            <string>state</string>
+            <string>state.sym</string>
             <string>zip</string>
-            <string>country</string>
+            <string>country.name</string>
             <string>delete_flag</string>
          </attributeNames>
       </ser:getListValues>

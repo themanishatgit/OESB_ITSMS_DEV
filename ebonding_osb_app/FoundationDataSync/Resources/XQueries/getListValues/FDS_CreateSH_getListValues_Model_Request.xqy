@@ -22,8 +22,8 @@ declare function local:func($SessionId as xs:string,
 			<string>delete_flag</string>
 			<string>sym</string>
 			<string>manufacturer</string>
-			<string>resource_class</string>
-			<string>resource_family</string>
+			<string>resource_class.type</string>
+			<string>resource_family.sym</string>
 		</attributeNames>
       </ser:getListValues>
 };

@@ -18,7 +18,7 @@ declare function local:func($Response as element() )as element()  {
         <u_mac_address>{fn:data($Response/Attributes/Attribute[AttrName/text()='mac_address']/AttrValue/text())}</u_mac_address>
         <u_dns_name>{fn:data($Response/Attributes/Attribute[AttrName/text()='dns_name']/AttrValue/text())}</u_dns_name>
               <u_ip_address>{fn:data($Response/Attributes/Attribute[AttrName/text()='alarm_id']/AttrValue/text())}</u_ip_address>
-        <u_svc_status>{fn:data($Response/Attributes/Attribute[AttrName/text()='status']/AttrValue/text())}</u_svc_status>
+        <u_svc_status>{fn:data($Response/Attributes/Attribute[AttrName/text()='status.sym']/AttrValue/text())}</u_svc_status>
         <u_supply_vendor>{fn:data($Response/Attributes/Attribute[AttrName/text()='supplier']/AttrValue/text())}</u_supply_vendor>
               <u_maintenance_vendor>{fn:data($Response/Attributes/Attribute[AttrName/text()='vendor_repair']/AttrValue/text())}</u_maintenance_vendor>
         <u_model_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='model']/AttrValue/text())}</u_model_uuid>
@@ -55,7 +55,7 @@ declare function local:func($Response as element() )as element()  {
                <u_child_ncc>{fn:data($Response/Attributes/Attribute[AttrName/text()='zchild_ncc']/AttrValue/text())}</u_child_ncc>
         <u_mcs_ci>{fn:data($Response/Attributes/Attribute[AttrName/text()='zmcs_ci']/AttrValue/text())}</u_mcs_ci>
         <u_parent_svc_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='zparent_svc']/AttrValue/text())}</u_parent_svc_uuid>
-              <u_sd_owner_group>{fn:data($Response/Attributes/Attribute[AttrName/text()='zsd_owner_group']/AttrValue/text())}</u_sd_owner_group>
+              <u_sd_owner_group_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='zsd_owner_group']/AttrValue/text())}</u_sd_owner_group_uuid>
         <u_pci>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpci_compliant']/AttrValue/text())}</u_pci>
         <u_environment>{fn:data($Response/Attributes/Attribute[AttrName/text()='zenvironment']/AttrValue/text())}</u_environment>
               <u_mcs_resiliency_type>{fn:data($Response/Attributes/Attribute[AttrName/text()='zmcs_resilience_type']/AttrValue/text())}</u_mcs_resiliency_type>

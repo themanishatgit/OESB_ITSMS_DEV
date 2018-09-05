@@ -30,7 +30,7 @@ declare function local:func($SessionId as xs:string,
 			<string>dns_name</string>
 			<string>alarm_id</string>
 			<string>license_number</string>
-			<string>status</string>
+			<string>status.sym</string>
 			<string>supplier</string>
 			<string>vendor_repair</string>
 			<string>model</string>

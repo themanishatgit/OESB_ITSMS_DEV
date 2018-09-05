@@ -12,8 +12,8 @@ declare function local:func($Response as element() )as element()  {
         <u_inactive>{fn:data($Response/Attributes/Attribute[AttrName/text()='delete_flag']/AttrValue/text())}</u_inactive>
         <u_model_name>{fn:data($Response/Attributes/Attribute[AttrName/text()='sym']/AttrValue/text())}</u_model_name>
          <u_manufacturer_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='manufacturer']/AttrValue/text())}</u_manufacturer_uuid>
-          <u_class>{fn:data($Response/Attributes/Attribute[AttrName/text()='resource_class']/AttrValue/text())}</u_class>
-          <u_family>{fn:data($Response/Attributes/Attribute[AttrName/text()='resource_family']/AttrValue/text())}</u_family>
+          <u_class>{fn:data($Response/Attributes/Attribute[AttrName/text()='resource_class.type']/AttrValue/text())}</u_class>
+          <u_family>{fn:data($Response/Attributes/Attribute[AttrName/text()='resource_family.sym']/AttrValue/text())}</u_family>
              
 </insert>	
 };

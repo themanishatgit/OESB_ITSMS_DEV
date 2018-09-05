@@ -21,11 +21,15 @@ declare function local:func($Response as element() )as element()  {
         <u_location_name_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='location']/AttrValue/text())}</u_location_name_uuid>
         <u_department>{fn:data($Response/Attributes/Attribute[AttrName/text()='dept.name']/AttrValue/text())}</u_department>
         <u_admin_org_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='organization']/AttrValue/text())}</u_admin_org_uuid>
-      <u_email_address>{fn:substring-before(fn:data($Response/Attributes/Attribute[AttrName/text()='email_address']/AttrValue/text()),',')}</u_email_address>
+      <u_email_address>{
+      if(fn:substring-before(fn:data($Response/Attributes/Attribute[AttrName/text()='email_address']/AttrValue/text()),','))
+then(fn:substring-before(fn:data($Response/Attributes/Attribute[AttrName/text()='email_address']/AttrValue/text()),','))
+else($Response/Attributes/Attribute[AttrName/text()='email_address']/AttrValue/text())
+      }</u_email_address>
        <u_secondary_email_address>{fn:substring-after(fn:data($Response/Attributes/Attribute[AttrName/text()='email_address']/AttrValue/text()),',')}</u_secondary_email_address>
         <u_contact_id>{fn:data($Response/Attributes/Attribute[AttrName/text()='contact_num']/AttrValue/text())}</u_contact_id>
         <u_access_type>{fn:data($Response/Attributes/Attribute[AttrName/text()='access_type.sym']/AttrValue/text())}</u_access_type>
-        <u_notif_method>{fn:data($Response/Attributes/Attribute[AttrName/text()='notify_method1.sym']/AttrValue/text())}</u_notif_method>
+        <u_notif_method>{fn:data($Response/Attributes/Attribute[AttrName/text()='notify_method2.sym']/AttrValue/text())}</u_notif_method>
         <u_visible>{fn:data($Response/Attributes/Attribute[AttrName/text()='zvisible']/AttrValue/text())}</u_visible>
         <u_cnt_desc>{fn:data($Response/Attributes/Attribute[AttrName/text()='zcnt_description']/AttrValue/text())}</u_cnt_desc>
                  

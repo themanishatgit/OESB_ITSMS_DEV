@@ -28,6 +28,7 @@ declare function local:func($SessionId as xs:string,
             <string>phone_number</string>
             <string>description</string>
             <string>delete_flag</string>
+            <string>zapp_mem_code</string>
          </attributeNames>
       </ser:getListValues>
 };

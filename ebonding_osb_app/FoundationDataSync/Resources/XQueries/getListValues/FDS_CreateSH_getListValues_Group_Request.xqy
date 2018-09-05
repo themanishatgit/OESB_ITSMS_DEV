@@ -24,11 +24,11 @@ declare function local:func($SessionId as xs:string,
 			<string>phone_number</string>
 			<string>alt_phone</string>			
 			<string>type</string>
-			<string>location</string>
+			<string>location.name</string>
 			<string>dept</string>
 			<string>organization</string>			
 			<string>email_address</string>		
-			<string>notify_method2</string>	
+			<string>notify_method2.sym</string>	
 			<string>zinterface_link</string>			
 			<string>zvisible</string>		
 			<string>zcnt_description</string>

@@ -18,7 +18,7 @@ declare function local:func($Response as element() )as element()  {
         <u_phone_num>{fn:data($Response/Attributes/Attribute[AttrName/text()='phone_number']/AttrValue/text())}</u_phone_num>
         <u_description>{fn:data($Response/Attributes/Attribute[AttrName/text()='description']/AttrValue/text())}</u_description>
         <u_inactive>{fn:data($Response/Attributes/Attribute[AttrName/text()='delete_flag']/AttrValue/text())}</u_inactive>
-      
+        <u_app_member_code>{fn:data($Response/Attributes/Attribute[AttrName/text()='zapp_mem_code']/AttrValue/text())}</u_app_member_code>
 </insert>	
 };
 

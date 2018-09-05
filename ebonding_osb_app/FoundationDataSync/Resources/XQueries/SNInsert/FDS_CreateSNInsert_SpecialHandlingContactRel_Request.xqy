@@ -10,7 +10,7 @@ declare function local:func($Response as element() )as element()  {
    <insert> 
         <u_id>{fn:data($Response/Attributes/Attribute[AttrName/text()='id']/AttrValue/text())}</u_id>
         <u_contact>{fn:data($Response/Attributes/Attribute[AttrName/text()='contact']/AttrValue/text())}</u_contact>
-        <u_spec_handling>{fn:data($Response/Attributes/Attribute[AttrName/text()='special_handling.sym']/AttrValue/text())}</u_spec_handling>
+        <u_spec_handling>{fn:data($Response/Attributes/Attribute[AttrName/text()='special_handling']/AttrValue/text())}</u_spec_handling>
                    
 </insert>	
 };

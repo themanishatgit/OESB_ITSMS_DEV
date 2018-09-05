@@ -21,7 +21,7 @@ declare function local:func($SessionId as xs:string,
 			<string>id</string>
 			<string>contact</string>
 			<string>contact.email_address</string>
-			<string>special_handling.sym</string>
+			<string>special_handling</string>
 		</attributeNames>
       </ser:getListValues>
 };

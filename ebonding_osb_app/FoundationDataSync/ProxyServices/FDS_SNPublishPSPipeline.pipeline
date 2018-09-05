@@ -279,6 +279,50 @@ xs:QName('TRANID'),
                                                     </con4:log>
                                                 </con1:responseTransform>
                                             </con1:wsCallout>
+                                            <con4:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                                                <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e46</con2:id>
+                                                <con4:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                                <con4:operation>logout</con4:operation>
+                                                <con4:request>
+                                                    <con4:body wrapped="false">LogoutReq</con4:body>
+                                                </con4:request>
+                                                <con4:response>
+                                                    <con4:body wrapped="false">LogoutRes</con4:body>
+                                                </con4:response>
+                                                <con4:requestTransform>
+                                                    <con4:routing-options>
+                                                        <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e45</con2:id>
+                                                        <con4:mode>request-response</con4:mode>
+                                                        <con4:qualityOfService>best-effort</con4:qualityOfService>
+                                                    </con4:routing-options>
+                                                    <con4:assign varName="LogoutReq">
+                                                        <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e44</con2:id>
+                                                        <con4:expr>
+                                                            <con2:xqueryText>&lt;ser:logout xmlns:ser="http://www.ca.com/UnicenterServicePlus/ServiceDesk">
+    &lt;sid>{$SessionId}&lt;/sid>
+&lt;/ser:logout></con2:xqueryText>
+                                                        </con4:expr>
+                                                    </con4:assign>
+                                                    <con3:log>
+                                                        <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e43</con2:id>
+                                                        <con3:logLevel>error</con3:logLevel>
+                                                        <con3:expr>
+                                                            <con2:xqueryText>$LogoutReq</con2:xqueryText>
+                                                        </con3:expr>
+                                                        <con3:message>****ObjectSyncPS.LogoutReq****</con3:message>
+                                                    </con3:log>
+                                                </con4:requestTransform>
+                                                <con4:responseTransform>
+                                                    <con3:log>
+                                                        <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e42</con2:id>
+                                                        <con3:logLevel>error</con3:logLevel>
+                                                        <con3:expr>
+                                                            <con2:xqueryText>$LogoutRes</con2:xqueryText>
+                                                        </con3:expr>
+                                                        <con3:message>****ObjectSyncPS.LogoutRes****</con3:message>
+                                                    </con3:log>
+                                                </con4:responseTransform>
+                                            </con4:wsCallout>
                                             <con2:reply>
                                                 <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7fdd</con2:id>
                                             </con2:reply>
@@ -568,6 +612,50 @@ else('FDS_ERR005')</con1:path>
                             </con5:log>
                         </con4:outboundTransform>
                     </con5:route>
+                    <con4:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e07</con2:id>
+                        <con4:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>logout</con4:operation>
+                        <con4:request>
+                            <con4:body wrapped="false">LogoutReq</con4:body>
+                        </con4:request>
+                        <con4:response>
+                            <con4:body wrapped="false">LogoutRes</con4:body>
+                        </con4:response>
+                        <con4:requestTransform>
+                            <con4:routing-options>
+                                <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e06</con2:id>
+                                <con4:mode>request-response</con4:mode>
+                                <con4:qualityOfService>best-effort</con4:qualityOfService>
+                            </con4:routing-options>
+                            <con4:assign varName="LogoutReq">
+                                <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e05</con2:id>
+                                <con4:expr>
+                                    <con2:xqueryText>&lt;ser:logout xmlns:ser="http://www.ca.com/UnicenterServicePlus/ServiceDesk">
+    &lt;sid>{$SessionId}&lt;/sid>
+&lt;/ser:logout></con2:xqueryText>
+                                </con4:expr>
+                            </con4:assign>
+                            <con3:log>
+                                <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e04</con2:id>
+                                <con3:logLevel>error</con3:logLevel>
+                                <con3:expr>
+                                    <con2:xqueryText>$LogoutReq</con2:xqueryText>
+                                </con3:expr>
+                                <con3:message>****ObjectSyncPS.LogoutReq****</con3:message>
+                            </con3:log>
+                        </con4:requestTransform>
+                        <con4:responseTransform>
+                            <con3:log>
+                                <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e03</con2:id>
+                                <con3:logLevel>error</con3:logLevel>
+                                <con3:expr>
+                                    <con2:xqueryText>$LogoutRes</con2:xqueryText>
+                                </con3:expr>
+                                <con3:message>****ObjectSyncPS.LogoutRes****</con3:message>
+                            </con3:log>
+                        </con4:responseTransform>
+                    </con4:wsCallout>
                     <con5:reply xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/config">
                         <con5:id>_ActionId-N3f57fef5.N7021ed48.0.16586e229a8.N7f65</con5:id>
                     </con5:reply>
