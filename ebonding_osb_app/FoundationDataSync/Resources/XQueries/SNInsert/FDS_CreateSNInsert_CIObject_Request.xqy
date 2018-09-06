@@ -24,7 +24,7 @@ declare function local:func($Response as element() )as element()  {
         <u_model_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='model']/AttrValue/text())}</u_model_uuid>
         <u_product_version>{fn:data($Response/Attributes/Attribute[AttrName/text()='product_version']/AttrValue/text())}</u_product_version>
               <u_serial_number>{fn:data($Response/Attributes/Attribute[AttrName/text()='serial_number']/AttrValue/text())}</u_serial_number>
-        <u_primary_cnt>{fn:data($Response/Attributes/Attribute[AttrName/text()='resource_contact']/AttrValue/text())}</u_primary_cnt>
+        <u_primary_cnt_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='resource_contact']/AttrValue/text())}</u_primary_cnt_uuid>
         <u_maintenance_org_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='repair_org']/AttrValue/text())}</u_maintenance_org_uuid>
               <u_location_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='location']/AttrValue/text())}</u_location_uuid>
         <u_floor_location>{fn:data($Response/Attributes/Attribute[AttrName/text()='loc_floor']/AttrValue/text())}</u_floor_location>
