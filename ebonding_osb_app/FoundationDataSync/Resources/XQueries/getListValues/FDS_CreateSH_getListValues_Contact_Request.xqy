@@ -29,7 +29,7 @@ declare function local:func($SessionId as xs:string,
 			<string>alt_phone</string>			
 			<string>type.sym</string>
 			<string>location</string>
-			<string>dept</string>
+			<string>dept.name</string>
 			<string>organization</string>			
 			<string>email_address</string>			
 			<string>contact_num</string>			

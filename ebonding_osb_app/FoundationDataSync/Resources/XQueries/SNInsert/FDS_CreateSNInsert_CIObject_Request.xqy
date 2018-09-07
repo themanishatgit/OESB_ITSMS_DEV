@@ -11,7 +11,7 @@ declare function local:func($Response as element() )as element()  {
         <u_ci_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='id']/AttrValue/text())}</u_ci_uuid>
         <u_inactive>{fn:data($Response/Attributes/Attribute[AttrName/text()='delete_flag']/AttrValue/text())}</u_inactive>
         <u_family>{fn:data($Response/Attributes/Attribute[AttrName/text()='family']/AttrValue/text())}</u_family>
-            <u_class>{fn:data($Response/Attributes/Attribute[AttrName/text()='class']/AttrValue/text())}</u_class>
+            <u_class>{fn:data($Response/Attributes/Attribute[AttrName/text()='class.type']/AttrValue/text())}</u_class>
         <u_asset_tag>{fn:data($Response/Attributes/Attribute[AttrName/text()='name']/AttrValue/text())}</u_asset_tag>
         <u_node_name>{fn:data($Response/Attributes/Attribute[AttrName/text()='asset_num']/AttrValue/text())}</u_node_name>
              <u_host_name>{fn:data($Response/Attributes/Attribute[AttrName/text()='system_name']/AttrValue/text())}</u_host_name>
@@ -41,7 +41,7 @@ declare function local:func($Response as element() )as element()  {
         <u_warranty_end_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='warranty_end']/AttrValue/text())}</u_warranty_end_date>
               <u_expiration_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='expiration_date']/AttrValue/text())}</u_expiration_date>
         <u_financial_ref>{fn:data($Response/Attributes/Attribute[AttrName/text()='financial_num']/AttrValue/text())}</u_financial_ref>
-        <u_responsible_vendor>{fn:data($Response/Attributes/Attribute[AttrName/text()='vendor_restore']/AttrValue/text())}</u_responsible_vendor>
+        <u_responsible_vendor_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='vendor_restore']/AttrValue/text())}</u_responsible_vendor_uuid>
               <u_pm_required>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_required']/AttrValue/text())}</u_pm_required>
         <u_pm_duration>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_duration']/AttrValue/text())}</u_pm_duration>
         <u_next_pm_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text())}</u_next_pm_date>
@@ -57,9 +57,9 @@ declare function local:func($Response as element() )as element()  {
         <u_parent_svc_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='zparent_svc']/AttrValue/text())}</u_parent_svc_uuid>
               <u_sd_owner_group_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='zsd_owner_group']/AttrValue/text())}</u_sd_owner_group_uuid>
         <u_pci>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpci_compliant']/AttrValue/text())}</u_pci>
-        <u_environment>{fn:data($Response/Attributes/Attribute[AttrName/text()='zenvironment']/AttrValue/text())}</u_environment>
-              <u_mcs_resiliency_type>{fn:data($Response/Attributes/Attribute[AttrName/text()='zmcs_resilience_type']/AttrValue/text())}</u_mcs_resiliency_type>
-        <u_support_model>{fn:data($Response/Attributes/Attribute[AttrName/text()='zsupport_model']/AttrValue/text())}</u_support_model>
+        <u_environment>{fn:data($Response/Attributes/Attribute[AttrName/text()='zenvironment.sym']/AttrValue/text())}</u_environment>
+              <u_mcs_resiliency_type>{fn:data($Response/Attributes/Attribute[AttrName/text()='zmcs_resilience_type.sym']/AttrValue/text())}</u_mcs_resiliency_type>
+        <u_support_model>{fn:data($Response/Attributes/Attribute[AttrName/text()='zsupport_model.sym']/AttrValue/text())}</u_support_model>
       
                                                                                      
 </insert>	

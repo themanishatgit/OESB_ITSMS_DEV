@@ -13,7 +13,7 @@ declare function local:func($Response as element() )as element()  {
         if(fn:data($Response/Attributes/Attribute[AttrName/text()='table_name']/AttrValue/text())='USP_LREL_CENV_CNTREF')
         then('u_user_ci_relationship')
         else if(fn:data($Response/Attributes/Attribute[AttrName/text()='table_name']/AttrValue/text())='GRPMEM')
-        then('sys_user_group')
+        then('sys_user_grmember')
         else if(fn:data($Response/Attributes/Attribute[AttrName/text()='table_name']/AttrValue/text())='USP_CONTACT_HANDLING')
         then('u_user_special_handlings')
         else if(fn:data($Response/Attributes/Attribute[AttrName/text()='table_name']/AttrValue/text())='BUSMGT')

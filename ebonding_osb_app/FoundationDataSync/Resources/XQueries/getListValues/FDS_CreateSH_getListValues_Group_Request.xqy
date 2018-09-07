@@ -24,7 +24,7 @@ declare function local:func($SessionId as xs:string,
 			<string>phone_number</string>
 			<string>alt_phone</string>			
 			<string>type</string>
-			<string>location.name</string>
+			<string>location</string>
 			<string>dept</string>
 			<string>organization</string>			
 			<string>email_address</string>		

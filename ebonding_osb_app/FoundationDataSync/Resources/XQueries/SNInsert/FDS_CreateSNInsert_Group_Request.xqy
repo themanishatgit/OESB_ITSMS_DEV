@@ -13,7 +13,7 @@ declare function local:func($Response as element() )as element()  {
         <u_inactive>{fn:data($Response/Attributes/Attribute[AttrName/text()='delete_flag']/AttrValue/text())}</u_inactive>
          <u_pri_phone_number>{fn:data($Response/Attributes/Attribute[AttrName/text()='phone_number']/AttrValue/text())}</u_pri_phone_number>
           <u_alt_phone_number>{fn:data($Response/Attributes/Attribute[AttrName/text()='alt_phone']/AttrValue/text())}</u_alt_phone_number>
-          <u_location_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='location.name']/AttrValue/text())}</u_location_uuid>
+          <u_location_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='location']/AttrValue/text())}</u_location_uuid>
         <u_admin_org_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='organization']/AttrValue/text())}</u_admin_org_uuid>
         <u_email_address>{
       if(fn:substring-before(fn:data($Response/Attributes/Attribute[AttrName/text()='email_address']/AttrValue/text()),','))

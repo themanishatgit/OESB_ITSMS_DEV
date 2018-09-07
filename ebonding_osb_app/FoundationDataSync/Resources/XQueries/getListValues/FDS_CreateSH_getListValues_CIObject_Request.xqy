@@ -22,7 +22,7 @@ declare function local:func($SessionId as xs:string,
             <string>id</string>           
 			<string>delete_flag</string>
 			<string>family</string>
-			<string>class</string>
+			<string>class.type</string>
 			<string>name</string>
 			<string>asset_num</string>
 			<string>system_name</string>
@@ -79,9 +79,9 @@ declare function local:func($SessionId as xs:string,
 			<string>zparent_svc</string>
 			<string>zsd_owner_group</string>
 			<string>zpci_compliant</string>
-			<string>zenvironment</string>
-			<string>zmcs_resilience_type</string>
-			<string>zsupport_model</string>
+			<string>zenvironment.sym</string>
+			<string>zmcs_resilience_type.sym</string>
+			<string>zsupport_model.sym</string>
 		</attributeNames>
       </ser:getListValues>
 };

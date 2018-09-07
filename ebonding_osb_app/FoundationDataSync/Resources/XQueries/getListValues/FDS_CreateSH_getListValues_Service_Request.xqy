@@ -21,9 +21,9 @@ declare function local:func($SessionId as xs:string,
             <string>id</string>           
 			<string>delete_flag</string>
 			<string>family</string>
-			<string>class</string>
+			<string>class.type</string>
 			<string>name</string>
-			<string>status</string>
+			<string>status.sym</string>
 			<string>manufacturer</string>
 			<string>model</string>
 			<string>serial_number</string>
@@ -43,7 +43,7 @@ declare function local:func($SessionId as xs:string,
 			<string>network_contact_uuid</string>
 			<string>zinterface_link</string>
 			<string>zsd_owner_group</string>
-			<string>zsupport_model</string>
+			<string>zsupport_model.sym</string>
 		</attributeNames>
       </ser:getListValues>
 };
