@@ -1,0 +1,1923 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cus:Customizations xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/PushToSNPublishQ</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:jms="http://www.bea.com/wli/sb/transports/jms" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_FDS_SNPublishQ@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@jms_url_FDS_SNPublishQ@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/UpdateFDSTransaction</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>JCA Always Use WSDL Flag</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">true</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>JCA Connection Mode</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">managed</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>JCA Overwrite Connection Authentication Flag</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_MarkLoaded</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_FDS_MarkLoaded@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_SNPublishPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_FDS_SNPublishQ@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_TriggerSyncPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_FDS_TriggerSyncPS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_FetchSHData@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_FetchSHData@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNCIObjectPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_CIObject@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_CIObject@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNCMDBCIRelPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_CMDBRelationship@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_CMDBRelationship@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNContactAssetRelPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_ContactCIRelationship@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_ContactCIRelationship@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNContactPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNContactPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNContactPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNDeletedRecordsPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNDeletedRecordsPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNDeletedRecordsPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNGroupMemberPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNGroupMemberPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNGroupMemberPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNGroupPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNGroupPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNGroupPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNLocationPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNLocationPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNLocationPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNManufacturerPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNManufacturerPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNManufacturerPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNModelPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNModelPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNModelPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNOrganizationPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNOrganizationPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNOrganizationPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNServicePublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNServicePublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNServicePublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNSpecialHandlingContactRelPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNSpecialHandlingContactRelPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNSpecialHandlingContactRelPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNSpecialHandlingPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNSpecialHandlingPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNSpecialHandlingPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNStartSyncBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNStartSyncBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNStartSyncBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNVendorPublishBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNVendorPublishBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNVendorPublishBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
+        <cus:description/>
+        <cus:query>
+            <xt:resourceTypes>BusinessService</xt:resourceTypes>
+            <xt:resourceTypes>ProxyService</xt:resourceTypes>
+            <xt:envValueTypes>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueTypes>
+            <xt:envValueTypes>JCA Always Use WSDL Flag</xt:envValueTypes>
+            <xt:envValueTypes>JCA Connection Mode</xt:envValueTypes>
+            <xt:envValueTypes>JCA Overwrite Connection Authentication Flag</xt:envValueTypes>
+            <xt:envValueTypes>Read Timeout for HTTP Outbound Transport Provider</xt:envValueTypes>
+            <xt:envValueTypes>Secure Connections to JMS Server</xt:envValueTypes>
+            <xt:envValueTypes>Service Retry Count</xt:envValueTypes>
+            <xt:envValueTypes>Service Retry Iteration Interval</xt:envValueTypes>
+            <xt:envValueTypes>Service URI</xt:envValueTypes>
+            <xt:envValueTypes>Service URI Weight</xt:envValueTypes>
+            <xt:envValueTypes>UDDI Auto Publish</xt:envValueTypes>
+            <xt:envValueTypes>Work Manager</xt:envValueTypes>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/PushToSNPublishQ</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/UpdateFDSTransaction</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_MarkLoaded</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_SNPublishPS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_TriggerSyncPS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNCIObjectPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNCMDBCIRelPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNContactAssetRelPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNContactPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNDeletedRecordsPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNGroupMemberPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNGroupPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNLocationPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNManufacturerPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNModelPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNOrganizationPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNServicePublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNSpecialHandlingContactRelPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNSpecialHandlingPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNStartSyncBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNVendorPublishBS</xt:path>
+            </xt:refsToSearch>
+            <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
+            <xt:searchString>Search String</xt:searchString>
+            <xt:isCompleteMatch>false</xt:isCompleteMatch>
+        </cus:query>
+        <cus:replacement>Replacement String</cus:replacement>
+    </cus:customization>
+    <cus:customization xsi:type="cus:ReferenceCustomizationType">
+        <cus:description/>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/UpdateFDSTransaction</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_MarkLoaded</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_MarkLoadedPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_SNPublishPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_SNPublishPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_TriggerSyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>FoundationDataSync/ProxyServices/FDS_TriggerSyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>WSDL</xt:type>
+            <xt:path>FoundationDataSync/Resources/WSDLs/FDS_MarkLoaded</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNCIObjectPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNCMDBCIRelPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNContactAssetRelPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNContactPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNDeletedRecordsPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNGroupMemberPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNGroupPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNLocationPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNManufacturerPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNModelPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNOrganizationPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNServicePublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNSpecialHandlingContactRelPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNSpecialHandlingPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNStartSyncBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNVendorPublishBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>WSDL</xt:type>
+            <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>WSDL</xt:type>
+            <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction-concrete</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>JCA</xt:type>
+            <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction_db</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/PushToSNPublishQ</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/PushToSNPublishQ</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/UpdateFDSTransaction</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/UpdateFDSTransaction</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_MarkLoadedPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_MarkLoadedPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPS</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPS</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_ObjectSyncPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_SNPublishPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_SNPublishPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_TriggerSyncPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>FoundationDataSync/ProxyServices/FDS_TriggerSyncPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>FoundationDataSync/Resources/Schemas/FDS_MarkLoaded</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>FoundationDataSync/Resources/Schemas/FDS_MarkLoaded</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/FDS_MarkLoaded</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/FDS_MarkLoaded</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/FDS_TriggerSyncPS</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/FDS_TriggerSyncPS</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SHProviderWebservices</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SHProviderWebservices</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublishWebservices</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublishWebservices</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNStartSync</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNStartSync</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>FoundationDataSync/Resources/XQueries/FDS_CreateSHdoQueryRequest</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>FoundationDataSync/Resources/XQueries/FDS_CreateSHdoQueryRequest</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>FoundationDataSync/Resources/XQueries/FDS_CreateUpdateTransactionRequest</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>FoundationDataSync/Resources/XQueries/FDS_ServiceSequence</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>FoundationDataSync/Resources/XQueries/FDS_ServiceSequence</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>ServiceAccount</xt:type>
+                <xt:path>SN_INC/Resources/ServiceAccounts/SN_ServiceAccount</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>ServiceAccount</xt:type>
+                <xt:path>SN_INC/Resources/ServiceAccounts/SN_ServiceAccount</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNStartSyncBS</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>FoundationDataSync/BusinessServices/Providers/ServiceNow/SNStartSyncBS</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction-concrete</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction-concrete</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>XML</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction-or-mappings</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>XML</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction-or-mappings</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>JCA</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction_db</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>JCA</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction_db</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction_table</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>FoundationDataSync/Resources/DBAdapters/UpdateFDSTransaction/UpdateFDSTransaction_table</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNCIObjectPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNCIObjectPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNCMDBCIRelPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNCMDBCIRelPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNContactAssetRelPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNContactAssetRelPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNContactPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNContactPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNDeletedRecordsPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNDeletedRecordsPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNGroupMemberPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNGroupMemberPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNGroupPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNGroupPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNLocationPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNLocationPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNManufacturerPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNManufacturerPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNModelPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNModelPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNOrganizationPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNOrganizationPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNServicePublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNServicePublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNSpecialHandlingContactRelPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNSpecialHandlingContactRelPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNSpecialHandlingPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNSpecialHandlingPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNVendorPublish</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNVendorPublish</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+    </cus:customization>
+</cus:Customizations>
