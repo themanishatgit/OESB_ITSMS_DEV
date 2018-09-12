@@ -28,6 +28,14 @@ xs:QName('STATUS'),
 )/STATUS/text()</con1:xqueryText>
                         </con2:expr>
                     </con2:assign>
+                    <con5:log>
+                        <con1:id>_ActionId-N3f57fef5.N253e7ac9.0.165c2e988ac.N7ffe</con1:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con1:xqueryText>$LastBatchStatus</con1:xqueryText>
+                        </con5:expr>
+                        <con5:message>****TriggerSyncPS.LastBatchStatus****</con5:message>
+                    </con5:log>
                     <con2:ifThenElse>
                         <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7e7b</con1:id>
                         <con2:case id="_BranchId-N3f57fef5.2139307a.0.16589fbc43e.N7e7a">
@@ -161,14 +169,6 @@ xs:QName('TRANID'),
             <con:stage id="_StageId-N3f57fef5.2139307a.0.16589fbc43e.N7be6" name="Log">
                 <con:context/>
                 <con:actions>
-                    <con5:log>
-                        <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7be5</con1:id>
-                        <con5:logLevel>error</con5:logLevel>
-                        <con5:expr>
-                            <con1:xqueryText>$body</con1:xqueryText>
-                        </con5:expr>
-                        <con5:message>****TriggerSync.Login.Fault.Body****</con5:message>
-                    </con5:log>
                     <con5:log>
                         <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7be4</con1:id>
                         <con5:logLevel>error</con5:logLevel>

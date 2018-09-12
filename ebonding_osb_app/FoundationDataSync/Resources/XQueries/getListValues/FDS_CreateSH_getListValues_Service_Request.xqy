@@ -44,6 +44,8 @@ declare function local:func($SessionId as xs:string,
 			<string>zinterface_link</string>
 			<string>zsd_owner_group</string>
 			<string>zsupport_model.sym</string>
+                        <string>zcontract_id</string>
+                        <string>zcustomer_org</string>
 		</attributeNames>
       </ser:getListValues>
 };

@@ -34,6 +34,7 @@ declare function local:func($SessionId as xs:string,
 			<string>zcnt_description</string>
 			<string>znot_footer</string>
 			<string>zsd_group</string>
+                        <string>supervisor_contact_uuid</string>
 		</attributeNames>
       </ser:getListValues>
 };

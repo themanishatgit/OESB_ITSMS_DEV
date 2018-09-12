@@ -309,7 +309,7 @@ xs:QName('TRANID'),
                                                         <con3:expr>
                                                             <con2:xqueryText>$LogoutReq</con2:xqueryText>
                                                         </con3:expr>
-                                                        <con3:message>****ObjectSyncPS.LogoutReq****</con3:message>
+                                                        <con3:message>****SNPublishPS.LogoutReq****</con3:message>
                                                     </con3:log>
                                                 </con4:requestTransform>
                                                 <con4:responseTransform>
@@ -319,7 +319,7 @@ xs:QName('TRANID'),
                                                         <con3:expr>
                                                             <con2:xqueryText>$LogoutRes</con2:xqueryText>
                                                         </con3:expr>
-                                                        <con3:message>****ObjectSyncPS.LogoutRes****</con3:message>
+                                                        <con3:message>****SNPublishPS.LogoutRes****</con3:message>
                                                     </con3:log>
                                                 </con4:responseTransform>
                                             </con4:wsCallout>
@@ -531,14 +531,6 @@ else(fn:concat('Error occured at ',$fault/ctx:location/ctx:node))</con1:path>
                                     </con1:xqueryTransform>
                                 </con2:expr>
                             </con2:replace>
-                            <con5:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
-                                <con1:id>_ActionId-N3f57fef5.N7021ed48.0.16586e229a8.N7f29</con1:id>
-                                <con5:logLevel>error</con5:logLevel>
-                                <con5:expr>
-                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con6:xqueryText>
-                                </con5:expr>
-                                <con5:message>****ObjectSyncPS.UpdateFDSTransactions.4****</con5:message>
-                            </con5:log>
                         </con4:outboundTransform>
                     </con5:route>
                     <con5:assign varName="BatchTranId" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
@@ -602,14 +594,6 @@ else('FDS_ERR005')</con1:path>
                                     </con1:xqueryTransform>
                                 </con2:expr>
                             </con2:replace>
-                            <con5:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
-                                <con1:id>_ActionId-N3f57fef5.N7021ed48.0.16586e229a8.N7e57</con1:id>
-                                <con5:logLevel>error</con5:logLevel>
-                                <con5:expr>
-                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con6:xqueryText>
-                                </con5:expr>
-                                <con5:message>****ObjectSyncPS.UpdateFDSTransactions.4****</con5:message>
-                            </con5:log>
                         </con4:outboundTransform>
                     </con5:route>
                     <con4:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
@@ -642,7 +626,7 @@ else('FDS_ERR005')</con1:path>
                                 <con3:expr>
                                     <con2:xqueryText>$LogoutReq</con2:xqueryText>
                                 </con3:expr>
-                                <con3:message>****ObjectSyncPS.LogoutReq****</con3:message>
+                                <con3:message>****SNPublishPS.EH.LogoutReq****</con3:message>
                             </con3:log>
                         </con4:requestTransform>
                         <con4:responseTransform>
@@ -652,7 +636,7 @@ else('FDS_ERR005')</con1:path>
                                 <con3:expr>
                                     <con2:xqueryText>$LogoutRes</con2:xqueryText>
                                 </con3:expr>
-                                <con3:message>****ObjectSyncPS.LogoutRes****</con3:message>
+                                <con3:message>****SNPublishPS.EH.LogoutRes****</con3:message>
                             </con3:log>
                         </con4:responseTransform>
                     </con4:wsCallout>
@@ -682,14 +666,6 @@ else('FDS_ERR005')</con1:path>
 </ctx:route>]]></con2:xqueryText>
                         </con3:service>
                         <con3:outboundTransform>
-                            <con4:log>
-                                <con2:id>_ActionId-N3f57fef5.N7021ed48.0.16586e229a8.N7f6b</con2:id>
-                                <con4:logLevel>error</con4:logLevel>
-                                <con4:expr>
-                                    <con2:xqueryText>$outbound</con2:xqueryText>
-                                </con4:expr>
-                                <con4:message>****FDS_SNPublishPS.OutboundSetForSNBS****</con4:message>
-                            </con4:log>
                             <con4:log>
                                 <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7fc9</con2:id>
                                 <con4:logLevel>error</con4:logLevel>
