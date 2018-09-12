@@ -33,18 +33,30 @@ declare function local:func($Response as element() )as element()  {
         <u_shelf_location>{fn:data($Response/Attributes/Attribute[AttrName/text()='loc_shelf']/AttrValue/text())}</u_shelf_location>
         <u_slot_location>{fn:data($Response/Attributes/Attribute[AttrName/text()='loc_slot']/AttrValue/text())}</u_slot_location>
         
-              <u_installation_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='install_date']/AttrValue/text())}</u_installation_date>
-        <u_acquire_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='acquire_date']/AttrValue/text())}</u_acquire_date>
+               <u_installation_date>{if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='install_date']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:dateTime('1970-01-01T00:00:00')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='install_date']/AttrValue/text()),'S')))),'-','/')),'T',' ')
+	  else ()
+	  }</u_installation_date>
+        <u_acquire_date> {if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='acquire_date']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:dateTime('1970-01-01T00:00:00')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='acquire_date']/AttrValue/text()),'S')))),'-','/')),'T',' ')
+	  else ()
+	  }</u_acquire_date>
         <u_notes>{fn:data($Response/Attributes/Attribute[AttrName/text()='description']/AttrValue/text())}</u_notes>
               <u_owner_org_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='org_bought_for_uuid']/AttrValue/text())}</u_owner_org_uuid>
-        <u_warranty_start_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='warranty_start']/AttrValue/text())}</u_warranty_start_date>
-        <u_warranty_end_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='warranty_end']/AttrValue/text())}</u_warranty_end_date>
-              <u_expiration_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='expiration_date']/AttrValue/text())}</u_expiration_date>
+       <u_warranty_start_date> {if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='warranty_start']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:date('1970-01-01')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='warranty_start']/AttrValue/text()),'S')))),'-','/')),'T',' ')
+	  else ()
+	  }</u_warranty_start_date>
+        <u_warranty_end_date> {if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='warranty_end']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:date('1970-01-01')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='warranty_end']/AttrValue/text()),'S')))),'-','/')),'T',' ')
+	  else ()
+	  }</u_warranty_end_date>
+       <u_expiration_date> {if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='expiration_date']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:date('1970-01-01')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='expiration_date']/AttrValue/text()),'S')))),'-','/')),'T',' ')
+	  else ()
+	  }</u_expiration_date>
         <u_financial_ref>{fn:data($Response/Attributes/Attribute[AttrName/text()='financial_num']/AttrValue/text())}</u_financial_ref>
         <u_responsible_vendor_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='vendor_restore']/AttrValue/text())}</u_responsible_vendor_uuid>
               <u_pm_required>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_required']/AttrValue/text())}</u_pm_required>
         <u_pm_duration>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_duration']/AttrValue/text())}</u_pm_duration>
-        <u_next_pm_date>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text())}</u_next_pm_date>
+        <u_next_pm_date>{if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:date('1970-01-01')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text()),'S')))),'-','/')),'T',' ')
+	  else ()
+	  }</u_next_pm_date>
               <u_warranty_org_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='zwarranty_org']/AttrValue/text())}</u_warranty_org_uuid>
         <u_customer_org_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='zcustomer_org']/AttrValue/text())}</u_customer_org_uuid>
         <u_po>{fn:data($Response/Attributes/Attribute[AttrName/text()='zPO']/AttrValue/text())}</u_po>
