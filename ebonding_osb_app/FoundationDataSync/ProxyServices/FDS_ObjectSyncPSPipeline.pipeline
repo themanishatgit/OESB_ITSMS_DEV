@@ -254,6 +254,39 @@ else($EpochTime)</con5:path>
                                         </con2:replace>
                                     </con4:outboundTransform>
                                 </con4:route>
+                                <con1:wsCallout>
+                                    <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7e47</con2:id>
+                                    <con1:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con1:operation>freeListHandles</con1:operation>
+                                    <con1:request>
+                                        <con1:body wrapped="false">freeListHandlesReq</con1:body>
+                                    </con1:request>
+                                    <con1:response>
+                                        <con1:body wrapped="false">freeListHandlesReq</con1:body>
+                                    </con1:response>
+                                    <con1:requestTransform>
+                                        <con1:assign varName="freeListHandlesReq">
+                                            <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7e46</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText><![CDATA[<ser:freeListHandles xmlns:ser="http://www.ca.com/UnicenterServicePlus/ServiceDesk">
+    <sid>{$SessionId}</sid>
+    <handles>
+       <integer>{$ListHandle}</integer>
+    </handles>
+</ser:freeListHandles>]]></con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                        <con3:log>
+                                            <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7e45</con2:id>
+                                            <con3:logLevel>error</con3:logLevel>
+                                            <con3:expr>
+                                                <con2:xqueryText>$freeListHandlesReq</con2:xqueryText>
+                                            </con3:expr>
+                                            <con3:message>****ObjectSyncPS.FreeListHandlesReq1****</con3:message>
+                                        </con3:log>
+                                    </con1:requestTransform>
+                                    <con1:responseTransform/>
+                                </con1:wsCallout>
                                 <con1:ifThenElse>
                                     <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7d7b</con2:id>
                                     <con1:case id="_BranchId-a013dce.N335c56a7.0.164f1526b9b.N7d7a">
@@ -657,54 +690,45 @@ else($EpochTime)</con5:path>
                                     </con1:foreach>
                                 </con1:actions>
                             </con1:foreach>
-                        </con1:default>
-                    </con1:ifThenElse>
-                </con:actions>
-            </con:stage>
-        </con:pipeline>
-        <con:pipeline type="response" name="response-a013dce.6e79a2a1.0.164469568e1.N7dbe" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <con:stage id="_StageId-a013dce.6e79a2a1.0.164469568e1.N7db8" name="freeListHandles" errorHandler="error-N3f57e0b8.N3cea576.0.1649d5be40d.N7ec2">
-                <con:context/>
-                <con:actions>
-                    <con1:wsCallout>
-                        <con2:id>_ActionId-a013dce.6e79a2a1.0.164469568e1.N7db7</con2:id>
-                        <con1:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con1:operation>freeListHandles</con1:operation>
-                        <con1:request>
-                            <con1:body wrapped="false">freeListHandlesReq</con1:body>
-                        </con1:request>
-                        <con1:response>
-                            <con1:body wrapped="false">freeListHandlesReq</con1:body>
-                        </con1:response>
-                        <con1:requestTransform>
-                            <con1:assign varName="freeListHandlesReq">
-                                <con2:id>_ActionId-a013dce.6e79a2a1.0.164469568e1.N7db6</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText><![CDATA[<ser:freeListHandles xmlns:ser="http://www.ca.com/UnicenterServicePlus/ServiceDesk">
+                            <con1:wsCallout>
+                                <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7eb4</con2:id>
+                                <con1:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con1:operation>freeListHandles</con1:operation>
+                                <con1:request>
+                                    <con1:body wrapped="false">freeListHandlesReq</con1:body>
+                                </con1:request>
+                                <con1:response>
+                                    <con1:body wrapped="false">freeListHandlesReq</con1:body>
+                                </con1:response>
+                                <con1:requestTransform>
+                                    <con1:assign varName="freeListHandlesReq">
+                                        <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7eb3</con2:id>
+                                        <con1:expr>
+                                            <con2:xqueryText><![CDATA[<ser:freeListHandles xmlns:ser="http://www.ca.com/UnicenterServicePlus/ServiceDesk">
     <sid>{$SessionId}</sid>
     <handles>
        <integer>{$ListHandle}</integer>
     </handles>
 </ser:freeListHandles>]]></con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
-                            <con3:log>
-                                <con2:id>_ActionId-N3f57fef5.N253e7ac9.0.165c2e988ac.N7ffa</con2:id>
-                                <con3:logLevel>error</con3:logLevel>
-                                <con3:expr>
-                                    <con2:xqueryText>$freeListHandlesReq</con2:xqueryText>
-                                </con3:expr>
-                                <con3:message>****ObjectSyncPS.FreeListHandlesReq****</con3:message>
-                            </con3:log>
-                        </con1:requestTransform>
-                        <con1:responseTransform/>
-                    </con1:wsCallout>
-                    <con2:reply>
-                        <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7faf</con2:id>
-                    </con2:reply>
+                                        </con1:expr>
+                                    </con1:assign>
+                                    <con3:log>
+                                        <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7eb2</con2:id>
+                                        <con3:logLevel>error</con3:logLevel>
+                                        <con3:expr>
+                                            <con2:xqueryText>$freeListHandlesReq</con2:xqueryText>
+                                        </con3:expr>
+                                        <con3:message>****ObjectSyncPS.FreeListHandlesReq1****</con3:message>
+                                    </con3:log>
+                                </con1:requestTransform>
+                                <con1:responseTransform/>
+                            </con1:wsCallout>
+                        </con1:default>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
+        <con:pipeline type="response" name="response-a013dce.6e79a2a1.0.164469568e1.N7dbe" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></con:pipeline>
         <con:pipeline type="error" name="error-a013dce.N5a35e0d0.0.16470280588.N7f23">
             <con:stage id="_StageId-a013dce.N5a35e0d0.0.16470280588.N7ee7" name="Service.EH">
                 <con:context/>
@@ -892,16 +916,6 @@ else('FDS_ERR003')</con1:path>
                     <con1:reply>
                         <con1:id>_ActionId-a013dce.N5a35e0d0.0.16470280588.N7ee3</con1:id>
                     </con1:reply>
-                </con:actions>
-            </con:stage>
-        </con:pipeline>
-        <con:pipeline type="error" name="error-N3f57e0b8.N3cea576.0.1649d5be40d.N7ec2">
-            <con:stage id="_StageId-N3f57e0b8.N3cea576.0.1649d5be40d.N7ec1" name="freeListHandles.EH">
-                <con:context/>
-                <con:actions>
-                    <con1:resume>
-                        <con1:id>_ActionId-N3f57e0b8.N3cea576.0.1649d5be40d.N7ebe</con1:id>
-                    </con1:resume>
                 </con:actions>
             </con:stage>
         </con:pipeline>
