@@ -577,7 +577,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="Source">
-                                            <con6:path>$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()</con6:path>
+                                            <con6:path>$SourceSystem</con6:path>
                                         </con6:param>
                                         <con6:param name="ErrCode">
                                             <con6:path>''</con6:path>
