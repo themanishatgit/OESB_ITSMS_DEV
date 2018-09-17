@@ -51,7 +51,15 @@ declare function local:func($CanonicalFormatInput as element(),
         (<ns1:PRIORITY>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority)}</ns1:PRIORITY>)
         else()}
         <ns1:ACT_LOG>
-          <ns1:DESCRIPTION>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments)}</ns1:DESCRIPTION>
+          <ns1:DESCRIPTION>{
+          if(fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')
+          then(
+          if(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments))
+          then(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments))
+          else(fn:concat('Status changed to ', fn:data($ResolvedValues/Status)))
+          )
+          else(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments))
+          }</ns1:DESCRIPTION>
         </ns1:ACT_LOG>
         {if(fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')
         then(

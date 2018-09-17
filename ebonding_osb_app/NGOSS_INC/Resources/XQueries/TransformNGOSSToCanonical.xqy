@@ -43,6 +43,7 @@ declare function local:func($IncidentXML as element() (:: schema-element(Inciden
                     else($DefaultValues/Group/text())
                     }</ns1:AssignmentGroup>
                     <ns1:Description>{fn:concat($IncidentXML/IncidentDescription/text(),'. Hardware CI Location : ',$IncidentXML/SiteReference/text())}</ns1:Description>
+                    <ns1:ShortDescription>{fn:substring($IncidentXML/IncidentDescription/text(),1,160)}</ns1:ShortDescription>
                     <ns1:Priority>{
                      if($ResolvedValues/Priority/text()) 
                     then($ResolvedValues/Priority/text()) 
