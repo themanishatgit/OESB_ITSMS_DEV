@@ -389,6 +389,7 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                 <con:context>
                     <con2:userNsDecl prefix="cus" namespace="urn:ws.solvedirect.com/webservices/custom"/>
                     <con2:userNsDecl prefix="typ" namespace="http://eai/Sav/Trillium/Types"/>
+                    <con2:userNsDecl prefix="config" namespace="http://www.bea.com/wli/sb/services/security/config"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
@@ -397,6 +398,12 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                         <con3:service ref="CISCO_INC/BusinessServices/Outbound/CISCOIncReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:operation>putCall</con3:operation>
                         <con3:outboundTransform>
+                            <con1:assign varName="CISCOServiceAccount">
+                                <con2:id>_ActionId-a013dc6.c6ff418.0.165ebae15f7.N7ffe</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>fn-bea:lookupBasicCredentials('CISCO_INC/Resources/ServiceAccounts/CISCO_ServiceAccount')</con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
                             <con1:replace varName="body" contents-only="true">
                                 <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7294</con2:id>
                                 <con1:location>
@@ -404,8 +411,8 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                 </con1:location>
                                 <con1:expr>
                                     <con2:xqueryText><![CDATA[<cus:putCall>
-	<username>{dvm:lookup('CISCO_INC/Resources/DVMs/CISCOOutboundCredentials', 'key', 'username', 'value', '')}</username>
-	<password>{dvm:lookup('CISCO_INC/Resources/DVMs/CISCOOutboundCredentials', 'key', 'password', 'value', '')}</password>
+	<username>{$CISCOServiceAccount/config:username/text()}</username>
+	<password>{$CISCOServiceAccount/config:password/text()}</password>
 	<CallData>
 		<soapenv:Envelope xmlns:typ="http://eai/Sav/Trillium/Types" xmlns:soapenv="http://Schemas.xmlsoap.org/soap/envelope/">
 			<soapenv:Body>
