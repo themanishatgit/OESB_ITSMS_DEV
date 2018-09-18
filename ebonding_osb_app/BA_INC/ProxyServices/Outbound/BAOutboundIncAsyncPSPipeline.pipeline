@@ -240,7 +240,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                             <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'BAOutboundIncASyncPS'</con6:path>
+                                            <con6:path>'BAOutboundIncAsyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'END'</con6:path>
@@ -385,7 +385,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                             <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'BAOutboundIncASyncPS'</con6:path>
+                                            <con6:path>'BAOutboundIncAsyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'START'</con6:path>
@@ -541,7 +541,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                             <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'BAOutboundIncASyncPS'</con6:path>
+                                            <con6:path>'BAOutboundIncAsyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'REQUEST_SENT'</con6:path>
