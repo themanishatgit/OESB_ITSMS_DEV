@@ -43,7 +43,11 @@ declare function local:func($CanonicalFormatInput as element(),
         else()}
         {if(fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')
         then
-        (<ns1:DESCRIPTION>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Description)}</ns1:DESCRIPTION>)
+        (<ns1:DESCRIPTION>{
+        if(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Description))
+        then(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Description))
+        else(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ShortDescription))
+        }</ns1:DESCRIPTION>)
         else()}
         <ns1:GROUP>{fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AssignmentGroup)}</ns1:GROUP>
         {if(fn:data($CanonicalFormatInput/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')
