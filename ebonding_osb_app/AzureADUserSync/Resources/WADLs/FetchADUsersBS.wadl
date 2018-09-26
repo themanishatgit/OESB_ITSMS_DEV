@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="FetchADUsersBS">RestReference</doc>
+   <resources>
+      <resource path="/v1.0/users/delta?$expand={expand}">
+         <method name="GET" soa:name="delta">
+            <request>
+               <param name="expand" style="template" type="xsd:string"/>
+            </request>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+         </method>
+      </resource>
+      <resource path="/v1.0/users/delta?$skiptoken={skipToken}">
+         <method name="GET" soa:name="nextlink">
+            <request>
+               <param name="skipToken" style="template" type="xsd:string"/>
+            </request>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+         </method>
+      </resource>
+      <resource path="/v1.0/users/delta?$deltatoken={deltaToken}">
+         <method name="GET" soa:name="deltalink">
+            <request>
+               <param name="deltaToken" style="template" type="xsd:string"/>
+            </request>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+         </method>
+      </resource>
+      <resource path="/v1.0/users/{managerId}">
+         <method name="GET" soa:name="getmanager">
+            <request>
+               <param name="managerId" style="template" type="xsd:string"/>
+            </request>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

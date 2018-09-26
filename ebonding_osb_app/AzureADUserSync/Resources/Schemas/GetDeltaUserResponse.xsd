@@ -1,0 +1,135 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sita.aero/getdelta" targetNamespace="http://www.sita.aero/getdelta" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="UTF-8">
+   <xsd:element name="Delta">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="value" maxOccurs="unbounded">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="passwordProfile">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="password"/>
+                              <xsd:element name="forceChangePasswordNextSignIn" type="xsd:string"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="country" type="xsd:string"/>
+                     <xsd:element name="preferredLanguage"/>
+                     <xsd:element name="mail" type="xsd:string"/>
+                     <xsd:element name="isResourceAccount"/>
+                     <xsd:element name="city" type="xsd:string"/>
+                     <xsd:element name="extension_cfd12883679d40f1bc611a771bb00f29_extensionAttribute5" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="displayName" type="xsd:string"/>
+                     <xsd:element name="extension_cfd12883679d40f1bc611a771bb00f29_extensionAttribute6" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="companyName" type="xsd:string"/>
+                     <xsd:element name="jobTitle" type="xsd:string"/>
+                     <xsd:element name="postalCode"/>
+                     <xsd:element name="extension_cfd12883679d40f1bc611a771bb00f29_extensionAttribute7" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="createdDateTime"/>
+                     <xsd:element name="deletedDateTime"/>
+                     <xsd:element name="legalAgeGroupClassification"/>
+                     <xsd:element name="accountEnabled" type="xsd:string"/>
+                     <xsd:element name="assignedPlans" maxOccurs="unbounded" minOccurs="0">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="assignedDateTime" type="xsd:string"/>
+                              <xsd:element name="service" type="xsd:string"/>
+                              <xsd:element name="capabilityStatus" type="xsd:string"/>
+                              <xsd:element name="servicePlanId" type="xsd:string"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="businessPhones" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="onPremisesSyncEnabled" type="xsd:string"/>
+                     <xsd:element name="onPremisesUserPrincipalName"/>
+                     <xsd:element name="officeLocation" type="xsd:string"/>
+                     <xsd:element name="surname" type="xsd:string"/>
+                     <xsd:element name="onPremisesSamAccountName" type="xsd:string"/>
+                     <xsd:element name="passwordPolicies"/>
+                     <xsd:element name="provisionedPlans" maxOccurs="unbounded" minOccurs="0">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="provisioningStatus" type="xsd:string"/>
+                              <xsd:element name="service" type="xsd:string"/>
+                              <xsd:element name="capabilityStatus" type="xsd:string"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="state" type="xsd:string"/>
+                     <xsd:element name="id" type="xsd:string"/>
+                     <xsd:element name="department" type="xsd:string"/>
+                     <xsd:element name="userPrincipalName" type="xsd:string"/>
+                     <xsd:element name="mailNickname" type="xsd:string"/>
+                     <xsd:element name="assignedLicenses" maxOccurs="unbounded" minOccurs="0">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="skuId" type="xsd:string"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="givenName" type="xsd:string"/>
+                     <xsd:element name="ageGroup"/>
+                     <xsd:element name="onPremisesSecurityIdentifier" type="xsd:string"/>
+                     <xsd:element name="proxyAddresses" maxOccurs="unbounded" type="xsd:string"/>
+                     <xsd:element name="onPremisesExtensionAttributes">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="extensionAttribute14"/>
+                              <xsd:element name="extensionAttribute15"/>
+                              <xsd:element name="extensionAttribute2" type="xsd:string"/>
+                              <xsd:element name="extensionAttribute1" type="xsd:string"/>
+                              <xsd:element name="extensionAttribute4" type="xsd:integer"/>
+                              <xsd:element name="extensionAttribute3" type="xsd:integer"/>
+                              <xsd:element name="extensionAttribute6" type="xsd:string"/>
+                              <xsd:element name="extensionAttribute5" type="xsd:string"/>
+                              <xsd:element name="extensionAttribute8" type="xsd:string"/>
+                              <xsd:element name="extensionAttribute7" type="xsd:string"/>
+                              <xsd:element name="extensionAttribute9"/>
+                              <xsd:element name="extensionAttribute12"/>
+                              <xsd:element name="extensionAttribute13"/>
+                              <xsd:element name="extensionAttribute10"/>
+                              <xsd:element name="extensionAttribute11"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="mobilePhone" type="xsd:string"/>
+                     <xsd:element name="streetAddress" type="xsd:string"/>
+                     <xsd:element name="onPremisesImmutableId" type="xsd:string"/>
+                     <xsd:element name="onPremisesDomainName" type="xsd:string"/>
+                     <xsd:element name="onPremisesLastSyncDateTime" type="xsd:string"/>
+                     <xsd:element name="imAddresses" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="usageLocation" type="xsd:string"/>
+                     <xsd:element name="userType" type="xsd:string"/>
+                     <xsd:element name="consentProvidedForMinor"/>
+                     <xsd:element name="refreshTokensValidFromDateTime" type="xsd:string"/>
+                     <xsd:element name="manager_delta">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="id" type="xsd:string"/>
+                           </xsd:sequence>
+                           <xsd:attribute name="odata.type" type="xsd:string"/>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="_removed">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="reason" type="xsd:string"/>
+                           </xsd:sequence>
+                           <xsd:attribute name="odata.type" type="xsd:string"/>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+         <xsd:attribute name="odata.nextLink" type="xsd:string"/>
+         <xsd:attribute name="odata.deltaLink" type="xsd:string"/>
+         <xsd:attribute name="odata.context" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

@@ -27,6 +27,7 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ResourceBundlesContentSet"/>
    </list>
    <list n="listOfChildren">
+      <hash><url n="URL" path="AzureADUserSync/AzureADUserSync.jpr"/></hash>
       <hash><url n="URL" path="BA_INC/BA_INC.jpr"/></hash>
       <hash><url n="URL" path="CISCO_INC/CISCO_INC.jpr"/></hash>
       <hash><url n="URL" path="Common/Common.jpr"/></hash>
@@ -53,6 +54,6 @@
       </hash>
    </hash>
    <hash n="oracle.sb.tooling.ide.core.internal.application.SbApplication">
-      <value n="configContextSessionName" v="OSB-IDE_build_1536931357171"/>
+      <value n="configContextSessionName" v="OSB-IDE_build_1537545952470"/>
    </hash>
 </jws:workspace>
