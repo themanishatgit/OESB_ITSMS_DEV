@@ -83,15 +83,15 @@
                     <con1:assign varName="TransactionType" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013b5c.21fa6e06.0.163cad9c471.N7e98</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>if($body/ba:ITServicesDataMessage/ITServicesMessageHeader/MessageFunction/text()='OPEN')
-then('CREATE')
-else('UPDATE')</con2:xqueryText>
+                            <con2:xqueryText>if($body/ba:ITServicesDataMessage/ITServicesMessageHeader/LinkedRecord/text())
+then('UPDATE')
+else('CREATE')</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:assign varName="Message_TranId" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013b5c.21fa6e06.0.163cad9c471.N7e95</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>$body/ba:ITServicesDataMessage/ITServicesMessageHeader/MessageIdentifier/text()</con2:xqueryText>
+                            <con2:xqueryText>fn:substring($body/ba:ITServicesDataMessage/ITServicesMessageHeader/MessageIdentifier/text(),1,100)</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con5:assign varName="SourceSystem" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
