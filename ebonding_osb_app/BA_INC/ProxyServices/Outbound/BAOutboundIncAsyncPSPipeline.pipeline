@@ -407,7 +407,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                     </con3:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N3f57fefe.N66711172.0.1635e1337e3.N7ee4" name="MapStatus" errorHandler="error-a013dce.2cafda84.0.165337dfb1c.N7f6a">
+            <con:stage id="_StageId-N3f57fefe.N66711172.0.1635e1337e3.N7ee4" name="MapStatus">
                 <con:context>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
@@ -561,47 +561,6 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                             </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
-                </con:actions>
-            </con:stage>
-        </con:pipeline>
-        <con:pipeline type="error" name="error-a013dce.2cafda84.0.165337dfb1c.N7f6a">
-            <con:stage id="_StageId-a013dce.2cafda84.0.165337dfb1c.N7f69" name="MapStatus.EH">
-                <con:context/>
-                <con:actions>
-                    <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dce.2cafda84.0.165337dfb1c.N7f01</con6:id>
-                        <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:outboundTransform>
-                            <con2:replace contents-only="true" varName="body">
-                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dce.2cafda84.0.165337dfb1c.N7f00</con6:id>
-                                <con2:location>
-                                    <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
-                                </con2:location>
-                                <con2:expr>
-                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
-	<ErrorDetails>
-		<ErrorCode>ERR002</ErrorCode>
-		<ErrorMsg>Technical Failure</ErrorMsg>
-	</ErrorDetails>
-	<MessageDetails>
-		<Message_TransactionId>{$Message_TranId}</Message_TransactionId>
-		<TransactionType>{$TransactionType}</TransactionType>
-		<RecType>{$RecType}</RecType>
-		<ProxyService>BAOutboundIncAsyncPS</ProxyService>
-                <Payload>{$fault}</Payload>
-		<Source>{$SourceSystem}</Source>
-		<Destination>BA</Destination>
-		<IncidentId>{$TicketNumber}</IncidentId>
-		<ExternalRefNum>{$ExtRefNumber}</ExternalRefNum>
-	</MessageDetails>
-</ErrorHandlerRequest>]]></con6:xqueryText>
-                                </con2:expr>
-                            </con2:replace>
-                        </con3:outboundTransform>
-                    </con3:route>
-                    <con2:reply>
-                        <con2:id>_ActionId-a013dce.2cafda84.0.165337dfb1c.N7efd</con2:id>
-                    </con2:reply>
                 </con:actions>
             </con:stage>
         </con:pipeline>
