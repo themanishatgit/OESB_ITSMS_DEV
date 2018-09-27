@@ -13,7 +13,11 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
     <IncidentXML>
         <IncidentID>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber)}</IncidentID>
         <EventID>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Customer/ns1:RefNumber)}</EventID>
-        <Type>{fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)}</Type>
+        <Type>{
+        if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ACK')
+        then(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType))
+        else('Update')
+        }</Type>
         <IncidentStatus>{
         if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ACK')
         then('Open')
@@ -22,7 +26,7 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
         <Description>{
         if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ACK')
         then('ACK')
-        else(fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:WorkNotes))
+        else('Update')
         }</Description>
     </IncidentXML>
 };
