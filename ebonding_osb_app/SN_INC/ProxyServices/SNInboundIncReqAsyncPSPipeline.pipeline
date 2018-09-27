@@ -609,12 +609,33 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                 </con:actions>
             </con:stage>
         </con:pipeline>
+        <con:pipeline type="error" name="error-a013dce.Nb55578a.0.1661ad2cddd.N7f1e">
+            <con:stage id="_StageId-a013dce.Nb55578a.0.1661ad2cddd.N7f1d" name="Route.EH">
+                <con:context/>
+                <con:actions>
+                    <con2:ifThenElse>
+                        <con1:id>_ActionId-a013dce.Nb55578a.0.1661ad2cddd.N7f13</con1:id>
+                        <con2:case id="_BranchId-a013dce.Nb55578a.0.1661ad2cddd.N7f12">
+                            <con2:condition>
+                                <con1:xqueryText>$TransactionType='ERROR'</con1:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con1:reply>
+                                    <con1:id>_ActionId-a013dce.Nb55578a.0.1661ad2cddd.N7f0f</con1:id>
+                                </con1:reply>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default/>
+                    </con2:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
         <con:flow>
             <con:pipeline-node name="Pipeline Pair Node1">
                 <con:request>request-N3f57fdfd.765e5c99.0.163cc1e0244.N7e91</con:request>
                 <con:response>response-N3f57fdfd.765e5c99.0.163cc1e0244.N7e90</con:response>
             </con:pipeline-node>
-            <con:route-node name="RouteNode1">
+            <con:route-node name="RouteNode1" error-handler="error-a013dce.Nb55578a.0.1661ad2cddd.N7f1e">
                 <con:context>
                     <con1:userNsDecl prefix="config" namespace="http://www.bea.com/wli/sb/services/security/config"/>
                     <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>

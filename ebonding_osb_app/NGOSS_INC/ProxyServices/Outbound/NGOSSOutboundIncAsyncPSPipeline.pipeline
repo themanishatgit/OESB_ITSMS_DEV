@@ -121,6 +121,52 @@
                     </con4:route>
                 </con:actions>
             </con:stage>
+            <con:stage id="_StageId-a013dce.Nb55578a.0.1661ad2cddd.N7f32" name="MapStatus" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-a013dce.Nb55578a.0.1661ad2cddd.N7f31</con2:id>
+                        <con1:service ref="Common/ProxyServices/FetchDataMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>execute</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="false">DataMappingRequest</con1:body>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="false">DataMappingResponse</con1:body>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:assign varName="DataMappingRequest">
+                                <con2:id>_ActionId-a013dce.Nb55578a.0.1661ad2cddd.N7f30</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText><![CDATA[<fet:FetchDataMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchDataMappingMessageV1">
+    <fet:RecType>{fn:upper-case($RecType)}</fet:RecType>
+    <fet:Source>{fn:upper-case($SourceSystem)}</fet:Source>
+    <fet:Destination>BA</fet:Destination>
+    <!--1 or more repetitions:-->
+    <fet:FetchData>
+        <fet:ObjectName>STATUS</fet:ObjectName>
+        <fet:SourceValue>{fn:upper-case(data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status))}</fet:SourceValue>
+    </fet:FetchData>
+</fet:FetchDataMappingRequest>]]></con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
+                        </con1:requestTransform>
+                        <con1:responseTransform/>
+                    </con1:wsCallout>
+                    <con1:replace varName="IncomingRequest" contents-only="true">
+                        <con2:id>_ActionId-a013dce.Nb55578a.0.1661ad2cddd.N7f2f</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.//inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='STATUS']/fet:DestinationValue/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
             <con:stage id="_StageId-a013b23.N22e84121.0.163d038901c.N7fce" name="Transform">
                 <con:context/>
                 <con:actions>
@@ -269,12 +315,33 @@
                 </con:actions>
             </con:stage>
         </con:pipeline>
+        <con:pipeline type="error" name="error-a013dce.Nb55578a.0.1661ad2cddd.N7f2e">
+            <con:stage id="_StageId-a013dce.Nb55578a.0.1661ad2cddd.N7f2d" name="Route.EH">
+                <con:context/>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a013dce.Nb55578a.0.1661ad2cddd.N7f23</con2:id>
+                        <con1:case id="_BranchId-a013dce.Nb55578a.0.1661ad2cddd.N7f22">
+                            <con1:condition>
+                                <con2:xqueryText>$TransactionType='ERROR'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con2:reply>
+                                    <con2:id>_ActionId-a013dce.Nb55578a.0.1661ad2cddd.N7f1f</con2:id>
+                                </con2:reply>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default/>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
         <con:flow>
             <con:pipeline-node name="Pipeline Pair Node1">
                 <con:request>request-a013dca.Ne983b99.0.16344c3ab33.N7e9b</con:request>
                 <con:response>response-a013dca.Ne983b99.0.16344c3ab33.N7e9a</con:response>
             </con:pipeline-node>
-            <con:route-node name="To NGOSS System">
+            <con:route-node name="To NGOSS System" error-handler="error-a013dce.Nb55578a.0.1661ad2cddd.N7f2e">
                 <con:context/>
                 <con:actions>
                     <con4:route>
