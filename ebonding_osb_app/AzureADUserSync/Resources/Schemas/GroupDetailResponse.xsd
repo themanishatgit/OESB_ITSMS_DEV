@@ -1,0 +1,42 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sita.aero/grouplist" targetNamespace="http://www.sita.aero/grouplist" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="UTF-8">
+   <xsd:element name="Group">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="value" maxOccurs="unbounded">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="id" type="xsd:string"/>
+                     <xsd:element name="deletedDateTime"/>
+                     <xsd:element name="classification"/>
+                     <xsd:element name="createdDateTime" type="xsd:string"/>
+                     <xsd:element name="description" type="xsd:string"/>
+                     <xsd:element name="displayName" type="xsd:string"/>
+                     <xsd:element name="mail" type="xsd:string"/>
+                     <xsd:element name="mailEnabled" type="xsd:string"/>
+                     <xsd:element name="mailNickname" type="xsd:string"/>
+                     <xsd:element name="onPremisesLastSyncDateTime" type="xsd:string"/>
+                     <xsd:element name="onPremisesSecurityIdentifier" type="xsd:string"/>
+                     <xsd:element name="onPremisesSyncEnabled" type="xsd:string"/>
+                     <xsd:element name="preferredDataLocation"/>
+                     <xsd:element name="proxyAddresses" maxOccurs="unbounded" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="renewedDateTime" type="xsd:string"/>
+                     <xsd:element name="securityEnabled" type="xsd:string"/>
+                     <xsd:element name="visibility" type="xsd:string"/>
+                     <xsd:element name="groupTypes" maxOccurs="unbounded" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="resourceProvisioningOptions" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="creationOptions" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="resourceBehaviorOptions" maxOccurs="unbounded" minOccurs="0" type="xsd:string"/>
+                  </xsd:sequence>
+                  <xsd:attribute name="odata.type" type="xsd:string"/>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+         <xsd:attribute name="odata.context" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>
