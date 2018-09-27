@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sita.aero/getmanager" targetNamespace="http://www.sita.aero/getmanager" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="UTF-8">
+   <xsd:element name="Manager">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="businessPhones" type="xsd:string"/>
+            <xsd:element name="displayName" type="xsd:string"/>
+            <xsd:element name="givenName" type="xsd:string"/>
+            <xsd:element name="jobTitle" type="xsd:string"/>
+            <xsd:element name="mail" type="xsd:string"/>
+            <xsd:element name="mobilePhone" type="xsd:string"/>
+            <xsd:element name="officeLocation" type="xsd:string"/>
+            <xsd:element name="preferredLanguage"/>
+            <xsd:element name="surname" type="xsd:string"/>
+            <xsd:element name="userPrincipalName" type="xsd:string"/>
+            <xsd:element name="_odata.context" type="xsd:string"/>
+         </xsd:sequence>
+         
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

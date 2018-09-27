@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:coreEntry>
+        <con:binding type="Any XML"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-a013dc6.460d90c.0.1660b304c78.N7dc2">
+        <con:pipeline type="request" name="request-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9d">
+            <con:stage id="_StageId-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9b" name="FetchVariables">
+                <con:context/>
+                <con:actions>
+                    <con1:log>
+                        <con2:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7f97</con2:id>
+                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con1:expr>
+                        <con1:message>&lt;&lt; AUS_SNPublishSync.RequestReceived >></con1:message>
+                    </con1:log>
+                    <con3:assign varName="InputRequest">
+                        <con2:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7f90</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con5:assign varName="BatchId" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7ef2</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/AUSSNPublishPSRequest/MessageMetaData/BatchId/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con5:assign>
+                    <con5:assign varName="TranId" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7eee</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/AUSSNPublishPSRequest/MessageMetaData/TranId/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con5:assign>
+                    <con5:assign varName="LastRecord" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7eeb</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/AUSSNPublishPSRequest/MessageMetaData/LastRecord/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con5:assign>
+                    <con5:assign varName="AccessToken" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dc6.15285688.0.166115bf98b.N7fcd</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/AUSSNPublishPSRequest/MessageMetaData/AccessToken/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con5:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dc6.460d90c.0.1660b304c78.N7fa8" name="CheckGroup.Stg">
+                <con:context>
+                    <con2:userNsDecl prefix="delta" namespace="http://www.sita.aero/getdelta"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7f9e</con2:id>
+                        <con3:case id="_BranchId-a013dc6.460d90c.0.1660b304c78.N7f9d">
+                            <con3:condition>
+                                <con2:xqueryText>$InputRequest/AUSSNPublishPSRequest/User/delta:accountEnabled/text()='true'</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions/>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                    <con3:assign varName="UserInActiveGroup">
+                        <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7fa5</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>''</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dc6.460d90c.0.1660b304c78.N8000" name="GetManager.Stg">
+                <con:context>
+                    <con2:userNsDecl prefix="delta" namespace="http://www.sita.aero/getdelta"/>
+                </con:context>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7fb9</con2:id>
+                        <con3:case id="_BranchId-a013dc6.460d90c.0.1660b304c78.N7fb8">
+                            <con3:condition>
+                                <con2:xqueryText>fn:exists($InputRequest/AUSSNPublishPSRequest/User/delta:manager_delta)</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:wsCallout>
+                                    <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7ffd</con2:id>
+                                    <con3:service ref="AzureADUserSync/BusinessServices/AzureAD/FetchADUsersBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:operation>getmanager</con3:operation>
+                                    <con3:request>
+                                        <con3:payload wrapped="false">GetManagerRequest</con3:payload>
+                                    </con3:request>
+                                    <con3:response>
+                                        <con3:payload wrapped="false">GetManagerJsonResponse</con3:payload>
+                                    </con3:response>
+                                    <con3:requestTransform>
+                                        <con6:replace contents-only="true" varName="outbound" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                            <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7fc9</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>./ctx:transport/ctx:request/tp:headers</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText>&lt;tp:user-header name="Authorization" value="Bearer {$AccessToken}"/></con2:xqueryText>
+                                            </con1:expr>
+                                        </con6:replace>
+                                        <con1:insert varName="outbound" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                                            <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7fc6</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>./ctx:transport/ctx:request</con2:xpathText>
+                                            </con1:location>
+                                            <con1:where>last-child</con1:where>
+                                            <con1:expr>
+                                                <con2:xqueryText>&lt;tp:user-metadata name='managerId' value='{$InputRequest/AUSSNPublishPSRequest/User/delta:manager_delta/delta:id/text()}' /></con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:insert>
+                                        <con1:log>
+                                            <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7fc0</con2:id>
+                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:expr>
+                                                <con2:xqueryText>$outbound</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:message>&lt;&lt; AUS_SNPublishSync.GetManagerOutbound >></con1:message>
+                                        </con1:log>
+                                        <con1:log>
+                                            <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7e5d</con2:id>
+                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:expr>
+                                                <con2:xqueryText>$InputRequest/AUSSNPublishPSRequest/User/delta:manager_delta/delta:id/text()</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:message>&lt;&lt; AUS_SNPublishSync.MgrID >></con1:message>
+                                        </con1:log>
+                                    </con3:requestTransform>
+                                    <con3:responseTransform>
+                                        <con1:log>
+                                            <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7faf</con2:id>
+                                            <con2:disabled>true</con2:disabled>
+                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:expr>
+                                                <con2:xqueryText>$GetManagerJsonResponse</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:message>&lt;&lt; AUS_SNPublishSync.GetManagerResponse >></con1:message>
+                                        </con1:log>
+                                        <con1:assign varName="GetManagerResponse" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                                            <con2:id>_ActionId-a013dc6.15285688.0.166115bf98b.N7fca</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>fn:replace($GetManagerJsonResponse, '@odata.context', '_odata.context')</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                        <con3:nxsdTranslation>
+                                            <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7fac</con2:id>
+                                            <con3:type>Native-To-XML</con3:type>
+                                            <con3:sourceExpr>
+                                                <con2:xqueryText>$GetManagerResponse</con2:xqueryText>
+                                            </con3:sourceExpr>
+                                            <con3:nxsd ref="AzureADUserSync/Resources/Schemas/GetManagerResponse"/>
+                                            <con3:schemaElement xmlns:get="http://www.sita.aero/getmanager">get:Manager</con3:schemaElement>
+                                            <con3:assign-variable>GetManagerResponse</con3:assign-variable>
+                                        </con3:nxsdTranslation>
+                                    </con3:responseTransform>
+                                </con3:wsCallout>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9c">
+            <con:stage id="_StageId-a013dc6.460d90c.0.1660b304c78.N7f61" name="UpdateAUSTransaction" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con1:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateAUSTransaction" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
+                <con:actions>
+                    <con4:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.460d90c.0.1660b304c78.N7ee4</con5:id>
+                        <con4:case id="_BranchId-a013dc6.460d90c.0.1660b304c78.N7ee3">
+                            <con4:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$LastRecord='Y'</con5:xqueryText>
+                            </con4:condition>
+                            <con4:actions>
+                                <con4:assign varName="Status">
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.460d90c.0.1660b304c78.N7df4</con5:id>
+                                    <con4:expr>
+                                        <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">'PROCESSED'</con5:xqueryText>
+                                    </con4:expr>
+                                </con4:assign>
+                                <con3:route>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.460d90c.0.1660b304c78.N7f60</con5:id>
+                                    <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:operation>merge</con3:operation>
+                                    <con3:outboundTransform>
+                                        <con2:replace contents-only="true" varName="body">
+                                            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.460d90c.0.1660b304c78.N7f5f</con5:id>
+                                            <con2:location>
+                                                <con1:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                            </con2:location>
+                                            <con2:expr>
+                                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config"><![CDATA[<upd:AusTransactionsCollection>
+    <upd:AusTransactions>
+        <upd:batchId>{$BatchId}</upd:batchId>
+        <upd:transactionId>{$TranId}</upd:transactionId>
+        <upd:status>{$Status}</upd:status>
+        <upd:updatedAt>{fn:current-dateTime()}</upd:updatedAt>
+    </upd:AusTransactions>
+</upd:AusTransactionsCollection>]]></con5:xqueryText>
+                                            </con2:expr>
+                                        </con2:replace>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                            </con4:actions>
+                        </con4:case>
+                        <con4:default/>
+                    </con4:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dc6.460d90c.0.1660b304c78.N7dc2">
+            <con:stage id="_StageId-a013dc6.N4418d23f.0.16614dd0a26.N7ed8" name="AUSSNPublishSyncPS.ErrHandler.Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con2:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateAUSTransaction"/>
+                </con:context>
+                <con:actions>
+                    <con4:log>
+                        <con2:id>_ActionId-a013dc6.N4418d23f.0.16614dd0a26.N7ed7</con2:id>
+                        <con4:logLevel>error</con4:logLevel>
+                        <con4:expr>
+                            <con2:xqueryText>$fault/*</con2:xqueryText>
+                        </con4:expr>
+                        <con4:message>&lt;&lt; Fault >></con4:message>
+                    </con4:log>
+                    <con3:route>
+                        <con2:id>_ActionId-a013dc6.N4418d23f.0.16614dd0a26.N7ed6</con2:id>
+                        <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>merge</con3:operation>
+                        <con3:outboundTransform>
+                            <con5:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dc6.N4418d23f.0.16614dd0a26.N7ed5</con2:id>
+                                <con5:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con5:location>
+                                <con5:expr>
+                                    <con2:xqueryText><![CDATA[<upd:AusTransactionsCollection>
+    <upd:AusTransactions>
+        <upd:creationTime>{fn:current-dateTime()}</upd:creationTime>
+        <upd:batchId>{$BatchId}</upd:batchId>
+        <upd:transactionId>{$TranId}</upd:transactionId>
+        <upd:status>ERROR</upd:status>
+        <upd:errCode>{$fault/ctx:errorCode/text()}</upd:errCode>
+        <upd:errMsg>{concat('AUS_SNPublishSyncPS~',$fault/ctx:reason/text(),'~',fn-bea:serialize($fault))}</upd:errMsg>
+        <upd:machineName>{fn-bea:getHostname()}</upd:machineName>
+        <upd:updatedAt>{fn:current-dateTime()}</upd:updatedAt>
+    </upd:AusTransactions>
+</upd:AusTransactionsCollection>]]></con2:xqueryText>
+                                </con5:expr>
+                            </con5:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con2:reply>
+                        <con2:id>_ActionId-a013dc6.N4418d23f.0.16614dd0a26.N7ed4</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="AUS_SNPublishSync_PP">
+                <con:request>request-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9d</con:request>
+                <con:response>response-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9c</con:response>
+            </con:pipeline-node>
+            <con:route-node name="SNUserPublish_RN" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                <con:context>
+                    <con2:userNsDecl prefix="u_az_int" namespace="http://www.service-now.com/u_azure_integration"/>
+                    <con2:userNsDecl prefix="getm" namespace="http://www.sita.aero/getmanager"/>
+                    <con2:userNsDecl prefix="delta" namespace="http://www.sita.aero/getdelta"/>
+                </con:context>
+                <con:actions>
+                    <con1:route>
+                        <con2:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7f96</con2:id>
+                        <con1:service ref="AzureADUserSync/BusinessServices/ServiceNow/SNUserPublishBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>insert</con1:operation>
+                        <con1:outboundTransform>
+                            <con3:replace contents-only="true" varName="body">
+                                <con2:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7f93</con2:id>
+                                <con3:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con3:location>
+                                <con3:expr>
+                                    <con2:xqueryText><![CDATA[<u_az_int:insert>
+         <u_active>{$InputRequest/AUSSNPublishPSRequest/User/delta:accountEnabled/text()}</u_active>
+         <u_business_phone>{$InputRequest/AUSSNPublishPSRequest/User/delta:businessPhones/text()}</u_business_phone>
+         <u_company>{$InputRequest/AUSSNPublishPSRequest/User/delta:companyName/text()}</u_company>
+         <u_contact_type>EMPLOYEE</u_contact_type>
+         <u_department>{$InputRequest/AUSSNPublishPSRequest/User/delta:onPremisesExtensionAttributes/delta:extensionAttribute7/text()}</u_department>
+         <u_email>{$InputRequest/AUSSNPublishPSRequest/User/delta:mail/text()}</u_email>
+         <u_employee_number>{$InputRequest/AUSSNPublishPSRequest/User/delta:onPremisesExtensionAttributes/delta:extensionAttribute3/text()}</u_employee_number>
+         <u_first_name>{$InputRequest/AUSSNPublishPSRequest/User/delta:givenName/text()}</u_first_name>
+         <u_last_name>{$InputRequest/AUSSNPublishPSRequest/User/delta:surname/text()}</u_last_name>
+         <u_manager_email>{$GetManagerResponse/getm:mail/text()}</u_manager_email>
+         <u_middle_name></u_middle_name>
+         <u_mobile_phone>{$InputRequest/AUSSNPublishPSRequest/User/delta:mobilePhone/text()}</u_mobile_phone>
+         <u_notification>Enable</u_notification>
+         <u_office_location>{$InputRequest/AUSSNPublishPSRequest/User/delta:officeLocation/text()}</u_office_location>
+         <u_source>Azure</u_source>
+         <u_user_account_id>{$InputRequest/AUSSNPublishPSRequest/User/delta:id/text()}</u_user_account_id>
+      </u_az_int:insert>]]></con2:xqueryText>
+                                </con3:expr>
+                            </con3:replace>
+                            <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7f8d</con2:id>
+                                <con1:logLevel>warning</con1:logLevel>
+                                <con1:expr>
+                                    <con2:xqueryText>$body</con2:xqueryText>
+                                </con1:expr>
+                                <con1:message>&lt;&lt; AUS_SNPublishSync.RequestSentToSN >></con1:message>
+                            </con1:log>
+                        </con1:outboundTransform>
+                        <con1:responseTransform>
+                            <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dc6.460d90c.0.1660b304c78.N7fa9</con2:id>
+                                <con1:logLevel>warning</con1:logLevel>
+                                <con1:expr>
+                                    <con2:xqueryText>$body</con2:xqueryText>
+                                </con1:expr>
+                                <con1:message>&lt;&lt; AUS_SNPublishSync.ResponseReceivedFromSN >></con1:message>
+                            </con1:log>
+                        </con1:responseTransform>
+                    </con1:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>
