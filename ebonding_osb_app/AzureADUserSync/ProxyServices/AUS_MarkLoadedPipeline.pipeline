@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="AzureADUserSync/Resources/WSDLs/AUS_MarkLoaded"/>
+            <con:binding>
+                <con:name>execute_bind</con:name>
+                <con:namespace>http://xmlns.oracle.com/SITA_Ebondings/AzureADUserSync/AUS_MarkLoaded</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-a013dc6.3d18e46e.0.1661baa6a7b.N7d76">
+            <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7d74" name="Stage1">
+                <con:context>
+                    <con1:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateAUSTransaction"/>
+                </con:context>
+                <con:actions>
+                    <con3:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d3f</con1:id>
+                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:expr>
+                            <con1:xqueryText>$body</con1:xqueryText>
+                        </con3:expr>
+                        <con3:message>****AUS_MarkLoaded.IncomingRequest****</con3:message>
+                    </con3:log>
+                    <con2:assign varName="TranId" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d3c</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('TRANID'),
+'SELECT TRANSACTION_ID FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS WHERE STATUS=?)','PROCESSED'
+)/TRANSACTION_ID/text()</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="Status">
+                        <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d02</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>'LOADED'</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con3:route>
+                        <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d39</con1:id>
+                        <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>merge</con3:operation>
+                        <con3:outboundTransform>
+                            <con5:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                                <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d05</con2:id>
+                                <con5:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con5:location>
+                                <con5:expr>
+                                    <con2:xqueryText><![CDATA[<upd:AusTransactionsCollection>
+    <upd:AusTransactions>
+        <upd:transactionId>{$TranId}</upd:transactionId>
+        <upd:status>{$Status}</upd:status>
+        <upd:updatedAt>{fn:current-dateTime()}</upd:updatedAt>
+    </upd:AusTransactions>
+</upd:AusTransactionsCollection>]]></con2:xqueryText>
+                                </con5:expr>
+                            </con5:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dc6.3d18e46e.0.1661baa6a7b.N7d75">
+            <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7d73" name="Request.Stg">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="AUS_MarkLoaded_PP">
+                <con:request>request-a013dc6.3d18e46e.0.1661baa6a7b.N7d76</con:request>
+                <con:response>response-a013dc6.3d18e46e.0.1661baa6a7b.N7d75</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>
