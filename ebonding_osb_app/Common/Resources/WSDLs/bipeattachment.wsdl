@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+	name="bipeattachment"
+	targetNamespace="http://www.obs.com" 
+	xmlns:tns="http://www.obs.com/bipe_att"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:sncns="http://www.obs.com" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+	<wsdl:types>
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.obs.com/bipe_att">
+			<xsd:element name="retrieveFileByName">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="1" name="file_name"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" maxOccurs="1" name="record_num"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="retrieveFileByNameResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="1" name="file" type="tns:fileType">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="retrieveFile" type="tns:Void">
+			
+			</xsd:element>
+
+			<xsd:element name="retrieveFileResponse">
+			<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="1" name="file" type="tns:fileType">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="retrieveFileByIncidentNumber">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="1" name="record_num"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="retrieveFileByIncidentNumberResponse">
+			<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="1" name="file" type="tns:fileType">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="sendFile">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="1" name="file_type"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" maxOccurs="1" name="file_name"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" maxOccurs="1" name="payload"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" maxOccurs="1" name="record_num"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="sendFileResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="1" name="inc_number"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:complexType name="Void">
+			    <xsd:sequence>
+			    </xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="fileType">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" maxOccurs="1" name="file_type"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" maxOccurs="1" name="file_name"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" maxOccurs="1" name="payload"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" maxOccurs="1" name="record_num"
+						type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="retrieveFileResponse">
+		<wsdl:part name="parameters" element="tns:retrieveFileResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveFileByName">
+		<wsdl:part name="parameters" element="tns:retrieveFileByName">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveFileByNameResponse">
+		<wsdl:part name="parameters" element="tns:retrieveFileByNameResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveFileByIncidentNumber">
+		<wsdl:part name="parameters" element="tns:retrieveFileByIncidentNumber">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveFileByIncidentNumberResponse">
+		<wsdl:part name="parameters" element="tns:retrieveFileByIncidentNumberResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sendFile">
+		<wsdl:part name="parameters" element="tns:sendFile">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveFile">
+		<wsdl:part name="parameters" element="tns:retrieveFile">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sendFileResponse">
+		<wsdl:part name="parameters" element="tns:sendFileResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="AttachmentServiceSoap">
+		<wsdl:operation name="retrieveFileByName">
+			<wsdl:input name="retrieveFileByName" message="sncns:retrieveFileByName">
+			</wsdl:input>
+			<wsdl:output name="retrieveFileByNameResponse" message="sncns:retrieveFileByNameResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveFileByIncidentNumber">
+			<wsdl:input name="retrieveFileByIncidentNumber" message="sncns:retrieveFileByIncidentNumber">
+			</wsdl:input>
+			<wsdl:output name="retrieveFileByIncidentNumberResponse" message="sncns:retrieveFileByIncidentNumberResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveFile">
+			<wsdl:input name="retrieveFile" message="sncns:retrieveFile">
+			</wsdl:input>
+			<wsdl:output name="retrieveFileResponse" message="sncns:retrieveFileResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sendFile">
+			<wsdl:input name="sendFile" message="sncns:sendFile">
+			</wsdl:input>
+			<wsdl:output name="sendFileResponse" message="sncns:sendFileResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AttachmentServiceSoapBinding" type="sncns:AttachmentServiceSoap">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="retrieveFileByName">
+			<soap:operation
+				soapAction="http://www.obs.com/bipe_att/retrieveFileByName"
+				style="document" />
+			<wsdl:input name="retrieveFileByName">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="retrieveFileByNameResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveFileByIncidentNumber">
+			<soap:operation
+				soapAction="http://www.obs.com/bipe_att/retrieveFileByIncidentNumber"
+				style="document" />
+			<wsdl:input name="retrieveFileByIncidentNumber">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="retrieveFileByIncidentNumberResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveFile">
+			<soap:operation
+				soapAction="http://www.obs.com/bipe_att/retrieveFile"
+				style="document" />
+			<wsdl:input name="retrieveFile">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="retrieveFileResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sendFile">
+			<soap:operation soapAction="http://www.obs.com/bipe_att/sendFile"
+				style="document" />
+			<wsdl:input name="sendFile">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="sendFileResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="bipeattachment">
+		<wsdl:port name="AttachmentServiceSoap" binding="sncns:AttachmentServiceSoapBinding">
+			<soap:address
+				location="http://localhost/bipe_att/ws/bipeattachment" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
