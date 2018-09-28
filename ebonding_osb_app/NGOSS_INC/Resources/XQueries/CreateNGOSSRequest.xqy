@@ -26,6 +26,8 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
         <Description>{
         if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ACK')
         then('ACK')
+        else if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ERROR')
+        then(fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:WorkNotes))
         else('Update')
         }</Description>
     </IncidentXML>
