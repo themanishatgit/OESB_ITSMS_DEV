@@ -112,17 +112,24 @@
                                     <con3:responseTransform>
                                         <con1:log>
                                             <con2:id>_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7f89</con2:id>
+                                            <con2:disabled>true</con2:disabled>
                                             <con1:logLevel>warning</con1:logLevel>
                                             <con1:expr>
                                                 <con2:xqueryText>$GroupDetailJsonResponse</con2:xqueryText>
                                             </con1:expr>
                                             <con1:message>&lt;&lt; AUS_SNPublishSync.GroupDetailJsonResponse >></con1:message>
                                         </con1:log>
+                                        <con1:assign varName="GroupDetailResponse" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                                            <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7efc</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>fn:replace(fn:replace($GroupDetailJsonResponse, '@odata.context', '_odata.context'),'@odata.type','_odata.type')</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
                                         <con3:nxsdTranslation>
                                             <con2:id>_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7f48</con2:id>
                                             <con3:type>Native-To-XML</con3:type>
                                             <con3:sourceExpr>
-                                                <con2:xqueryText>$GroupDetailJsonResponse</con2:xqueryText>
+                                                <con2:xqueryText>$GroupDetailResponse</con2:xqueryText>
                                             </con3:sourceExpr>
                                             <con3:nxsd ref="AzureADUserSync/Resources/Schemas/GroupDetailResponse"/>
                                             <con3:schemaElement xmlns:gro="http://www.sita.aero/grouplist">gro:Group</con3:schemaElement>
@@ -138,27 +145,44 @@
                                             <con3:index-variable>index</con3:index-variable>
                                             <con3:total-variable>count</con3:total-variable>
                                             <con3:actions>
+                                                <con1:log>
+                                                    <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7e93</con2:id>
+                                                    <con2:disabled>true</con2:disabled>
+                                                    <con1:logLevel>warning</con1:logLevel>
+                                                    <con1:expr>
+                                                        <con2:xqueryText>$value/grpl:displayName/text()</con2:xqueryText>
+                                                    </con1:expr>
+                                                    <con1:message>&lt;&lt; Group Name >></con1:message>
+                                                </con1:log>
                                                 <con3:assign varName="GrpCnt">
                                                     <con2:id>_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7f11</con2:id>
                                                     <con3:expr>
-                                                        <con2:xqueryText>if($value/grpl:displayName/text()='AZR-AG-ALL Comnet-DYN-Security') then (xs:int($GrpCnt)+1)
-else if($value/grpl:displayName/text()='AZR-AG-All ERM Externals-DYN-Security-Group') then (xs:int($GrpCnt)+1)
-else if($value/grpl:displayName/text()='AZR-AG-All JV_Aviareto-DYN-Security-Group') then (xs:int($GrpCnt)+1)
-else if($value/grpl:displayName/text()='AZR-AG-All JV_Champs-DYN-Security-Group') then (xs:int($GrpCnt)+1)
-else if($value/grpl:displayName/text()='AZR-AG-All JV_OnAir-DYN-Security-Group') then (xs:int($GrpCnt)+1)
-else if($value/grpl:displayName/text()='AZR-AG-All Permanents-DYN-Security-Group') then (xs:int($GrpCnt)+1)
-else if($value/grpl:displayName/text()='AZR-AG-All Permanents Includes the JV (SITAOnAir)-DYN-Security-Group') then (xs:int($GrpCnt)+1)
-else if($value/grpl:displayName/text()='AZR-AG-All Third Party Externals-DYN-Security-Group') then (xs:int($GrpCnt)+1)
-else ('INACTIVE')</con2:xqueryText>
+                                                        <con2:xqueryText>if($value/grpl:displayName/text()='AZR-AG-ALL Comnet-DYN-Security') then (xs:integer($GrpCnt)+1)
+else if($value/grpl:displayName/text()='AZR-AG-All ERM Externals-DYN-Security-Group') then (xs:integer($GrpCnt)+1)
+else if($value/grpl:displayName/text()='AZR-AG-All JV_Aviareto-DYN-Security-Group') then (xs:integer($GrpCnt)+1)
+else if($value/grpl:displayName/text()='AZR-AG-All JV_Champs-DYN-Security-Group') then (xs:integer($GrpCnt)+1)
+else if($value/grpl:displayName/text()='AZR-AG-All JV_OnAir-DYN-Security-Group') then (xs:integer($GrpCnt)+1)
+else if($value/grpl:displayName/text()='AZR-AG-All Permanents-DYN-Security-Group') then (xs:integer($GrpCnt)+1)
+else if($value/grpl:displayName/text()='AZR-AG-All Permanents Includes the JV (SITAOnAir)-DYN-Security-Group') then (xs:integer($GrpCnt)+1)
+else if($value/grpl:displayName/text()='AZR-AG-All Third Party Externals-DYN-Security-Group') then (xs:integer($GrpCnt)+1)
+else(xs:integer($GrpCnt)+0)</con2:xqueryText>
                                                     </con3:expr>
                                                 </con3:assign>
                                             </con3:actions>
                                         </con3:foreach>
+                                        <con1:log>
+                                            <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7ef9</con2:id>
+                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:expr>
+                                                <con2:xqueryText>$GrpCnt</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:message>&lt;&lt; Group Counter >></con1:message>
+                                        </con1:log>
                                         <con3:ifThenElse>
                                             <con2:id>_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7f02</con2:id>
                                             <con3:case id="_BranchId-a013dc6.498af3ce.0.1661a1da01c.N7f01">
                                                 <con3:condition>
-                                                    <con2:xqueryText>$GrpCnt>0</con2:xqueryText>
+                                                    <con2:xqueryText>xs:integer($GrpCnt)>0</con2:xqueryText>
                                                 </con3:condition>
                                                 <con3:actions/>
                                             </con3:case>

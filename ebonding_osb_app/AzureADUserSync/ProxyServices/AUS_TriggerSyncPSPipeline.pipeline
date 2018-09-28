@@ -22,8 +22,7 @@
                         <con1:expr>
                             <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('DELTALINK'),
-'SELECT DELTALINK FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS)'
-)/DELTALINK/text()</con2:xqueryText>
+'SELECT DELTALINK FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS) AND STATUS=?','PROCESSED')/DELTALINK/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con2:assign varName="BatchId" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
@@ -42,6 +41,7 @@ xs:QName('BATCHID'),
                 <con:context>
                     <con1:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateAUSTransaction" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
                 </con:context>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con2:assign varName="Status">
                         <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7c1c</con5:id>

@@ -27,12 +27,15 @@
                      <xsd:element name="resourceProvisioningOptions" minOccurs="0" type="xsd:string"/>
                      <xsd:element name="creationOptions" minOccurs="0" type="xsd:string"/>
                      <xsd:element name="resourceBehaviorOptions" maxOccurs="unbounded" minOccurs="0" type="xsd:string"/>
+                     <xsd:element name="_odata.type" type="xsd:string"/>
+                     <xsd:element name="_odata.context" type="xsd:string"/>
+                     
                   </xsd:sequence>
-                  <xsd:attribute name="odata.type" type="xsd:string"/>
+                  
                </xsd:complexType>
             </xsd:element>
          </xsd:sequence>
-         <xsd:attribute name="odata.context" type="xsd:string"/>
+         
       </xsd:complexType>
    </xsd:element>
 <xsd:annotation xmlns="">

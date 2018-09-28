@@ -278,6 +278,7 @@ else('INPROGRESS')</con1:xqueryText>
                             <con5:actions>
                                 <con2:assign varName="StartTranId" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
                                     <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7f64</con6:id>
+                                    <con6:disabled xmlns:con6="http://www.bea.com/wli/sb/stages/config">true</con6:disabled>
                                     <con2:expr>
                                         <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
@@ -286,12 +287,14 @@ xs:QName('TRANID'),
                                 </con2:assign>
                                 <con2:assign varName="Status" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
                                     <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7f61</con6:id>
+                                    <con6:disabled xmlns:con6="http://www.bea.com/wli/sb/stages/config">true</con6:disabled>
                                     <con2:expr>
                                         <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">'PROCESSED'</con6:xqueryText>
                                     </con2:expr>
                                 </con2:assign>
                                 <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
                                     <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7f99</con6:id>
+                                    <con6:disabled xmlns:con6="http://www.bea.com/wli/sb/stages/config">true</con6:disabled>
                                     <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                     <con3:operation>merge</con3:operation>
                                     <con3:outboundTransform>
