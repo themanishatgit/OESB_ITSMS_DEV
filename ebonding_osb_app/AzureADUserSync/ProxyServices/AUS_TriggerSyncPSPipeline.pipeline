@@ -14,76 +14,63 @@
     </con:coreEntry>
     <con:router errorHandler="error-a013dc6.6b442a62.0.165f6e56565.N7bf9">
         <con:pipeline type="request" name="request-a013dc6.6b442a62.0.165f6e56565.N8000">
-            <con:stage id="_StageId-a013dc6.6b442a62.0.165f6e56565.N7ffe" name="GetDeltaLinkFromDB">
-                <con:context/>
+            <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7db1" name="CheckProcessedFlag" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con:context>
+                    <con1:userNsDecl prefix="ser" namespace="http://www.ca.com/UnicenterServicePlus/ServiceDesk" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
                 <con:actions>
-                    <con1:assign varName="DeltaLink">
-                        <con2:id>_ActionId-a013dc6.6b442a62.0.165f6e56565.N7fea</con2:id>
-                        <con1:expr>
-                            <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
-xs:QName('DELTALINK'),
-'SELECT DELTALINK FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS) AND STATUS=?','PROCESSED')/DELTALINK/text()</con2:xqueryText>
-                        </con1:expr>
-                    </con1:assign>
-                    <con2:assign varName="BatchId" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.6b442a62.0.165f6e56565.N7cf8</con1:id>
+                    <con2:assign varName="LastBatchStatus">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7db0</con6:id>
                         <con2:expr>
-                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
-xs:QName('BATCHID'),
-'select AUS_BATCH_ID_SEQ.nextval from dual')//NEXTVAL/text()</con1:xqueryText>
+                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('STATUS'),
+'SELECT STATUS FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS WHERE DELTALINK IS NOT NULL)'
+)/STATUS/text()</con6:xqueryText>
                         </con2:expr>
                     </con2:assign>
+                    <con5:log>
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7daf</con6:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con1:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$LastBatchStatus</con1:xqueryText>
+                        </con5:expr>
+                        <con5:message>****AUS_TriggerSyncPS.LastBatchStatus****</con5:message>
+                    </con5:log>
+                    <con2:ifThenElse>
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7dae</con6:id>
+                        <con2:case id="_BranchId-a013dc6.3d18e46e.0.1661baa6a7b.N7dad">
+                            <con2:condition>
+                                <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$LastBatchStatus='INPROGRESS' or $LastBatchStatus='PROCESSED'</con6:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con1:reply xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                                    <con6:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7dac</con6:id>
+                                </con1:reply>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default>
+                            <con6:assign varName="DeltaLink" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dc6.6b442a62.0.165f6e56565.N7fea</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('DELTALINK'),
+'SELECT DELTALINK FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS) AND STATUS=?','PROCESSED')/DELTALINK/text()</con2:xqueryText>
+                                </con1:expr>
+                            </con6:assign>
+                            <con2:assign varName="BatchId" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.6b442a62.0.165f6e56565.N7cf8</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('BATCHID'),
+'select AUS_BATCH_ID_SEQ.nextval from dual')//NEXTVAL/text()</con1:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                        </con2:default>
+                    </con2:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-a013dc6.6b442a62.0.165f6e56565.N7fff">
-            <con:stage id="_StageId-a013dc6.498af3ce.0.1661a1da01c.N7c1d" name="UpdateAUSTransaction" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
-                <con:context>
-                    <con1:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateAUSTransaction" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
-                </con:context>
-                <con:disabled>true</con:disabled>
-                <con:actions>
-                    <con2:assign varName="Status">
-                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7c1c</con5:id>
-                        <con2:expr>
-                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">'INPROGRESS'</con5:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
-                    <con5:assign varName="TranId" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
-                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7c17</con6:id>
-                        <con2:expr>
-                            <con1:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
-xs:QName('TRANID'),
-'select AUS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text()</con1:xqueryText>
-                        </con2:expr>
-                    </con5:assign>
-                    <con3:route>
-                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7c1b</con5:id>
-                        <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
-                        <con3:outboundTransform>
-                            <con2:replace contents-only="true" varName="body">
-                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7c1a</con5:id>
-                                <con2:location>
-                                    <con1:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
-                                </con2:location>
-                                <con2:expr>
-                                    <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config"><![CDATA[<upd:AusTransactionsCollection>
-    <upd:AusTransactions>
-        <upd:nextLink>START</upd:nextLink>
-        <upd:creationTime>{fn:current-dateTime()}</upd:creationTime>
-        <upd:batchId>{$BatchId}</upd:batchId>
-        <upd:transactionId>{$TranId}</upd:transactionId>
-        <upd:status>{$Status}</upd:status>
-        <upd:machineName>{fn-bea:getHostname()}</upd:machineName>
-    </upd:AusTransactions>
-</upd:AusTransactionsCollection>]]></con5:xqueryText>
-                                </con2:expr>
-                            </con2:replace>
-                        </con3:outboundTransform>
-                    </con3:route>
-                </con:actions>
-            </con:stage>
             <con:stage id="_StageId-a013dc6.6b442a62.0.165f6e56565.N7ffd" name="PublishToSyncService">
                 <con:context>
                     <con2:userNsDecl prefix="get" namespace="http://www.sita.aero/GetAccessTokenBS_GetToken_response"/>
