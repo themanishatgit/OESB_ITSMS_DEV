@@ -54,7 +54,7 @@ xs:QName('STATUS'),
                                 <con1:expr>
                                     <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('DELTALINK'),
-'SELECT DELTALINK FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS) AND STATUS=?','PROCESSED')/DELTALINK/text()</con2:xqueryText>
+'SELECT DELTALINK FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS) AND STATUS=?','LOADED')/DELTALINK/text()</con2:xqueryText>
                                 </con1:expr>
                             </con6:assign>
                             <con2:assign varName="BatchId" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
