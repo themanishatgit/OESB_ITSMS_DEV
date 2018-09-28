@@ -239,7 +239,7 @@ else(xs:integer($GrpCnt)+0)</con2:xqueryText>
                                             </con1:location>
                                             <con1:where>last-child</con1:where>
                                             <con1:expr>
-                                                <con2:xqueryText>&lt;tp:user-metadata name='managerId' value='{$InputRequest/AUSSNPublishPSRequest/User/delta:manager_delta/delta:id/text()}' /></con2:xqueryText>
+                                                <con2:xqueryText>&lt;tp:user-metadata name='managerId' value='{$InputRequest/AUSSNPublishPSRequest/User/delta:manager_delta[not(exists(delta:_removed))]/delta:id/text()}' /></con2:xqueryText>
                                             </con1:expr>
                                         </con1:insert>
                                         <con1:log>
