@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="Common/Resources/WSDLs/SendAttachment"/>
+            <con:binding>
+                <con:name>uploadFileBind</con:name>
+                <con:namespace>http://www.sita.aero/WSDL/AttachmentV1</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-a013dca.6d45f095.0.165f5cc4ff7.N7cd4">
+        <con:pipeline type="error" name="error-a013dca.136577ea.0.165fb597373.N7dbf">
+            <con:stage id="_StageId-a013dca.136577ea.0.165fb597373.N7dbe" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.136577ea.0.165fb597373.N7d8a</con4:id>
+                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:expr>
+                            <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$fault</con2:xqueryText>
+                        </con1:expr>
+                        <con1:message>FAult:</con1:message>
+                    </con3:log>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dca.6d45f095.0.165f5cc4ff7.N7f35">
+            <con:stage id="_StageId-a013dca.6d45f095.0.165f5cc4ff7.N7f33" name="Response_Stg">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dca.6d45f095.0.165f5cc4ff7.N7cd4">
+            <con:stage id="_StageId-a013dca.6d45f095.0.165f5cc4ff7.N7cd3" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ca0</con4:id>
+                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:expr>
+                            <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$fault</con2:xqueryText>
+                        </con1:expr>
+                        <con1:message>FAult:</con1:message>
+                    </con3:log>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-a013dca.6d45f095.0.165f5cc4ff7.N7f36">
+            <con:stage id="_StageId-a013dca.6d45f095.0.165f5cc4ff7.N7c62" name="SNGetRecords_Stg">
+                <con:context>
+                    <con1:userNsDecl prefix="inc" namespace="http://www.service-now.com/incident"/>
+                </con:context>
+                <con:actions>
+                    <con4:log>
+                        <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7d30</con1:id>
+                        <con4:logLevel>warning</con4:logLevel>
+                        <con4:expr>
+                            <con1:xqueryText>$body</con1:xqueryText>
+                        </con4:expr>
+                        <con4:message>BODY:</con4:message>
+                    </con4:log>
+                    <con4:log>
+                        <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7d2d</con1:id>
+                        <con4:logLevel>warning</con4:logLevel>
+                        <con4:expr>
+                            <con1:xqueryText>$Attachment</con1:xqueryText>
+                        </con4:expr>
+                        <con4:message>ATTACHMENT</con4:message>
+                    </con4:log>
+                    <con4:log>
+                        <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7d2a</con1:id>
+                        <con4:logLevel>warning</con4:logLevel>
+                        <con4:expr>
+                            <con1:xqueryText>$Inbound</con1:xqueryText>
+                        </con4:expr>
+                        <con4:message>INBOUND:</con4:message>
+                    </con4:log>
+                    <con2:assign varName="IncomingRequest">
+                        <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7f9b</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:ifThenElse>
+                        <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7c61</con1:id>
+                        <con2:case id="_BranchId-a013dca.6d45f095.0.165f5cc4ff7.N7c60">
+                            <con2:condition>
+                                <con1:xqueryText>$body/UploadFileRequestMessage/DestinationSystem/text() = 'SN'</con1:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con2:wsCallout xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                                    <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ec4</con1:id>
+                                    <con2:service ref="Common/BusinessServices/SNGetRecordsReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con2:operation>getRecords</con2:operation>
+                                    <con2:request>
+                                        <con2:body wrapped="false">GetRecordsRequest</con2:body>
+                                    </con2:request>
+                                    <con2:response>
+                                        <con2:body wrapped="false">GetRecordsResponse</con2:body>
+                                    </con2:response>
+                                    <con2:requestTransform>
+                                        <con2:assign varName="GetRecordsRequest">
+                                            <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ec3</con1:id>
+                                            <con2:expr>
+                                                <con1:xqueryText>&lt;inc:getRecords>
+         &lt;number>{$body/UploadFileRequestMessage/TicketNumber/text()}&lt;/number>      
+&lt;/inc:getRecords></con1:xqueryText>
+                                            </con2:expr>
+                                        </con2:assign>
+                                    </con2:requestTransform>
+                                    <con2:responseTransform>
+                                        <con3:log>
+                                            <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ec2</con1:id>
+                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:expr>
+                                                <con1:xqueryText>$GetRecordsResponse</con1:xqueryText>
+                                            </con3:expr>
+                                            <con3:message>GetRecordsResponse</con3:message>
+                                        </con3:log>
+                                    </con2:responseTransform>
+                                </con2:wsCallout>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default/>
+                    </con2:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="SendAttachment_PP">
+                <con:request>request-a013dca.6d45f095.0.165f5cc4ff7.N7f36</con:request>
+                <con:response>response-a013dca.6d45f095.0.165f5cc4ff7.N7f35</con:response>
+            </con:pipeline-node>
+            <con:route-node name="SendAttachment_RN" error-handler="error-a013dca.136577ea.0.165fb597373.N7dbf">
+                <con:context>
+                    <con1:userNsDecl prefix="bipe" namespace="http://www.obs.com/bipe_att"/>
+                </con:context>
+                <con:actions>
+                    <con3:dynamic-route>
+                        <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7b90</con1:id>
+                        <con3:service>
+                            <con1:xqueryText><![CDATA[if($body/UploadFileRequestMessage/DestinationSystem/text() = 'SN')
+then(
+<ctx:route>
+<ctx:service isProxy="false">Common/BusinessServices/SNSendAttachmentReqHTTPBS</ctx:service>
+<ctx:operation>SendAttachment</ctx:operation>
+</ctx:route>
+)
+else if($body/UploadFileRequestMessage/DestinationSystem/text() = 'OCEANE') then (
+<ctx:route>
+<ctx:service isProxy="false">Common/BusinessServices/OceaneSendAttachmentReqHTTPBS</ctx:service>
+<ctx:operation>sendFile</ctx:operation>
+</ctx:route>
+)
+else()]]></con1:xqueryText>
+                        </con3:service>
+                        <con3:outboundTransform>
+                            <con2:ifThenElse>
+                                <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7b40</con1:id>
+                                <con2:case id="_BranchId-a013dca.6d45f095.0.165f5cc4ff7.N7b3f">
+                                    <con2:condition>
+                                        <con1:xqueryText>$body/UploadFileRequestMessage/DestinationSystem/text() = 'SN'</con1:xqueryText>
+                                    </con2:condition>
+                                    <con2:actions>
+                                        <con5:insert varName="outbound" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7b09</con2:id>
+                                            <con4:location>
+                                                <con2:xpathText>./ctx:transport/ctx:request</con2:xpathText>
+                                            </con4:location>
+                                            <con4:where>last-child</con4:where>
+                                            <con4:expr>
+                                                <con2:xqueryText>&lt;tp:user-metadata name='file_name' value='{$body/UploadFileRequestMessage/Filename/text()}' /></con2:xqueryText>
+                                            </con4:expr>
+                                        </con5:insert>
+                                        <con4:replace varName="body" contents-only="true" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ad5</con2:id>
+                                            <con3:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con3:location>
+                                            <con3:expr>
+                                                <con2:xqueryText>$attachments/ctx:attachment/ctx:body/*[1]</con2:xqueryText>
+                                            </con3:expr>
+                                        </con4:replace>
+                                        <con5:insert varName="outbound" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ad2</con2:id>
+                                            <con4:location>
+                                                <con2:xpathText>./ctx:transport/ctx:request</con2:xpathText>
+                                            </con4:location>
+                                            <con4:where>last-child</con4:where>
+                                            <con4:expr>
+                                                <con2:xqueryText>&lt;tp:user-metadata name='table_name' value='{$GetRecordsResponse/getRecordsResult/sys_class_name/text()}' /></con2:xqueryText>
+                                            </con4:expr>
+                                        </con5:insert>
+                                        <con5:insert varName="outbound" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7acf</con2:id>
+                                            <con4:location>
+                                                <con2:xpathText>./ctx:transport/ctx:request</con2:xpathText>
+                                            </con4:location>
+                                            <con4:where>last-child</con4:where>
+                                            <con4:expr>
+                                                <con2:xqueryText>&lt;tp:user-metadata name='table_sys_id' value='{$GetRecordsResponse/getRecordsResult/sys_id/text()}' /></con2:xqueryText>
+                                            </con4:expr>
+                                        </con5:insert>
+                                        <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7acc</con2:id>
+                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:expr>
+                                                <con2:xqueryText>$body</con2:xqueryText>
+                                            </con3:expr>
+                                            <con3:message>BodySN:</con3:message>
+                                        </con3:log>
+                                        <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ac9</con2:id>
+                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:expr>
+                                                <con2:xqueryText>$outbound</con2:xqueryText>
+                                            </con3:expr>
+                                            <con3:message>Outbound:</con3:message>
+                                        </con3:log>
+                                    </con2:actions>
+                                </con2:case>
+                                <con2:case id="_BranchId-a013dca.6d45f095.0.165f5cc4ff7.N7b3d">
+                                    <con2:condition>
+                                        <con1:xqueryText>$body/UploadFileRequestMessage/DestinationSystem/text() = 'OCEANE'</con1:xqueryText>
+                                    </con2:condition>
+                                    <con2:actions>
+                                        <con2:ifThenElse>
+                                            <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7d35</con1:id>
+                                            <con2:case id="_BranchId-a013dca.7227ab93.0.165fc2c957e.N7d34">
+                                                <con2:condition>
+                                                    <con1:xqueryText>fn:exists($attachments/ctx:attachment/ctx:body/*[1])</con1:xqueryText>
+                                                </con2:condition>
+                                                <con2:actions>
+                                                    <con2:javaCallout varName="AttachmentPayload">
+                                                        <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7a92</con1:id>
+                                                        <con2:archive ref="Common/Resources/Jar/utils"/>
+                                                        <con2:className>aero.sita.utilities.Utility</con2:className>
+                                                        <con2:method>public static java.lang.String encodeBase64([B)</con2:method>
+                                                        <con2:expr>
+                                                            <con1:xqueryText>$attachments/ctx:attachment/ctx:body/*[1]</con1:xqueryText>
+                                                        </con2:expr>
+                                                        <con2:return-param-as-ref>false</con2:return-param-as-ref>
+                                                    </con2:javaCallout>
+                                                </con2:actions>
+                                            </con2:case>
+                                            <con2:default/>
+                                        </con2:ifThenElse>
+                                        <con3:replace contents-only="true" varName="body" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7a5d</con2:id>
+                                            <con3:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con3:location>
+                                            <con3:expr>
+                                                <con2:xqueryText><![CDATA[<bipe:sendFile>   
+         <bipe:file_type>{$body/UploadFileRequestMessage/FileType/text()}</bipe:file_type>
+         <bipe:file_name>{$body/UploadFileRequestMessage/Filename/text()}</bipe:file_name>        
+         <bipe:payload>{$AttachmentPayload}</bipe:payload>     
+         <bipe:record_num>{$body/UploadFileRequestMessage/ExternalRefNumber/text()}</bipe:record_num>
+ </bipe:sendFile>]]></con2:xqueryText>
+                                            </con3:expr>
+                                        </con3:replace>
+                                        <con2:replace varName="attachments" contents-only="true">
+                                            <con1:id>_ActionId-a000004.299a2d36.4.1660aa97c0d.N7ffd</con1:id>
+                                            <con2:location>
+                                                <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">.</con:xpathText>
+                                            </con2:location>
+                                            <con2:expr>
+                                                <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">''</con:xqueryText>
+                                            </con2:expr>
+                                        </con2:replace>
+                                        <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7a5a</con2:id>
+                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:expr>
+                                                <con2:xqueryText>$outbound</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:message>Outbound</con1:message>
+                                        </con1:log>
+                                        <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                                            <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N79f1</con2:id>
+                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:expr>
+                                                <con2:xqueryText>$body</con2:xqueryText>
+                                            </con3:expr>
+                                            <con3:message>BodyOCEANE:</con3:message>
+                                        </con3:log>
+                                        <con4:log>
+                                            <con1:id>_ActionId-a000004.299a2d36.2.1660aa0dfc0.N7ff7</con1:id>
+                                            <con4:logLevel>warning</con4:logLevel>
+                                            <con4:expr>
+                                                <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$attachments</con:xqueryText>
+                                            </con4:expr>
+                                            <con4:message>BodyAttachment:</con4:message>
+                                        </con4:log>
+                                    </con2:actions>
+                                </con2:case>
+                                <con2:default/>
+                            </con2:ifThenElse>
+                        </con3:outboundTransform>
+                        <con3:responseTransform>
+                            <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N79bc</con2:id>
+                                <con3:logLevel>warning</con3:logLevel>
+                                <con3:expr>
+                                    <con2:xqueryText>concat('HTTP Response Code : ',$outbound/ctx:transport/ctx:response/http:http-response-code/text(),
+'~ Response Code : ',$outbound/ctx:transport/ctx:response/tp:response-code/text(),
+'~ Response Message : ',$outbound/ctx:transport/ctx:response/tp:response-message/text())</con2:xqueryText>
+                                </con3:expr>
+                                <con3:message>Response Received</con3:message>
+                            </con3:log>
+                            <con2:ifThenElse>
+                                <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N76c6</con1:id>
+                                <con2:case id="_BranchId-a013dca.6d45f095.0.165f5cc4ff7.N76c5">
+                                    <con2:condition>
+                                        <con1:xqueryText>$IncomingRequest/UploadFileRequestMessage/DestinationSystem/text() = 'SN'</con1:xqueryText>
+                                    </con2:condition>
+                                    <con2:actions>
+                                        <con2:replace contents-only="true" varName="body">
+                                            <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N76cf</con1:id>
+                                            <con2:location>
+                                                <con1:xpathText>.</con1:xpathText>
+                                            </con2:location>
+                                            <con2:expr>
+                                                <con1:xqueryText><![CDATA[if($outbound/ctx:transport/ctx:response/http:http-response-code/text()='201')then
+  <UploadFileResponseMessage>
+         <Status>Success</Status>
+         <Description>Attachment Request Accepted Successfully</Description>
+      </UploadFileResponseMessage>
+else(<UploadFileResponseMessage>
+         <Status>Failure</Status>
+         <Description>Technical Failure</Description>
+      </UploadFileResponseMessage>)]]></con1:xqueryText>
+                                            </con2:expr>
+                                        </con2:replace>
+                                    </con2:actions>
+                                </con2:case>
+                                <con2:case id="_BranchId-a013dca.7227ab93.0.165fc2c957e.N7f2d">
+                                    <con2:condition>
+                                        <con1:xqueryText>$IncomingRequest/UploadFileRequestMessage/DestinationSystem/text() = 'OCEANE'</con1:xqueryText>
+                                    </con2:condition>
+                                    <con2:actions>
+                                        <con2:replace contents-only="true" varName="body">
+                                            <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7f2f</con1:id>
+                                            <con2:location>
+                                                <con1:xpathText>.</con1:xpathText>
+                                            </con2:location>
+                                            <con2:expr>
+                                                <con1:xqueryText><![CDATA[<UploadFileResponseMessage>
+         <Status>Success</Status>
+         <Description>Attachment Request Accepted Successfully</Description>
+      </UploadFileResponseMessage>]]></con1:xqueryText>
+                                            </con2:expr>
+                                        </con2:replace>
+                                    </con2:actions>
+                                </con2:case>
+                                <con2:default/>
+                            </con2:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:dynamic-route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>
