@@ -51,6 +51,34 @@
                     </con5:assign>
                 </con:actions>
             </con:stage>
+            <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7c95" name="CheckCurrentBatchStatus">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="CurrentBatchStatus">
+                        <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7c92</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('STATUS_CNT'),
+'SELECT COUNT(STATUS) STATUS_CNT FROM AUS_TRANSACTIONS WHERE STATUS=? AND BATCH_ID =?','ERROR',$BatchId
+)/STATUS_CNT/text()</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7c8b</con2:id>
+                        <con3:case id="_BranchId-a013dc6.3d18e46e.0.1661baa6a7b.N7c8a">
+                            <con3:condition>
+                                <con2:xqueryText>xs:integer($CurrentBatchStatus)=0</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions/>
+                        </con3:case>
+                        <con3:default>
+                            <con2:reply isError="true">
+                                <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7b9f</con2:id>
+                            </con2:reply>
+                        </con3:default>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
             <con:stage id="_StageId-a013dc6.460d90c.0.1660b304c78.N7fa8" name="CheckGroup.Stg">
                 <con:context>
                     <con2:userNsDecl prefix="grpl" namespace="http://www.sita.aero/grouplist"/>
@@ -415,7 +443,7 @@ else(xs:integer($GrpCnt)+0)</con2:xqueryText>
         <upd:batchId>{$BatchId}</upd:batchId>
         <upd:creationTime>{fn:current-dateTime()}</upd:creationTime>
         <upd:errCode>{$fault/ctx:errorCode/text()}</upd:errCode>
-        <upd:errMsg>{concat('AUS_SNPublishSyncPS~',$fault/ctx:reason/text(),'~',fn-bea:serialize($fault))}</upd:errMsg>
+        <upd:errMsg>{concat('Reason->',$fault/ctx:reason/text(),'~Fault->',fn-bea:serialize($fault))}</upd:errMsg>
         <upd:snRequest>{$SNRequest}</upd:snRequest>
         <upd:snResponse>{$SNResponse}</upd:snResponse>
     </upd:AusSnTransactions>

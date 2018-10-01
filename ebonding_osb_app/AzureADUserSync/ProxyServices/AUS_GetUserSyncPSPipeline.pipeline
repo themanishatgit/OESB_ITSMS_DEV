@@ -190,6 +190,29 @@ else()</con2:xqueryText>
                                         <con1:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7fc4</con1:id>
                                         <con3:service ref="AzureADUserSync/BusinessServices/PushToAUS_SNPublishQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                         <con3:outboundTransform>
+                                            <con3:assign varName="CurrentBatchStatus" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7b6b</con2:id>
+                                                <con3:expr>
+                                                    <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('STATUS_CNT'),
+'SELECT COUNT(STATUS) STATUS_CNT FROM AUS_TRANSACTIONS WHERE STATUS=? AND BATCH_ID =?','ERROR',$BatchId
+)/STATUS_CNT/text()</con2:xqueryText>
+                                                </con3:expr>
+                                            </con3:assign>
+                                            <con3:ifThenElse xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7b2c</con2:id>
+                                                <con3:case id="_BranchId-a013dc6.3d18e46e.0.1661baa6a7b.N7b2b">
+                                                    <con3:condition>
+                                                        <con2:xqueryText>xs:integer($CurrentBatchStatus)=0</con2:xqueryText>
+                                                    </con3:condition>
+                                                    <con3:actions/>
+                                                </con3:case>
+                                                <con3:default>
+                                                    <con2:reply isError="true">
+                                                        <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7b29</con2:id>
+                                                    </con2:reply>
+                                                </con3:default>
+                                            </con3:ifThenElse>
                                             <con2:replace contents-only="true" varName="body">
                                                 <con1:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7fc1</con1:id>
                                                 <con2:location>
@@ -275,7 +298,7 @@ else('INPROGRESS')</con1:xqueryText>
                             <con5:condition>
                                 <con2:xqueryText>xs:int($UserCount)=0 and fn:exists($DeltaLink)</con2:xqueryText>
                             </con5:condition>
-                            <con5:actions></con5:actions>
+                            <con5:actions/>
                         </con5:case>
                         <con5:default>
                             <con3:route>
