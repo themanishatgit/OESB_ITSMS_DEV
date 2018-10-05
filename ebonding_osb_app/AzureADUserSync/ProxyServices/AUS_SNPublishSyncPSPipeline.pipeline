@@ -13,6 +13,7 @@
                 <con:actions>
                     <con1:log>
                         <con2:id>_ActionId-a013dc6.N2d0d734a.0.165fbf2cec9.N7f97</con2:id>
+                        <con2:disabled>true</con2:disabled>
                         <con1:logLevel>warning</con1:logLevel>
                         <con1:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
@@ -507,7 +508,7 @@ xs:QName('BATCH_STATUS'),
                     <con3:route>
                         <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7f7f</con4:id>
                         <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSSNTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
+                        <con3:operation>insert</con3:operation>
                         <con3:outboundTransform>
                             <con5:assign varName="SNTranId" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
                                 <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7fcd</con6:id>
@@ -605,7 +606,7 @@ xs:QName('TRANID'),
                     <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
                         <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.498af3ce.0.1661a1da01c.N7be0</con5:id>
                         <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSSNTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
+                        <con3:operation>insert</con3:operation>
                         <con3:outboundTransform>
                             <con5:assign varName="SNTranId" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
                                 <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7f99</con6:id>
@@ -627,7 +628,7 @@ xs:QName('TRANID'),
         <upd:batchId>{$BatchId}</upd:batchId>
         <upd:creationTime>{fn:current-dateTime()}</upd:creationTime>
         <upd:errCode>{$fault/ctx:errorCode/text()}</upd:errCode>
-        <upd:errMsg>{concat('Reason->',$fault/ctx:reason/text(),'~Fault->',fn-bea:serialize($fault),'~Outbound->',$outbound)}</upd:errMsg>
+        <upd:errMsg>{concat('Reason->',$fault/ctx:reason/text(),'~Fault->',fn-bea:serialize($fault),'~SNOutboundResponse->',fn-bea:serialize($SNOutboundResponse))}</upd:errMsg>
         <upd:snRequest>{$SNRequest}</upd:snRequest>
         <upd:snResponse>{$SNResponse}</upd:snResponse>
         <upd:inputRequest>{$InputRequest}</upd:inputRequest>
@@ -687,12 +688,41 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                 </con:actions>
             </con:stage>
         </con:pipeline>
+        <con:pipeline type="error" name="error-a013dc6.N32d0779c.0.16644e0ee58.N7f95">
+            <con:stage id="_StageId-a013dc6.N32d0779c.0.16644e0ee58.N7f94" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:log>
+                        <con2:id>_ActionId-a013dc6.N32d0779c.0.16644e0ee58.N7f91</con2:id>
+                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:expr>
+                            <con2:xqueryText>$fault</con2:xqueryText>
+                        </con1:expr>
+                        <con1:message>&lt;&lt; Fault SN_Publish >></con1:message>
+                    </con1:log>
+                    <con1:log>
+                        <con2:id>_ActionId-a013dc6.N32d0779c.0.16644e0ee58.N7f8e</con2:id>
+                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:expr>
+                            <con2:xqueryText>$outbound</con2:xqueryText>
+                        </con1:expr>
+                        <con1:message>&lt;&lt; Outbound SN_Publish >></con1:message>
+                    </con1:log>
+                    <con3:assign varName="SNOutboundResponse">
+                        <con2:id>_ActionId-a013dc6.N32d0779c.0.16644e0ee58.N7ffe</con2:id>
+                        <con3:expr>
+                            <con2:xqueryText>$outbound</con2:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
         <con:flow>
             <con:pipeline-node name="AUS_SNPublishSync_PP">
                 <con:request>request-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9d</con:request>
                 <con:response>response-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9c</con:response>
             </con:pipeline-node>
-            <con:route-node name="AUS_SNPublish_RN">
+            <con:route-node name="AUS_SNPublish_RN" error-handler="error-a013dc6.N32d0779c.0.16644e0ee58.N7f95">
                 <con:context/>
                 <con:actions>
                     <con3:ifThenElse>

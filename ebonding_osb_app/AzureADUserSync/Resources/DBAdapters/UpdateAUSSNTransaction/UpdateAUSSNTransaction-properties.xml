@@ -19,8 +19,8 @@
    <entry key="AUS_SN_TRANSACTIONS.SN_RESPONSE:db_column_not_null">false</entry>
    <entry key="AUS_SN_TRANSACTIONS.CREATION_TIME:db_column_type">TIMESTAMP</entry>
    <entry key="AUS_SN_TRANSACTIONS:db_table_type">TABLE</entry>
-   <entry key="AUS_SN_TRANSACTIONS.TRAN_ID:db_column_precision">38</entry>
    <entry key="AUS_SN_TRANSACTIONS.SN_RESPONSE:db_column_size">4000</entry>
+   <entry key="AUS_SN_TRANSACTIONS.TRAN_ID:db_column_precision">38</entry>
    <entry key="AUS_SN_TRANSACTIONS.SN_REQUEST:db_column_type">VARCHAR2</entry>
    <entry key="AUS_SN_TRANSACTIONS.PARENT_TRAN_ID:db_column_not_null">false</entry>
    <entry key="AUS_SN_TRANSACTIONS.CREATION_TIME:db_column_not_null">false</entry>

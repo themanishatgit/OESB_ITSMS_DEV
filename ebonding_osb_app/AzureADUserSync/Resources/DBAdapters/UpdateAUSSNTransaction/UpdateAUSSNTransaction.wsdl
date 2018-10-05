@@ -21,8 +21,9 @@
         <wsdl:part name="AusSnTransactionsCollection" element="top:AusSnTransactionsCollection"/>
     </wsdl:message>
     <wsdl:portType name="UpdateAUSSNTransaction_ptt">
-        <wsdl:operation name="merge">
+        <wsdl:operation name="insert">
             <wsdl:input message="tns:AusSnTransactionsCollection_msg"/>
+            <wsdl:output message="tns:AusSnTransactionsCollection_msg"/>
         </wsdl:operation>
     </wsdl:portType>
 </wsdl:definitions>
