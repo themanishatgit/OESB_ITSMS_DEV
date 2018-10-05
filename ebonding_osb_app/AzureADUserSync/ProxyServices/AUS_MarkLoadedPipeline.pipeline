@@ -53,13 +53,36 @@ xs:QName('TRANID'),
                                     <con2:xpathText>.</con2:xpathText>
                                 </con5:location>
                                 <con5:expr>
-                                    <con2:xqueryText><![CDATA[<upd:AusTransactionsCollection>
-    <upd:AusTransactions>
-        <upd:transactionId>{$TranId}</upd:transactionId>
-        <upd:status>{$Status}</upd:status>
-        <upd:updatedAt>{fn:current-dateTime()}</upd:updatedAt>
-    </upd:AusTransactions>
-</upd:AusTransactionsCollection>]]></con2:xqueryText>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="AzureADUserSync/Resources/XQueries/UpdateAUSTransactionRequest"/>
+                                        <con2:param name="DeltaLink">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Status">
+                                            <con2:path>$Status</con2:path>
+                                        </con2:param>
+                                        <con2:param name="NextLink">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrMsg">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="UserCount">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="BatchId">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Payload">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TranId">
+                                            <con2:path>$TranId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrCode">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
                                 </con5:expr>
                             </con5:replace>
                         </con3:outboundTransform>
