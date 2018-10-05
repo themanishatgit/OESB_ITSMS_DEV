@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="root_descriptor_alias">AUS_SN_TRANSACTIONS</entry>
+   <entry key="AUS_SN_TRANSACTIONS.TRAN_ID:db_column_not_null">true</entry>
+   <entry key="AUS_SN_TRANSACTIONS.PARENT_TRAN_ID:db_column_type">NUMBER</entry>
+   <entry key="AUS_SN_TRANSACTIONS.BATCH_ID:db_column_type">NUMBER</entry>
+   <entry key="AUS_SN_TRANSACTIONS.ERR_CODE:db_column_type">VARCHAR2</entry>
+   <entry key="AUS_SN_TRANSACTIONS.SN_REQUEST:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.BATCH_ID:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.PARENT_TRAN_ID:db_column_precision">38</entry>
+   <entry key="AUS_SN_TRANSACTIONS.PARENT_TRAN_ID:db_column_scale">0</entry>
+   <entry key="AUS_SN_TRANSACTIONS.CREATION_TIME:db_column_scale">6</entry>
+   <entry key="AUS_SN_TRANSACTIONS.ERR_CODE:db_column_size">20</entry>
+   <entry key="AUS_SN_TRANSACTIONS.INPUT_REQUEST:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.SN_RESPONSE:db_column_type">VARCHAR2</entry>
+   <entry key="AUS_SN_TRANSACTIONS.ERR_MSG:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.BATCH_ID:db_column_precision">38</entry>
+   <entry key="AUS_SN_TRANSACTIONS.SN_RESPONSE:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.CREATION_TIME:db_column_type">TIMESTAMP</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_table_type">TABLE</entry>
+   <entry key="AUS_SN_TRANSACTIONS.TRAN_ID:db_column_precision">38</entry>
+   <entry key="AUS_SN_TRANSACTIONS.SN_RESPONSE:db_column_size">4000</entry>
+   <entry key="AUS_SN_TRANSACTIONS.SN_REQUEST:db_column_type">VARCHAR2</entry>
+   <entry key="AUS_SN_TRANSACTIONS.PARENT_TRAN_ID:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.CREATION_TIME:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.ERR_MSG:db_column_type">VARCHAR2</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_8">TRAN_ID</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_7">INPUT_REQUEST</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_6">SN_RESPONSE</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_5">SN_REQUEST</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_4">ERR_MSG</entry>
+   <entry key="AUS_SN_TRANSACTIONS.SN_REQUEST:db_column_size">4000</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_3">ERR_CODE</entry>
+   <entry key="AUS_SN_TRANSACTIONS.TRAN_ID:db_column_scale">0</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_2">CREATION_TIME</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_1">BATCH_ID</entry>
+   <entry key="AUS_SN_TRANSACTIONS:db_column_0">PARENT_TRAN_ID</entry>
+   <entry key="AUS_SN_TRANSACTIONS.BATCH_ID:db_column_scale">0</entry>
+   <entry key="AUS_SN_TRANSACTIONS.TRAN_ID:db_column_type">NUMBER</entry>
+   <entry key="AUS_SN_TRANSACTIONS.ERR_CODE:db_column_not_null">false</entry>
+   <entry key="AUS_SN_TRANSACTIONS.ERR_MSG:db_column_size">4000</entry>
+   <entry key="AUS_SN_TRANSACTIONS.INPUT_REQUEST:db_column_type">CLOB</entry>
+</properties>

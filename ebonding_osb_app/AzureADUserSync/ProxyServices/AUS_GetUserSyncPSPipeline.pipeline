@@ -13,6 +13,7 @@
                 <con:actions>
                     <con1:log>
                         <con2:id>_ActionId-a013dc6.6b442a62.0.165f6e56565.N7f00</con2:id>
+                        <con2:disabled>true</con2:disabled>
                         <con1:logLevel>warning</con1:logLevel>
                         <con1:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
@@ -66,6 +67,7 @@ else('')</con2:xqueryText>
                 <con:actions>
                     <con5:log xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.6b442a62.0.165f6e56565.N7e97</con6:id>
+                        <con6:disabled xmlns:con6="http://www.bea.com/wli/sb/stages/config">true</con6:disabled>
                         <con2:logLevel>warning</con2:logLevel>
                         <con2:expr>
                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">concat('NextLink->',$NextLink,'~','DeltaLink->',$DeltaLink)</con6:xqueryText>
@@ -125,6 +127,7 @@ else()</con2:xqueryText>
                             </con3:replace>
                             <con2:log xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.6b442a62.0.165f6e56565.N7dbc</con5:id>
+                                <con5:disabled xmlns:con5="http://www.bea.com/wli/sb/stages/config">true</con5:disabled>
                                 <con2:logLevel>warning</con2:logLevel>
                                 <con2:expr>
                                     <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">$outbound</con3:xqueryText>
@@ -208,8 +211,14 @@ xs:QName('STATUS_CNT'),
                                                     <con3:actions/>
                                                 </con3:case>
                                                 <con3:default>
+                                                    <con3:Error>
+                                                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7ad6</con2:id>
+                                                        <con3:errCode>AUS_ERR002</con3:errCode>
+                                                        <con3:message>Current batch is in ERROR state</con3:message>
+                                                    </con3:Error>
                                                     <con2:reply isError="true">
                                                         <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7b29</con2:id>
+                                                        <con2:disabled>true</con2:disabled>
                                                     </con2:reply>
                                                 </con3:default>
                                             </con3:ifThenElse>
@@ -267,19 +276,36 @@ else('INPROGRESS')</con1:xqueryText>
                                     <con1:xpathText>.</con1:xpathText>
                                 </con2:location>
                                 <con2:expr>
-                                    <con1:xqueryText><![CDATA[<upd:AusTransactionsCollection>
-    <upd:AusTransactions>
-        <upd:nextlink>{$NextLink}</upd:nextlink>
-        <upd:deltalink>{$DeltaLink}</upd:deltalink>
-        <upd:payload>{$DeltaUserResponseJson}</upd:payload>
-        <upd:creationTime>{fn:current-dateTime()}</upd:creationTime>
-        <upd:userCount>{$UserCount}</upd:userCount>
-        <upd:batchId>{$BatchId}</upd:batchId>
-        <upd:transactionId>{$TranId}</upd:transactionId>
-        <upd:status>{$Status}</upd:status>
-        <upd:machineName>{fn-bea:getHostname()}</upd:machineName>
-    </upd:AusTransactions>
-</upd:AusTransactionsCollection>]]></con1:xqueryText>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="AzureADUserSync/Resources/XQueries/UpdateAUSTransactionRequest"/>
+                                        <con1:param name="DeltaLink">
+                                            <con1:path>$DeltaLink</con1:path>
+                                        </con1:param>
+                                        <con1:param name="Status">
+                                            <con1:path>$Status</con1:path>
+                                        </con1:param>
+                                        <con1:param name="NextLink">
+                                            <con1:path>$NextLink</con1:path>
+                                        </con1:param>
+                                        <con1:param name="ErrMsg">
+                                            <con1:path>''</con1:path>
+                                        </con1:param>
+                                        <con1:param name="UserCount">
+                                            <con1:path>$UserCount</con1:path>
+                                        </con1:param>
+                                        <con1:param name="BatchId">
+                                            <con1:path>$BatchId</con1:path>
+                                        </con1:param>
+                                        <con1:param name="Payload">
+                                            <con1:path>$DeltaUserResponseJson</con1:path>
+                                        </con1:param>
+                                        <con1:param name="TranId">
+                                            <con1:path>$TranId</con1:path>
+                                        </con1:param>
+                                        <con1:param name="ErrCode">
+                                            <con1:path>''</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
                                 </con2:expr>
                             </con2:replace>
                         </con3:outboundTransform>
@@ -321,6 +347,7 @@ else('INPROGRESS')</con1:xqueryText>
                                     </con1:replace>
                                     <con4:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
                                         <con2:id>_ActionId-a013dc6.6b442a62.0.165f6e56565.N7c53</con2:id>
+                                        <con2:disabled>true</con2:disabled>
                                         <con4:logLevel>warning</con4:logLevel>
                                         <con4:expr>
                                             <con2:xqueryText>$body</con2:xqueryText>
@@ -344,7 +371,7 @@ else('INPROGRESS')</con1:xqueryText>
                         <con2:id>_ActionId-a013dc6.N4418d23f.0.16614dd0a26.N7f7d</con2:id>
                         <con4:logLevel>error</con4:logLevel>
                         <con4:expr>
-                            <con2:xqueryText>$fault/*</con2:xqueryText>
+                            <con2:xqueryText>concat('Body->',$body,'~Fault->',$fault)</con2:xqueryText>
                         </con4:expr>
                         <con4:message>&lt;&lt; Fault >></con4:message>
                     </con4:log>
@@ -359,20 +386,62 @@ else('INPROGRESS')</con1:xqueryText>
                                     <con2:xpathText>.</con2:xpathText>
                                 </con5:location>
                                 <con5:expr>
-                                    <con2:xqueryText><![CDATA[<upd:AusTransactionsCollection>
-    <upd:AusTransactions>
-        <upd:creationTime>{fn:current-dateTime()}</upd:creationTime>
-        <upd:batchId>{$BatchId}</upd:batchId>
-        <upd:transactionId>{$TranId}</upd:transactionId>
-        <upd:status>ERROR</upd:status>
-        <upd:errCode>{$fault/ctx:errorCode/text()}</upd:errCode>
-        <upd:errMsg>{concat('AUS_GetUserSyncPS~',$fault/ctx:reason/text(),'~',fn-bea:serialize($fault))}</upd:errMsg>
-        <upd:machineName>{fn-bea:getHostname()}</upd:machineName>
-        <upd:updatedAt>{fn:current-dateTime()}</upd:updatedAt>
-    </upd:AusTransactions>
-</upd:AusTransactionsCollection>]]></con2:xqueryText>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="AzureADUserSync/Resources/XQueries/UpdateAUSTransactionRequest"/>
+                                        <con2:param name="DeltaLink">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Status">
+                                            <con2:path>'ERROR'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="NextLink">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrMsg">
+                                            <con2:path>concat('AUS_GetUserSyncPS~',$fault/ctx:reason/text(),'~',fn-bea:serialize($fault))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="UserCount">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="BatchId">
+                                            <con2:path>$BatchId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Payload">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TranId">
+                                            <con2:path>$TranId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrCode">
+                                            <con2:path>$fault/ctx:errorCode/text()</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
                                 </con5:expr>
                             </con5:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con3:route xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7de8</con2:id>
+                        <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:outboundTransform>
+                            <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7de7</con2:id>
+                                <con1:header-set>outbound-request</con1:header-set>
+                                <con1:header value="expression" name="Subject">
+                                    <con2:xqueryText>fn:concat('Error Occurred with AzureADUserSync with Batch ID: ',$BatchId)</con2:xqueryText>
+                                </con1:header>
+                            </con1:transport-headers>
+                            <con1:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7de6</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryText>fn:concat('AzureADUserSync Failed With: 
+Error Code: ',$fault/ctx:errorCode/text(),'
+Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
+                                </con1:expr>
+                            </con1:replace>
                         </con3:outboundTransform>
                     </con3:route>
                     <con2:reply>

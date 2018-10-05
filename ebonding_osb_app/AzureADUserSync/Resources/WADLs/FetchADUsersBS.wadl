@@ -54,7 +54,7 @@
             </response>
          </method>
       </resource>
-      <resource path="/v1.0/users/{userId}/memberOf">
+      <resource path="/v1.0/users/{userId}/memberOf?$select=id,displayName">
          <method name="GET" soa:name="getgrouplist">
             <request>
                <param name="userId" style="template" type="xsd:string"/>

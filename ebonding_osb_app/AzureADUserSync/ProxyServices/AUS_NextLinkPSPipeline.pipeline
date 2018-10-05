@@ -6,7 +6,7 @@
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
     </con:coreEntry>
-    <con:router>
+    <con:router errorHandler="error-a013dc6.N63963d34.0.1663ab9f05c.N7d4b">
         <con:pipeline type="request" name="request-a013dc6.3d18e46e.0.1661baa6a7b.N7c83">
             <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7bdd" name="CheckCurrentBatchStatus" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
                 <con:context/>
@@ -35,8 +35,14 @@ xs:QName('STATUS_CNT'),
                             <con3:actions/>
                         </con3:case>
                         <con3:default>
+                            <con3:Error>
+                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7b3e</con2:id>
+                                <con3:errCode>AUS_ERR002</con3:errCode>
+                                <con3:message>Current batch is in ERROR state</con3:message>
+                            </con3:Error>
                             <con2:reply isError="true">
                                 <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7ba2</con2:id>
+                                <con2:disabled>true</con2:disabled>
                             </con2:reply>
                         </con3:default>
                     </con3:ifThenElse>
@@ -44,6 +50,103 @@ xs:QName('STATUS_CNT'),
             </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-a013dc6.3d18e46e.0.1661baa6a7b.N7c82"/>
+        <con:pipeline type="error" name="error-a013dc6.N63963d34.0.1663ab9f05c.N7d4b">
+            <con:stage id="_StageId-a013dc6.N63963d34.0.1663ab9f05c.N7d07" name="NextLinkPS.ErrHandler.Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con2:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateAUSTransaction"/>
+                </con:context>
+                <con:actions>
+                    <con4:log>
+                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7d06</con2:id>
+                        <con4:logLevel>error</con4:logLevel>
+                        <con4:expr>
+                            <con2:xqueryText>$fault/*</con2:xqueryText>
+                        </con4:expr>
+                        <con4:message>&lt;&lt; Fault >></con4:message>
+                    </con4:log>
+                    <con3:route>
+                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7d05</con2:id>
+                        <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>merge</con3:operation>
+                        <con3:outboundTransform>
+                            <con5:assign varName="TranId" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7c9b</con6:id>
+                                <con2:expr>
+                                    <con1:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('TRANID'),
+'select AUS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text()</con1:xqueryText>
+                                </con2:expr>
+                            </con5:assign>
+                            <con5:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7d04</con2:id>
+                                <con5:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con5:location>
+                                <con5:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="AzureADUserSync/Resources/XQueries/UpdateAUSTransactionRequest"/>
+                                        <con2:param name="DeltaLink">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Status">
+                                            <con2:path>'ERROR'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="NextLink">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrMsg">
+                                            <con2:path>concat('AUS_NextLinkPS~',$fault/ctx:reason/text(),'~',fn-bea:serialize($fault))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="UserCount">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="BatchId">
+                                            <con2:path>$BatchId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Payload">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TranId">
+                                            <con2:path>$TranId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrCode">
+                                            <con2:path>$fault/ctx:errorCode/text()</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con5:expr>
+                            </con5:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con3:route xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7d03</con2:id>
+                        <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:outboundTransform>
+                            <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7d02</con2:id>
+                                <con1:header-set>outbound-request</con1:header-set>
+                                <con1:header value="expression" name="Subject">
+                                    <con2:xqueryText>fn:concat('Error Occurred with AzureADUserSync with Batch ID: ',$BatchId)</con2:xqueryText>
+                                </con1:header>
+                            </con1:transport-headers>
+                            <con1:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7d01</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryText>fn:concat('AzureADUserSync Failed With: 
+Error Code: ',$fault/ctx:errorCode/text(),'
+Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con2:reply>
+                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7d00</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
         <con:flow>
             <con:pipeline-node name="AUS_NextLink_PP">
                 <con:request>request-a013dc6.3d18e46e.0.1661baa6a7b.N7c83</con:request>
