@@ -323,6 +323,51 @@ else(xs:integer($GrpCnt)+0)</con2:xqueryText>
                     </con3:ifThenElse>
                 </con:actions>
             </con:stage>
+            <con:stage id="_StageId-a013dc6.N530c4973.0.1663fb21a3c.N7d73" name="SNPublish.Stg">
+                <con:context/>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con2:id>_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7d69</con2:id>
+                        <con3:case id="_BranchId-a013dc6.N530c4973.0.1663fb21a3c.N7d68">
+                            <con3:condition>
+                                <con2:xqueryText>xs:integer($GrpCnt)>0</con2:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:wsCallout>
+                                    <con2:id>_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7d70</con2:id>
+                                    <con3:service ref="AzureADUserSync/BusinessServices/ServiceNow/SNUserPublishBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:operation>insert</con3:operation>
+                                    <con3:request>
+                                        <con3:body wrapped="false">SNRequest</con3:body>
+                                    </con3:request>
+                                    <con3:response>
+                                        <con3:body wrapped="false">SNResponse</con3:body>
+                                    </con3:response>
+                                    <con3:requestTransform>
+                                        <con3:assign varName="SNRequest">
+                                            <con2:id>_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7cd1</con2:id>
+                                            <con3:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="AzureADUserSync/Resources/XQueries/CreateSNRequest"/>
+                                                    <con2:param name="DeltaUser">
+                                                        <con2:path>$InputRequest/AUSSNPublishPSRequest/User</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="Manager">
+                                                        <con2:path>$GetManagerResponse</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con3:expr>
+                                        </con3:assign>
+                                    </con3:requestTransform>
+                                    <con3:responseTransform/>
+                                </con3:wsCallout>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-a013dc6.N2d0d734a.0.165fbf2cec9.N7f9c">
             <con:stage id="_StageId-a013dc6.460d90c.0.1660b304c78.N7f61" name="UpdateAUSTransaction" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
@@ -593,30 +638,49 @@ xs:QName('TRANID'),
                             </con4:replace>
                         </con3:outboundTransform>
                     </con3:route>
-                    <con3:route xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
-                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7e55</con2:id>
-                        <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:outboundTransform>
-                            <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7e54</con2:id>
-                                <con1:header-set>outbound-request</con1:header-set>
-                                <con1:header value="expression" name="Subject">
-                                    <con2:xqueryText>fn:concat('Error Occurred with AzureADUserSync with Batch ID: ',$BatchId)</con2:xqueryText>
-                                </con1:header>
-                            </con1:transport-headers>
-                            <con1:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7e53</con2:id>
-                                <con1:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con1:location>
-                                <con1:expr>
-                                    <con2:xqueryText>fn:concat('AzureADUserSync Failed With: 
+                    <con2:assign varName="TranIdStatus" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7c3b</con6:id>
+                        <con2:expr>
+                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('TRANIDSTATUS'),
+'SELECT STATUS FROM AUS_TRANSACTIONS WHERE TRANSACTION_ID=?',$TranId)//STATUS/text()</con6:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con5:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7c34</con2:id>
+                        <con5:case id="_BranchId-a013dc6.N530c4973.0.1663fb21a3c.N7c33">
+                            <con5:condition>
+                                <con2:xqueryText>$TranIdStatus='ERROR'</con2:xqueryText>
+                            </con5:condition>
+                            <con5:actions/>
+                        </con5:case>
+                        <con5:default>
+                            <con3:route xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7e55</con2:id>
+                                <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con3:outboundTransform>
+                                    <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7e54</con2:id>
+                                        <con1:header-set>outbound-request</con1:header-set>
+                                        <con1:header value="expression" name="Subject">
+                                            <con2:xqueryText>fn:concat('Error Occurred with AzureADUserSync with Batch ID: ',$BatchId)</con2:xqueryText>
+                                        </con1:header>
+                                    </con1:transport-headers>
+                                    <con1:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                        <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7e53</con2:id>
+                                        <con1:location>
+                                            <con2:xpathText>.</con2:xpathText>
+                                        </con1:location>
+                                        <con1:expr>
+                                            <con2:xqueryText>fn:concat('AzureADUserSync Failed With: 
 Error Code: ',$fault/ctx:errorCode/text(),'
 Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
-                                </con1:expr>
-                            </con1:replace>
-                        </con3:outboundTransform>
-                    </con3:route>
+                                        </con1:expr>
+                                    </con1:replace>
+                                </con3:outboundTransform>
+                            </con3:route>
+                        </con5:default>
+                    </con5:ifThenElse>
                     <con2:reply>
                         <con2:id>_ActionId-a013dc6.N4418d23f.0.16614dd0a26.N7ed4</con2:id>
                     </con2:reply>
