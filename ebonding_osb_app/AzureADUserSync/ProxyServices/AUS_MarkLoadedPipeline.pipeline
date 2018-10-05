@@ -32,7 +32,7 @@
                         <con2:expr>
                             <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'SELECT TRANSACTION_ID FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS WHERE STATUS=?)','PROCESSED'
+'SELECT TRANSACTION_ID FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS WHERE DELTALINK IS NOT NULL AND STATUS=?)','PROCESSED'
 )/TRANSACTION_ID/text()</con1:xqueryText>
                         </con2:expr>
                     </con2:assign>
