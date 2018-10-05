@@ -39,7 +39,6 @@ declare function local:func($BatchId as xs:string,
             {if($ErrCode) then <ns1:errCode>{$ErrCode}</ns1:errCode> else ()}
             {if($ErrMsg) then <ns1:errMsg>{$ErrMsg}</ns1:errMsg> else ()}
             <ns1:machineName>{fn-bea:getHostname()}</ns1:machineName>
-            <ns1:updatedAt>{fn:current-dateTime()}</ns1:updatedAt>
         </ns1:AusTransactions>
     </ns1:AusTransactionsCollection>
 };

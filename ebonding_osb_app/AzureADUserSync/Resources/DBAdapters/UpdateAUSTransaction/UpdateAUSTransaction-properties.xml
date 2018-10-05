@@ -10,11 +10,9 @@
    <entry key="AUS_TRANSACTIONS.CREATION_TIME:db_column_not_null">false</entry>
    <entry key="AUS_TRANSACTIONS.USER_COUNT:db_column_precision">38</entry>
    <entry key="AUS_TRANSACTIONS.NEXTLINK:db_column_not_null">false</entry>
-   <entry key="AUS_TRANSACTIONS.UPDATED_AT:db_column_type">TIMESTAMP</entry>
    <entry key="AUS_TRANSACTIONS.DELTALINK:db_column_not_null">false</entry>
    <entry key="AUS_TRANSACTIONS.STATUS:db_column_type">VARCHAR2</entry>
    <entry key="AUS_TRANSACTIONS.BATCH_ID:db_column_not_null">false</entry>
-   <entry key="AUS_TRANSACTIONS:db_column_11">UPDATED_AT</entry>
    <entry key="AUS_TRANSACTIONS.BATCH_ID:db_column_scale">0</entry>
    <entry key="AUS_TRANSACTIONS:db_column_10">MACHINE_NAME</entry>
    <entry key="AUS_TRANSACTIONS:db_column_9">ERR_MSG</entry>
@@ -39,13 +37,11 @@
    <entry key="AUS_TRANSACTIONS.ERR_MSG:db_column_not_null">false</entry>
    <entry key="AUS_TRANSACTIONS.MACHINE_NAME:db_column_type">VARCHAR2</entry>
    <entry key="AUS_TRANSACTIONS.ERR_MSG:db_column_size">200</entry>
-   <entry key="AUS_TRANSACTIONS.UPDATED_AT:db_column_scale">6</entry>
    <entry key="AUS_TRANSACTIONS.DELTALINK:db_column_type">CLOB</entry>
    <entry key="AUS_TRANSACTIONS.CREATION_TIME:db_column_scale">6</entry>
    <entry key="AUS_TRANSACTIONS.USER_COUNT:db_column_scale">0</entry>
    <entry key="AUS_TRANSACTIONS.NEXTLINK:db_column_type">CLOB</entry>
    <entry key="AUS_TRANSACTIONS.BATCH_ID:db_column_type">NUMBER</entry>
-   <entry key="AUS_TRANSACTIONS.UPDATED_AT:db_column_not_null">false</entry>
    <entry key="AUS_TRANSACTIONS.STATUS:db_column_not_null">false</entry>
    <entry key="AUS_TRANSACTIONS.ERR_CODE:db_column_type">VARCHAR2</entry>
    <entry key="AUS_TRANSACTIONS.TRANSACTION_ID:db_column_not_null">true</entry>

@@ -75,11 +75,6 @@
                <field table="AUS_TRANSACTIONS" name="MACHINE_NAME" xsi:type="column"/>
                <attribute-classification>java.lang.String</attribute-classification>
             </attribute-mapping>
-            <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>updatedAt</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="UPDATED_AT" xsi:type="column"/>
-               <attribute-classification>java.sql.Timestamp</attribute-classification>
-            </attribute-mapping>
          </attribute-mappings>
          <descriptor-type>independent</descriptor-type>
          <sequencing>

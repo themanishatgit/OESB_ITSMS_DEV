@@ -382,31 +382,31 @@ else(xs:integer($GrpCnt)+0)</con2:xqueryText>
                                         </con2:replace>
                                     </con3:outboundTransform>
                                 </con3:route>
-                                <con4:assign varName="TotalProcessedDiffCnt">
+                                <con4:assign varName="BatchStatus">
                                     <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7e78</con5:id>
-                                    <con5:disabled xmlns:con5="http://www.bea.com/wli/sb/stages/config">true</con5:disabled>
                                     <con4:expr>
                                         <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
-xs:QName('TOT_PROC_CNT_DIFF'),
-'SELECT (TOTAL_COUNT - PROCESSED_COUNT) TOT_PROC_CNT_DIFF FROM
+xs:QName('BATCH_STATUS'),
+'SELECT TOTAL_COUNT,PROCESSED_COUNT,ERROR_COUNT,DELTALINK FROM
 (SELECT COUNT(STATUS) TOTAL_COUNT FROM AUS_TRANSACTIONS WHERE BATCH_ID=?) ,
-(SELECT COUNT(STATUS) PROCESSED_COUNT FROM AUS_TRANSACTIONS WHERE BATCH_ID=? AND STATUS=?) ',$BatchId,$BatchId,'PROCESSED')//TOT_PROC_CNT_DIFF/text()</con5:xqueryText>
+(SELECT COUNT(STATUS) PROCESSED_COUNT FROM AUS_TRANSACTIONS WHERE BATCH_ID=? AND STATUS=?),
+(SELECT COUNT(STATUS) ERROR_COUNT FROM AUS_TRANSACTIONS WHERE BATCH_ID=? AND STATUS=?),
+(SELECT DELTALINK FROM AUS_TRANSACTIONS WHERE BATCH_ID=? AND USER_COUNT=0 AND DELTALINK IS NOT NULL)
+',$BatchId,$BatchId,'PROCESSED',$BatchId,'ERROR',$BatchId)</con5:xqueryText>
                                     </con4:expr>
                                 </con4:assign>
                                 <con4:ifThenElse>
                                     <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7e71</con5:id>
-                                    <con5:disabled xmlns:con5="http://www.bea.com/wli/sb/stages/config">true</con5:disabled>
                                     <con4:case id="_BranchId-a013dc6.N530c4973.0.1663fb21a3c.N7e70">
                                         <con4:condition>
-                                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">xs:integer($TotalProcessedDiffCnt)=0</con5:xqueryText>
+                                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn:exists($BatchStatus/DELTALINK) and xs:integer($BatchStatus/TOTAL_COUNT/text())=xs:integer($BatchStatus/PROCESSED_COUNT/text()) and xs:integer($BatchStatus/ERROR_COUNT/text())=0</con5:xqueryText>
                                         </con4:condition>
                                         <con4:actions>
                                             <con4:log xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                                                 <con2:id>_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7e07</con2:id>
-                                                <con2:disabled>true</con2:disabled>
                                                 <con4:logLevel>warning</con4:logLevel>
                                                 <con4:expr>
-                                                    <con2:xqueryText>concat($BatchId,'~',$TotalProcessedDiffCnt)</con2:xqueryText>
+                                                    <con2:xqueryText>concat($BatchId,'~',$BatchStatus)</con2:xqueryText>
                                                 </con4:expr>
                                                 <con4:message>****AUS_SNPublishPS.SNStartSyncReq****</con4:message>
                                             </con4:log>
