@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config">
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
     <con:coreEntry>
         <con:binding type="Any XML"/>
         <con:xqConfiguration>
@@ -656,7 +656,7 @@ xs:QName('TRANIDSTATUS'),
                             <con5:actions/>
                         </con5:case>
                         <con5:default>
-                            <con3:route xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                            <con3:route xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
                                 <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7e55</con2:id>
                                 <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                 <con3:outboundTransform>

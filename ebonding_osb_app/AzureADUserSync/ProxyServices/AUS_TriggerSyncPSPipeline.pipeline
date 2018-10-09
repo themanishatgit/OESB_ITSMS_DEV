@@ -19,14 +19,6 @@
                     <con1:userNsDecl prefix="ser" namespace="http://www.ca.com/UnicenterServicePlus/ServiceDesk" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
                 </con:context>
                 <con:actions>
-                    <con5:log>
-                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7daf</con6:id>
-                        <con5:logLevel>error</con5:logLevel>
-                        <con5:expr>
-                            <con1:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$LastBatchStatus</con1:xqueryText>
-                        </con5:expr>
-                        <con5:message>****AUS_TriggerSyncPS.LastBatchStatus****</con5:message>
-                    </con5:log>
                     <con2:assign varName="LastBatchStatus">
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7db0</con6:id>
                         <con2:expr>
@@ -36,6 +28,14 @@ xs:QName('STATUS'),
 )/STATUS/text()</con6:xqueryText>
                         </con2:expr>
                     </con2:assign>
+                    <con5:log>
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N39b0b05a.0.16658932d4d.N7f2a</con6:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">concat('LastBatchStatus->',$LastBatchStatus)</con6:xqueryText>
+                        </con5:expr>
+                        <con5:message>****AUS_TriggerSyncPS.LastBatchStatus****</con5:message>
+                    </con5:log>
                     <con2:ifThenElse>
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7dae</con6:id>
                         <con2:case id="_BranchId-a013dc6.3d18e46e.0.1661baa6a7b.N7dad">
@@ -65,6 +65,14 @@ xs:QName('BATCHID'),
 'select AUS_BATCH_ID_SEQ.nextval from dual')//NEXTVAL/text()</con1:xqueryText>
                                 </con2:expr>
                             </con2:assign>
+                            <con5:log>
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7daf</con6:id>
+                                <con5:logLevel>error</con5:logLevel>
+                                <con5:expr>
+                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">concat('LastBatchStatus->',$LastBatchStatus,'~NewBatchIdStarts->',$BatchId)</con6:xqueryText>
+                                </con5:expr>
+                                <con5:message>****AUS_TriggerSyncPS.LastBatchStatus****</con5:message>
+                            </con5:log>
                         </con2:default>
                     </con2:ifThenElse>
                 </con:actions>
