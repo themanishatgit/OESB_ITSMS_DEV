@@ -760,6 +760,10 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                                                 <con2:xqueryText>$body</con2:xqueryText>
                                             </con3:expr>
                                         </con3:assign>
+                                        <con3:routing-options>
+                                            <con2:id>_ActionId-a013dc6.N39b0b05a.0.16658932d4d.N7ffe</con2:id>
+                                            <con3:qualityOfService>exactly-once</con3:qualityOfService>
+                                        </con3:routing-options>
                                     </con4:outboundTransform>
                                     <con4:responseTransform>
                                         <con3:assign varName="SNResponse">
