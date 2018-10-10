@@ -12,16 +12,11 @@
 						<xsd:element minOccurs="0" maxOccurs="1" name="Filename" type="xsd:string" />
 						<xsd:element minOccurs="0" maxOccurs="1" name="TicketNumber" type="xsd:string" />
 						<xsd:element minOccurs="0" maxOccurs="1" name="ExternalRefNumber" type="xsd:string" />
+                                                <xsd:element minOccurs="1" maxOccurs="1" name="Data" type="xsd:base64Binary" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="UploadFileContent">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element minOccurs="1" maxOccurs="1" name="Data" type="xsd:base64Binary" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
+			
 			<xsd:element name="UploadFileResponseMessage">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -35,7 +30,7 @@
 	</wsdl:types>
 	<wsdl:message name="uploadFileRequest">
 		<wsdl:part name="UploadFileRequestMessage" element="UploadFileRequestMessage"/>
-		<wsdl:part name="UploadFileContent" element="UploadFileContent"/>
+		
 	</wsdl:message>
 	<wsdl:message name="uploadFileResponse">
 		<wsdl:part name="UploadFileResponseMessage" element="UploadFileResponseMessage"/>
@@ -51,14 +46,7 @@
 		<wsdl:operation name="uploadFile">
 			<soap:operation style="document" soapAction="uploadFile"/>
 			<wsdl:input>
-				<mime:multipartRelated>  
-					<mime:part>
-						<soap:body parts="UploadFileRequestMessage" use="literal" namespace="http://www.sita.aero/WSDL/AttachmentV1"/>
-					</mime:part>
-					<mime:part>
-						<mime:content part="UploadFileContent" type="base64Binary"/>
-					</mime:part>
-				</mime:multipartRelated>
+                              <soap:body use="literal" namespace="http://www.sita.aero/WSDL/AttachmentV1"/>
 			</wsdl:input>
 			<wsdl:output>
 				<soap:body use="literal" namespace="http://www.sita.aero/WSDL/AttachmentV1"/>

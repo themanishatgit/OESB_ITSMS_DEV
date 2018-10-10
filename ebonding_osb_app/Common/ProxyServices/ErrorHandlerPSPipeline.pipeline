@@ -151,7 +151,7 @@
                         <con2:id>_ActionId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ec7</con2:id>
                         <con1:case id="_BranchId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ec6">
                             <con1:condition>
-                                <con2:xqueryText>fn:not($body/ErrorHandlerRequest/MessageDetails/TransactionType/text()='ACK') and $InterfaceQueueList/Interface[Name=$SourceSystem]/SendLogComment/text()='Y'</con2:xqueryText>
+                                <con2:xqueryText>fn:not($body/ErrorHandlerRequest/MessageDetails/TransactionType/text()='ACK') and fn:not($body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text()='ERR001') and $InterfaceQueueList/Interface[Name=$SourceSystem]/SendLogComment/text()='Y'</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con1:assign varName="Partner">
