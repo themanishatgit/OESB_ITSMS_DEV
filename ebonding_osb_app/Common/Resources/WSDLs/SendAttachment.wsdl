@@ -12,7 +12,7 @@
 						<xsd:element minOccurs="0" maxOccurs="1" name="Filename" type="xsd:string" />
 						<xsd:element minOccurs="0" maxOccurs="1" name="TicketNumber" type="xsd:string" />
 						<xsd:element minOccurs="0" maxOccurs="1" name="ExternalRefNumber" type="xsd:string" />
-                                                <xsd:element minOccurs="1" maxOccurs="1" name="Data" type="xsd:base64Binary" />
+                                                <xsd:element minOccurs="1" maxOccurs="1" name="Data" type="xsd:string" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
