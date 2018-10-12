@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:businessServiceEntry xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env">
+<con:businessServiceEntry xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
     <con:coreEntry>
         <con1:binding type="SOAP" xsi:type="con:SoapBindingType" isSoap12="false" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:con1="http://xmlns.oracle.com/servicebus/business/config">
             <con:wsdl ref="Common/Resources/DBAdapters/Fetch_EbondingsPriorityMappingInbound/Fetch_EbondingsPriorityMappingInbound-concrete"/>
@@ -15,6 +15,11 @@
         <con:ws-policy>
             <ser:binding-mode>no-policies</ser:binding-mode>
         </con:ws-policy>
+        <con:result-caching isSupported="true">
+            <con:ttlExpression source="request">
+                <con1:xqueryText>'P1DT30M'</con1:xqueryText>
+            </con:ttlExpression>
+        </con:result-caching>
         <con:xqConfiguration>
             <ser:snippetVersion>1.0</ser:snippetVersion>
         </con:xqConfiguration>

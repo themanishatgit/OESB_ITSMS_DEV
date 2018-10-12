@@ -15,6 +15,11 @@
         <con:ws-policy>
             <ser:binding-mode>no-policies</ser:binding-mode>
         </con:ws-policy>
+        <con:result-caching isSupported="true">
+            <con:ttlExpression source="request">
+                <con1:xqueryText>'P1DT30M'</con1:xqueryText>
+            </con:ttlExpression>
+        </con:result-caching>
         <con:xqConfiguration>
             <ser:snippetVersion>1.0</ser:snippetVersion>
         </con:xqConfiguration>
