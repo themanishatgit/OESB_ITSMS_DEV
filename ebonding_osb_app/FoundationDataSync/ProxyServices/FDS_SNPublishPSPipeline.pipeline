@@ -89,6 +89,25 @@
                     </con2:assign>
                 </con:actions>
             </con:stage>
+            <con:stage id="_StageId-N3f575e55.N670e94c9.0.16679679f82.N7ffc" name="CheckForGroupMembers">
+                <con:context/>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N3f575e55.N670e94c9.0.16679679f82.N7ff2</con2:id>
+                        <con1:case id="_BranchId-N3f575e55.N670e94c9.0.16679679f82.N7ff1">
+                            <con1:condition>
+                                <con2:xqueryText>$ObjectName='GroupMember' and $Record//Attribute[AttrName/text()='group.type']/AttrValue/text()!='2308'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con2:reply>
+                                    <con2:id>_ActionId-N3f575e55.N670e94c9.0.16679679f82.N7fee</con2:id>
+                                </con2:reply>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default/>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
             <con:stage id="_StageId-N3f57e0b8.N4011d008.0.164d28d79c7.N7f74" name="Transform">
                 <con:context/>
                 <con:actions>
@@ -106,6 +125,9 @@
                             </con2:dynamicXqueryTransform>
                         </con1:expr>
                     </con1:replace>
+                    <con2:reply>
+                        <con2:id>_ActionId-N3f575e55.N670e94c9.0.16679679f82.N7ffe</con2:id>
+                    </con2:reply>
                 </con:actions>
             </con:stage>
         </con:pipeline>

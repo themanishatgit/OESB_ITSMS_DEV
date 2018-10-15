@@ -19,9 +19,11 @@ declare function local:func($SessionId as xs:string,
          <attributeNames>
             <!--1 or more repetitions:-->
             <string>id</string>           
-			<string>group</string>
-			<string>member</string>
-		</attributeNames>
+            <string>group</string>
+            <string>group.type</string>
+            <string>member</string>
+            <string>member.type</string>
+         </attributeNames>
       </ser:getListValues>
 };
 
