@@ -79,7 +79,12 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
 			)
 			else(
 			if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)
-            then <sup_comments>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)}</sup_comments>
+            then (
+            if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary)
+            then(<sup_comments>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments), '. 
+ResolutionSummary: ',$IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary/text()}</sup_comments>)
+            else(<sup_comments>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SupplierComments)}</sup_comments>)
+            )
             else ()
 			)
         }
@@ -101,7 +106,12 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
         }
         {
             if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)
-            then <additional_comments>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)}</additional_comments>
+            then (
+            if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary)
+            then(<additional_comments>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments), '. 
+Resolution Summary: ', $IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary/text()}</additional_comments>)
+            else(<additional_comments>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)}</additional_comments>)
+            )
             else ()
         }
         {
@@ -123,11 +133,6 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
         {
             if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionCode)
             then <close_code>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionCode)}</close_code>
-            else ()
-        }
-        {
-            if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary)
-            then <close_notes>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary)}</close_notes>
             else ()
         }
         {
