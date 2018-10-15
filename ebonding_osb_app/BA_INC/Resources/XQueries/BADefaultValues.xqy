@@ -1,6 +1,6 @@
 <DefaultValues>
   <Inbound>
-    <Priority>1</Priority>
+    <Priority>3</Priority>
     <Category>Hardware</Category>
     <ResolutionCode>No Fault Found</ResolutionCode>
     <Issue>Failure</Issue>
