@@ -125,9 +125,6 @@
                             </con2:dynamicXqueryTransform>
                         </con1:expr>
                     </con1:replace>
-                    <con2:reply>
-                        <con2:id>_ActionId-N3f575e55.N670e94c9.0.16679679f82.N7ffe</con2:id>
-                    </con2:reply>
                 </con:actions>
             </con:stage>
         </con:pipeline>
