@@ -45,7 +45,7 @@
   <Object>
     <Name>GroupMember</Name>
     <SHName>grpmem</SHName>
-    <AdditionalFilter></AdditionalFilter>
+    <AdditionalFilter>group.type=2308</AdditionalFilter>
     <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
     <Sequence>7</Sequence>
   </Object>
