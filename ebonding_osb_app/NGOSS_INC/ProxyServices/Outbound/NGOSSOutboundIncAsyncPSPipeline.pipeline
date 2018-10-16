@@ -144,7 +144,7 @@
                                     <con2:xqueryText><![CDATA[<fet:FetchDataMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchDataMappingMessageV1">
     <fet:RecType>{fn:upper-case($RecType)}</fet:RecType>
     <fet:Source>{fn:upper-case($SourceSystem)}</fet:Source>
-    <fet:Destination>BA</fet:Destination>
+    <fet:Destination>NGOSS</fet:Destination>
     <!--1 or more repetitions:-->
     <fet:FetchData>
         <fet:ObjectName>STATUS</fet:ObjectName>
