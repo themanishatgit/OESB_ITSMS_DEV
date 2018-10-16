@@ -58,7 +58,7 @@ declare function local:func($IncidentXML as element() (:: schema-element(Inciden
                           <ns1:Name>NGOSS</ns1:Name>
                           <ns1:RefNumber>{$IncidentXML/EventID/text()}</ns1:RefNumber>
                     </ns1:Customer>
-                    <ns1:WorkNotes>{fn:concat($IncidentXML/EventLogComment/text(),$IncidentXML/TimeLogComment/text(),
+                     <ns1:WorkNotes>{fn:concat($IncidentXML/EventLogComment/text(),$IncidentXML/TimeLogComment/text(),
                     if($IncidentXML/Active/text()='True')
                     then('The NGOSS/SMARTS Event is Active on the Affected Device/CI.')
                     else('The NGOSS/SMARTS Event has Cleared on the Affected Device/CI.'),

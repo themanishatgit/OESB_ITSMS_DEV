@@ -16,6 +16,16 @@
             <ser:binding-mode>no-policies</ser:binding-mode>
         </con:ws-policy>
         <con:result-caching isSupported="true">
+            <con:expressionContext>
+                <con1:userNsDecl prefix="fet" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsDataMapping"/>
+            </con:expressionContext>
+            <con:tokenExpression>
+                <con1:xqueryText>fn:concat($body/fet:Fetch_EbondingsDataMappingSelect_objectName_recType_source_destination_sourceValInputParameters/fet:objectName,
+$body/fet:Fetch_EbondingsDataMappingSelect_objectName_recType_source_destination_sourceValInputParameters/fet:recType,
+$body/fet:Fetch_EbondingsDataMappingSelect_objectName_recType_source_destination_sourceValInputParameters/fet:source,
+$body/fet:Fetch_EbondingsDataMappingSelect_objectName_recType_source_destination_sourceValInputParameters/fet:destination,
+$body/fet:Fetch_EbondingsDataMappingSelect_objectName_recType_source_destination_sourceValInputParameters/fet:sourceVal)</con1:xqueryText>
+            </con:tokenExpression>
             <con:ttlExpression source="request">
                 <con1:xqueryText>'P1DT30M'</con1:xqueryText>
             </con:ttlExpression>
