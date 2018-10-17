@@ -885,6 +885,8 @@
         </cus:actions>
     </cus:customization>
     <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+	
+
         <cus:description/>
         <cus:owners>
             <xt:owner>
@@ -910,6 +912,58 @@
             <xt:replace>
                 <xt:envValueType>UDDI Auto Publish</xt:envValueType>
                 <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+     
+	 <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+	 
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>Operations</xt:type>
+                <xt:path>System/Operator Settings/GlobalOperationalSettings</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Global Operational Settings</xt:envValueType>
+                <xt:value>
+                    <con:operations xmlns:con="http://xmlns.oracle.com/servicebus/domain/config">
+                        <con:monitoring>true</con:monitoring>
+                        <con:reporting>true</con:reporting>
+                        <con:logging>true</con:logging>
+                        <con:sla-alerting>true</con:sla-alerting>
+                        <con:pipeline-alerting>true</con:pipeline-alerting>
+                        <con:result-caching>true</con:result-caching>
+                        <con:resequencer-settings>
+                            <con:maxGroupsLocked>5</con:maxGroupsLocked>
+                            <con:lockerThreadSleep>10</con:lockerThreadSleep>
+                            <con:deleteCompletedMessage>true</con:deleteCompletedMessage>
+                        </con:resequencer-settings>
+                        <con:javaScript-timeout>30</con:javaScript-timeout>
+                        <con:automatic-service-migration>false</con:automatic-service-migration>
+                        <con:email-header-trim>false</con:email-header-trim>
+						  <con:comment-logging>false</con:comment-logging>
+                        <con:osb-resource-validation>true</con:osb-resource-validation>
+                    </con:operations>
+                </xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+   
+   <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>SMTPServer</xt:type>
+                <xt:path>System/SMTP Servers/SITASMTP</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>SMTP Server URL</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@smtp_server_host@</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
