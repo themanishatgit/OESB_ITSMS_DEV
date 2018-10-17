@@ -262,7 +262,7 @@ else('CREATE')</con2:xqueryText>
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7963</con2:id>
                         <con5:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7962">
                             <con5:condition>
-                                <con2:xqueryText>$TransactionType='Update' and fn:not($DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text())</con2:xqueryText>
+                                <con2:xqueryText>$TransactionType='UPDATE' and fn:not($DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text())</con2:xqueryText>
                             </con5:condition>
                             <con5:actions>
                                 <con5:replace varName="body" contents-only="true">
@@ -357,31 +357,43 @@ else('CREATE')</con2:xqueryText>
             </con:stage>
             <con:stage id="_StageId-3904ea71.N4f618a99.0.16682fe4c3d.N7884" name="SendErrorMailStg" errorHandler="error-3904ea71.N4f618a99.0.16682fe4c3d.N7880" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context>
+                    <con2:userNsDecl prefix="fetch" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
                 </con:context>
                 <con:actions>
-                    <con3:route>
-                        <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7883</con2:id>
-                        <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:outboundTransform>
-                            <con1:transport-headers xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                                <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7882</con2:id>
-                                <con1:header-set>outbound-request</con1:header-set>
-                                <con1:header value="expression" name="Subject">
-                                    <con2:xqueryText>fn:concat('Invalid status received in inbound transaction with ticket number ', $TicketNumber)</con2:xqueryText>
-                                </con1:header>
-                            </con1:transport-headers>
-                            <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                                <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7881</con2:id>
-                                <con1:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con1:location>
-                                <con1:expr>
-                                    <con2:xqueryText>fn:concat('An invalid status was received in the incoming update on ticket number ', $TicketNumber, ' with message transaction id ', $Message_TranId, '. Please refer audit logs for the complete payload.')</con2:xqueryText>
-                                </con1:expr>
-                            </con1:replace>
-                        </con3:outboundTransform>
-                    </con3:route>
+                    <con5:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N77aa</con2:id>
+                        <con5:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N77a9">
+                            <con5:condition>
+                                <con2:xqueryText>$TransactionType='UPDATE' and fn:not($DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text())</con2:xqueryText>
+                            </con5:condition>
+                            <con5:actions>
+                                <con3:route>
+                                    <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7883</con2:id>
+                                    <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:outboundTransform>
+                                        <con1:transport-headers>
+                                            <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7882</con2:id>
+                                            <con1:header-set>outbound-request</con1:header-set>
+                                            <con1:header value="expression" name="Subject">
+                                                <con2:xqueryText>fn:concat('Invalid status received in inbound transaction with ticket number ', $TicketNumber)</con2:xqueryText>
+                                            </con1:header>
+                                        </con1:transport-headers>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7881</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText>fn:concat('An invalid status was received in the incoming update on ticket number ', $TicketNumber, ' with message transaction id ', $Message_TranId, '. Please refer audit logs for the complete payload.')</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                            </con5:actions>
+                        </con5:case>
+                        <con5:default/>
+                    </con5:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
@@ -464,7 +476,7 @@ else('CREATE')</con2:xqueryText>
                         <con5:case id="_BranchId-a013dc6.N366183fe.0.164403ca73f.N7e70">
                             <con5:condition>
                                 <con2:xqueryText>($Response/inc:IncidentResponseMessage/inc:ErrorCode/text()='ERR002') or
-($TransactionType='Update' and fn:not($DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()))</con2:xqueryText>
+($TransactionType='UPDATE' and fn:not($DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()))</con2:xqueryText>
                             </con5:condition>
                             <con5:actions>
                                 <con5:replace varName="body" contents-only="true">
