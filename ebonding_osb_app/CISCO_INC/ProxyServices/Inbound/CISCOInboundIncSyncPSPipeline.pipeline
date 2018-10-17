@@ -479,6 +479,7 @@ else ''</con2:path>
                 </con:context>
                 <con:actions>
                     <con1:ifThenElse>
+                        <con2:comment>Checks for invalid status in update transactions</con2:comment>
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7e66</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7e65">
                             <con1:condition>

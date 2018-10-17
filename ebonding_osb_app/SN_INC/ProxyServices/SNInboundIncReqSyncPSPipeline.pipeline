@@ -363,6 +363,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                 </con:context>
                 <con:actions>
                     <con1:ifThenElse>
+                        <con2:comment>Checks for SN response status</con2:comment>
                         <con2:id>_ActionId-a013b5c.40457e0b.0.163b6d4c107.N7eb6</con2:id>
                         <con1:case id="_BranchId-a013b5c.40457e0b.0.163b6d4c107.N7eb5">
                             <con1:condition>
