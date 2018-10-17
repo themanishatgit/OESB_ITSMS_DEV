@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-       <module>System</module>
+       <!--<module>System</module>-->
       <!--  <module>Common</module>
 		<module>DataMappingLoad</module> 
 		<module>SN_INC</module>
