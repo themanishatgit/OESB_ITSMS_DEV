@@ -16,16 +16,41 @@
         <con:pipeline type="response" name="response-a013b64.N7b3ae3c1.0.163cffb80dd.N7d38">
             <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N7d00" name="PrepareResponse_Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                 <con:context>
+                    <con2:userNsDecl prefix="fetdm" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
-                    <con2:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7cff</con6:id>
-                        <con2:location>
-                            <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
-                        </con2:location>
-                        <con2:expr>
-                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
+                    <con1:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7dfc</con2:id>
+                        <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7dfb">
+                            <con1:condition>
+                                <con2:xqueryText>$InputRequest/incidentData/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS' and fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con2:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                    <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7dc6</con6:id>
+                                    <con2:location>
+                                        <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                    </con2:location>
+                                    <con2:expr>
+                                        <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
+       <ProcessIncidentResult xmlns="">
+          <STATUS>ERROR</STATUS>
+          <DESCRIPTION>An invalid status was received in the request. Therefore, updates from the transaction have been ignored.</DESCRIPTION>
+        </ProcessIncidentResult>
+</ProcessIncidentResponse>]]></con6:xqueryText>
+                                    </con2:expr>
+                                </con2:replace>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con2:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7cff</con6:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
        <ProcessIncidentResult xmlns="">
        {
         if($ServiceNowResponse/inc:Status/text()!='Success') then
@@ -63,8 +88,10 @@
            
        </ProcessIncidentResult>
 </ProcessIncidentResponse>]]></con6:xqueryText>
-                        </con2:expr>
-                    </con2:replace>
+                                </con2:expr>
+                            </con2:replace>
+                        </con1:default>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-a013dc6.N4a5f3b08.0.164f9f5c9af.N7f97" name="AuditResponseEnd_Stg" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
@@ -112,7 +139,9 @@ else ''</con2:path>
                                             <con2:path>''</con2:path>
                                         </con2:param>
                                         <con2:param name="TicketNumber">
-                                            <con2:path>$ServiceNowResponse/inc:TicketNumber/text()</con2:path>
+                                            <con2:path>if($ServiceNowResponse/inc:TicketNumber/text())
+then($ServiceNowResponse/inc:TicketNumber/text())
+else($InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:path>
                                         </con2:param>
                                         <con2:param name="ProxyService">
                                             <con2:path>'CISCOInboundIncSyncPS'</con2:path>
@@ -438,16 +467,6 @@ else ''</con2:path>
                         </con1:requestTransform>
                         <con1:responseTransform/>
                     </con1:wsCallout>
-                    <con1:ifThenElse>
-                        <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7f39</con2:id>
-                        <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7f38">
-                            <con1:condition>
-                                <con2:xqueryText>$InputRequest/incidentData/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS' and fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
-                            </con1:condition>
-                            <con1:actions/>
-                        </con1:case>
-                        <con1:default/>
-                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N7776" name="CreateSNRequest_Stg" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
@@ -459,32 +478,82 @@ else ''</con2:path>
                     <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
                 </con:context>
                 <con:actions>
-                    <con1:assign varName="SNRequest">
-                        <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7774</con2:id>
-                        <con1:expr>
-                            <con2:xqueryTransform>
-                                <con2:resource ref="CISCO_INC/Resources/XQueries/CISCORequestToSNRequest"/>
-                                <con2:param name="TransactionType">
-                                    <con2:path>$TransactionType</con2:path>
-                                </con2:param>
-                                <con2:param name="CISCORequest">
-                                    <con2:path>$InputRequest/incidentData</con2:path>
-                                </con2:param>
-                                <con2:param name="StatusDestinationValue">
-                                    <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:path>
-                                </con2:param>
-                                <con2:param name="ResolutionCodeDestinationValue">
-                                    <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text()</con2:path>
-                                </con2:param>
-                                <con2:param name="SourceSystem">
-                                    <con2:path>$SourceSystem</con2:path>
-                                </con2:param>
-                                <con2:param name="MsgTranId">
-                                    <con2:path>$MsgTranId</con2:path>
-                                </con2:param>
-                            </con2:xqueryTransform>
-                        </con1:expr>
-                    </con1:assign>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7e66</con2:id>
+                        <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7e65">
+                            <con1:condition>
+                                <con2:xqueryText>$InputRequest/incidentData/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS' and fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:assign varName="SNRequest">
+                                    <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7f03</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryText><![CDATA[<ns1:IncidentRequestMessage xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
+	<ns1:IncidentRequestHeader>
+		<ns1:TransactionId>{$MsgTranId}</ns1:TransactionId>
+		<ns1:TransactionType>ERROR</ns1:TransactionType>
+		<ns1:RecType>INC</ns1:RecType>
+		<ns1:SourceSystem>{$SourceSystem}</ns1:SourceSystem>
+		<ns1:DestinationSystem>{$DestinationSystem}</ns1:DestinationSystem>
+	</ns1:IncidentRequestHeader>
+	<ns1:IncidentRequestBody>
+		<ns1:IncidentDetails>
+			<ns1:TicketNumber>{$InputRequest/incidentData/INCIDENT_NUMBER/text()}</ns1:TicketNumber>
+			{
+                        if(dvm:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER')
+                        then
+                        <ns1:Customer>
+                            <ns1:Name>{$SourceSystem}</ns1:Name>
+                            <ns1:RefNumber>{fn:data($CISCORequest/CUSTOMER_EXTERNAL_REFERENCE)}</ns1:RefNumber>
+                        </ns1:Customer>
+                      else()
+                      }
+                      {
+                        if(dvm:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER')
+                        then
+                        <ns1:Supplier>
+                          <ns1:Name>{$SourceSystem}</ns1:Name>
+                          <ns1:RefNumber>{fn:data($CISCORequest/SUPPLIER_EXTERNAL_REFERENCE)}</ns1:RefNumber>
+                        </ns1:Supplier>
+                        else()
+                      }
+			<ns1:WorkNotes>ERR-APP: An invalid status was received in the incoming update on this ticket. Therefore, updates from the transaction have been ignored.</ns1:WorkNotes>
+		</ns1:IncidentDetails>
+	</ns1:IncidentRequestBody>
+</ns1:IncidentRequestMessage>]]></con2:xqueryText>
+                                    </con1:expr>
+                                </con1:assign>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:assign varName="SNRequest">
+                                <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7774</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="CISCO_INC/Resources/XQueries/CISCORequestToSNRequest"/>
+                                        <con2:param name="TransactionType">
+                                            <con2:path>$TransactionType</con2:path>
+                                        </con2:param>
+                                        <con2:param name="CISCORequest">
+                                            <con2:path>$InputRequest/incidentData</con2:path>
+                                        </con2:param>
+                                        <con2:param name="StatusDestinationValue">
+                                            <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ResolutionCodeDestinationValue">
+                                            <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="SourceSystem">
+                                            <con2:path>$SourceSystem</con2:path>
+                                        </con2:param>
+                                        <con2:param name="MsgTranId">
+                                            <con2:path>$MsgTranId</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:assign>
+                        </con1:default>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N770a" name="AuditSNRequest_Stg" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
