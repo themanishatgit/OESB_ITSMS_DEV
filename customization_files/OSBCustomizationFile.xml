@@ -193,7 +193,69 @@
             </xt:replace>
         </cus:actions>
     </cus:customization>
-	 
+	  <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/Fetch_EbondingsDataMapping</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>JCA Always Use WSDL Flag</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">true</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>JCA Connection Mode</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">managed</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>JCA Overwrite Connection Authentication Flag</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
     <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
         <cus:description/>
         <cus:owners>
@@ -258,7 +320,7 @@
         </cus:actions>
     </cus:customization>
 	  <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
-        <cus:description/>
+	          <cus:description/>
         <cus:owners>
 		
             <xt:owner>
@@ -321,70 +383,11 @@
             </xt:replace>
         </cus:actions>
     </cus:customization>
-    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
-        <cus:description/>
-        <cus:owners>
-            <xt:owner>
-                <xt:type>BusinessService</xt:type>
-                <xt:path>Common/BusinessServices/Fetch_EbondingsDataMapping</xt:path>
-            </xt:owner>
-        </cus:owners>
-        <cus:actions>
-            <xt:replace>
-                <xt:envValueType>Service Operational Settings</xt:envValueType>
-                <xt:value>
-                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
-                        <oper:throttling enabled="false"/>
-                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
-                    </oper:operations>
-                </xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>Service URI Weight</xt:envValueType>
-                <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>Service URI</xt:envValueType>
-                <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>Service URI Table</xt:envValueType>
-                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
-                    <tran:tableElement>
-                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
-                        <tran:weight>0</tran:weight>
-                    </tran:tableElement>
-                </xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>Work Manager</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>JCA Always Use WSDL Flag</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">true</xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>JCA Connection Mode</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">managed</xt:value>
-            </xt:replace>
-            <xt:replace>
-                <xt:envValueType>JCA Overwrite Connection Authentication Flag</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
-            </xt:replace>
-        </cus:actions>
-    </cus:customization>
-    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+  
+
+ 
+ 
+ <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
         <cus:description/>
         <cus:owners>
             <xt:owner>
