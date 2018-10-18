@@ -23,7 +23,7 @@
                 <con1:xqueryText>fn:concat($body/fet:Fetch_EbondingsPriorityMappingInboundSelect_rectype_priorityInputParameters/fet:rectype,$body/fet:Fetch_EbondingsPriorityMappingInboundSelect_rectype_priorityInputParameters/fet:priority)</con1:xqueryText>
             </con:tokenExpression>
             <con:ttlExpression source="request">
-                <con1:xqueryText>'P1DT30M'</con1:xqueryText>
+                <con1:xqueryText>'P1D'</con1:xqueryText>
             </con:ttlExpression>
         </con:result-caching>
         <con:xqConfiguration>

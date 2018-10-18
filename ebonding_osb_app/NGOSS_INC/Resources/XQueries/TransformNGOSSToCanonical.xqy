@@ -58,16 +58,16 @@ declare function local:func($IncidentXML as element() (:: schema-element(Inciden
                           <ns1:Name>NGOSS</ns1:Name>
                           <ns1:RefNumber>{$IncidentXML/EventID/text()}</ns1:RefNumber>
                     </ns1:Customer>
-                     <ns1:WorkNotes>{fn:concat($IncidentXML/EventLogComment/text(),$IncidentXML/TimeLogComment/text(),
-                    if($IncidentXML/Active/text()='True')
-                    then('The NGOSS/SMARTS Event is Active on the Affected Device/CI.')
-                    else('The NGOSS/SMARTS Event has Cleared on the Affected Device/CI.'),
-                    if($IncidentXML/Acknowledged/text()='True')
-                    then('The NGOSS/SMARTS Event is Acknowledged by the User Name Above.')
-                    else('The NGOSS/SMARTS Event has been Unacknowledged.'),
-                    if($IncidentXML/InMaintenance/text()='True')
-                    then('The Affected Device/CI is in Maintenance within NGOSS/SMARTS.')
-                    else('The Affected Device/CI is not in Maintenance within NGOSS/SMARTS.')
+                        <ns1:WorkNotes>{fn:concat($IncidentXML/EventLogComment/text(),$IncidentXML/TimeLogComment/text(),
+                    if(fn:upper-case($IncidentXML/Active/text())='TRUE')
+                    then(' The NGOSS/SMARTS Event is Active on the Affected Device/CI.')
+                    else(' The NGOSS/SMARTS Event has Cleared on the Affected Device/CI.'),
+                    if(fn:upper-case($IncidentXML/Acknowledged/text())='TRUE')
+                    then(' The NGOSS/SMARTS Event is Acknowledged by the User Name Above.')
+                    else(' The NGOSS/SMARTS Event has been Unacknowledged.'),
+                    if(fn:upper-case($IncidentXML/InMaintenance/text())='TRUE')
+                    then(' The Affected Device/CI is in Maintenance within NGOSS/SMARTS.')
+                    else(' The Affected Device/CI is not in Maintenance within NGOSS/SMARTS.')
                     )}</ns1:WorkNotes>
               </ns1:IncidentDetails>
               <ns1:IncidentContact>

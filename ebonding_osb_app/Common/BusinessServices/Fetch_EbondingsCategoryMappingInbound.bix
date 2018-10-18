@@ -23,7 +23,7 @@
                 <con1:xqueryText>fn:concat($body/fet:Fetch_EbondingsCategoryMappingInboundSelect_recType_shCategory_isActiveInputParameters/fet:recType,$body/fet:Fetch_EbondingsCategoryMappingInboundSelect_recType_shCategory_isActiveInputParameters/fet:shCategory,$body/fet:Fetch_EbondingsCategoryMappingInboundSelect_recType_shCategory_isActiveInputParameters/fet:isActive)</con1:xqueryText>
             </con:tokenExpression>
             <con:ttlExpression source="request">
-                <con1:xqueryText>'P1DT30M'</con1:xqueryText>
+                <con1:xqueryText>'P1D'</con1:xqueryText>
             </con:ttlExpression>
         </con:result-caching>
         <con:xqConfiguration>
