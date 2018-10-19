@@ -41,7 +41,7 @@ xs:QName('TRANID'),
         then($Message_TranId)
         else('DUMMY')
         }</ns1:messageTranId>
-	<ns1:machineName>{fn-bea:getHostname()}</ns1:machineName>
+	<ns1:machineName>{'Test'}</ns1:machineName>
 	<ns1:payload>{$Payload}</ns1:payload>
 	<ns1:source>{
         if($Source)
