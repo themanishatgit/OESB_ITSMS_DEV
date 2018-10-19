@@ -26,13 +26,14 @@
         <tran:provider-specific xsi:type="ema:EmailEndPointConfiguration">
             <ema:use-ssl>false</ema:use-ssl>
             <ema:outbound-properties>
+                <ema:smtp-resource ref="System/SMTP Servers/SITASMTP"/>
                 <ema:connection-timeout>0</ema:connection-timeout>
                 <ema:timeout>0</ema:timeout>
                 <ema:from-address>esbteam@sita.aero</ema:from-address>
                 <ema:from-name>ESB</ema:from-name>
                 <ema:reply-to-address/>
                 <ema:reply-to-name/>
-                <ema:mail-session-jndiname>test</ema:mail-session-jndiname>
+                <ema:mail-session-jndiname/>
             </ema:outbound-properties>
             <ema:request-encoding>iso-8859-1</ema:request-encoding>
         </tran:provider-specific>
