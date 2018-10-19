@@ -3,7 +3,6 @@
     <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
         <cus:description/>
         <cus:owners>
-		
             <xt:owner>
                 <xt:type>BusinessService</xt:type>
                 <xt:path>Common/BusinessServices/Fetch_EbondingsCategoryMappingInbound</xt:path>
@@ -13,7 +12,7 @@
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
                 <xt:value>
-                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
                         <oper:throttling enabled="false"/>
                         <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
                     </oper:operations>
@@ -76,7 +75,7 @@
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
                 <xt:value>
-                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
                         <oper:throttling enabled="false"/>
                         <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
                     </oper:operations>
@@ -202,7 +201,7 @@
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
                 <xt:value>
-                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
                         <oper:throttling enabled="false"/>
                         <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
                     </oper:operations>
@@ -265,7 +264,7 @@
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
                 <xt:value>
-                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
                         <oper:throttling enabled="false"/>
                         <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
                     </oper:operations>
@@ -384,6 +383,65 @@
         <cus:owners>
             <xt:owner>
                 <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/OceaneSendAttachmentReqHTTPBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_OceaneSendAttachmentReqHTTPBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_OceaneSendAttachmentReqHTTPBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
                 <xt:path>Common/BusinessServices/PartnerOutboundIncQJMSBS</xt:path>
             </xt:owner>
         </cus:owners>
@@ -418,11 +476,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -473,11 +531,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -486,6 +544,124 @@
             <xt:replace>
                 <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
                 <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/SNGetRecordsReqHTTPBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNGetRecordsReqHTTPBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNGetRecordsReqHTTPBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/SNSendAttachmentReqHTTPBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNSendAttachmentReqHTTPBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_SNSendAttachmentReqHTTPBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -528,11 +704,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@mail_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@mail_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -719,14 +895,66 @@
             </xt:replace>
         </cus:actions>
     </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/SendAttachmentPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_SendAttachmentPS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_bipeattachment@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
     <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
         <cus:description/>
         <cus:query>
             <xt:resourceTypes>BusinessService</xt:resourceTypes>
             <xt:resourceTypes>ProxyService</xt:resourceTypes>
+            <xt:envValueTypes>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueTypes>
             <xt:envValueTypes>JCA Always Use WSDL Flag</xt:envValueTypes>
             <xt:envValueTypes>JCA Connection Mode</xt:envValueTypes>
             <xt:envValueTypes>JCA Overwrite Connection Authentication Flag</xt:envValueTypes>
+            <xt:envValueTypes>Read Timeout for HTTP Outbound Transport Provider</xt:envValueTypes>
             <xt:envValueTypes>Secure Connections to JMS Server</xt:envValueTypes>
             <xt:envValueTypes>Service Retry Count</xt:envValueTypes>
             <xt:envValueTypes>Service Retry Iteration Interval</xt:envValueTypes>
@@ -760,11 +988,23 @@
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/OceaneSendAttachmentReqHTTPBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
                 <xt:path>Common/BusinessServices/PartnerOutboundIncQJMSBS</xt:path>
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>BusinessService</xt:type>
                 <xt:path>Common/BusinessServices/Publish_ErrorQ</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/SNGetRecordsReqHTTPBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/SNSendAttachmentReqHTTPBS</xt:path>
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>BusinessService</xt:type>
@@ -798,6 +1038,14 @@
                 <xt:type>ProxyService</xt:type>
                 <xt:path>Common/ProxyServices/SAFFailureHandlerPS</xt:path>
             </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/SendAttachmentPS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPS</xt:path>
+            </xt:refsToSearch>
             <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
             <xt:searchString>Search String</xt:searchString>
             <xt:isCompleteMatch>false</xt:isCompleteMatch>
@@ -829,6 +1077,18 @@
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>BusinessService</xt:type>
             <xt:path>Common/BusinessServices/Insert_ESBAudit</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>Common/BusinessServices/OceaneSendAttachmentReqHTTPBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>Common/BusinessServices/SNGetRecordsReqHTTPBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>Common/BusinessServices/SNSendAttachmentReqHTTPBS</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>BusinessService</xt:type>
@@ -889,6 +1149,22 @@
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Pipeline</xt:type>
             <xt:path>Common/ProxyServices/SAFFailureHandlerPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>Common/ProxyServices/SendAttachmentPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>Common/ProxyServices/SendAttachmentPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPSPipeline</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>WSDL</xt:type>
@@ -1033,6 +1309,16 @@
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/SNGetRecordsReqHTTPBS</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>Common/BusinessServices/SNGetRecordsReqHTTPBS</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>BusinessService</xt:type>
                 <xt:path>Common/BusinessServices/Send_Email</xt:path>
             </xt:oldRef>
             <xt:newRef>
@@ -1122,6 +1408,26 @@
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
             <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>Common/ProxyServices/SendAttachmentPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>Common/ProxyServices/SendAttachmentPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
                 <xt:type>SMTPServer</xt:type>
                 <xt:path>System/SMTP Servers/SITASMTP</xt:path>
             </xt:oldRef>
@@ -1232,6 +1538,16 @@
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
             <xt:oldRef>
+                <xt:type>Archive</xt:type>
+                <xt:path>Common/Resources/Jar/utils</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Archive</xt:type>
+                <xt:path>Common/Resources/Jar/utils</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
                 <xt:type>XMLSchema</xt:type>
                 <xt:path>Common/Resources/Schemas/AuditPSMessage</xt:path>
             </xt:oldRef>
@@ -1282,6 +1598,16 @@
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
             <xt:oldRef>
+                <xt:type>WADL</xt:type>
+                <xt:path>Common/Resources/WADLs/SNSendAttachmentReqHTTPBS</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WADL</xt:type>
+                <xt:path>Common/Resources/WADLs/SNSendAttachmentReqHTTPBS</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
                 <xt:type>WSDL</xt:type>
                 <xt:path>Common/Resources/WSDLs/AuditPS</xt:path>
             </xt:oldRef>
@@ -1323,6 +1649,16 @@
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>WSDL</xt:type>
+                <xt:path>Common/Resources/WSDLs/Getrecords</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>Common/Resources/WSDLs/Getrecords</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
                 <xt:path>Common/Resources/WSDLs/OutboundIncReqSync</xt:path>
             </xt:oldRef>
             <xt:newRef>
@@ -1332,6 +1668,26 @@
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
             <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>Common/Resources/WSDLs/SendAttachment</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>Common/Resources/WSDLs/SendAttachment</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>Common/Resources/WSDLs/bipeattachment</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>Common/Resources/WSDLs/bipeattachment</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
                 <xt:type>Xquery</xt:type>
                 <xt:path>Common/Resources/XQueries/CreateAuditBSRequest</xt:path>
             </xt:oldRef>
@@ -1358,6 +1714,16 @@
             <xt:newRef>
                 <xt:type>Xquery</xt:type>
                 <xt:path>Common/Resources/XQueries/InterfaceQueueList</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>ServiceAccount</xt:type>
+                <xt:path>SN_INC/Resources/ServiceAccounts/SN_ServiceAccount</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>ServiceAccount</xt:type>
+                <xt:path>SN_INC/Resources/ServiceAccounts/SN_ServiceAccount</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
