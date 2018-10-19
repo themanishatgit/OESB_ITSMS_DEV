@@ -15,7 +15,7 @@
 		<!--<module>DataMappingLoad</module> 
 		<module>SN_INC</module>
 		<module>BA_INC</module>-->
-		<module>NGOSS_INC</module>
+		<!--<module>NGOSS_INC</module>-->
               <!--  <module>CISCO_INC</module>-->
 		<!--<module>OBS_INC</module>
 		<module>FoundationDataSync</module>
