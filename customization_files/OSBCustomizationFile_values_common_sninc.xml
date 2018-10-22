@@ -26,24 +26,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jca://eis/DB/ESBDevDB</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:URI>jca://eis/DB/ESBDevDB</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -89,24 +89,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jca://eis/DB/ESBDevDB</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:URI>jca://eis/DB/ESBDevDB</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -152,24 +152,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jca://eis/DB/ESBDevDB</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:URI>jca://eis/DB/ESBDevDB</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -215,24 +215,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jca://eis/DB/ESBDevDB</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:URI>jca://eis/DB/ESBDevDB</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -278,24 +278,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jca://eis/DB/ESBDevDB</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:URI>jca://eis/DB/ESBDevDB</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -341,24 +341,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@esb_db_adapter_jndi@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jca://eis/DB/ESBDevDB</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@esb_db_adapter_jndi@</tran:URI>
+                        <tran:URI>jca://eis/DB/ESBDevDB</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -404,24 +404,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_OceaneSendAttachmentReqHTTPBS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">http://130.61.81.206/bipe_att/ws/bipeattachment</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@bs_url_OceaneSendAttachmentReqHTTPBS@</tran:URI>
+                        <tran:URI>http://130.61.81.206/bipe_att/ws/bipeattachment</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -463,24 +463,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_PartnerOutboundIncQ@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms:///EbondingIncConnectionFactory/PartnerOutboundIncQJMSBSRequest</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@jms_url_PartnerOutboundIncQ@</tran:URI>
+                        <tran:URI>jms:///EbondingIncConnectionFactory/PartnerOutboundIncQJMSBSRequest</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -518,24 +518,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_ErrorHandlerQ@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms:///EbondingIncConnectionFactory/ErrorHandlerQ</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@jms_url_ErrorHandlerQ@</tran:URI>
+                        <tran:URI>jms:///EbondingIncConnectionFactory/ErrorHandlerQ</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -573,24 +573,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNGetRecordsReqHTTPBS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://sitaitsmsdev.service-now.com/incident.do?SOAP</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@bs_url_SNGetRecordsReqHTTPBS@</tran:URI>
+                        <tran:URI>https://sitaitsmsdev.service-now.com/incident.do?SOAP</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -632,24 +632,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNSendAttachmentReqHTTPBS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://sitaitsmsdev.service-now.com</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@bs_url_SNSendAttachmentReqHTTPBS@</tran:URI>
+                        <tran:URI>https://sitaitsmsdev.service-now.com</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -691,24 +691,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@smtp_default_mail_to@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">mailto:sanchitm@hexaware.com</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@smtp_default_mail_to@</tran:URI>
+                        <tran:URI>mailto:sanchitm@hexaware.com</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -723,7 +723,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_AuditPS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/Common/AuditPS</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -748,7 +748,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_ErrorHandlerQ@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms:///EbondingIncConnectionFactory/ErrorHandlerQ</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
@@ -777,7 +777,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_FetchCategoryMapping@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/Common/FetchCategoryMapping</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -802,7 +802,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_FetchDataMapping@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/Common/FetchDataMapping</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -827,7 +827,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_FetchPriorityMapping@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/Common/FetchPriorityMapping</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -852,7 +852,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_OutboundIncReqSyncPS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/Common/OutboundIncReqSyncPS</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -877,7 +877,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_SAFFailureQ@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms:///EbondingIncConnectionFactory/SAFFailureQ</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
@@ -906,7 +906,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_SendAttachmentPS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/Common/SendAttachmentPS</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -921,7 +921,6 @@
         </cus:actions>
     </cus:customization>
     <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
-	
         <cus:description/>
         <cus:owners>
             <xt:owner>
@@ -932,7 +931,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_bipeattachment@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/bipe_att/ws/bipeattachment</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -946,7 +945,7 @@
             </xt:replace>
         </cus:actions>
     </cus:customization>
-     <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
         <cus:description/>
         <cus:owners>
             <xt:owner>
@@ -957,7 +956,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_SNInboundIncQ@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms:///EbondingIncConnectionFactory/SNInboundIncQ</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
@@ -986,7 +985,7 @@
         <cus:actions>
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_SNInboundIncReqSyncPS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/SN_INC/SNInboundIncReqSyncPS</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Operational Settings</xt:envValueType>
@@ -1026,24 +1025,24 @@
             <xt:replace>
                 <xt:envValueType>Service URI</xt:envValueType>
                 <xt:location>0</xt:location>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_SNIncReqHTTPBS@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://sitaitsmsqa.service-now.com/Sita_inbound.do?SOAP</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service URI Table</xt:envValueType>
                 <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
                     <tran:tableElement>
-                        <tran:URI>@bs_url_SNIncReqHTTPBS@</tran:URI>
+                        <tran:URI>https://sitaitsmsqa.service-now.com/Sita_inbound.do?SOAP</tran:URI>
                         <tran:weight>0</tran:weight>
                     </tran:tableElement>
                 </xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@db_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -1059,8 +1058,7 @@
             </xt:replace>
         </cus:actions>
     </cus:customization>
-    
-   <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
+    <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
         <cus:description/>
         <cus:query>
             <xt:resourceTypes>BusinessService</xt:resourceTypes>
@@ -1161,7 +1159,7 @@
                 <xt:type>ProxyService</xt:type>
                 <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPS</xt:path>
             </xt:refsToSearch>
-			 <xt:refsToSearch xsi:type="xt:ResourceRefType">
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
                 <xt:path>SN_INC/ProxyServices/SNInboundIncReqAsyncPS</xt:path>
             </xt:refsToSearch>
@@ -1294,6 +1292,22 @@
             <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPSPipeline</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>SN_INC/ProxyServices/SNInboundIncReqAsyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>SN_INC/ProxyServices/SNInboundIncReqAsyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>SN_INC/ProxyServices/SNInboundIncReqSyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>SN_INC/ProxyServices/SNInboundIncReqSyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>WSDL</xt:type>
             <xt:path>Common/Resources/DBAdapters/Fetch_EbondingsDataMapping</xt:path>
         </cus:refsToBeConsidered>
@@ -1344,6 +1358,18 @@
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Xquery</xt:type>
             <xt:path>Common/Resources/XQueries/CreateAuditRequest</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>SN_INC/BusinessServices/Provider/SNIncReqHTTPBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>WSDL</xt:type>
+            <xt:path>SN_INC/Resources/WSDLs/SNInboundIncReq</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>SN_INC/Resources/XQueries/CreateSNRequest</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>WSDL</xt:type>
@@ -1505,6 +1531,16 @@
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
             <xt:oldRef>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/FetchPriorityMapping</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>Common/ProxyServices/FetchPriorityMapping</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
                 <xt:type>Pipeline</xt:type>
                 <xt:path>Common/ProxyServices/FetchPriorityMappingPipeline</xt:path>
             </xt:oldRef>
@@ -1551,6 +1587,26 @@
             <xt:newRef>
                 <xt:type>Pipeline</xt:type>
                 <xt:path>Common/ProxyServices/SimulatorBipeAttachmentPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>SN_INC/ProxyServices/SNInboundIncReqAsyncPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>SN_INC/ProxyServices/SNInboundIncReqAsyncPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>SN_INC/ProxyServices/SNInboundIncReqSyncPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>SN_INC/ProxyServices/SNInboundIncReqSyncPSPipeline</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
@@ -1845,12 +1901,52 @@
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
             <xt:oldRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>SN_INC/BusinessServices/Provider/SNIncReqHTTPBS</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>SN_INC/BusinessServices/Provider/SNIncReqHTTPBS</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Archive</xt:type>
+                <xt:path>SN_INC/Resources/JARs/utils</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Archive</xt:type>
+                <xt:path>SN_INC/Resources/JARs/utils</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
                 <xt:type>ServiceAccount</xt:type>
                 <xt:path>SN_INC/Resources/ServiceAccounts/SN_ServiceAccount</xt:path>
             </xt:oldRef>
             <xt:newRef>
                 <xt:type>ServiceAccount</xt:type>
                 <xt:path>SN_INC/Resources/ServiceAccounts/SN_ServiceAccount</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>SN_INC/Resources/WSDLs/SNInboundIncReq</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>SN_INC/Resources/WSDLs/SNInboundIncReq</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>SN_INC/Resources/XQueries/CreateSNRequest</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>SN_INC/Resources/XQueries/CreateSNRequest</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
@@ -2051,6 +2147,16 @@
             <xt:newRef>
                 <xt:type>XMLSchema</xt:type>
                 <xt:path>Common/Resources/DBAdapters/Fetch_EbondingsPriorityMappingOutbound/Fetch_EbondingsPriorityMappingOutbound_table</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>SN_INC/Resources/WSDLs/Provider/SNPartner</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>SN_INC/Resources/WSDLs/Provider/SNPartner</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
     </cus:customization>
