@@ -54,7 +54,7 @@ declare function local:func($Response as element() )as element()  {
         <u_responsible_vendor_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='vendor_restore']/AttrValue/text())}</u_responsible_vendor_uuid>
               <u_pm_required>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_required']/AttrValue/text())}</u_pm_required>
         <u_pm_duration>{fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_duration']/AttrValue/text())}</u_pm_duration>
-        <u_next_pm_date>{if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:date('1970-01-01')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text()),'S')))),'-','/')),'T',' ')
+       <u_next_pm_date>{if(fn:string-length($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text())>0)then fn:replace((fn:replace((fn:string(xs:dateTime('1970-01-01T00:00:00')+xs:dayTimeDuration(concat('PT',fn:data($Response/Attributes/Attribute[AttrName/text()='zpm_next_maint']/AttrValue/text()),'S')))),'-','/')),'T',' ')
 	  else ()
 	  }</u_next_pm_date>
               <u_warranty_org_uuid>{fn:data($Response/Attributes/Attribute[AttrName/text()='zwarranty_org']/AttrValue/text())}</u_warranty_org_uuid>
