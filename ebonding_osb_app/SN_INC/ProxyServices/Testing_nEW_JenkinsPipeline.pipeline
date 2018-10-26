@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+    <con:coreEntry>
+        <con:binding type="Any XML"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-a013dca.Nca771b4.0.16685d1b3e8.N7f32">
+            <con:stage id="_StageId-a013dca.Nca771b4.0.16685d1b3e8.N7f30" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:log>
+                        <con2:id>_ActionId-a013dca.Nca771b4.0.16685d1b3e8.N7f2c</con2:id>
+                        <con1:logLevel>debug</con1:logLevel>
+                    </con1:log>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dca.Nca771b4.0.16685d1b3e8.N7f31">
+            <con:stage id="_StageId-a013dca.Nca771b4.0.16685d1b3e8.N7f2f" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-a013dca.Nca771b4.0.16685d1b3e8.N7f32</con:request>
+                <con:response>response-a013dca.Nca771b4.0.16685d1b3e8.N7f31</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>
