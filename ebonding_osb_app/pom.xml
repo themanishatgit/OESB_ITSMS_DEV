@@ -20,7 +20,7 @@
 		<!--<module>OBS_INC</module> -->
 	<!--	<module>FoundationDataSync</module>-->
       <!--  <module>AzureADUserSync</module>-->
-		
+        <module>SBProject</module>
     </modules>
 
 </project>
