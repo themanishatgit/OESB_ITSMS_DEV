@@ -46,7 +46,7 @@ else('UPDATE')</con2:xqueryText>
                     <con1:assign varName="Message_TranId">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f09</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>fn:concat('OBS_MsgTranId_',fn:current-dateTime())</con2:xqueryText>
+                            <con2:xqueryText>fn-bea:uuid()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:assign varName="TicketNumber">
@@ -74,6 +74,7 @@ else('UPDATE')</con2:xqueryText>
             </con:stage>
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N7e65" name="AuditStart" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context/>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7e64</con6:id>
@@ -216,6 +217,15 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 		<fet:ObjectName>LOC_GROUP</fet:ObjectName>
 		<fet:SourceValue>{fn:substring-after(fn:upper-case(data($body/TRANSACTION/CUSTOMER_LOC)),':')}</fet:SourceValue>
 	</fet:FetchData>
+    
+	<fet:FetchData>
+		<fet:ObjectName>REPORT_METHOD</fet:ObjectName>
+		<fet:SourceValue>{fn:upper-case(data($body/TRANSACTION/REPORT_METHOD))}</fet:SourceValue>
+	</fet:FetchData>
+     <fet:FetchData>
+		<fet:ObjectName>RESOLUTION_CODE</fet:ObjectName>
+		<fet:SourceValue>{fn:upper-case(data($body/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='resol_local']/FIELD_VALUE/text()))}</fet:SourceValue>
+	</fet:FetchData>
 </fet:FetchDataMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
                             </con1:assign>
@@ -272,6 +282,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 	<Category>{$CategoryMappingResponse/fetcm:Result/fetcm:SNCategory/text()}</Category>
         <SubCategory>{$CategoryMappingResponse/fetcm:Result/fetcm:SNSubCategory/text()}</SubCategory>
 	<LocGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='LOC_GROUP']/fetch:DestinationValue/text()}</LocGroup>
+        <ReportMethod>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='REPORT_METHOD']/fetch:DestinationValue/text()}</ReportMethod>
 </ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
@@ -304,6 +315,30 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                             </con2:xqueryTransform>
                         </con1:expr>
                     </con1:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.3deac160.0.166c8eccb2d.N7e6d" name="AuditRequestSent" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                <con:context/>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.3deac160.0.166c8eccb2d.N7e6c</con6:id>
+                        <con4:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>insert</con4:operation>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true">
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.3deac160.0.166c8eccb2d.N7e6b</con6:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                                        <con6:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                    </con6:xqueryTransform>
+                                </con2:expr>
+                            </con2:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
                 </con:actions>
             </con:stage>
         </con:pipeline>
@@ -366,6 +401,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
             </con:stage>
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N7c0e" name="AuditEnd" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context/>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7c0d</con6:id>
