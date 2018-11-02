@@ -55,7 +55,7 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
                     else()
                     }
                     
-                    { if(($TransactionType='CREATE') or  ($TransactionType='UPDATE')) then 
+                    { if(($TransactionType='CREATE') ) then 
                   <ns1:Description>{fn:data($OBSClarifyInboundMessage/ACT_LOG/DESCRIPTION)}</ns1:Description>
                 else()
                     }
@@ -98,7 +98,7 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
                       else ()
                   }
                    
-                    <ns1:ResolutionCode>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='resol_local']/FIELD_VALUE/text()}</ns1:ResolutionCode>
+                    <ns1:ResolutionCode>{data($ResolvedValues/ResolutionCode)}</ns1:ResolutionCode>
                      {      if($TransactionType='CREATE') then 
                     <ns1:ReportMethod>{data($ResolvedValues/ReportMethod)}</ns1:ReportMethod> else()}
               </ns1:IncidentDetails>

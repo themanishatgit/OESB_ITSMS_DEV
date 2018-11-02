@@ -280,9 +280,10 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 	<Priority>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='PRIORITY']/fetch:DestinationValue/text()}</Priority>
 	<Status>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()}</Status>
 	<Category>{$CategoryMappingResponse/fetcm:Result/fetcm:SNCategory/text()}</Category>
-        <SubCategory>{$CategoryMappingResponse/fetcm:Result/fetcm:SNSubCategory/text()}</SubCategory>
+    <SubCategory>{$CategoryMappingResponse/fetcm:Result/fetcm:SNSubCategory/text()}</SubCategory>
 	<LocGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='LOC_GROUP']/fetch:DestinationValue/text()}</LocGroup>
-        <ReportMethod>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='REPORT_METHOD']/fetch:DestinationValue/text()}</ReportMethod>
+    <ReportMethod>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='REPORT_METHOD']/fetch:DestinationValue/text()}</ReportMethod>
+    <ResolutionCode>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='RESOLUTION_CODE']/fetch:DestinationValue/text()}</ResolutionCode>
 </ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
