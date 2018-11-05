@@ -19,7 +19,6 @@
               <!--  <module>CISCO_INC</module>-->
 		<!--<module>OBS_INC</module> -->
 	<!--	<module>FoundationDataSync</module>-->
-        <module>AzureADUserSync</module>
     </modules>
 
 </project>

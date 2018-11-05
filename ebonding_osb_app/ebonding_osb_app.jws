@@ -27,7 +27,6 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ResourceBundlesContentSet"/>
    </list>
    <list n="listOfChildren">
-      <hash><url n="URL" path="AzureADUserSync/AzureADUserSync.jpr"/></hash>
       <hash><url n="URL" path="BA_INC/BA_INC.jpr"/></hash>
       <hash><url n="URL" path="CISCO_INC/CISCO_INC.jpr"/></hash>
       <hash><url n="URL" path="Common/Common.jpr"/></hash>
