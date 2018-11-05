@@ -1,0 +1,12 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ebonding_osb_app/AzureADUserSync/UpdateAUSTransaction" name="UpdateAUSTransaction-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="UpdateAUSTransaction.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ebonding_osb_app/AzureADUserSync/UpdateAUSTransaction"/>
+    <wsdl:binding name="UpdateAUSTransaction_ptt-binding" type="upd:UpdateAUSTransaction_ptt" xmlns:upd="http://xmlns.oracle.com/pcbpel/adapter/db/ebonding_osb_app/AzureADUserSync/UpdateAUSTransaction">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="merge">
+            <soap:operation soapAction="merge"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>
