@@ -428,7 +428,7 @@ xs:QName('DELTALINK'),
                                                     </con4:assign>
                                                     <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7fc7</con7:id>
-                                                        <con6:logLevel>debug</con6:logLevel>
+                                                        <con6:logLevel>warning</con6:logLevel>
                                                         <con6:expr>
                                                             <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$AUS_StartSyncReq</con7:xqueryText>
                                                         </con6:expr>
@@ -438,7 +438,7 @@ xs:QName('DELTALINK'),
                                                 <con4:responseTransform>
                                                     <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7f90</con7:id>
-                                                        <con6:logLevel>debug</con6:logLevel>
+                                                        <con6:logLevel>warning</con6:logLevel>
                                                         <con6:expr>
                                                             <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$AUS_StartSyncRes</con7:xqueryText>
                                                         </con6:expr>
