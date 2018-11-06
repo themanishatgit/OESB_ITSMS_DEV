@@ -14,7 +14,7 @@
     </con:coreEntry>
     <con:router>
         <con:pipeline type="request" name="request-a013dc6.3d18e46e.0.1661baa6a7b.N7d76">
-            <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7d74" name="Stage1">
+            <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7d74" name="UpdateTransactionTables">
                 <con:context>
                     <con1:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateAUSTransaction"/>
                 </con:context>
@@ -27,75 +27,103 @@
                         </con3:expr>
                         <con3:message>****AUS_MarkLoaded.IncomingRequest****</con3:message>
                     </con3:log>
-                    <con2:assign varName="TranId" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+                    <con2:assign varName="BatchTransactionId" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                         <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d3c</con1:id>
                         <con2:expr>
                             <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'SELECT TRANSACTION_ID FROM AUS_TRANSACTIONS WHERE CREATION_TIME=(SELECT MAX(CREATION_TIME) FROM AUS_TRANSACTIONS WHERE DELTALINK IS NOT NULL AND STATUS=?)','PROCESSED'
+'SELECT TRANSACTION_ID FROM AUS_TRANSACTIONS WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM AUS_TRANSACTIONS WHERE DELTALINK IS NOT NULL AND STATUS=? and RECORD_TYPE=?)','PROCESSED','BATCH'
 )/TRANSACTION_ID/text()</con1:xqueryText>
                         </con2:expr>
                     </con2:assign>
-                    <con2:assign varName="Status">
-                        <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d02</con1:id>
-                        <con2:expr>
-                            <con1:xqueryText>'LOADED'</con1:xqueryText>
-                        </con2:expr>
-                    </con2:assign>
-                    <con3:route>
-                        <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d39</con1:id>
-                        <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
-                        <con3:outboundTransform>
-                            <con5:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
-                                <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d05</con2:id>
-                                <con5:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con5:location>
-                                <con5:expr>
-                                    <con2:xqueryTransform>
-                                        <con2:resource ref="AzureADUserSync/Resources/XQueries/UpdateAUSTransactionRequest"/>
-                                        <con2:param name="DeltaLink">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Status">
-                                            <con2:path>$Status</con2:path>
-                                        </con2:param>
-                                        <con2:param name="NextLink">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ErrMsg">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                        <con2:param name="UserCount">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                        <con2:param name="BatchId">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Payload">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TranId">
-                                            <con2:path>$TranId</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ErrCode">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                    </con2:xqueryTransform>
-                                </con5:expr>
-                            </con5:replace>
-                        </con3:outboundTransform>
-                    </con3:route>
+                    <con2:ifThenElse>
+                        <con1:id>_ActionId-3904eaa8.5b9cbcd4.0.166d0250582.N7fea</con1:id>
+                        <con2:case id="_BranchId-3904eaa8.5b9cbcd4.0.166d0250582.N7fe9">
+                            <con2:condition>
+                                <con1:xqueryText>fn:exists($BatchTransactionId)</con1:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con3:route>
+                                    <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d39</con1:id>
+                                    <con3:service ref="AzureADUserSync/BusinessServices/UpdateAUSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:operation>merge</con3:operation>
+                                    <con3:outboundTransform>
+                                        <con5:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                                            <con2:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d05</con2:id>
+                                            <con5:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con5:location>
+                                            <con5:expr>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="AzureADUserSync/Resources/XQueries/UpdateAUSTransactionRequest"/>
+                                                    <con2:param name="Status">
+                                                        <con2:path>'LOADED'</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="NextLink">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="Deltalink">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="RecordType">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errCode">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="BatchId">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="errMsg">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="Payload">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="RecordCount">
+                                                        <con2:path>''</con2:path>
+                                                    </con2:param>
+                                                    <con2:param name="TransactionId">
+                                                        <con2:path>$BatchTransactionId</con2:path>
+                                                    </con2:param>
+                                                </con2:xqueryTransform>
+                                            </con5:expr>
+                                        </con5:replace>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                                <con2:replace varName="body" contents-only="true">
+                                    <con1:id>_ActionId-3904eaa8.5b9cbcd4.0.166d0250582.N7fb2</con1:id>
+                                    <con2:location>
+                                        <con1:xpathText>.</con1:xpathText>
+                                    </con2:location>
+                                    <con2:expr>
+                                        <con1:xqueryText><![CDATA[<AUS_MarkLoadedResponse>
+  <Status>Success</Status>
+  <StatusDescription>Request Processed Successfully</StatusDescription>
+</AUS_MarkLoadedResponse>]]></con1:xqueryText>
+                                    </con2:expr>
+                                </con2:replace>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default>
+                            <con2:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-3904eaa8.5b9cbcd4.0.166d0250582.N7f7e</con1:id>
+                                <con2:location>
+                                    <con1:xpathText>.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con1:xqueryText><![CDATA[<AUS_MarkLoadedResponse>
+  <Status>Failure</Status>
+  <StatusDescription>No batch found in Processed state</StatusDescription>
+</AUS_MarkLoadedResponse>]]></con1:xqueryText>
+                                </con2:expr>
+                            </con2:replace>
+                        </con2:default>
+                    </con2:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
-        <con:pipeline type="response" name="response-a013dc6.3d18e46e.0.1661baa6a7b.N7d75">
-            <con:stage id="_StageId-a013dc6.3d18e46e.0.1661baa6a7b.N7d73" name="Request.Stg">
-                <con:context/>
-                <con:actions/>
-            </con:stage>
-        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dc6.3d18e46e.0.1661baa6a7b.N7d75"/>
         <con:flow>
             <con:pipeline-node name="AUS_MarkLoaded_PP">
                 <con:request>request-a013dc6.3d18e46e.0.1661baa6a7b.N7d76</con:request>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.4.v20160829-44060b6">
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd">
    <name>UpdateAUSTransaction-OR</name>
    <class-mapping-descriptors>
       <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
@@ -21,14 +21,24 @@
          </querying>
          <attribute-mappings>
             <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>nextlink</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="NEXTLINK" xsi:type="column"/>
-               <attribute-classification>[C</attribute-classification>
+               <attribute-name>transactionId</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="TRANSACTION_ID" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
             </attribute-mapping>
             <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>deltalink</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="DELTALINK" xsi:type="column"/>
-               <attribute-classification>[C</attribute-classification>
+               <attribute-name>batchId</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="BATCH_ID" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>recordType</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="RECORD_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>status</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="STATUS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
             </attribute-mapping>
             <attribute-mapping xsi:type="direct-mapping">
                <attribute-name>payload</attribute-name>
@@ -36,29 +46,29 @@
                <attribute-classification>[C</attribute-classification>
             </attribute-mapping>
             <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>creationTime</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="CREATION_TIME" xsi:type="column"/>
+               <attribute-name>machineName</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="MACHINE_NAME" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>nextlink</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="NEXTLINK" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>deltalink</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="DELTALINK" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>timestamp</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="TIMESTAMP" xsi:type="column"/>
                <attribute-classification>java.sql.Timestamp</attribute-classification>
             </attribute-mapping>
             <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>userCount</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="USER_COUNT" xsi:type="column"/>
+               <attribute-name>recordCount</attribute-name>
+               <field table="AUS_TRANSACTIONS" name="RECORD_COUNT" xsi:type="column"/>
                <attribute-classification>java.math.BigDecimal</attribute-classification>
-            </attribute-mapping>
-            <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>batchId</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="BATCH_ID" xsi:type="column"/>
-               <attribute-classification>java.math.BigDecimal</attribute-classification>
-            </attribute-mapping>
-            <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>transactionId</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="TRANSACTION_ID" xsi:type="column"/>
-               <attribute-classification>java.math.BigDecimal</attribute-classification>
-            </attribute-mapping>
-            <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>status</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="STATUS" xsi:type="column"/>
-               <attribute-classification>java.lang.String</attribute-classification>
             </attribute-mapping>
             <attribute-mapping xsi:type="direct-mapping">
                <attribute-name>errCode</attribute-name>
@@ -70,17 +80,8 @@
                <field table="AUS_TRANSACTIONS" name="ERR_MSG" xsi:type="column"/>
                <attribute-classification>java.lang.String</attribute-classification>
             </attribute-mapping>
-            <attribute-mapping xsi:type="direct-mapping">
-               <attribute-name>machineName</attribute-name>
-               <field table="AUS_TRANSACTIONS" name="MACHINE_NAME" xsi:type="column"/>
-               <attribute-classification>java.lang.String</attribute-classification>
-            </attribute-mapping>
          </attribute-mappings>
          <descriptor-type>independent</descriptor-type>
-         <sequencing>
-            <sequence-name>AUS_TRAN_ID_SEQ</sequence-name>
-            <sequence-field name="AUS_TRANSACTIONS.TRANSACTION_ID"/>
-         </sequencing>
          <caching>
             <cache-type>weak-reference</cache-type>
             <cache-size>-1</cache-size>
