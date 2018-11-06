@@ -17,9 +17,9 @@
 		<!--<module>BA_INC</module>-->
 		<!--<module>NGOSS_INC</module>-->
               <!--  <module>CISCO_INC</module>-->
-		<!--<module>OBS_INC</module> -->
+		<module>OBS_INC</module> 
 	<!--	<module>FoundationDataSync</module>-->
-        <module>AzureADUserSync</module>
+       <!-- <module>AzureADUserSync</module>-->
     </modules>
 
 </project>
