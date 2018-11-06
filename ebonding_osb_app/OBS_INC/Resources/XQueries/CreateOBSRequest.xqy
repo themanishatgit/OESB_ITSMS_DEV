@@ -20,10 +20,15 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
           <TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
         else()
         }
+		 {
+            if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)!='CREATE')then
+              <ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionId)}</ID>
+          else ()
+        }
         {
         if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
           <REC_TYPE>Incident</REC_TYPE>
-        else(<ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionId)}</ID>)
+        else()
         }
         <SR_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TicketNumber)}</SR_ID>
         {
@@ -301,12 +306,11 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
               <REPORT_METHOD>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ReportMethod)}</REPORT_METHOD>
             else ()
         }
-        {
-            if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-              <CUSTOMER_LOC>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentLocation/ns2:CustomerLOCCode)}</CUSTOMER_LOC>
-            else ()
-        }
-        
+       {
+        if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
+           <TIME_STAMP>{fn:current-time()}</TIME_STAMP>
+           else()
+       }
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
               <OPEN_DATE>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:OpenDate)}</OPEN_DATE>

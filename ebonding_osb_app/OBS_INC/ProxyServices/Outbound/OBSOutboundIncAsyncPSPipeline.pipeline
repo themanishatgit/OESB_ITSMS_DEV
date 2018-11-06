@@ -60,6 +60,7 @@
             </con:stage>
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N780e" name="AuditStart" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:context/>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N780d</con7:id>
@@ -126,6 +127,7 @@
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con1:wsCallout xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f93</con2:id>
@@ -171,6 +173,7 @@
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con1:wsCallout xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f20</con2:id>
@@ -246,6 +249,7 @@
             </con:stage>
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N773b" name="AuditRequestSent" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:context/>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N773a</con7:id>
@@ -311,6 +315,7 @@
         <con:pipeline type="response" name="response-N53e6a1ba.N47592837.0.1645a2c220b.N792a">
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N76cf" name="AuditResponseReceived" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:context/>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N76ce</con7:id>
