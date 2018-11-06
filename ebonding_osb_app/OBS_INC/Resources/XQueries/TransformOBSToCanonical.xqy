@@ -93,7 +93,7 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
                     <ns1:ETA>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='eta']/FIELD_VALUE/text()}</ns1:ETA>
                     <ns1:ATA>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='ata']/FIELD_VALUE/text()}</ns1:ATA>
                   {
-                  if($TransactionType='UPDATE') 
+                  if($TransactionType='UPDATE1') 
                      then <ns1:WorkNotes>{fn:data($OBSClarifyInboundMessage/ACT_LOG/DESCRIPTION)}</ns1:WorkNotes>
                       else ()
                   }
