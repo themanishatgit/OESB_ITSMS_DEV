@@ -12,9 +12,9 @@ declare variable $CanonicalRequestMessage as element() (:: schema-element(ns2:In
 declare function local:func($CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
     <ns1:TRANSACTION>
       
-        {if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
+        {if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE' and fn:not(fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber))))then
           <TRANSACTION_TYPE>Creation</TRANSACTION_TYPE>
-        else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')then
+        else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE' and  fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber)))then
           <TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
         else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE_REFNUMBER')then
           <TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
@@ -33,9 +33,15 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
         <SR_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TicketNumber)}</SR_ID>
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)!='CREATE')then
+            
+            if (fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber)))then
               <EXTERNAL_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber)}</EXTERNAL_ID>
-            else ()
-        }
+            else if (fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:RefNumber)))then
+            <EXTERNAL_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:RefNumber)}</EXTERNAL_ID>
+            else() 
+            
+            else()
+        } 
         <INTERFACE>SITA</INTERFACE>
         {
           if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
@@ -217,7 +223,7 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Impact/text())>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>IMPACT</FIELD_NAME>
-                        <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Impact)}</FIELD_VALUE>
+                        <FIELD_VALUE>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Impact', '')}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
                     
@@ -257,7 +263,7 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Urgency/text())>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>URGENCY</FIELD_NAME>
-                        <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Urgency)}</FIELD_VALUE>
+                        <FIELD_VALUE> {dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Urgency', '')}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
                     else()

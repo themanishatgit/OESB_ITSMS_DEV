@@ -62,9 +62,7 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
                {  
                    if($TransactionType='CREATE') then
                    <ns1:ShortDescription>{fn:data($OBSClarifyInboundMessage/SUMMARY)}</ns1:ShortDescription>
-                   else if($TransactionType='UPDATE') then
-                   <ns1:ShortDescription>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='SUMMARY']/FIELD_VALUE/text()}</ns1:ShortDescription>
-               else() }
+                    else() }
              
                   {      if($TransactionType='CREATE') then       
                      <ns1:Priority>{
@@ -95,7 +93,9 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
                   {
                   if($TransactionType='UPDATE') 
                      then <ns1:WorkNotes>{fn:data($OBSClarifyInboundMessage/ACT_LOG/DESCRIPTION)}</ns1:WorkNotes>
-                      else ()
+                      else if($TransactionType='UPDATE_REFNUMBER') then
+                      <ns1:WorkNotes>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='sfu_label']/FIELD_VALUE/text()}</ns1:WorkNotes>
+                    else ()
                   }
                    
               
