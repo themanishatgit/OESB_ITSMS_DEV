@@ -19,7 +19,7 @@
                 <con:actions>
                     <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                         <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.136577ea.0.165fb597373.N7d8a</con4:id>
-                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:logLevel>error</con1:logLevel>
                         <con1:expr>
                             <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$fault</con2:xqueryText>
                         </con1:expr>
@@ -40,7 +40,7 @@
                 <con:actions>
                     <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                         <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ca0</con4:id>
-                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:logLevel>error</con1:logLevel>
                         <con1:expr>
                             <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$fault</con2:xqueryText>
                         </con1:expr>
@@ -57,7 +57,7 @@
                 <con:actions>
                     <con4:log>
                         <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7d30</con1:id>
-                        <con4:logLevel>warning</con4:logLevel>
+                        <con4:logLevel>info</con4:logLevel>
                         <con4:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
                         </con4:expr>
@@ -65,7 +65,7 @@
                     </con4:log>
                     <con4:log>
                         <con1:id>_ActionId-a013dca.7227ab93.0.165fc2c957e.N7d2a</con1:id>
-                        <con4:logLevel>warning</con4:logLevel>
+                        <con4:logLevel>info</con4:logLevel>
                         <con4:expr>
                             <con1:xqueryText>$Inbound</con1:xqueryText>
                         </con4:expr>
@@ -107,7 +107,7 @@
                                     <con2:responseTransform>
                                         <con3:log>
                                             <con1:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ec2</con1:id>
-                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:logLevel>info</con3:logLevel>
                                             <con3:expr>
                                                 <con1:xqueryText>$GetRecordsResponse</con1:xqueryText>
                                             </con3:expr>
@@ -219,7 +219,7 @@ else()]]></con1:xqueryText>
                                         </con5:insert>
                                         <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                                             <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7acc</con2:id>
-                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:logLevel>info</con3:logLevel>
                                             <con3:expr>
                                                 <con2:xqueryText>$body</con2:xqueryText>
                                             </con3:expr>
@@ -227,7 +227,7 @@ else()]]></con1:xqueryText>
                                         </con3:log>
                                         <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                                             <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7ac9</con2:id>
-                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:logLevel>info</con3:logLevel>
                                             <con3:expr>
                                                 <con2:xqueryText>$outbound</con2:xqueryText>
                                             </con3:expr>
@@ -303,7 +303,7 @@ else()]]></con1:xqueryText>
                                         </con2:replace>
                                         <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
                                             <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N7a5a</con2:id>
-                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:logLevel>info</con1:logLevel>
                                             <con1:expr>
                                                 <con2:xqueryText>$outbound</con2:xqueryText>
                                             </con1:expr>
@@ -311,7 +311,7 @@ else()]]></con1:xqueryText>
                                         </con1:log>
                                         <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                                             <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N79f1</con2:id>
-                                            <con3:logLevel>warning</con3:logLevel>
+                                            <con3:logLevel>info</con3:logLevel>
                                             <con3:expr>
                                                 <con2:xqueryText>$body</con2:xqueryText>
                                             </con3:expr>
@@ -320,7 +320,7 @@ else()]]></con1:xqueryText>
                                         <con4:log>
                                             <con1:id>_ActionId-a000004.299a2d36.2.1660aa0dfc0.N7ff7</con1:id>
                                             <con1:disabled>true</con1:disabled>
-                                            <con4:logLevel>warning</con4:logLevel>
+                                            <con4:logLevel>info</con4:logLevel>
                                             <con4:expr>
                                                 <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$attachments</con:xqueryText>
                                             </con4:expr>
@@ -334,7 +334,7 @@ else()]]></con1:xqueryText>
                         <con3:responseTransform>
                             <con4:log>
                                 <con1:id>_ActionId-a013dca.N13626c7e.0.1665ce15c86.N7f96</con1:id>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con1:xqueryText>$body</con1:xqueryText>
                                 </con4:expr>
@@ -342,7 +342,7 @@ else()]]></con1:xqueryText>
                             </con4:log>
                             <con3:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con2:id>_ActionId-a013dca.6d45f095.0.165f5cc4ff7.N79bc</con2:id>
-                                <con3:logLevel>warning</con3:logLevel>
+                                <con3:logLevel>info</con3:logLevel>
                                 <con3:expr>
                                     <con2:xqueryText>concat('HTTP Response Code : ',$outbound/ctx:transport/ctx:response/http:http-response-code/text(),
 '~ Response Code : ',$outbound/ctx:transport/ctx:response/tp:response-code/text(),

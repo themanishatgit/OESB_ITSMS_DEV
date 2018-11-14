@@ -13,7 +13,7 @@
                 <con:actions>
                     <con1:log>
                         <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d48</con2:id>
-                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:logLevel>info</con1:logLevel>
                         <con1:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con1:expr>
@@ -120,7 +120,7 @@ xs:QName('STATUS'),
                                         </con1:insert>
                                         <con4:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                                             <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d45</con2:id>
-                                            <con4:logLevel>warning</con4:logLevel>
+                                            <con4:logLevel>info</con4:logLevel>
                                             <con4:expr>
                                                 <con2:xqueryText>$outbound</con2:xqueryText>
                                             </con4:expr>
@@ -146,7 +146,7 @@ xs:QName('STATUS'),
                                         </con3:nxsdTranslation>
                                         <con4:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                                             <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d42</con2:id>
-                                            <con4:logLevel>warning</con4:logLevel>
+                                            <con4:logLevel>info</con4:logLevel>
                                             <con4:expr>
                                                 <con2:xqueryText>$GroupDetailResponse</con2:xqueryText>
                                             </con4:expr>
@@ -227,7 +227,7 @@ else('N')</con2:xqueryText>
                                         </con1:insert>
                                         <con4:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                                             <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d3d</con2:id>
-                                            <con4:logLevel>warning</con4:logLevel>
+                                            <con4:logLevel>info</con4:logLevel>
                                             <con4:expr>
                                                 <con2:xqueryText>$GetManagerRequest</con2:xqueryText>
                                             </con4:expr>
@@ -253,7 +253,7 @@ else('N')</con2:xqueryText>
                                         </con3:nxsdTranslation>
                                         <con4:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                                             <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d3b</con2:id>
-                                            <con4:logLevel>warning</con4:logLevel>
+                                            <con4:logLevel>info</con4:logLevel>
                                             <con4:expr>
                                                 <con2:xqueryText>$GetManagerResponse</con2:xqueryText>
                                             </con4:expr>
@@ -329,7 +329,7 @@ else('N')</con2:xqueryText>
                                         </con2:replace>
                                         <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                             <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-3904eaa8.5b9cbcd4.0.166d0250582.N7ffe</con7:id>
-                                            <con6:logLevel>warning</con6:logLevel>
+                                            <con6:logLevel>info</con6:logLevel>
                                             <con6:expr>
                                                 <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$body</con7:xqueryText>
                                             </con6:expr>
@@ -398,7 +398,7 @@ xs:QName('DELTALINK'),
                                                     </con2:replace>
                                                     <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-3904eaa8.5b9cbcd4.0.166d0250582.N7ff8</con7:id>
-                                                        <con6:logLevel>warning</con6:logLevel>
+                                                        <con6:logLevel>info</con6:logLevel>
                                                         <con6:expr>
                                                             <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$body</con7:xqueryText>
                                                         </con6:expr>
@@ -428,7 +428,7 @@ xs:QName('DELTALINK'),
                                                     </con4:assign>
                                                     <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7fc7</con7:id>
-                                                        <con6:logLevel>warning</con6:logLevel>
+                                                        <con6:logLevel>info</con6:logLevel>
                                                         <con6:expr>
                                                             <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$AUS_StartSyncReq</con7:xqueryText>
                                                         </con6:expr>
@@ -438,7 +438,7 @@ xs:QName('DELTALINK'),
                                                 <con4:responseTransform>
                                                     <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7f90</con7:id>
-                                                        <con6:logLevel>warning</con6:logLevel>
+                                                        <con6:logLevel>info</con6:logLevel>
                                                         <con6:expr>
                                                             <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$AUS_StartSyncRes</con7:xqueryText>
                                                         </con6:expr>
@@ -667,7 +667,7 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                                         </con3:replace>
                                         <con1:log>
                                             <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d88</con2:id>
-                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:logLevel>info</con1:logLevel>
                                             <con1:expr>
                                                 <con2:xqueryText>$body</con2:xqueryText>
                                             </con1:expr>
@@ -677,7 +677,7 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                                     <con4:responseTransform>
                                         <con1:log>
                                             <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d54</con2:id>
-                                            <con1:logLevel>warning</con1:logLevel>
+                                            <con1:logLevel>info</con1:logLevel>
                                             <con1:expr>
                                                 <con2:xqueryText>$body</con2:xqueryText>
                                             </con1:expr>

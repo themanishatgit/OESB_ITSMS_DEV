@@ -13,7 +13,7 @@
                 <con:actions>
                     <con4:log>
                         <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fac</con2:id>
-                        <con4:logLevel>error</con4:logLevel>
+                        <con4:logLevel>info</con4:logLevel>
                         <con4:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con4:expr>
@@ -261,7 +261,7 @@ xs:QName('TRANID'),
                                                     </con1:assign>
                                                     <con4:log>
                                                         <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fa6</con2:id>
-                                                        <con4:logLevel>error</con4:logLevel>
+                                                        <con4:logLevel>info</con4:logLevel>
                                                         <con4:expr>
                                                             <con2:xqueryText>$Req</con2:xqueryText>
                                                         </con4:expr>
@@ -271,7 +271,7 @@ xs:QName('TRANID'),
                                                 <con1:responseTransform>
                                                     <con4:log>
                                                         <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7b35</con2:id>
-                                                        <con4:logLevel>error</con4:logLevel>
+                                                        <con4:logLevel>info</con4:logLevel>
                                                         <con4:expr>
                                                             <con2:xqueryText>$Res</con2:xqueryText>
                                                         </con4:expr>
@@ -305,7 +305,7 @@ xs:QName('TRANID'),
                                                     </con4:assign>
                                                     <con3:log>
                                                         <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e43</con2:id>
-                                                        <con3:logLevel>error</con3:logLevel>
+                                                        <con3:logLevel>info</con3:logLevel>
                                                         <con3:expr>
                                                             <con2:xqueryText>$LogoutReq</con2:xqueryText>
                                                         </con3:expr>
@@ -315,7 +315,7 @@ xs:QName('TRANID'),
                                                 <con4:responseTransform>
                                                     <con3:log>
                                                         <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7e42</con2:id>
-                                                        <con3:logLevel>error</con3:logLevel>
+                                                        <con3:logLevel>info</con3:logLevel>
                                                         <con3:expr>
                                                             <con2:xqueryText>$LogoutRes</con2:xqueryText>
                                                         </con3:expr>
@@ -368,7 +368,7 @@ xs:QName('TRANID'),
                                                             </con2:replace>
                                                             <con5:log>
                                                                 <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fa3</con6:id>
-                                                                <con5:logLevel>error</con5:logLevel>
+                                                                <con5:logLevel>info</con5:logLevel>
                                                                 <con5:expr>
                                                                     <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con6:xqueryText>
                                                                 </con5:expr>
@@ -698,7 +698,7 @@ else(fn:concat('Error occured at ',$fault/ctx:location/ctx:node))))</con2:xquery
                         <con3:outboundTransform>
                             <con4:log>
                                 <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7fc9</con2:id>
-                                <con4:logLevel>error</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$body</con2:xqueryText>
                                 </con4:expr>
@@ -708,7 +708,7 @@ else(fn:concat('Error occured at ',$fault/ctx:location/ctx:node))))</con2:xquery
                         <con3:responseTransform>
                             <con4:log>
                                 <con2:id>_ActionId-a013dce.Nc4b6a57.0.16567a59599.N7fc6</con2:id>
-                                <con4:logLevel>error</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$body</con2:xqueryText>
                                 </con4:expr>

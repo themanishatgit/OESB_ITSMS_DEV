@@ -21,7 +21,7 @@
                 <con:actions>
                     <con3:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                         <con1:id>_ActionId-a013dc6.3d18e46e.0.1661baa6a7b.N7d3f</con1:id>
-                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:logLevel>info</con3:logLevel>
                         <con3:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
                         </con3:expr>

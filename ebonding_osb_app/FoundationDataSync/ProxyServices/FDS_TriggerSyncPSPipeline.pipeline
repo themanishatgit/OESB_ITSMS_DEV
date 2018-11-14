@@ -30,7 +30,7 @@ xs:QName('STATUS'),
                     </con2:assign>
                     <con5:log>
                         <con1:id>_ActionId-N3f57fef5.N253e7ac9.0.165c2e988ac.N7ffe</con1:id>
-                        <con5:logLevel>error</con5:logLevel>
+                        <con5:logLevel>info</con5:logLevel>
                         <con5:expr>
                             <con1:xqueryText>$LastBatchStatus</con1:xqueryText>
                         </con5:expr>
@@ -301,7 +301,7 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                             </con2:replace>
                             <con5:log>
                                 <con1:id>_ActionId-N3f57fef5.2139307a.0.16589fbc43e.N7c59</con1:id>
-                                <con5:logLevel>error</con5:logLevel>
+                                <con5:logLevel>info</con5:logLevel>
                                 <con5:expr>
                                     <con1:xqueryText>$body</con1:xqueryText>
                                 </con5:expr>

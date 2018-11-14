@@ -30,7 +30,7 @@ xs:QName('STATUS'),
                     </con2:assign>
                     <con5:log>
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dc6.N39b0b05a.0.16658932d4d.N7f2a</con6:id>
-                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:logLevel>info</con5:logLevel>
                         <con5:expr>
                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$LastBatchStatus</con6:xqueryText>
                         </con5:expr>
@@ -315,7 +315,7 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                             </con3:insert>
                             <con4:log>
                                 <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d51</con2:id>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>fn:concat('REQUEST_BODY: ',$body,
 'OUTBOUND VARIABLE: ',$outbound)</con2:xqueryText>
@@ -326,7 +326,7 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                         <con1:responseTransform>
                             <con4:log>
                                 <con2:id>_ActionId-3904eaa8.5b9cbcd4.0.166d0250582.N7ee8</con2:id>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$body</con2:xqueryText>
                                 </con4:expr>

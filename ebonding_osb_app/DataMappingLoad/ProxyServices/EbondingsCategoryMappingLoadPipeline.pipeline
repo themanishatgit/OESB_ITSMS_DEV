@@ -26,7 +26,7 @@
                     <con3:log>
                         <con2:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7dae</con2:id>
                         <con2:disabled>true</con2:disabled>
-                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:logLevel>info</con3:logLevel>
                         <con3:expr>
                             <con2:xqueryText>$IncomingRequest</con2:xqueryText>
                         </con3:expr>
@@ -69,7 +69,7 @@ else('N')</con1:xqueryText>
                     </con2:assign>
                     <con3:log>
                         <con1:id>_ActionId-a013dca.36121359.0.164121be226.N7df3</con1:id>
-                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:logLevel>info</con3:logLevel>
                         <con3:expr>
                             <con1:xqueryText>$Record_Exists</con1:xqueryText>
                         </con3:expr>
@@ -131,7 +131,7 @@ xs:QName('TRANID'),
                     <con3:log>
                         <con1:id>_ActionId-a013dca.2398d79f.0.163d8f431f0.N7b3c</con1:id>
                         <con1:disabled>true</con1:disabled>
-                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:logLevel>info</con3:logLevel>
                         <con3:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
                         </con3:expr>
@@ -246,7 +246,7 @@ xs:QName('TRANID'),
                             <con5:log xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con1:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.2398d79f.0.163d8f431f0.N7c37</con1:id>
                                 <con6:disabled xmlns:con6="http://www.bea.com/wli/sb/stages/config">true</con6:disabled>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con1:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con1:xqueryText>
                                 </con4:expr>

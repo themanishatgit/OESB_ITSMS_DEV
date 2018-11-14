@@ -21,7 +21,7 @@
                 <con:actions>
                     <con1:log>
                         <con2:id>_ActionId-a013dca.3f8a40e0.0.16421326ef7.N7ff8</con2:id>
-                        <con1:logLevel>warning</con1:logLevel>
+                        <con1:logLevel>info</con1:logLevel>
                         <con1:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con1:expr>

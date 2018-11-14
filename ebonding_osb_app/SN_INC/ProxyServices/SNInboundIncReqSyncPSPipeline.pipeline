@@ -612,7 +612,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                             </con1:replace>
                             <con4:log>
                                 <con2:id>_ActionId-a013dc6.291b6c5f.0.164640ebe9f.N7ffe</con2:id>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$ServiceAccountUserCredentials/config:username/text()</con2:xqueryText>
                                 </con4:expr>
@@ -620,7 +620,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                             </con4:log>
                             <con4:log>
                                 <con2:id>_ActionId-a013dc6.291b6c5f.0.164640ebe9f.N7ff5</con2:id>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$outbound/*</con2:xqueryText>
                                 </con4:expr>
@@ -628,7 +628,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                             </con4:log>
                             <con4:log>
                                 <con2:id>_ActionId-a013dc6.N1a1861c0.0.164b80b67ba.N7ffe</con2:id>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con4:expr>

@@ -425,7 +425,7 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                             </con1:replace>
                             <con5:log>
                                 <con2:id>_ActionId-a013dc6.5ba51f93.0.164ac4995b8.N7ffc</con2:id>
-                                <con5:logLevel>error</con5:logLevel>
+                                <con5:logLevel>info</con5:logLevel>
                                 <con5:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con5:expr>
@@ -441,7 +441,7 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                             </con1:assign>
                             <con5:log>
                                 <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N728a</con2:id>
-                                <con5:logLevel>error</con5:logLevel>
+                                <con5:logLevel>info</con5:logLevel>
                                 <con5:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con5:expr>

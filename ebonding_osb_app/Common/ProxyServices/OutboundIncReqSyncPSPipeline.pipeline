@@ -218,7 +218,7 @@
                 <con:actions>
                     <con5:log>
                         <con1:id>_ActionId-a013dce.N67964cee.0.16532ef7677.N7f9d</con1:id>
-                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:logLevel>info</con5:logLevel>
                         <con5:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
                         </con5:expr>

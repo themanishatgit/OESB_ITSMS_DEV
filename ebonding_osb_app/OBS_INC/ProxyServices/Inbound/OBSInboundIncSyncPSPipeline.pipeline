@@ -614,7 +614,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                         <con3:responseTransform>
                             <con4:log xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f2d</con2:id>
-                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:logLevel>info</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$ServiceNowResponse</con2:xqueryText>
                                 </con4:expr>

@@ -393,7 +393,7 @@
                         <con4:responseTransform>
                             <con3:log>
                                 <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N762f</con2:id>
-                                <con3:logLevel>warning</con3:logLevel>
+                                <con3:logLevel>info</con3:logLevel>
                                 <con3:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con3:expr>

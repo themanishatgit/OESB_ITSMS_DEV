@@ -21,7 +21,7 @@
                 <con:actions>
                     <con3:log>
                         <con1:id>_ActionId-N3f57fef5.N7021ed48.0.16586e229a8.N7e54</con1:id>
-                        <con3:logLevel>error</con3:logLevel>
+                        <con3:logLevel>info</con3:logLevel>
                         <con3:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
                         </con3:expr>

@@ -706,7 +706,7 @@ else ''</con2:path>
                             </con1:assign>
                             <con3:log>
                                 <con1:id>_ActionId-a013b64.Nfc29b77.0.163d46640c5.N7d9a</con1:id>
-                                <con3:logLevel>error</con3:logLevel>
+                                <con3:logLevel>info</con3:logLevel>
                                 <con3:expr>
                                     <con1:xqueryText>$ServiceNowResponse</con1:xqueryText>
                                 </con3:expr>
