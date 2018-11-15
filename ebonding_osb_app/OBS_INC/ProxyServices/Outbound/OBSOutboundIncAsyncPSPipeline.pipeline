@@ -241,6 +241,12 @@
                     <con2:userNsDecl prefix="ns1" namespace="http://eai/Sav/Trillium/Types"/>
                 </con:context>
                 <con:actions>
+                    <con5:assign varName="ResolvedValues" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-a013dca.N7c59a2d.0.1670d3ab2dd.N7f58</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='STATUS_CODE']/fet:DestinationValue/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con5:assign>
                     <con1:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N77a5</con2:id>
                         <con1:location>
@@ -249,21 +255,15 @@
                         <con1:expr>
                             <con2:xqueryTransform>
                                 <con2:resource ref="OBS_INC/Resources/XQueries/CreateOBSRequest"/>
+                                <con2:param name="ResolvedValues">
+                                    <con2:path>$ResolvedValues</con2:path>
+                                </con2:param>
                                 <con2:param name="CanonicalRequestMessage">
                                     <con2:path>$body/*</con2:path>
                                 </con2:param>
                             </con2:xqueryTransform>
                         </con1:expr>
                     </con1:replace>
-                    <con5:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
-                        <con2:id>_ActionId-a013dca.N7c59a2d.0.1670d3ab2dd.N7f8c</con2:id>
-                        <con1:location>
-                            <con2:xpathText>./ns1:TRANSACTION/UPDATE_FIELD[FIELD_NAME/text()='STATUS']/FIELD_VALUE</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='STATUS_CODE']/fet:DestinationValue/text()</con2:xqueryText>
-                        </con1:expr>
-                    </con5:replace>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N773b" name="AuditRequestSent" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

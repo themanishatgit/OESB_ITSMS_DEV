@@ -9,7 +9,8 @@ declare namespace ns2="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 
 declare variable $CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::) external;
 
-declare function local:func($CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
+declare variable $ResolvedValues as xs:string external;
+declare function local:func($ResolvedValues as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
     <ns1:TRANSACTION>
       
   	 		
@@ -139,8 +140,7 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status/text())>0)then
                     <UPDATE_FIELD>
                       <FIELD_NAME>STATUS</FIELD_NAME>
-                      <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status)}</FIELD_VALUE>
-                      
+                      <FIELD_VALUE>{$ResolvedValues}</FIELD_VALUE>                      
                     </UPDATE_FIELD>
                     else()
                 }
@@ -337,4 +337,4 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
     </ns1:TRANSACTION>
 };
 
-local:func($CanonicalRequestMessage)
+local:func($ResolvedValues , $CanonicalRequestMessage)
