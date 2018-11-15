@@ -145,14 +145,15 @@ declare function local:func($CanonicalRequestMessage as element() (:: schema-ele
                     else()
                 }
                 {
-                  if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AFT/text())>0)then
+                  if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ATD/text())>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>ATD</FIELD_NAME>
-                        <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AFT)}</FIELD_VALUE>
+                        <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ATD)}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
                     else()
                 }
+                
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text())>0)then
                     <UPDATE_FIELD>

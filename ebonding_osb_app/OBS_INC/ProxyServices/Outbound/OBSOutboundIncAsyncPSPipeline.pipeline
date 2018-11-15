@@ -389,7 +389,15 @@
                     <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7631</con2:id>
                         <con4:service ref="OBS_INC/BusinessServices/Outbound/OBSIncReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con4:outboundTransform/>
+                        <con4:operation>handleTT</con4:operation>
+                        <con4:outboundTransform>
+                            <con6:routing-options xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-a013dca.N7c59a2d.0.1670d3ab2dd.N7fc3</con2:id>
+                                <con1:restOptions>
+                                    <con1:verb>POST</con1:verb>
+                                </con1:restOptions>
+                            </con6:routing-options>
+                        </con4:outboundTransform>
                         <con4:responseTransform>
                             <con3:log>
                                 <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N762f</con2:id>
