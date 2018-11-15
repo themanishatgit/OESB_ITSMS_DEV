@@ -46,7 +46,7 @@ declare function local:func($ResolvedValues as xs:string,$CanonicalRequestMessag
             else() 
             
             else()
-        } 
+        }
         <INTERFACE>SITA</INTERFACE>
         {
           if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
