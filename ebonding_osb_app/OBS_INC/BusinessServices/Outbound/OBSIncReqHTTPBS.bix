@@ -36,6 +36,8 @@
                 <http:request-method>POST</http:request-method>
                 <http:timeout>30</http:timeout>
                 <http:connection-timeout>30</http:connection-timeout>
+                <http:outbound-authentication xsi:type="http:HttpBasicAuthenticationType"/>
+                <http:service-account ref="SN_INC/Resources/ServiceAccounts/OBS_ServiceAccount"/>
                 <http:follow-redirects>false</http:follow-redirects>
                 <http:chunked-streaming-mode>true</http:chunked-streaming-mode>
                 <http:session-sctikiness enabled="false" session-id-name="JSESSIONID"/>
