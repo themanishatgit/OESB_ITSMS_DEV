@@ -21,7 +21,7 @@ declare function local:func($Status as xs:string,$Status_Code as xs:string,$Cano
        else if((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber) != '') and fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')then
           <TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
           
-        else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE_REFNUMBER')then
+        else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='Ack')then
           <TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
           else()  
         }  
