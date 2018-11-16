@@ -209,6 +209,7 @@
                     </con1:wsCallout>
                     <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f1e</con2:id>
+                        <con2:disabled>true</con2:disabled>
                         <con1:location>
                             <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status</con2:xpathText>
                         </con1:location>
