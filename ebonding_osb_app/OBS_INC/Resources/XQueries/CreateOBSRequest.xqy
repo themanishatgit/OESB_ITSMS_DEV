@@ -9,8 +9,9 @@ declare namespace ns2="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 
 declare variable $CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::) external;
 
-declare variable $ResolvedValues as xs:string external;
-declare function local:func($ResolvedValues as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
+declare variable $Status_Code as xs:string external;
+declare variable $Status as xs:string external;
+declare function local:func($Status as xs:string,$Status_Code as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
     <ns1:TRANSACTION>
       
   	 		
@@ -64,8 +65,10 @@ declare function local:func($ResolvedValues as xs:string,$CanonicalRequestMessag
           else()
         }
         {
-          if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE' or fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')then
+          if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE') then
             <STATUS>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status)}</STATUS>
+          else if (fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE') then
+          <STATUS>{$Status_Code}</STATUS>
           else()
         }
         {
@@ -140,7 +143,7 @@ declare function local:func($ResolvedValues as xs:string,$CanonicalRequestMessag
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status/text())>0)then
                     <UPDATE_FIELD>
                       <FIELD_NAME>STATUS</FIELD_NAME>
-                      <FIELD_VALUE>{$ResolvedValues}</FIELD_VALUE>                      
+                      <FIELD_VALUE>{$Status}</FIELD_VALUE>                      
                     </UPDATE_FIELD>
                     else()
                 }
@@ -337,4 +340,4 @@ declare function local:func($ResolvedValues as xs:string,$CanonicalRequestMessag
     </ns1:TRANSACTION>
 };
 
-local:func($ResolvedValues , $CanonicalRequestMessage)
+local:func($Status,$Status_Code , $CanonicalRequestMessage)
