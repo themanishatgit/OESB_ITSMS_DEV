@@ -36,15 +36,15 @@ declare function local:func($ResolvedValues as xs:string,$CanonicalRequestMessag
         else()
         }
         <SR_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TicketNumber)}</SR_ID>
-        {
+	 {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)!='CREATE')then
-            
-            if (fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber)))then
+            (
+            if ((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:Name/text()) = 'OBS'))then
               <EXTERNAL_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber)}</EXTERNAL_ID>
-            else if (fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:RefNumber)))then
+         else if ((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:Name/text()) = 'OBS'))then
             <EXTERNAL_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:RefNumber)}</EXTERNAL_ID>
             else() 
-            
+           ) 
             else()
         }
         <INTERFACE>SITA</INTERFACE>
