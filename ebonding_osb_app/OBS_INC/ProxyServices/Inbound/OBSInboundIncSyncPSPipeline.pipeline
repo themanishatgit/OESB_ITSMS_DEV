@@ -452,7 +452,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                             <con1:assign varName="DataMappingRequest">
                                 <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7d7b</con2:id>
                                 <con1:expr>
-                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<fet:FetchDataMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchDataMappingMessageV1">
+                                    <con2:xqueryText><![CDATA[<fet:FetchDataMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchDataMappingMessageV1">
 	<fet:RecType>INC</fet:RecType>
 	<fet:Source>OBS</fet:Source>
 	<fet:Destination>SN</fet:Destination>
@@ -469,11 +469,14 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 		<fet:SourceValue>{fn:upper-case(data($body/TRANSACTION/CATEGORY))}</fet:SourceValue>
 	</fet:FetchData>
 	<fet:FetchData>
-		<fet:ObjectName>LOC_GROUP</fet:ObjectName>
+		<fet:ObjectName>ASSIGNMENT_GROUP</fet:ObjectName>
 		<fet:SourceValue>{fn:substring-after(fn:upper-case(data($body/TRANSACTION/CUSTOMER_LOC)),':')}</fet:SourceValue>
 	</fet:FetchData>
-    
-	<fet:FetchData>
+       <fet:FetchData>
+		<fet:ObjectName>CONTACT</fet:ObjectName>
+		<fet:SourceValue>{fn:substring-before(fn:upper-case(data($body/TRANSACTION/CUSTOMER_LOC)),',')}</fet:SourceValue>
+	</fet:FetchData>
+        <fet:FetchData>
 		<fet:ObjectName>REPORT_METHOD</fet:ObjectName>
 		<fet:SourceValue>{fn:upper-case(data($body/TRANSACTION/REPORT_METHOD))}</fet:SourceValue>
 	</fet:FetchData>
@@ -481,7 +484,11 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 		<fet:ObjectName>RESOLUTION_CODE</fet:ObjectName>
 		<fet:SourceValue>{(data($body/TRANSACTION/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='resol_local']/FIELD_VALUE))}</fet:SourceValue>
 	</fet:FetchData>
-</fet:FetchDataMappingRequest>]]></con:xqueryText>
+        <fet:FetchData>
+		<fet:ObjectName>BUSINESS_SERVICE</fet:ObjectName>
+		<fet:SourceValue>{data($body/TRANSACTION/PRIMARY_CI/ASSET_TAG/text())}</fet:SourceValue>
+	</fet:FetchData>
+</fet:FetchDataMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
                             </con1:assign>
                         </con1:requestTransform>
@@ -541,6 +548,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 	<LocGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='LOC_GROUP']/fetch:DestinationValue/text()}</LocGroup>
     <ReportMethod>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='REPORT_METHOD']/fetch:DestinationValue/text()}</ReportMethod>
     <ResolutionCode>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='RESOLUTION_CODE']/fetch:DestinationValue/text()}</ResolutionCode>
+     <EmailAddress>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='LOC_CNT']/fetch:DestinationValue/text()}</EmailAddress>
 </ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
@@ -628,6 +636,12 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                             </con2:routing-options>
                         </con3:outboundTransform>
                         <con3:responseTransform>
+                            <con1:assign varName="ServiceNowResponse" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dca.N3b3d8527.0.167310bb0e1.N7f9c</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>$SNResponse/*</con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
                             <con4:log xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f2d</con2:id>
                                 <con4:logLevel>info</con4:logLevel>
