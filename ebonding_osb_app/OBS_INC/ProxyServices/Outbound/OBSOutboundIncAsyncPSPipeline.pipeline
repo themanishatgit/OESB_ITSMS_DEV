@@ -241,6 +241,7 @@
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="ns1" namespace="http://eai/Sav/Trillium/Types"/>
                 </con:context>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con5:assign varName="Status_Code" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                         <con2:id>_ActionId-a013dca.N7c59a2d.0.1670d3ab2dd.N7f58</con2:id>
@@ -267,9 +268,6 @@
                                 </con2:param>
                                 <con2:param name="CanonicalRequestMessage">
                                     <con2:path>$body/*</con2:path>
-                                </con2:param>
-                                <con2:param name="Status_Code">
-                                    <con2:path>$Status_Code</con2:path>
                                 </con2:param>
                             </con2:xqueryTransform>
                         </con1:expr>

@@ -199,4 +199,5 @@
          </list>
       </hash>
    </hash>
+   <value n="SOA_DVM_FOLDER_NAME" v="Resources/DVM/"/>
 </jpr:project>

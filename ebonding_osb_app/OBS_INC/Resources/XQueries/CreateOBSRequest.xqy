@@ -9,9 +9,9 @@ declare namespace ns2="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 
 declare variable $CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::) external;
 
-declare variable $Status_Code as xs:string external;
+
 declare variable $Status as xs:string external;
-declare function local:func($Status as xs:string,$Status_Code as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
+declare function local:func($Status as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
     <ns1:TRANSACTION>
        {if((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber) = '') and fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
           <TRANSACTION_TYPE>Creation</TRANSACTION_TYPE>
@@ -65,7 +65,7 @@ declare function local:func($Status as xs:string,$Status_Code as xs:string,$Cano
           if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE') then
             <STATUS>Open</STATUS>
           else if (fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE') then
-          <STATUS>{$Status_Code}</STATUS>
+          <STATUS>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundStatus_Code', 'Source_Value', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status/text(), 'Destination_value', '')}</STATUS>
           else()
         }
         {
@@ -337,4 +337,4 @@ declare function local:func($Status as xs:string,$Status_Code as xs:string,$Cano
     </ns1:TRANSACTION>
 };
 
-local:func($Status,$Status_Code , $CanonicalRequestMessage)
+local:func($Status, $CanonicalRequestMessage)
