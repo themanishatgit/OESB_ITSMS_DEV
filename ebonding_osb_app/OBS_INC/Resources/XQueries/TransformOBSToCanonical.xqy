@@ -92,11 +92,11 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
                     <ns1:ATA>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='ata']/FIELD_VALUE/text()}</ns1:ATA>
                     <ns1:AFT></ns1:AFT>
                   {
-                  if($TransactionType='UPDATE') 
-                     then <ns1:WorkNotes>{fn:data($OBSClarifyInboundMessage/ACT_LOG/DESCRIPTION)}</ns1:WorkNotes>
+                  if(fn:exists($OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='sfu_label']/FIELD_VALUE) and $TransactionType='UPDATE')
+                     then  <ns1:WorkNotes>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='sfu_label']/FIELD_VALUE/text()}</ns1:WorkNotes>
                       else if($TransactionType='UPDATE_REFNUMBER') then
                       <ns1:WorkNotes>{$OBSClarifyInboundMessage/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME/text()='sfu_label']/FIELD_VALUE/text()}</ns1:WorkNotes>
-                    else ()
+                    else  <ns1:WorkNotes>{fn:data($OBSClarifyInboundMessage/ACT_LOG/DESCRIPTION)}</ns1:WorkNotes>
                   }
                    
               
@@ -107,7 +107,7 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
               
                {      if($TransactionType='CREATE') then 
               <ns1:IncidentContact>                 
-                  <ns1:EmailAddress>{data($ResolvedValues/EmailAddress)}</ns1:EmailAddress>               
+                  <ns1:EmailAddress>{fn:substring-before(data($ResolvedValues/EmailAddress),',')}</ns1:EmailAddress>               
               </ns1:IncidentContact>               
               else()
               }

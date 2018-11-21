@@ -160,20 +160,22 @@
                         </con2:location>
                         <con2:expr>
                             <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config"><![CDATA[<RESPONSE>
+
+<STATUS>0</STATUS>
   {
-    if($body/inc:IncidentResponseMessage/inc:Status/text()='Success') then<STATUS>0</STATUS>
-    else(<STATUS>{$body/inc:IncidentResponseMessage/inc:ErrorCode/text()}</STATUS>)
-  }
-  {
-    if($TransactionType='CREATE' and $body/inc:IncidentResponseMessage/inc:Status/text()='Success')then
-      <ERROR_DESCRIPTION>{concat('New Incident Successfully Created (',$body/inc:IncidentResponseMessage/inc:TicketNumber/text(),').')}</ERROR_DESCRIPTION>
-    else if($TransactionType='UPDATE' and $body/inc:IncidentResponseMessage/inc:Status/text()='Success' and $body/TRANSACTION/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME='sfu_code']/FIELD_VALUE='200')then
-      <ERROR_DESCRIPTION>{concat('Incident with SR id:',$body/inc:IncidentResponseMessage/inc:TicketNumber/text(),' successfully acknowledged (Log note added successfully).')}</ERROR_DESCRIPTION>
-    else if($TransactionType='UPDATE' and $body/inc:IncidentResponseMessage/inc:Status/text()='Success')then
-      <ERROR_DESCRIPTION>{concat('Incident with SR id:',$body/inc:IncidentResponseMessage/inc:TicketNumber/text(),' successfully updated.')}</ERROR_DESCRIPTION>
-    else if($TransactionType='UPDATE_REFNUMBER' and $body/inc:IncidentResponseMessage/inc:Status/text()='Success')then
-      <ERROR_DESCRIPTION>{concat('Incident with SR id:',$body/inc:IncidentResponseMessage/inc:TicketNumber/text(),' successfully acknowledged.')}</ERROR_DESCRIPTION>
-    else(<ERROR_DESCRIPTION>{$body/inc:IncidentResponseMessage/inc:Description/text()}</ERROR_DESCRIPTION>)
+    if($TransactionType='CREATE') then
+      <ERROR_DESCRIPTION>{('New Incident Successfully Created' )}</ERROR_DESCRIPTION>	
+	  
+    else if($TransactionType='UPDATE' and $body/TRANSACTION/UPDATE_INFO/UPDATE_FIELD[FIELD_NAME='sfu_code']/FIELD_VALUE='200')then
+      <ERROR_DESCRIPTION>{('Incident successfully acknowledged (Log note added successfully).')}</ERROR_DESCRIPTION>
+	  
+    else if($TransactionType='UPDATE' )then
+      <ERROR_DESCRIPTION>{('Incident successfully updated.')}</ERROR_DESCRIPTION>
+	  
+    else if($TransactionType='UPDATE_REFNUMBER')then
+      <ERROR_DESCRIPTION>{('Incident successfully acknowledged.')}</ERROR_DESCRIPTION>
+	  
+    else()
   }
 </RESPONSE>]]></con5:xqueryText>
                         </con2:expr>
@@ -268,6 +270,7 @@
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N7f0c" name="Validate" errorHandler="error-N53e6a1ba.N47592837.0.1645a2c220b.N7f05" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context>
                     <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                    <con2:userNsDecl prefix="s0" namespace="http://tempuri.org/"/>
                 </con:context>
                 <con:actions>
                     <con1:replace contents-only="true" varName="body">
@@ -276,7 +279,24 @@
                             <con2:xpathText>.</con2:xpathText>
                         </con1:location>
                         <con1:expr>
-                            <con2:xqueryText>fn-bea:inlinedXML($body/tem:processTransaction/tem:transactionData/text())</con2:xqueryText>
+                            <con2:xqueryText>$body/tem:processTransaction/tem:transactionData/s0:processTransaction/s0:s/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                    <con3:log>
+                        <con2:id>_ActionId-a013dca.N3b3d8527.0.167310bb0e1.N7f34</con2:id>
+                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con3:expr>
+                        <con3:message>Body:</con3:message>
+                    </con3:log>
+                    <con1:replace varName="body">
+                        <con2:id>_ActionId-a013dca.N3b3d8527.0.167310bb0e1.N7f37</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>fn-bea:inlinedXML($body)</con2:xqueryText>
                         </con1:expr>
                     </con1:replace>
                     <con1:assign varName="IncomingRequest">
@@ -314,8 +334,10 @@ else('UPDATE')</con2:xqueryText>
                     </con1:assign>
                     <con1:validate>
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f06</con2:id>
-                        <con1:schema ref="OBS_INC/Resources/Schemas/OBS_INC_ClarifySchema"/>
-                        <con1:schemaElement>processTransaction</con1:schemaElement>
+                        <con2:disabled>true</con2:disabled>
+                        <con1:resourceExpr>
+                            <con2:xqueryText>$body/tem:processTransaction/tem:transactionData/processTransaction/s/TRANSACTION</con2:xqueryText>
+                        </con1:resourceExpr>
                         <con1:varName>body</con1:varName>
                         <con1:location>
                             <con2:xpathText>./*</con2:xpathText>
@@ -474,7 +496,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 	</fet:FetchData>
        <fet:FetchData>
 		<fet:ObjectName>CONTACT</fet:ObjectName>
-		<fet:SourceValue>{fn:substring-before(fn:upper-case(data($body/TRANSACTION/CUSTOMER_LOC)),',')}</fet:SourceValue>
+		<fet:SourceValue>{fn:substring-after(fn:upper-case(data($body/TRANSACTION/CUSTOMER_LOC)),',')}</fet:SourceValue>
 	</fet:FetchData>
         <fet:FetchData>
 		<fet:ObjectName>REPORT_METHOD</fet:ObjectName>
@@ -541,14 +563,14 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 	<Impact>{data($FetchPriorityMappingResponse/fet:Result/fet:Impact)}</Impact>
 	<Urgency>{data($FetchPriorityMappingResponse/fet:Result/fet:Urgency)}</Urgency>
 	<Priority>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='PRIORITY']/fetch:DestinationValue/text()}</Priority>
-	<Status>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()}</Status>
+	<Status>{fn:upper-case($DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text())}</Status>
 	<Category>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CATEGORY']/fetch:DestinationValue/text()}</Category>
 	<Category2>{$CategoryMappingResponse/fetcm:Result/fetcm:SNCategory/text()}</Category2>
     <SubCategory>{$CategoryMappingResponse/fetcm:Result/fetcm:SNSubCategory/text()}</SubCategory>
 	<LocGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='LOC_GROUP']/fetch:DestinationValue/text()}</LocGroup>
     <ReportMethod>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='REPORT_METHOD']/fetch:DestinationValue/text()}</ReportMethod>
     <ResolutionCode>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='RESOLUTION_CODE']/fetch:DestinationValue/text()}</ResolutionCode>
-     <EmailAddress>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='LOC_CNT']/fetch:DestinationValue/text()}</EmailAddress>
+     <EmailAddress>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CONTACT']/fetch:DestinationValue/text()}</EmailAddress>
 </ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
