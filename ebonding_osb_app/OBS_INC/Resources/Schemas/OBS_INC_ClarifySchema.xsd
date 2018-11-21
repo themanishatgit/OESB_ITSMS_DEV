@@ -1,74 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by aziz (weenko) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xs:element name="TRANSACTION" type="TRANSACTION" />
-  <xs:complexType name="TRANSACTION">
-    <xs:sequence>
-      <xs:element name="TRANSACTION_TYPE" type="xs:string" nillable="false" />
-      <xs:element name="REC_TYPE" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="TRANSACTION_ID" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="SR_ID" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="EXTERNAL_ID" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="INTERFACE" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="DESCRIPTION" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="SUMMARY" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="SEVERITY" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="STATUS" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="CATEGORY" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="RESPONSIBLE_PARTY" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="VNDR_REF_NUM" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="VNDR_DISP_TIME" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="VNDR_RES_TIME" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="GROUP" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="LOCATION" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="CUSTOMER" type="USER_INFO" nillable="true" minOccurs="0" />
-      <xs:element name="PRIMARY_CI" type="CI" nillable="true" minOccurs="0" />
-      <xs:element name="SECONDARY_CI" type="CI" nillable="true" minOccurs="0" />
-      <xs:element name="UPDATE_INFO" type="UPDATE_INFO" nillable="true" minOccurs="0" />
-      <xs:element name="SLA_VIOLATION" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="ACT_LOG" type="LOG_UPDATE" nillable="true" minOccurs="0" />
-      <xs:element name="REPORT_TYPES" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="UPDATED_BY" type="USER_INFO" nillable="true" minOccurs="0" />
-      <xs:element name="NCC" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="IMPACT" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="URGENCY" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="ID" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="REPORT_METHOD" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="CUSTOMER_LOC" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="INITIAL_TIME" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="TIME_STAMP" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="OPEN_DATE" type="xs:string" nillable="true" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="UPDATE_INFO">
-    <xs:sequence>
-      <xs:element name="UPDATE_FIELD" type="UPDATE_FIELD" nillable="true" minOccurs="0" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="UPDATE_FIELD">
-    <xs:sequence>
-      <xs:element name="FIELD_NAME" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="FIELD_VALUE" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="DESCRIPTION" type="xs:string" nillable="true" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="USER_INFO">
-    <xs:sequence>
-      <xs:element name="LAST_NAME" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="FIRST_NAME" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="MIDDLE_NAME" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="EMAIL_ADDRESS" type="xs:string" nillable="true" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="CI">
-    <xs:sequence>
-      <xs:element name="ASSET_TAG" type="xs:string" nillable="true" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="LOG_UPDATE">
-    <xs:sequence>
-      <xs:element name="DESCRIPTION" type="xs:string" nillable="true" minOccurs="0" />
-      <xs:element name="ACT_TYPE" type="xs:string" nillable="true" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="processTransaction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="s">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TRANSACTION">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="TRANSACTION_TYPE"/>
+                    <xs:element type="xs:string" name="REC_TYPE"/>
+                    <xs:element type="xs:string" name="TRANSACTION_ID"/>
+                    <xs:element type="xs:string" name="SR_ID"/>
+                    <xs:element type="xs:string" name="EXTERNAL_ID"/>
+                    <xs:element type="xs:string" name="INTERFACE"/>
+                    <xs:element type="xs:string" name="DESCRIPTION"/>
+                    <xs:element type="xs:string" name="SUMMARY"/>
+                    <xs:element type="xs:string" name="SEVERITY"/>
+                    <xs:element type="xs:string" name="STATUS"/>
+                    <xs:element type="xs:string" name="CATEGORY"/>
+                    <xs:element type="xs:string" name="RESPONSIBLE_PARTY"/>
+                    <xs:element type="xs:string" name="VNDR_REF_NUM"/>
+                    <xs:element type="xs:string" name="VNDR_DISP_TIME"/>
+                    <xs:element type="xs:string" name="VNDR_RES_TIME"/>
+                    <xs:element type="xs:string" name="GROUP"/>
+                    <xs:element type="xs:string" name="LOCATION"/>
+                    <xs:element name="CUSTOMER">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="LAST_NAME"/>
+                          <xs:element type="xs:string" name="FIRST_NAME"/>
+                          <xs:element type="xs:string" name="MIDDLE_NAME"/>
+                          <xs:element type="xs:string" name="EMAIL_ADDRESS"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="PRIMARY_CI">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="ASSET_TAG"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SECONDARY_CI">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="ASSET_TAG"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="UPDATE_INFO">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="UPDATE_FIELD">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="FIELD_NAME"/>
+                                <xs:element type="xs:string" name="FIELD_VALUE"/>
+                                <xs:element type="xs:string" name="DESCRIPTION"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="SLA_VIOLATION"/>
+                    <xs:element name="ACT_LOG">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="DESCRIPTION"/>
+                          <xs:element type="xs:string" name="ACT_TYPE"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="REPORT_TYPES"/>
+                    <xs:element name="UPDATED_BY">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="LAST_NAME"/>
+                          <xs:element type="xs:string" name="FIRST_NAME"/>
+                          <xs:element type="xs:string" name="MIDDLE_NAME"/>
+                          <xs:element type="xs:string" name="EMAIL_ADDRESS"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="NCC"/>
+                    <xs:element type="xs:string" name="IMPACT"/>
+                    <xs:element type="xs:string" name="URGENCY"/>
+                    <xs:element type="xs:string" name="ID"/>
+                    <xs:element type="xs:string" name="REPORT_METHOD"/>
+                    <xs:element type="xs:string" name="CUSTOMER_LOC"/>
+                    <xs:element type="xs:string" name="INITIAL_TIME"/>
+                    <xs:element type="xs:string" name="TIME_STAMP"/>
+                    <xs:element type="xs:string" name="OPEN_DATE"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

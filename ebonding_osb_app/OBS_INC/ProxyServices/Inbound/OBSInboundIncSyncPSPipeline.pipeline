@@ -315,7 +315,7 @@ else('UPDATE')</con2:xqueryText>
                     <con1:validate>
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f06</con2:id>
                         <con1:schema ref="OBS_INC/Resources/Schemas/OBS_INC_ClarifySchema"/>
-                        <con1:schemaElement>TRANSACTION</con1:schemaElement>
+                        <con1:schemaElement>processTransaction</con1:schemaElement>
                         <con1:varName>body</con1:varName>
                         <con1:location>
                             <con2:xpathText>./*</con2:xpathText>
