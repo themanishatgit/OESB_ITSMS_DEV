@@ -20,7 +20,7 @@ declare function local:func($DeltaUser as element(*),
         <u_company>{$DeltaUser/*:companyName/text()}</u_company>
         <u_contact_type>EMPLOYEE</u_contact_type>
         <u_department>{$DeltaUser/*:onPremisesExtensionAttributes/*:extensionAttribute7/text()}</u_department>
-        <u_email>{$DeltaUser/*:mail/text()}</u_email>
+        <u_email>{$DeltaUser/*:userPrincipalName/text()}</u_email>
         <u_employee_number>{$DeltaUser/*:onPremisesExtensionAttributes/*:extensionAttribute3/text()}</u_employee_number>
         <u_first_name>{$DeltaUser/*:givenName/text()}</u_first_name>
         <u_last_name>{$DeltaUser/*:surname/text()}</u_last_name>
