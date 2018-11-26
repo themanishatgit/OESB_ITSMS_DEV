@@ -107,7 +107,7 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
               
                {      if($TransactionType='CREATE') then 
               <ns1:IncidentContact>                 
-                  <ns1:EmailAddress>{fn:substring-before(data($ResolvedValues/EmailAddress),',')}</ns1:EmailAddress>               
+                  <ns1:EmailAddress>{fn:substring-before(fn:data($ResolvedValues/EmailAddress),',')}</ns1:EmailAddress>               
               </ns1:IncidentContact>               
               else()
               }

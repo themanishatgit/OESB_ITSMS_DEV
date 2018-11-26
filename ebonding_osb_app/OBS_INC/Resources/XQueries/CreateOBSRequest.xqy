@@ -65,7 +65,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
           if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE') then
             <STATUS>Open</STATUS>
           else if (fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE') then
-          <STATUS>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundStatus_Code', 'Source_Value', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status/text(), 'Destination_value', '')}</STATUS>
+          <STATUS>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status/text())}</STATUS>
           else()
         }
         {
@@ -288,7 +288,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
         {
           if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')then
             <ACT_LOG>
-                 <LOG_DESCRIPTION>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:SupplierComments)}</LOG_DESCRIPTION>
+                 <DESCRIPTION>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:SupplierComments)}</DESCRIPTION>
             </ACT_LOG>
           else()
         }
