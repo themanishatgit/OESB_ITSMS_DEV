@@ -65,7 +65,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
           if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE') then
             <STATUS>Open</STATUS>
           else if (fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE') then
-          <STATUS>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Status/text())}</STATUS>
+          <STATUS>{$Status}</STATUS>
           else()
         }
         {

@@ -12,7 +12,7 @@
             </con:port>
             <con:selector type="SOAP body"/>
         </ser:binding>
-        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes"/>
+        <oper:operations enabled="true"/>
         <ser:ws-policy>
             <ser:binding-mode>no-policies</ser:binding-mode>
         </ser:ws-policy>
