@@ -110,8 +110,8 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
 		(<ns1:IncidentContact>                 
 			<ns1:EmailAddress>{fn:substring-before(fn:data($ResolvedValues/EmailAddress),',')}</ns1:EmailAddress>               
 		</ns1:IncidentContact>  )             
-             else('IS-INT UNKNOWN CONTACT')
-                    else('IS-INT UNKNOWN CONTACT')
+             else(<ns1:IncidentContact> <ns1:EmailAddress>IS-INT UNKNOWN CONTACT</ns1:EmailAddress> </ns1:IncidentContact>  )
+                    else(<ns1:IncidentContact> <ns1:EmailAddress>IS-INT UNKNOWN CONTACT</ns1:EmailAddress> </ns1:IncidentContact>)
                     }
 		<ns1:IncidentAsset>
 			<ns1:CI>{data($OBSClarifyInboundMessage/SECONDARY_CI/ASSET_TAG)}</ns1:CI>
