@@ -167,6 +167,12 @@ Resolution Summary: ', $IncidentRequestMessage/ns1:IncidentRequestBody/ns1:Incid
         }
         
         {
+            if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SDOwnerGroup)
+            then <sd_owner_group>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:SDOwnerGroup)}</sd_owner_group>
+            else ()
+        }
+        
+        {
             if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ReportMethod)
             then <report_method>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ReportMethod)}</report_method>
             else ()

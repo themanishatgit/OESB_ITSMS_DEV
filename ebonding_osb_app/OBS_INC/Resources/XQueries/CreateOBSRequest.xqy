@@ -13,16 +13,14 @@ declare variable $CanonicalRequestMessage as element() (:: schema-element(ns2:In
 declare variable $Status as xs:string external;
 declare function local:func($Status as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
     <ns1:TRANSACTION>
-       {if((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber) = '') and fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
+      {   if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
           <TRANSACTION_TYPE>Creation</TRANSACTION_TYPE>
-        
-       else if((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:RefNumber) != '') and fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')then
-          <TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
           
-        else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ACK')then
-          <TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
-          else()  
-        }  
+          else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')then
+          <TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
+         else()
+       } 
+    
    {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)!='CREATE')then
               <ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionId)}</ID>
@@ -131,7 +129,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ETA/text())>0)then
                     <UPDATE_FIELD>
-                      <FIELD_NAME>ETA</FIELD_NAME>
+                      <FIELD_NAME>eta</FIELD_NAME>
                       <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ETA)}</FIELD_VALUE>
                     </UPDATE_FIELD>
                     else()
@@ -177,7 +175,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments/text())>0)then
                     <UPDATE_FIELD>
-                        <FIELD_NAME>COMMENTS</FIELD_NAME>
+                        <FIELD_NAME>comments</FIELD_NAME>
                         <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments)}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
@@ -207,7 +205,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ATA/text())>0)then
                     <UPDATE_FIELD>
-                        <FIELD_NAME>ATA</FIELD_NAME>
+                        <FIELD_NAME>ata</FIELD_NAME>
                         <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ATA)}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
@@ -217,7 +215,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TravelTime/text())>0)then
                     <UPDATE_FIELD>
-                        <FIELD_NAME>TRAVEL_TIME</FIELD_NAME>
+                        <FIELD_NAME>travel_time</FIELD_NAME>
                         <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TravelTime)}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
@@ -247,7 +245,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TimeSpent/text())>0)then
                     <UPDATE_FIELD>
-                        <FIELD_NAME>TIME_ON_SITE</FIELD_NAME>
+                        <FIELD_NAME>time_site</FIELD_NAME>
                         <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TimeSpent)}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
@@ -276,7 +274,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text())>0)then
                     <UPDATE_FIELD>
-                        <FIELD_NAME>RESOLUTION_CODE</FIELD_NAME>
+                        <FIELD_NAME>resol_local</FIELD_NAME>
                         <FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode)}</FIELD_VALUE>
                         
                     </UPDATE_FIELD>
