@@ -640,7 +640,7 @@ Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                         <con2:id>_ActionId-a013dc6.N530c4973.0.1663fb21a3c.N7f90</con2:id>
                         <con3:case id="_BranchId-a013dc6.N530c4973.0.1663fb21a3c.N7f8f">
                             <con3:condition>
-                                <con2:xqueryText>$RealUser='Y'</con2:xqueryText>
+                                <con2:xqueryText>$RealUser='Y' or $InputRequest/AUSSNPublishPSRequest/User/*:accountEnabled/text()='false'</con2:xqueryText>
                             </con3:condition>
                             <con3:actions>
                                 <con4:route>
