@@ -44,13 +44,7 @@
               </s:restriction>
             </s:simpleType>
           </s:element>
-          <s:element minOccurs="1" maxOccurs="1" name="AFFECTED_CONTACT" nillable="true">
-            <s:simpleType>
-              <s:restriction base="s:string">
-                <s:minLength value="1"/>
-              </s:restriction>
-            </s:simpleType>
-          </s:element>
+          <s:element minOccurs="1" maxOccurs="1" name="AFFECTED_CONTACT" nillable="true" type="s:string"/>
           <s:element minOccurs="1" maxOccurs="1" name="INCIDENT_CATEGORY" nillable="true" type="s:string"/>
           <s:element minOccurs="1" maxOccurs="1" name="SERVICE_CI" nillable="true" type="s:string"/>
           <s:element minOccurs="1" maxOccurs="1" name="HARDWARE_CI" nillable="true" type="s:string"/>
