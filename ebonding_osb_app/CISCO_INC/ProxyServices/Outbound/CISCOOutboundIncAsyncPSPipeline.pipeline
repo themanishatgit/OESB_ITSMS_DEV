@@ -214,7 +214,11 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                 <con2:param name="ResolutionCodeDestinationValue">
                                     <con2:path>if($InputRequest/inc:IncidentRequestHeader/inc:KillFlag/text()='Y')then
 $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text()
-else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text())</con2:path>
+else(
+if($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text())
+then($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text())
+else('No Fault Found')
+)</con2:path>
                                 </con2:param>
                             </con2:xqueryTransform>
                         </con1:expr>
