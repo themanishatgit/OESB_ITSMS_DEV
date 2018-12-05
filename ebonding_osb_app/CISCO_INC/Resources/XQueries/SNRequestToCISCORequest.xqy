@@ -88,9 +88,24 @@ declare function local:func($StatusDestinationValue as xs:string,
             <CATEGORY>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Category)}</CATEGORY>
           else()
         }
-        
-        
+        {
+        if(
+                 $StatusDestinationValue='Resolved' and
+                 fn:not($SNRequest/ns1:IncidentRequestHeader/ns1:KillFlag/text()='Y') and
+                 fn:string-length($ResolutionCodeDestinationValue)>0 and
+                 dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='CUSTOMER'
+                 )
+        then(
+        if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem='IBM'))
+        then(<GROUP>IBM-ROW55</GROUP>)
+        else if (fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem='JFK'))
+        then(<GROUP>AIRPORT JFK4-FIELD ENG</GROUP>)
+        else()
+        )
+        else(
         <GROUP>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AssignmentGroup)}</GROUP>
+        )
+        }
         {
           if(fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType)='UPDATE')
           then
