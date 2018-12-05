@@ -218,7 +218,19 @@ declare function local:func($StatusDestinationValue as xs:string,
                 }
                 
                 {
-                  if(fn:string-length($StatusDestinationValue)>0)then
+                 if(
+                 $StatusDestinationValue='Resolved' and
+                 fn:not($SNRequest/ns1:IncidentRequestHeader/ns1:KillFlag/text()='Y') and
+                 fn:string-length($ResolutionCodeDestinationValue)>0 and
+                 dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='CUSTOMER'
+                 )
+                 then(
+                 <UPDATE_FIELD>
+                        <FIELD_NAME>STATUS</FIELD_NAME>
+                        <FIELD_VALUE>Concurrence Requested</FIELD_VALUE>
+                    </UPDATE_FIELD>
+                 )
+                 else if(fn:string-length($StatusDestinationValue)>0)then
                     <UPDATE_FIELD>
                         <FIELD_NAME>STATUS</FIELD_NAME>
                         <FIELD_VALUE>{$StatusDestinationValue}</FIELD_VALUE>
