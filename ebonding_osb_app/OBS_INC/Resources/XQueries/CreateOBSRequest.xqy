@@ -24,16 +24,16 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
           else()
        } 
     
-   {
-            if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)!='CREATE')then
-              <ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionId)}</ID>
-          else ()
-        }
+
         {
         if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
           <REC_TYPE>Incident</REC_TYPE>
         else()
         }
+           
+           
+              <TRANSACTION_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionId)}</TRANSACTION_ID>
+       
         <SR_ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TicketNumber)}</SR_ID>
 	 {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)!='CREATE')then
@@ -308,11 +308,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
                 <URGENCY>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Urgency', '')}</URGENCY>
               else ()
         }
-        {
-            if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-              <ID>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionId)}</ID>
-          else ()
-        }
+  
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
               <REPORT_METHOD>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ReportMethod)}</REPORT_METHOD>
