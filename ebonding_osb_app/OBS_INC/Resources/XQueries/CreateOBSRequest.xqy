@@ -20,7 +20,7 @@ declare function local:func($Status as xs:string,$CanonicalRequestMessage as ele
           <TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
           
          else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ACK')then
-          <TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
+          <TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
           else()
        } 
     

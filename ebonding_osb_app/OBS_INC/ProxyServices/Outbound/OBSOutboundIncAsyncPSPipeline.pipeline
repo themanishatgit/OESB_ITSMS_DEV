@@ -65,7 +65,7 @@
                     <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N780d</con7:id>
                         <con4:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con4:operation>insert</con4:operation>
+                        <con6:operation>insert</con6:operation>
                         <con4:outboundTransform>
                             <con2:replace varName="body" contents-only="true">
                                 <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N780c</con7:id>
@@ -116,7 +116,7 @@
                             </con2:replace>
                             <con7:routing-options xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-N53e6b1dd.24d79842.0.164c6a0c39f.N7ffd</con2:id>
-                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
                             </con7:routing-options>
                         </con4:outboundTransform>
                     </con4:route>
@@ -330,7 +330,7 @@
                             </con2:replace>
                             <con7:routing-options xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-N53e6b1dd.24d79842.0.164c6a0c39f.N7ffb</con2:id>
-                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
                             </con7:routing-options>
                         </con4:outboundTransform>
                     </con6:route>
@@ -344,7 +344,7 @@
                     <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N76ce</con7:id>
                         <con4:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con4:operation>insert</con4:operation>
+                        <con6:operation>insert</con6:operation>
                         <con4:outboundTransform>
                             <con2:replace varName="body" contents-only="true">
                                 <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N76cd</con7:id>
@@ -395,7 +395,7 @@
                             </con2:replace>
                             <con7:routing-options xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con7="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-N53e6b1dd.24d79842.0.164c6a0c39f.N7ff9</con2:id>
-                                <con1:qualityOfService>exactly-once</con1:qualityOfService>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
                             </con7:routing-options>
                         </con4:outboundTransform>
                     </con6:route>
