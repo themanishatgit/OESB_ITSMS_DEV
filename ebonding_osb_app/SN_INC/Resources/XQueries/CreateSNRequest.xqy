@@ -185,6 +185,12 @@ Resolution Summary: ', $IncidentRequestMessage/ns1:IncidentRequestBody/ns1:Incid
         }
         
         {
+            if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ATD)
+            then <atd>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ATD)}</atd>
+            else ()
+        }
+        
+        {
             if ($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentAsset/ns1:EventId_CI)
             then <element_ci_id>{fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentAsset/ns1:EventId_CI)}</element_ci_id>
             else ()
