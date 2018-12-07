@@ -203,13 +203,13 @@ declare function local:func($StatusDestinationValue as xs:string,
                   else()
                 }
                 {
-                  if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='CUSTOMER' and fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments/text())>0)then
+                  if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', fn:data($SNRequest/ns1:IncidentRequestHeader/ns1:DestinationSystem), 'Type', '')='CUSTOMER' and fn:string-length($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary/text())>0)then
                     (
                      if(fn:upper-case($StatusDestinationValue)='RESOLVED' or fn:upper-case($StatusDestinationValue)='CLOSED')
 			then(
               	    <UPDATE_FIELD>
                         <FIELD_NAME>COMMENTS</FIELD_NAME>
-                        <FIELD_VALUE>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)}</FIELD_VALUE>
+                        <FIELD_VALUE>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:ResolutionSummary)}</FIELD_VALUE>
                     </UPDATE_FIELD>
                               )
                               else()
