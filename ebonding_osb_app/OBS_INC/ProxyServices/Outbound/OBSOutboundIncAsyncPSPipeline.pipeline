@@ -180,28 +180,30 @@
                         <con1:operation>execute</con1:operation>
                         <con1:request>
                             <con1:body wrapped="false">DataMappingRequest</con1:body>
+                            <con5:header/>
                         </con1:request>
                         <con1:response>
                             <con1:body wrapped="false">DataMappingResponse</con1:body>
+                            <con5:header/>
                         </con1:response>
                         <con1:requestTransform>
                             <con1:assign varName="DataMappingRequest">
                                 <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f1f</con2:id>
                                 <con1:expr>
-                                    <con2:xqueryText><![CDATA[<fet:FetchDataMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchDataMappingMessageV1">
+                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<fet:FetchDataMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchDataMappingMessageV1">
     <fet:RecType>{fn:upper-case($RecType)}</fet:RecType>
     <fet:Source>{fn:upper-case($SourceSystem)}</fet:Source>
     <fet:Destination>OBS</fet:Destination>
     <!--1 or more repetitions:-->
     <fet:FetchData>
         <fet:ObjectName>STATUS</fet:ObjectName>
-        <fet:SourceValue>{data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status)}</fet:SourceValue>
+        <fet:SourceValue>{fn:upper-case(data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status))}</fet:SourceValue>
     </fet:FetchData>
 	<fet:FetchData>
         <fet:ObjectName>STATUS_CODE</fet:ObjectName>
         <fet:SourceValue>{data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status)}</fet:SourceValue>
     </fet:FetchData>
-</fet:FetchDataMappingRequest>]]></con2:xqueryText>
+</fet:FetchDataMappingRequest>]]></con:xqueryText>
                                 </con1:expr>
                             </con1:assign>
                         </con1:requestTransform>
