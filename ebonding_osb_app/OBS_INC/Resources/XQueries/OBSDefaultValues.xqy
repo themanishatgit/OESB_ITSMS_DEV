@@ -8,4 +8,5 @@
 	<PRO_ACT_DEF_GROUP>AUTOASSIGNMENT PROCESS</PRO_ACT_DEF_GROUP>
 	<Service_CI>GENERIC_UNKNOWN_SERVICE_CI</Service_CI>
 	<zservicedesk_group>ADS-AMMAN QUEUE MANAGERS</zservicedesk_group>
+	<RESOLUTION_CODE>No Fault Found</RESOLUTION_CODE>
 </DefaultValues>
