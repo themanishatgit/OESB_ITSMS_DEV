@@ -245,7 +245,6 @@ xs:QName('DELTALINK'),
                     </con3:route>
                     <con3:route xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
                         <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7ec5</con2:id>
-                        <con2:disabled>true</con2:disabled>
                         <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:outboundTransform>
                             <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
