@@ -33,6 +33,104 @@
                             <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
+                    <con6:assign varName="Travel_Time_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dca.91ec915.0.167a6ed07a6.N7ffe</con2:id>
+                        <con2:disabled>true</con2:disabled>
+                        <con6:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">xs:integer(fn:substring-before(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),':'))</con:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
+                    <con6:ifThenElse xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a00010f.N3c2c54fc.3.167a77650e6.N8000</con2:id>
+                        <con6:case>
+                            <con6:condition>
+                                <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:exists(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()))</con:xqueryText>
+                            </con6:condition>
+                            <con6:actions>
+                                <con6:assign varName="Travel_Time_string">
+                                    <con2:id>_ActionId-a00010f.N3c2c54fc.4.167a7784d22.N8000</con2:id>
+                                    <con6:expr>
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">xs:integer(fn:substring-before(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),':'))</con:xqueryText>
+                                    </con6:expr>
+                                </con6:assign>
+                                <con6:assign varName="Travel_Date_string">
+                                    <con2:id>_ActionId-a00010f.N3c2c54fc.5.167a778d67c.N8000</con2:id>
+                                    <con6:expr>
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' ')</con:xqueryText>
+                                    </con6:expr>
+                                </con6:assign>
+                                <con6:assign varName="TravelTime">
+                                    <con2:id>_ActionId-a00010f.N3c2c54fc.5.167a778d67c.N7fff</con2:id>
+                                    <con6:expr>
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat((((xs:integer(fn:substring(fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),9,fn:string-length($Travel_Date_string))) - 1) * 24) + xs:integer($Travel_Time_string)),':',(fn:substring-after(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),':')))</con:xqueryText>
+                                    </con6:expr>
+                                </con6:assign>
+                            </con6:actions>
+                        </con6:case>
+                    </con6:ifThenElse>
+                    <con6:assign varName="Time_Spent_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a000004.N77c5dcf6.1.167a738f3ca.N8000</con2:id>
+                        <con2:disabled>true</con2:disabled>
+                        <con6:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">xs:integer(fn:substring-before(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),':'))</con:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
+                    <con6:ifThenElse xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a00010f.N3c2c54fc.6.167a77a556d.N8000</con2:id>
+                        <con6:case>
+                            <con6:condition>
+                                <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:exists(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()))</con:xqueryText>
+                            </con6:condition>
+                            <con6:actions>
+                                <con6:assign varName="Time_Spent_string">
+                                    <con2:id>_ActionId-a00010f.N3c2c54fc.4.167a7784d22.N7fff</con2:id>
+                                    <con6:expr>
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">xs:integer(fn:substring-before(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),':'))</con:xqueryText>
+                                    </con6:expr>
+                                </con6:assign>
+                                <con6:assign varName="TimeSpent_Date_string">
+                                    <con2:id>_ActionId-a00010f.N3c2c54fc.3.167a77650e6.N7fff</con2:id>
+                                    <con6:expr>
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' ')</con:xqueryText>
+                                    </con6:expr>
+                                </con6:assign>
+                                <con6:assign varName="TimeSpent">
+                                    <con2:id>_ActionId-a00010f.N3c2c54fc.6.167a77a556d.N7fff</con2:id>
+                                    <con6:expr>
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat((((xs:integer(fn:substring(fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),9,fn:string-length($TimeSpent_Date_string))) - 1) * 24) + xs:integer($Time_Spent_string)),':',(fn:substring-after(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),':')))</con:xqueryText>
+                                    </con6:expr>
+                                </con6:assign>
+                            </con6:actions>
+                        </con6:case>
+                    </con6:ifThenElse>
+                    <con6:assign varName="Travel_Date_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dca.91ec915.0.167a6ed07a6.N7ffb</con2:id>
+                        <con2:disabled>true</con2:disabled>
+                        <con6:expr>
+                            <con2:xqueryText>fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' ')</con2:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
+                    <con6:assign varName="TimeSpent_Date_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a000004.N77c5dcf6.2.167a739eeaf.N8000</con2:id>
+                        <con2:disabled>true</con2:disabled>
+                        <con6:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' ')</con:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
+                    <con6:assign varName="TimeSpent" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dca.91ec915.0.167a6ed07a6.N7ff8</con2:id>
+                        <con2:disabled>true</con2:disabled>
+                        <con6:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat((((xs:integer(fn:substring(fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),9,fn:string-length($TimeSpent_Date_string))) - 1) * 24) + xs:integer($Time_Spent_string)),':',(fn:substring-after(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),':')))</con:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
+                    <con6:assign varName="TravelTime" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a000004.N77c5dcf6.3.167a73adc56.N8000</con2:id>
+                        <con2:disabled>true</con2:disabled>
+                        <con6:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat((((xs:integer(fn:substring(fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),9,fn:string-length($Travel_Date_string))) - 1) * 24) + xs:integer($Travel_Time_string)),':',(fn:substring-after(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),':')))</con:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
                     <con1:assign varName="SourceSystem" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N78ac</con2:id>
                         <con1:expr>
@@ -54,7 +152,11 @@
                     <con1:assign varName="ExtRefNumber" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N78a9</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text()</con2:xqueryText>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">if ((fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:Name/text()) = 'OBS'))then
+$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text()
+  else if ((fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:Name/text()) = 'OBS'))then
+$body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text()
+else()</con:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con6:assign varName="Status_Code" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
@@ -287,24 +389,30 @@
                             <con2:xpathText>.</con2:xpathText>
                         </con1:location>
                         <con1:expr>
-                            <con2:xqueryTransform>
-                                <con2:resource ref="OBS_INC/Resources/XQueries/CreateOBSRequest"/>
-                                <con2:param name="Status">
-                                    <con2:path>$Status</con2:path>
-                                </con2:param>
-                                <con2:param name="CanonicalRequestMessage">
-                                    <con2:path>$body/*</con2:path>
-                                </con2:param>
-                                <con2:param name="Resolution_Code">
-                                    <con2:path>$Resolution_Code</con2:path>
-                                </con2:param>
-                                <con2:param name="DefaultValues">
-                                    <con2:path>$DefaultValues</con2:path>
-                                </con2:param>
-                                <con2:param name="Status_Code">
-                                    <con2:path>$Status_Code</con2:path>
-                                </con2:param>
-                            </con2:xqueryTransform>
+                            <con:xqueryTransform xmlns:con="http://www.bea.com/wli/sb/stages/config">
+                                <con:resource ref="OBS_INC/Resources/XQueries/CreateOBSRequest"/>
+                                <con:param name="TravelTime">
+                                    <con:path>$TravelTime</con:path>
+                                </con:param>
+                                <con:param name="Status">
+                                    <con:path>$Status</con:path>
+                                </con:param>
+                                <con:param name="CanonicalRequestMessage">
+                                    <con:path>$body/*</con:path>
+                                </con:param>
+                                <con:param name="TimeSpent">
+                                    <con:path>$TimeSpent</con:path>
+                                </con:param>
+                                <con:param name="Resolution_Code">
+                                    <con:path>$Resolution_Code</con:path>
+                                </con:param>
+                                <con:param name="DefaultValues">
+                                    <con:path>$DefaultValues</con:path>
+                                </con:param>
+                                <con:param name="Status_Code">
+                                    <con:path>$Status_Code</con:path>
+                                </con:param>
+                            </con:xqueryTransform>
                         </con1:expr>
                     </con1:replace>
                 </con:actions>

@@ -10,11 +10,13 @@ declare namespace ns2="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 declare variable $CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::) external;
 
 declare variable $Status_Code as xs:string external;
+declare variable $TravelTime as xs:string external;
+declare variable $TimeSpent as xs:string external;
 declare variable $Status as xs:string external;
 declare variable $Resolution_Code as xs:string external;
 declare variable $DefaultValues as element(*) external;
 
-declare function local:func($Status_Code as xs:string, $Status as xs:string, $DefaultValues as element(*),$Resolution_Code as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
+declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$TimeSpent as xs:string , $Status as xs:string, $DefaultValues as element(*),$Resolution_Code as xs:string,$CanonicalRequestMessage as element() (:: schema-element(ns2:IncidentRequestMessage) ::)) as element() (:: schema-element(ns1:TRANSACTION) ::) {
 <ns1:TRANSACTION>
       {   if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
 	<TRANSACTION_TYPE>Creation</TRANSACTION_TYPE>
@@ -230,8 +232,8 @@ declare function local:func($Status_Code as xs:string, $Status as xs:string, $De
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TravelTime/text())>0)then
 		<UPDATE_FIELD>
-			<FIELD_NAME>travel_time</FIELD_NAME>
-			<FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TravelTime)}</FIELD_VALUE>
+			<FIELD_NAME>TRAVEL_TIME</FIELD_NAME>
+			<FIELD_VALUE>{$TravelTime}</FIELD_VALUE>
 
 		</UPDATE_FIELD>
 
@@ -260,8 +262,8 @@ declare function local:func($Status_Code as xs:string, $Status as xs:string, $De
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TimeSpent/text())>0)then
 		<UPDATE_FIELD>
-			<FIELD_NAME>time_site</FIELD_NAME>
-			<FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TimeSpent)}</FIELD_VALUE>
+			<FIELD_NAME>TIME_SITE</FIELD_NAME>
+			<FIELD_VALUE>{$TimeSpent}</FIELD_VALUE>
 
 		</UPDATE_FIELD>
 
@@ -357,4 +359,4 @@ declare function local:func($Status_Code as xs:string, $Status as xs:string, $De
 </ns1:TRANSACTION>
 };
 
-local:func($Status_Code, $Status, $DefaultValues, $Resolution_Code,$CanonicalRequestMessage)
+local:func($Status_Code,  $TravelTime , $TimeSpent ,$Status, $DefaultValues, $Resolution_Code,$CanonicalRequestMessage)
