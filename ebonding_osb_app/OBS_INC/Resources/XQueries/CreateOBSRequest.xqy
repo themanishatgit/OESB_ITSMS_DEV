@@ -232,8 +232,11 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TravelTime/text())>0)then
 		<UPDATE_FIELD>
-			<FIELD_NAME>TRAVEL_TIME</FIELD_NAME>
-			<FIELD_VALUE>{$TravelTime}</FIELD_VALUE>
+			<FIELD_NAME>travel_time</FIELD_NAME>
+			<FIELD_VALUE>{if(fn:string-length(fn:substring-before($TravelTime,':')) < 2)
+                        then (fn:concat('0',$TravelTime))
+                        else($TravelTime)
+                        }</FIELD_VALUE>
 
 		</UPDATE_FIELD>
 
@@ -262,9 +265,12 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TimeSpent/text())>0)then
 		<UPDATE_FIELD>
-			<FIELD_NAME>TIME_SITE</FIELD_NAME>
-			<FIELD_VALUE>{$TimeSpent}</FIELD_VALUE>
-
+			<FIELD_NAME>time_site</FIELD_NAME>
+			<FIELD_VALUE>{if (fn:string-length(fn:substring-before($TimeSpent,':'))<2) then ((fn:concat('0',$TimeSpent)))
+			
+                                    else if ((fn:substring-before(($TimeSpent),':')) >= '12') then ('12:00:00')
+                                    else($TimeSpent)}
+			</FIELD_VALUE>
 		</UPDATE_FIELD>
 
                     else()
@@ -306,10 +312,10 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
             if ((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:Name/text()) = 'OBS'))then
 		<DESCRIPTION>{if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:SupplierComments))
           then(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:SupplierComments))
-		  
+
           else(fn:concat('Status changed to ', if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested' else ($Status)))}</DESCRIPTION>
-		  
-		  
+
+
          else if ((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:Name/text()) = 'OBS'))then
 		<DESCRIPTION>{ if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes))
           then(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes))
