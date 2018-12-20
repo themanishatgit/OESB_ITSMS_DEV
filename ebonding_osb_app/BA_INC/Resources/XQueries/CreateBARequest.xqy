@@ -60,7 +60,8 @@ declare function local:func($CanonicalFormatInput as element(),
           then(
           if(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments))
           then(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments))
-          else(fn:concat('Status changed to ', fn:data($ResolvedValues/Status)))
+          else(fn:concat('Status changed to ', fn:data($ResolvedValues/Status),'. ', if ((fn:data($ResolvedValues/Status)='Resolved') and fn:exists(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) 
+		  then fn:concat('Resolution Summary: ',(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionSummary))) else () ))
           )
           else(fn:data($CanonicalFormatInput/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments))
           }</ns1:DESCRIPTION>
