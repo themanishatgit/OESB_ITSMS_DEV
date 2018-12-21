@@ -262,12 +262,14 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 
                     else()
                 }
-                {
+                   {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TimeSpent/text())>0)then
 		<UPDATE_FIELD>
 			<FIELD_NAME>time_site</FIELD_NAME>
-			<FIELD_VALUE>{if (fn:string-length(fn:substring-before($TimeSpent,':'))<2) then ((fn:concat('0',$TimeSpent)))
-			
+			<FIELD_VALUE>{if (fn:string-length(fn:substring-before($TimeSpent,':'))<2) 
+	then ((fn:concat('0', if ((fn:substring-before($TimeSpent,':')) eq '0' ) then ('1:') else (fn:concat(fn:substring-before($TimeSpent,':'),':')),
+	(fn:substring-after(($TimeSpent),':')))))
+						else if ((fn:substring-before(($TimeSpent),':')) = '00') then fn:concat('01:',(fn:substring-after($TimeSpent,':')))
                                     else if ((fn:substring-before(($TimeSpent),':')) >= '12') then ('12:00:00')
                                     else($TimeSpent)}
 			</FIELD_VALUE>

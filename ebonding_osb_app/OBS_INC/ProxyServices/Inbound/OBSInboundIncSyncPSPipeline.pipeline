@@ -573,7 +573,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 	<Category>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CATEGORY']/fetch:DestinationValue/text()}</Category>
 	<Category2>{$CategoryMappingResponse/fetcm:Result/fetcm:SNCategory/text()}</Category2>
     <SubCategory>{$CategoryMappingResponse/fetcm:Result/fetcm:SNSubCategory/text()}</SubCategory>
-	<LocGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='LOC_GROUP']/fetch:DestinationValue/text()}</LocGroup>
+	<LocGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='ASSIGNMENT_GROUP']/fetch:DestinationValue/text()}</LocGroup>
     <ReportMethod>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='REPORT_METHOD']/fetch:DestinationValue/text()}</ReportMethod>
     <ResolutionCode>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='RESOLUTION_CODE']/fetch:DestinationValue/text()}</ResolutionCode>
      <EmailAddress>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CONTACT']/fetch:DestinationValue/text()}</EmailAddress>
