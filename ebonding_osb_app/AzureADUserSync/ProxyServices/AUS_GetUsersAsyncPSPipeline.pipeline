@@ -13,7 +13,7 @@
                 <con:actions>
                     <con1:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
                         <con2:id>_ActionId-N3f575e54.N7f6e088a.0.166ac09c80f.N7ed9</con2:id>
-                        <con1:logLevel>info</con1:logLevel>
+                        <con1:logLevel>warning</con1:logLevel>
                         <con1:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con1:expr>
@@ -141,7 +141,7 @@ else()</con2:xqueryText>
                             </con3:replace>
                             <con4:log xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
                                 <con2:id>_ActionId-3904eaa8.N5c714004.0.166cb55bbc9.N7d4b</con2:id>
-                                <con4:logLevel>info</con4:logLevel>
+                                <con4:logLevel>warning</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>fn:concat('REQUEST_BODY: ',$body,
 'OUTBOUND VARIABLE: ',$outbound)</con2:xqueryText>
@@ -168,7 +168,7 @@ else()</con2:xqueryText>
                             </con2:nxsdTranslation>
                             <con4:log>
                                 <con1:id>_ActionId-a01b4f7.a4f686b.0.166c2223d2c.N7ffb</con1:id>
-                                <con4:logLevel>info</con4:logLevel>
+                                <con4:logLevel>warning</con4:logLevel>
                                 <con4:expr>
                                     <con1:xqueryText>$DeltaUserResponse</con1:xqueryText>
                                 </con4:expr>
@@ -244,7 +244,7 @@ else('IN_PROGRESS')</con1:path>
                             </con5:replace>
                             <con4:log>
                                 <con1:id>_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7e0d</con1:id>
-                                <con4:logLevel>info</con4:logLevel>
+                                <con4:logLevel>warning</con4:logLevel>
                                 <con4:expr>
                                     <con1:xqueryText>$body</con1:xqueryText>
                                 </con4:expr>
@@ -301,7 +301,7 @@ else('IN_PROGRESS')</con1:path>
                 <con:actions>
                     <con4:log>
                         <con2:id>_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7e0a</con2:id>
-                        <con4:logLevel>info</con4:logLevel>
+                        <con4:logLevel>warning</con4:logLevel>
                         <con4:expr>
                             <con2:xqueryText>'Checking Condition'</con2:xqueryText>
                         </con4:expr>
@@ -316,7 +316,7 @@ else('IN_PROGRESS')</con1:path>
                             <con5:actions>
                                 <con4:log>
                                     <con2:id>_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7e10</con2:id>
-                                    <con4:logLevel>info</con4:logLevel>
+                                    <con4:logLevel>warning</con4:logLevel>
                                     <con4:expr>
                                         <con2:xqueryText>'UserCount = ', $UserCount, 'and DeltaLink = ', $DeltaLink</con2:xqueryText>
                                     </con4:expr>
@@ -463,7 +463,7 @@ xs:QName('COUNT'),
                                                     </con4:assign>
                                                     <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7cf8</con7:id>
-                                                        <con6:logLevel>info</con6:logLevel>
+                                                        <con6:logLevel>warning</con6:logLevel>
                                                         <con6:expr>
                                                             <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$AUS_StartSyncReq</con7:xqueryText>
                                                         </con6:expr>
@@ -473,7 +473,7 @@ xs:QName('COUNT'),
                                                 <con4:responseTransform>
                                                     <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f575e5a.N78f33e8.0.166e4c80cda.N7cf7</con7:id>
-                                                        <con6:logLevel>info</con6:logLevel>
+                                                        <con6:logLevel>warning</con6:logLevel>
                                                         <con6:expr>
                                                             <con7:xqueryText xmlns:con7="http://www.bea.com/wli/sb/stages/config">$AUS_StartSyncRes</con7:xqueryText>
                                                         </con6:expr>

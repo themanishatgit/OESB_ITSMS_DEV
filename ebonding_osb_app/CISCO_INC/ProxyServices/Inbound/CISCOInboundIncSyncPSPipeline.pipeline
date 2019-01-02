@@ -8,6 +8,7 @@
                 <con:namespace>http://tempuri.org/</con:namespace>
             </con:binding>
         </con:binding>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
@@ -706,7 +707,7 @@ else ''</con2:path>
                             </con1:assign>
                             <con3:log>
                                 <con1:id>_ActionId-a013b64.Nfc29b77.0.163d46640c5.N7d9a</con1:id>
-                                <con3:logLevel>info</con3:logLevel>
+                                <con3:logLevel>warning</con3:logLevel>
                                 <con3:expr>
                                     <con1:xqueryText>$ServiceNowResponse</con1:xqueryText>
                                 </con3:expr>

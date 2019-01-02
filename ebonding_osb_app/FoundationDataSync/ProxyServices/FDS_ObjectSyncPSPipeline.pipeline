@@ -2,6 +2,7 @@
 <con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
     <con:coreEntry>
         <con:binding type="Any XML"/>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
@@ -13,7 +14,7 @@
                 <con:actions>
                     <con3:log>
                         <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fbc</con2:id>
-                        <con3:logLevel>info</con3:logLevel>
+                        <con3:logLevel>warning</con3:logLevel>
                         <con3:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con3:expr>
@@ -151,7 +152,7 @@ xs:QName('EXECUTION_TIME'),
                             </con1:assign>
                             <con3:log>
                                 <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fb9</con2:id>
-                                <con3:logLevel>info</con3:logLevel>
+                                <con3:logLevel>warning</con3:logLevel>
                                 <con3:expr>
                                     <con2:xqueryText>$doQueryReq</con2:xqueryText>
                                 </con3:expr>
@@ -173,7 +174,7 @@ xs:QName('EXECUTION_TIME'),
                             </con1:assign>
                             <con3:log>
                                 <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fb6</con2:id>
-                                <con3:logLevel>info</con3:logLevel>
+                                <con3:logLevel>warning</con3:logLevel>
                                 <con3:expr>
                                     <con2:xqueryText>$doQueryRes</con2:xqueryText>
                                 </con3:expr>
@@ -278,7 +279,7 @@ else($EpochTime)</con5:path>
                                         </con1:assign>
                                         <con3:log>
                                             <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7e45</con2:id>
-                                            <con3:logLevel>info</con3:logLevel>
+                                            <con3:logLevel>warning</con3:logLevel>
                                             <con3:expr>
                                                 <con2:xqueryText>$freeListHandlesReq</con2:xqueryText>
                                             </con3:expr>
@@ -320,7 +321,7 @@ else($EpochTime)</con5:path>
                                                     </con2:replace>
                                                     <con5:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7cd9</con7:id>
-                                                        <con5:logLevel>info</con5:logLevel>
+                                                        <con5:logLevel>warning</con5:logLevel>
                                                         <con5:expr>
                                                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$body</con6:xqueryText>
                                                         </con5:expr>
@@ -412,7 +413,7 @@ xs:QName('TRANID'),
                                                 </con1:assign>
                                                 <con4:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
                                                     <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7c00</con2:id>
-                                                    <con4:logLevel>info</con4:logLevel>
+                                                    <con4:logLevel>warning</con4:logLevel>
                                                     <con4:expr>
                                                         <con2:xqueryText>$Req</con2:xqueryText>
                                                     </con4:expr>
@@ -447,7 +448,7 @@ xs:QName('TRANID'),
                                                 </con1:assign>
                                                 <con3:log>
                                                     <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7f94</con2:id>
-                                                    <con3:logLevel>info</con3:logLevel>
+                                                    <con3:logLevel>warning</con3:logLevel>
                                                     <con3:expr>
                                                         <con2:xqueryText>$LogoutReq</con2:xqueryText>
                                                     </con3:expr>
@@ -457,7 +458,7 @@ xs:QName('TRANID'),
                                             <con1:responseTransform>
                                                 <con3:log>
                                                     <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7f5f</con2:id>
-                                                    <con3:logLevel>info</con3:logLevel>
+                                                    <con3:logLevel>warning</con3:logLevel>
                                                     <con3:expr>
                                                         <con2:xqueryText>$LogoutRes</con2:xqueryText>
                                                     </con3:expr>
@@ -561,7 +562,7 @@ else(xs:integer($ListLength) - 1)</con2:xqueryText>
                                             </con1:assign>
                                             <con3:log>
                                                 <con2:id>_ActionId-a013dce.N38b6bb0d.0.164f005f025.N7fb3</con2:id>
-                                                <con3:logLevel>info</con3:logLevel>
+                                                <con3:logLevel>warning</con3:logLevel>
                                                 <con3:expr>
                                                     <con2:xqueryText>$getListValuesReq</con2:xqueryText>
                                                 </con3:expr>
@@ -675,7 +676,7 @@ else($EpochTime)</con5:path>
                                             </con1:replace>
                                             <con3:log>
                                                 <con2:id>_ActionId-a013dce.N335c56a7.0.164f1526b9b.N7fe5</con2:id>
-                                                <con3:logLevel>info</con3:logLevel>
+                                                <con3:logLevel>warning</con3:logLevel>
                                                 <con3:expr>
                                                     <con2:xqueryText>$body</con2:xqueryText>
                                                 </con3:expr>
@@ -714,7 +715,7 @@ else($EpochTime)</con5:path>
                                     </con1:assign>
                                     <con3:log>
                                         <con2:id>_ActionId-a013dce.2ae7037b.0.165d7c9925d.N7eb2</con2:id>
-                                        <con3:logLevel>info</con3:logLevel>
+                                        <con3:logLevel>warning</con3:logLevel>
                                         <con3:expr>
                                             <con2:xqueryText>$freeListHandlesReq</con2:xqueryText>
                                         </con3:expr>

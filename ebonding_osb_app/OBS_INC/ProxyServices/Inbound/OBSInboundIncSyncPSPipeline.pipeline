@@ -300,28 +300,12 @@
                             <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn-bea:inlinedXML($body)</con:xqueryText>
                         </con1:expr>
                     </con1:replace>
-                    <con3:log>
-                        <con2:id>_ActionId-a00010f.N59807dd8.7.16735f171a7.N7ffd</con2:id>
-                        <con3:logLevel>warning</con3:logLevel>
-                        <con3:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$body</con:xqueryText>
-                        </con3:expr>
-                        <con3:message>BODY RN:</con3:message>
-                    </con3:log>
                     <con1:assign varName="IncomingRequest">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f0b</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con3:log>
-                        <con2:id>_ActionId-a00010f.N59807dd8.6.16735ef0175.N7ffe</con2:id>
-                        <con3:logLevel>debug</con3:logLevel>
-                        <con3:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$IncomingRequest</con:xqueryText>
-                        </con3:expr>
-                        <con3:message>IncomingRequest:</con3:message>
-                    </con3:log>
                     <con1:assign varName="TransactionType">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7f0a</con2:id>
                         <con1:expr>
@@ -734,7 +718,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                             </con1:assign>
                             <con4:log xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f2d</con2:id>
-                                <con4:logLevel>info</con4:logLevel>
+                                <con4:logLevel>warning</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$ServiceNowResponse</con2:xqueryText>
                                 </con4:expr>

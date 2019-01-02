@@ -8,6 +8,7 @@
                 <con:namespace>http://xmlns.oracle.com/SITA_Ebondings/DataMappingLoad/EbondingsPriorityMappingLoad</con:namespace>
             </con:binding>
         </con:binding>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
@@ -19,7 +20,7 @@
                 <con:actions>
                     <con4:log>
                         <con1:id>_ActionId-a013dca.5ef5460.0.164ef21367f.N7f6a</con1:id>
-                        <con4:logLevel>info</con4:logLevel>
+                        <con4:logLevel>warning</con4:logLevel>
                         <con4:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
                         </con4:expr>

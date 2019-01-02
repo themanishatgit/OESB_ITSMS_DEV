@@ -8,6 +8,7 @@
                 <con:namespace>http://www.sita.aero/WSDL/NGOSSInbound</con:namespace>
             </con:binding>
         </con:binding>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>

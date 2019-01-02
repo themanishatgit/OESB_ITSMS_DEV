@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ser:proxyServiceEntry xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env">
-    <ser:coreEntry>
+    <ser:coreEntry isAutoPublish="false">
         <ser:security>
             <con:inboundWss processWssHeader="true"/>
         </ser:security>

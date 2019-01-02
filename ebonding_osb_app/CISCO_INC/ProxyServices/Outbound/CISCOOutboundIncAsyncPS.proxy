@@ -2,7 +2,9 @@
 <ser:proxyServiceEntry xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env">
     <ser:coreEntry isAutoPublish="false">
         <ser:binding type="abstract XML"/>
-        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes"/>
+        <oper:operations enabled="true">
+            <oper:monitoring enabled="true" aggregationInterval="10"/>
+        </oper:operations>
         <ser:invoke ref="CISCO_INC/ProxyServices/Outbound/CISCOOutboundIncAsyncPSPipeline" xsi:type="con:PipelineRef" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
         <ser:xqConfiguration>
             <ser:snippetVersion>1.0</ser:snippetVersion>

@@ -33,13 +33,6 @@
                             <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con6:assign varName="Travel_Time_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dca.91ec915.0.167a6ed07a6.N7ffe</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con6:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">xs:integer(fn:substring-before(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),':'))</con:xqueryText>
-                        </con6:expr>
-                    </con6:assign>
                     <con6:ifThenElse xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a00010f.N3c2c54fc.3.167a77650e6.N8000</con2:id>
                         <con6:case>
@@ -68,13 +61,6 @@
                             </con6:actions>
                         </con6:case>
                     </con6:ifThenElse>
-                    <con6:assign varName="Time_Spent_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a000004.N77c5dcf6.1.167a738f3ca.N8000</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con6:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">xs:integer(fn:substring-before(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),':'))</con:xqueryText>
-                        </con6:expr>
-                    </con6:assign>
                     <con6:ifThenElse xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a00010f.N3c2c54fc.6.167a77a556d.N8000</con2:id>
                         <con6:case>
@@ -103,34 +89,6 @@
                             </con6:actions>
                         </con6:case>
                     </con6:ifThenElse>
-                    <con6:assign varName="Travel_Date_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dca.91ec915.0.167a6ed07a6.N7ffb</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con6:expr>
-                            <con2:xqueryText>fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' ')</con2:xqueryText>
-                        </con6:expr>
-                    </con6:assign>
-                    <con6:assign varName="TimeSpent_Date_string" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a000004.N77c5dcf6.2.167a739eeaf.N8000</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con6:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' ')</con:xqueryText>
-                        </con6:expr>
-                    </con6:assign>
-                    <con6:assign varName="TimeSpent" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dca.91ec915.0.167a6ed07a6.N7ff8</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con6:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat((((xs:integer(fn:substring(fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),9,fn:string-length($TimeSpent_Date_string))) - 1) * 24) + xs:integer($Time_Spent_string)),':',(fn:substring-after(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TimeSpent/text()),' '),':')))</con:xqueryText>
-                        </con6:expr>
-                    </con6:assign>
-                    <con6:assign varName="TravelTime" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a000004.N77c5dcf6.3.167a73adc56.N8000</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con6:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat((((xs:integer(fn:substring(fn:substring-before(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),9,fn:string-length($Travel_Date_string))) - 1) * 24) + xs:integer($Travel_Time_string)),':',(fn:substring-after(fn:substring-after(fn:data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TravelTime/text()),' '),':')))</con:xqueryText>
-                        </con6:expr>
-                    </con6:assign>
                     <con1:assign varName="SourceSystem" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N78ac</con2:id>
                         <con1:expr>
@@ -230,52 +188,6 @@ else()</con:xqueryText>
                     </con4:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N53e6b176.2427ae49.0.1645ead4534.N7f94" name="EnrichPriority" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:context>
-                    <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
-                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
-                </con:context>
-                <con:disabled>true</con:disabled>
-                <con:actions>
-                    <con1:wsCallout xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f93</con2:id>
-                        <con1:service ref="Common/ProxyServices/FetchPriorityMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con1:operation>execute</con1:operation>
-                        <con1:request>
-                            <con1:body wrapped="false">FetchPriorityMappingRequest</con1:body>
-                            <con1:header/>
-                        </con1:request>
-                        <con1:response>
-                            <con1:body wrapped="false">FetchPriorityMappingResponse</con1:body>
-                        </con1:response>
-                        <con1:requestTransform>
-                            <con1:assign varName="FetchPriorityMappingRequest">
-                                <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f92</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText><![CDATA[<fet:FetchPriorityMappingRequest xmlns:fet="http://www.sita.aero/schema/FetchPriorityMappingMessageV1">
-	<fet:RecType>{fn:upper-case($RecType)}</fet:RecType>
-	<fet:Source>{fn:upper-case($SourceSystem)}</fet:Source>
-	<fet:Destination>OBS</fet:Destination>
-	<fet:Impact>{fn:upper-case(data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Impact))}</fet:Impact>
-	<fet:Urgency>{fn:upper-case(data($body/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Urgency))}</fet:Urgency>
-</fet:FetchPriorityMappingRequest>]]></con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
-                        </con1:requestTransform>
-                        <con1:responseTransform/>
-                    </con1:wsCallout>
-                    <con1:insert varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f91</con2:id>
-                        <con1:location>
-                            <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Category</con2:xpathText>
-                        </con1:location>
-                        <con1:where>before</con1:where>
-                        <con1:expr>
-                            <con2:xqueryText>&lt;inc:Priority>{$FetchPriorityMappingResponse/fet:Result/fet:Priority/text()}&lt;/inc:Priority></con2:xqueryText>
-                        </con1:expr>
-                    </con1:insert>
-                </con:actions>
-            </con:stage>
             <con:stage id="_StageId-N53e6b176.2427ae49.0.1645ead4534.N7f21" name="MapStatusAndAssignmentGroup" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:context>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
@@ -321,33 +233,6 @@ else()</con:xqueryText>
                         </con1:requestTransform>
                         <con1:responseTransform/>
                     </con1:wsCallout>
-                    <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f1e</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con1:location>
-                            <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='STATUS']/fet:DestinationValue/text()</con2:xqueryText>
-                        </con1:expr>
-                    </con1:replace>
-                    <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-N53e6b176.2427ae49.0.1645ead4534.N7f1d</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con1:location>
-                            <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='STATUS_CODE']/fet:DestinationValue/text()</con2:xqueryText>
-                        </con1:expr>
-                    </con1:replace>
-                    <con5:assign varName="Status_Code" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dca.N7c59a2d.0.1670d3ab2dd.N7f8f</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con5:expr>
-                            <con2:xqueryText>$DataMappingResponse/fet:Result/fet:FetchData[fet:ObjectName/text()='STATUS_CODE']/fet:DestinationValue/text()</con2:xqueryText>
-                        </con5:expr>
-                    </con5:assign>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N77a6" name="Transform" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -569,7 +454,7 @@ else()</con:xqueryText>
                         <con4:responseTransform>
                             <con3:log>
                                 <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N762f</con2:id>
-                                <con3:logLevel>info</con3:logLevel>
+                                <con3:logLevel>warning</con3:logLevel>
                                 <con3:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con3:expr>

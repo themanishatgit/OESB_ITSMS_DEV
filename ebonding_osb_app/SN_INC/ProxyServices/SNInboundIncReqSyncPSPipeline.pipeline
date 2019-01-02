@@ -8,6 +8,7 @@
                 <con:namespace>http://www.sita.aero/WSDL/SNInboundIncReqV1</con:namespace>
             </con:binding>
         </con:binding>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
@@ -334,9 +335,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="TicketNumber">
-                                            <con6:path>if($SNResponse/executeResponse/ticket_number/text())
-then($SNResponse/executeResponse/ticket_number/text())
-else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text())</con6:path>
+                                            <con6:path>$SNResponse/executeResponse/ticket_number/text()</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
                                             <con6:path>'SNInboundIncReqSyncPS'</con6:path>
@@ -363,7 +362,6 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                 </con:context>
                 <con:actions>
                     <con1:ifThenElse>
-                        <con2:comment>Checks for SN response status</con2:comment>
                         <con2:id>_ActionId-a013b5c.40457e0b.0.163b6d4c107.N7eb6</con2:id>
                         <con1:case id="_BranchId-a013b5c.40457e0b.0.163b6d4c107.N7eb5">
                             <con1:condition>
@@ -475,9 +473,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="TicketNumber">
-                                            <con6:path>if($SNResponse/executeResponse/ticket_number/text())
-then($SNResponse/executeResponse/ticket_number/text())
-else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text())</con6:path>
+                                            <con6:path>$SNResponse/executeResponse/ticket_number/text()</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
                                             <con6:path>'SNInboundIncReqSyncPS'</con6:path>
@@ -612,7 +608,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                             </con1:replace>
                             <con4:log>
                                 <con2:id>_ActionId-a013dc6.291b6c5f.0.164640ebe9f.N7ffe</con2:id>
-                                <con4:logLevel>info</con4:logLevel>
+                                <con4:logLevel>warning</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$ServiceAccountUserCredentials/config:username/text()</con2:xqueryText>
                                 </con4:expr>
@@ -620,7 +616,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                             </con4:log>
                             <con4:log>
                                 <con2:id>_ActionId-a013dc6.291b6c5f.0.164640ebe9f.N7ff5</con2:id>
-                                <con4:logLevel>info</con4:logLevel>
+                                <con4:logLevel>warning</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$outbound/*</con2:xqueryText>
                                 </con4:expr>
@@ -628,7 +624,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                             </con4:log>
                             <con4:log>
                                 <con2:id>_ActionId-a013dc6.N1a1861c0.0.164b80b67ba.N7ffe</con2:id>
-                                <con4:logLevel>info</con4:logLevel>
+                                <con4:logLevel>warning</con4:logLevel>
                                 <con4:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con4:expr>

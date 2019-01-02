@@ -2,6 +2,7 @@
 <con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
     <con:coreEntry>
         <con:binding type="Any XML"/>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
@@ -24,7 +25,7 @@
                 <con:actions>
                     <con4:log>
                         <con2:id>_ActionId-a013dc6.N51379d8b.0.1647e93fb26.N7f8f</con2:id>
-                        <con4:logLevel>info</con4:logLevel>
+                        <con4:logLevel>warning</con4:logLevel>
                         <con4:expr>
                             <con2:xqueryText>$body/*</con2:xqueryText>
                         </con4:expr>

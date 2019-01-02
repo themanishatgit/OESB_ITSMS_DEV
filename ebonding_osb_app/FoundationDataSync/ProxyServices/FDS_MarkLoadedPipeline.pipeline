@@ -8,6 +8,7 @@
                 <con:namespace>http://xmlns.oracle.com/SITA_Ebondings/FoundationDataSync/FDS_MarkLoaded</con:namespace>
             </con:binding>
         </con:binding>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
         <con:xqConfiguration>
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
@@ -21,7 +22,7 @@
                 <con:actions>
                     <con3:log>
                         <con1:id>_ActionId-N3f57fef5.N7021ed48.0.16586e229a8.N7e54</con1:id>
-                        <con3:logLevel>info</con3:logLevel>
+                        <con3:logLevel>warning</con3:logLevel>
                         <con3:expr>
                             <con1:xqueryText>$body</con1:xqueryText>
                         </con3:expr>

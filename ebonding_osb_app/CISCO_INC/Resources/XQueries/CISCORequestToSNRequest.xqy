@@ -146,12 +146,23 @@ declare function local:func($MsgTranId as xs:string,
                         else(<ns1:AdditionalComments>{fn:data($CISCORequest/COMMENTS)}</ns1:AdditionalComments>)
                       }
 
-                      {
+                   {
+                   				 
+                        
                         if(dvmtr:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER' and fn:data($CISCORequest/ACTLOG_DESC)!='')
-                        then
-			<ns1:SupplierComments>{fn:data($CISCORequest/ACTLOG_DESC)}</ns1:SupplierComments>
-                        else(<ns1:SupplierComments>{fn:data($CISCORequest/COMMENTS)}</ns1:SupplierComments>)
+						
+							then
+			
+			<ns1:SupplierComments>{ if ($CISCORequest/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS') then  fn:concat(fn:data($CISCORequest/ACTLOG_DESC),if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text()))) then fn:concat('TIME SPENT: ',(fn:data($CISCORequest/TIME_SPENT/text()))) else())
+			else
+			fn:data($CISCORequest/ACTLOG_DESC)}</ns1:SupplierComments>
+                        else(<ns1:SupplierComments>{if ($CISCORequest/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS') then 
+						fn:concat(fn:data($CISCORequest/COMMENTS),if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text()))) then fn:concat('TIME SPENT: ',(fn:data($CISCORequest/TIME_SPENT/text()))) else())
+						else
+						fn:data($CISCORequest/COMMENTS)}</ns1:SupplierComments>
+						)
                       }
+
 
 			<ns1:TimeSpent>{fn:data($CISCORequest/TIME_SPENT)}</ns1:TimeSpent>
 			<ns1:TravelTime>{fn:data($CISCORequest/TRAVEL_TIME)}</ns1:TravelTime>

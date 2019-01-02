@@ -12,7 +12,9 @@
             </con:binding>
             <con:selector type="SOAP body"/>
         </ser:binding>
-        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes"/>
+        <oper:operations enabled="true">
+            <oper:monitoring enabled="true" aggregationInterval="10"/>
+        </oper:operations>
         <ser:ws-policy>
             <ser:binding-mode>owsm-policy-bindings</ser:binding-mode>
             <ser:owsm-policy-metadata>

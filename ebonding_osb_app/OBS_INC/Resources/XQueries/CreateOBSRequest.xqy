@@ -26,6 +26,9 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 
          else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ACK')then
 	<TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
+	
+	else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ERROR')then
+	<TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
           else()
        } 
 
@@ -332,6 +335,16 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
             else(<DESCRIPTION/>) 
            }</ACT_LOG>)
         else()
+	}
+	
+	{
+	if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ERROR') 
+	then(<ACT_LOG>
+				<DESCRIPTION>
+				{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments)}
+				</DESCRIPTION>
+		</ACT_LOG>)
+	else()
 	}
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
