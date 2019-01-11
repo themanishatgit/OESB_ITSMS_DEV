@@ -34,7 +34,7 @@ xs:QName('STATUS'),
                         <con3:expr>
                             <con2:xqueryText>$LastLoadedBatchTimeAzure</con2:xqueryText>
                         </con3:expr>
-                        <con3:message>****FDS_TransactionTableMonitoringPS.LastProcessedAzureLoadTime****</con3:message>
+                        <con3:message>****FDS_TransactionTableMonitoringPS.LastProcessedAzureLoadTime1****</con3:message>
                     </con3:log>
                     <con1:assign varName="TimeDifference">
                         <con2:id>_ActionId-a012806.195be889.0.16836ec8881.N7ebe</con2:id>
