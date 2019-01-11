@@ -57,4 +57,7 @@
         </oracleHome>
     </properties>
     -->
+    <modules>
+        <module>../SN_INC/pom.xml</module>
+    </modules>
 </project>
