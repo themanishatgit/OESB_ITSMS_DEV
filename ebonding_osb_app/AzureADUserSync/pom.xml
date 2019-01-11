@@ -16,5 +16,18 @@
     <packaging>sbar</packaging>
 
     <description/>
+    
+    <dependencies>
+        <dependency>
+            <groupId>ebonding_osb_app</groupId>
+            <artifactId>SN_INC</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ebonding_osb_app</groupId>
+            <artifactId>Common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
