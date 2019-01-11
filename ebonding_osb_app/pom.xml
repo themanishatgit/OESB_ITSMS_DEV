@@ -9,7 +9,7 @@
 
     <packaging>pom</packaging>
 
-    <modules>
+    <!--<modules>
         <module>System</module>
 		<module>Common</module>
 		<module>DataMappingLoad</module>
@@ -20,7 +20,7 @@
 		<module>OBS_INC</module>
 		<module>FoundationDataSync</module>
         <module>AzureADUserSync</module>
-        <module>Utilities</module>
-    </modules>
+        <module>Utilities</module> 
+    </modules> -->
 
 </project>
