@@ -289,7 +289,7 @@
                         <con3:expr>
                             <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$body</con:xqueryText>
                         </con3:expr>
-                        <con3:message>BODY:</con3:message>
+                        <con3:message>BODY1:</con3:message>
                     </con3:log>
                     <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-a013dca.N3b3d8527.0.167310bb0e1.N7f37</con2:id>
