@@ -37,6 +37,7 @@
       <hash><url n="URL" path="OBS_INC/OBS_INC.jpr"/></hash>
       <hash><url n="URL" path="SBProject/SBProject.jpr"/></hash>
       <hash><url n="URL" path="SN_INC/SN_INC.jpr"/></hash>
+      <hash><url n="URL" path="Utilities/Utilities.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
       <hash n="profileDefinitions">
