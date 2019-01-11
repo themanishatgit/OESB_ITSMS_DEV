@@ -22,12 +22,5 @@
         <module>AzureADUserSync</module>
         <module>Utilities</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>ebonding_osb_app</groupId>
-            <artifactId>Common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>sbar</type>
-        </dependency>
-    </dependencies>
+
 </project>
