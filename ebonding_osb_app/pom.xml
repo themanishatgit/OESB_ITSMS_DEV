@@ -21,6 +21,8 @@
 		<module>FoundationDataSync</module>
         <module>AzureADUserSync</module> -->
         <module>Utilities</module> 
+		<module>Common</module>
+		<module>SN_INC</module>
     </modules> 
 
 </project>
