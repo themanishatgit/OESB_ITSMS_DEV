@@ -115,7 +115,7 @@ declare function local:func($OBSClarifyInboundMessage as element() (:: schema-el
                     }
 		<ns1:IncidentAsset>
 			<ns1:CI>{data($OBSClarifyInboundMessage/SECONDARY_CI/ASSET_TAG)}</ns1:CI>
-			<ns1:BusinessService>{fn:data($OBSClarifyInboundMessage/PRIMARY_CI/ASSET_TAG)}</ns1:BusinessService>
+			<ns1:BusinessService>{data($ResolvedValues/BusinessService)}</ns1:BusinessService>
 		</ns1:IncidentAsset>
 
 	</ns1:IncidentRequestBody>

@@ -549,7 +549,7 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                     <con1:assign varName="ResolvedValues">
                         <con2:id>_ActionId-N3f57d45a.N36cd38a9.0.164c1e07cc7.N7fef</con2:id>
                         <con1:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ResolvedValues>
+                            <con2:xqueryText><![CDATA[<ResolvedValues>
 	<Impact>{data($FetchPriorityMappingResponse/fet:Result/fet:Impact)}</Impact>
 	<Urgency>{data($FetchPriorityMappingResponse/fet:Result/fet:Urgency)}</Urgency>
 	<Priority>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='PRIORITY']/fetch:DestinationValue/text()}</Priority>
@@ -560,8 +560,9 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
 	<LocGroup>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='ASSIGNMENT_GROUP']/fetch:DestinationValue/text()}</LocGroup>
     <ReportMethod>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='REPORT_METHOD']/fetch:DestinationValue/text()}</ReportMethod>
     <ResolutionCode>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='RESOLUTION_CODE']/fetch:DestinationValue/text()}</ResolutionCode>
-     <EmailAddress>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CONTACT']/fetch:DestinationValue/text()}</EmailAddress>
-</ResolvedValues>]]></con:xqueryText>
+    <EmailAddress>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='CONTACT']/fetch:DestinationValue/text()}</EmailAddress>
+    <BusinessService>{$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='BUSINESS_SERVICE']/fetch:DestinationValue/text()}</BusinessService>
+</ResolvedValues>]]></con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:replace varName="body" contents-only="true">
