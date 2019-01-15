@@ -449,14 +449,14 @@ else()</con:xqueryText>
                         <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7ff6</con1:id>
                         <con2:case id="_BranchId-a013dd4.518f5b72.0.16850a7f92c.N7ff5">
                             <con2:condition>
-                                <con1:xqueryText>$TransformedOBSRequest/TRANSACTION_TYPE/text()='Ack' and fn:contains($TransformedOBSRequest/EXTERNAL_ID/text(), '-')</con1:xqueryText>
+                                <con1:xqueryText>$TransactionType='ACK' and fn:contains($ExtRefNumber, '-')</con1:xqueryText>
                             </con2:condition>
                             <con2:actions>
                                 <con3:route>
                                     <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7fef</con1:id>
                                     <con3:service ref="Common/BusinessServices/PartnerOutboundIncQJMSBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                     <con3:outboundTransform>
-                                        <con2:replace varName="body">
+                                        <con2:replace varName="body" contents-only="true">
                                             <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7fb1</con1:id>
                                             <con2:location>
                                                 <con1:xpathText>.</con1:xpathText>
