@@ -80,7 +80,7 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 	<STATUS>Open</STATUS>
           else if (fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE') then
 	<STATUS>{ if ($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y') then 'Resolved' 	
-	else if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested' else ($Status)}</STATUS>
+	else if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested' else if($Status_Code = 'Acknowledged')then $Status_Code else ($Status)}</STATUS>
           else()
         }
         {
@@ -168,7 +168,6 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 		<UPDATE_FIELD>
 			<FIELD_NAME>ATD</FIELD_NAME>
 			<FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ATD)}</FIELD_VALUE>
-
 		</UPDATE_FIELD>
                     else()
                 }
@@ -322,15 +321,16 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
           then(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:SupplierComments))
 		  
 			else if (($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y')) then 'Status Changed to Resolved'
-			
-          else(fn:concat('Status changed to ', if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested' else ($Status)))}</DESCRIPTION>
+			else if($Status_Code = 'Acknowledged')then 'Ticket Acknowledged' 
+          else(fn:concat('Status changed to ', if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested'  else ($Status)))}</DESCRIPTION>
 
 
          else if ((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:Name/text()) = 'OBS'))then
 		<DESCRIPTION>{  if (($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y')) then 'Status Changed to Resolved'
 		
 		else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes))
-          then(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes))		 
+          then(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes))	
+		  else if($Status_Code = 'Acknowledged')then 'Ticket Acknowledged' 		  
           else(fn:concat('Status changed to ', if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested' else ($Status)))}</DESCRIPTION>
             else(<DESCRIPTION/>) 
            }</ACT_LOG>)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <con:coreEntry>
         <con:binding type="Any XML"/>
         <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
@@ -10,7 +10,7 @@
     </con:coreEntry>
     <con:router>
         <con:pipeline type="request" name="request-N53e6a1ba.N47592837.0.1645a2c220b.N792b">
-            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N78b0" name="FetchVariables" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N78b0" name="FetchVariables" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
@@ -95,6 +95,12 @@
                             <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
+                    <con6:assign varName="DestinationSystem" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7fb4</con2:id>
+                        <con6:expr>
+                            <con2:xqueryText>$body/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()</con2:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
                     <con1:assign varName="TicketNumber" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N78ab</con2:id>
                         <con1:expr>
@@ -125,7 +131,7 @@ else()</con:xqueryText>
                     </con6:assign>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N780e" name="AuditStart" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N780e" name="AuditStart" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context/>
                 <con:actions>
                     <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
@@ -188,7 +194,7 @@ else()</con:xqueryText>
                     </con4:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N53e6b176.2427ae49.0.1645ead4534.N7f21" name="MapStatusAndAssignmentGroup" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:stage id="_StageId-N53e6b176.2427ae49.0.1645ead4534.N7f21" name="MapStatusAndAssignmentGroup" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
                 <con:context>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
@@ -235,7 +241,7 @@ else()</con:xqueryText>
                     </con1:wsCallout>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N77a6" name="Transform" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N77a6" name="Transform" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="ns1" namespace="http://eai/Sav/Trillium/Types"/>
@@ -300,9 +306,15 @@ else()</con:xqueryText>
                             </con:xqueryTransform>
                         </con1:expr>
                     </con1:replace>
+                    <con6:assign varName="TransformedOBSRequest" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7ff2</con2:id>
+                        <con6:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con6:expr>
+                    </con6:assign>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N773b" name="AuditRequestSent" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N773b" name="AuditRequestSent" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context/>
                 <con:actions>
                     <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
@@ -367,7 +379,7 @@ else()</con:xqueryText>
             </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-N53e6a1ba.N47592837.0.1645a2c220b.N792a">
-            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N76cf" name="AuditResponseReceived" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:stage id="_StageId-N53e6a1ba.N47592837.0.1645a2c220b.N76cf" name="AuditResponseReceived" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                 <con:context/>
                 <con:actions>
                     <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
@@ -430,6 +442,56 @@ else()</con:xqueryText>
                     </con6:route>
                 </con:actions>
             </con:stage>
+            <con:stage id="_StageId-a013dd4.518f5b72.0.16850a7f92c.N8000" name="AcknowledgeStatusUpdate">
+                <con:context/>
+                <con:actions>
+                    <con2:ifThenElse>
+                        <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7ff6</con1:id>
+                        <con2:case id="_BranchId-a013dd4.518f5b72.0.16850a7f92c.N7ff5">
+                            <con2:condition>
+                                <con1:xqueryText>$TransformedOBSRequest/TRANSACTION_TYPE/text()='Ack' and fn:contains($TransformedOBSRequest/EXTERNAL_ID/text(), '-')</con1:xqueryText>
+                            </con2:condition>
+                            <con2:actions>
+                                <con3:route>
+                                    <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7fef</con1:id>
+                                    <con3:service ref="Common/BusinessServices/PartnerOutboundIncQJMSBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:outboundTransform>
+                                        <con2:replace varName="body">
+                                            <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7fb1</con1:id>
+                                            <con2:location>
+                                                <con1:xpathText>.</con1:xpathText>
+                                            </con2:location>
+                                            <con2:expr>
+                                                <con1:xqueryTransform>
+                                                    <con1:resource ref="OBS_INC/Resources/XQueries/TransformOBSAckToCanonical"/>
+                                                    <con1:param name="AckTransaction">
+                                                        <con1:path>$TransformedOBSRequest/*</con1:path>
+                                                    </con1:param>
+                                                </con1:xqueryTransform>
+                                            </con2:expr>
+                                        </con2:replace>
+                                        <con2:assign varName="InterfaceQueueList" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                            <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7fbb</con1:id>
+                                            <con2:expr>
+                                                <con1:xqueryTransform>
+                                                    <con1:resource ref="Common/Resources/XQueries/InterfaceQueueList"/>
+                                                </con1:xqueryTransform>
+                                            </con2:expr>
+                                        </con2:assign>
+                                        <con2:routing-options xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                            <con1:id>_ActionId-a013dd4.518f5b72.0.16850a7f92c.N7fb7</con1:id>
+                                            <con2:uriExpr>
+                                                <con1:xqueryText>$InterfaceQueueList/Interface[Name=$DestinationSystem]/QueueName/text()</con1:xqueryText>
+                                            </con2:uriExpr>
+                                        </con2:routing-options>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                            </con2:actions>
+                        </con2:case>
+                        <con2:default/>
+                    </con2:ifThenElse>
+                </con:actions>
+            </con:stage>
         </con:pipeline>
         <con:flow>
             <con:pipeline-node name="Pipeline Pair Node1">
@@ -439,7 +501,7 @@ else()</con:xqueryText>
             <con:route-node name="Route To OBS Clarify System">
                 <con:context/>
                 <con:actions>
-                    <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                         <con2:id>_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7631</con2:id>
                         <con4:service ref="OBS_INC/BusinessServices/Outbound/OBSIncReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con4:operation>handleTT</con4:operation>
@@ -466,5 +528,5 @@ else()</con:xqueryText>
             </con:route-node>
         </con:flow>
     </con:router>
-    <aler:alertRules xsi:nil="true" xmlns:aler="http://xmlns.oracle.com/servicebus/monitoring/alert" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <aler:alertRules xsi:nil="true" xmlns:aler="http://xmlns.oracle.com/servicebus/monitoring/alert"/>
 </con:pipelineEntry>
