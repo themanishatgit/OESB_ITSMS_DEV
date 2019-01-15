@@ -14,6 +14,7 @@ declare function local:func($AckTransaction as element() (:: schema-element(ns1:
         <ns2:IncidentRequestHeader>
             <ns2:TransactionId>{fn-bea:uuid()}</ns2:TransactionId>
             <ns2:TransactionType>UPDATE</ns2:TransactionType>
+            <ns2:RecType>INC</ns2:RecType>
             <ns2:SourceSystem>SN</ns2:SourceSystem>
             <ns2:DestinationSystem>OBS</ns2:DestinationSystem>
         </ns2:IncidentRequestHeader>

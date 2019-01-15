@@ -159,7 +159,7 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 		<UPDATE_FIELD>
 			<FIELD_NAME>STATUS</FIELD_NAME>
 			<FIELD_VALUE>{ if ($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y') then 'Resolved'
-			else if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested' else ($Status)}</FIELD_VALUE>                      
+			else if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested'  else if($Status_Code = 'Acknowledged')then $Status_Code else ($Status)}</FIELD_VALUE>                      
 		</UPDATE_FIELD>
                    
                 
@@ -305,7 +305,6 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 			<FIELD_NAME>resol_local</FIELD_NAME>
 			<FIELD_VALUE>{ if ($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y') then 'Cancelled'
 			else if(fn:string-length($Resolution_Code)>0) then $Resolution_Code else ('No Fault Found')}</FIELD_VALUE>
-
 		</UPDATE_FIELD>
 
 
