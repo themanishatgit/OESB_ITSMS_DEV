@@ -26,7 +26,7 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 
          else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ACK')then
 	<TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
-	
+
 	else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ERROR')then
 	<TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
           else()
@@ -155,14 +155,14 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 		</UPDATE_FIELD>
                     else()
                 }
-                
+
 		<UPDATE_FIELD>
 			<FIELD_NAME>STATUS</FIELD_NAME>
 			<FIELD_VALUE>{ if ($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y') then 'Resolved'
 			else if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested'  else if($Status_Code = 'Acknowledged')then $Status_Code else ($Status)}</FIELD_VALUE>                      
 		</UPDATE_FIELD>
-                   
-                
+
+
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ATD/text())>0)then
 		<UPDATE_FIELD>
@@ -182,7 +182,8 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 
                     else()
                 }
-
+			{
+			if($Status_Code != 'Acknowledged')then
 		<UPDATE_FIELD>
 			<FIELD_NAME>CATEGORY</FIELD_NAME>
 			<FIELD_VALUE>{if(fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Category/text())))
@@ -190,6 +191,8 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
                       else($DefaultValues/CATEGORY/text())}</FIELD_VALUE>			
 
 		</UPDATE_FIELD>
+		else()
+		}
 
 
                 {
@@ -241,92 +244,94 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
                         else($TravelTime)
                         }</FIELD_VALUE>
 
-		</UPDATE_FIELD>
+				</UPDATE_FIELD>
 
                     else()
                 }
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Impact/text())>0)then
-		<UPDATE_FIELD>
-			<FIELD_NAME>IMPACT</FIELD_NAME>
-			<FIELD_VALUE>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Impact', '')}</FIELD_VALUE>
+				<UPDATE_FIELD>
+					<FIELD_NAME>IMPACT</FIELD_NAME>
+					<FIELD_VALUE>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Impact', '')}</FIELD_VALUE>
 
-		</UPDATE_FIELD>
+				</UPDATE_FIELD>
 
                     else()
                 }
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentLocation/ns2:Issue/text())>0)then
-		<UPDATE_FIELD>
-			<FIELD_NAME>SYMPTOM</FIELD_NAME>
-			<FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentLocation/ns2:Issue)}</FIELD_VALUE>
+				<UPDATE_FIELD>
+					<FIELD_NAME>SYMPTOM</FIELD_NAME>
+					<FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentLocation/ns2:Issue)}</FIELD_VALUE>
 
-		</UPDATE_FIELD>
+				</UPDATE_FIELD>
 
                     else()
                 }
                    {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:TimeSpent/text())>0)then
-		<UPDATE_FIELD>
-			<FIELD_NAME>time_site</FIELD_NAME>
-			<FIELD_VALUE>{if (fn:string-length(fn:substring-before($TimeSpent,':'))<2) 
+				<UPDATE_FIELD>
+					<FIELD_NAME>time_site</FIELD_NAME>
+					<FIELD_VALUE>{if (fn:string-length(fn:substring-before($TimeSpent,':'))<2) 
 	then ((fn:concat('0', if ((fn:substring-before($TimeSpent,':')) eq '0' ) then ('1:') else (fn:concat(fn:substring-before($TimeSpent,':'),':')),
 	'00:00')))
 						else if ((fn:substring-before(($TimeSpent),':')) = '00') then '01:00:00'
                                     else if ((fn:substring-before(($TimeSpent),':')) >= '12') then ('12:00:00')
                                     else($TimeSpent)}
-			</FIELD_VALUE>
-		</UPDATE_FIELD>
+							</FIELD_VALUE>
+						</UPDATE_FIELD>
 
                     else()
                 }
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentAsset/ns2:BusinessService/text())>0)then
-		<UPDATE_FIELD>
-			<FIELD_NAME>SERVICE_CI</FIELD_NAME>
-			<FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentAsset/ns2:BusinessService)}</FIELD_VALUE>
+						<UPDATE_FIELD>
+							<FIELD_NAME>SERVICE_CI</FIELD_NAME>
+							<FIELD_VALUE>{data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentAsset/ns2:BusinessService)}</FIELD_VALUE>
 
-		</UPDATE_FIELD>
+						</UPDATE_FIELD>
 
                     else()
                 }
                 {
                   if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Urgency/text())>0)then
-		<UPDATE_FIELD>
-			<FIELD_NAME>URGENCY</FIELD_NAME>
-			<FIELD_VALUE> {dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Urgency', '')}</FIELD_VALUE>
+						<UPDATE_FIELD>
+							<FIELD_NAME>URGENCY</FIELD_NAME>
+							<FIELD_VALUE> {dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Urgency', '')}</FIELD_VALUE>
 
-		</UPDATE_FIELD>
+						</UPDATE_FIELD>
                     else()
                 }
-
-
-		<UPDATE_FIELD>
-			<FIELD_NAME>resol_local</FIELD_NAME>
-			<FIELD_VALUE>{ if ($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y') then 'Cancelled'
+			{
+			if($Status_Code != 'Acknowledged')then
+						<UPDATE_FIELD>
+							<FIELD_NAME>resol_local</FIELD_NAME>
+							<FIELD_VALUE>{ if ($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y') then 'Cancelled'
 			else if(fn:string-length($Resolution_Code)>0) then $Resolution_Code else ('No Fault Found')}</FIELD_VALUE>
-		</UPDATE_FIELD>
+						</UPDATE_FIELD>
+		else()
+		}
 
 
-	</UPDATE_INFO>
+					</UPDATE_INFO>
           else()
         }
               {
 	  if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='UPDATE')then
         (<ACT_LOG>{
             if ((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Supplier/ns2:Name/text()) = 'OBS'))then
-		<DESCRIPTION>{ if (($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y')) then 'Resolved'
+						<DESCRIPTION>{ if (($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y')) then 'Resolved'
 		else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:SupplierComments))
           then(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:SupplierComments))
-		  
+
 			else if (($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y')) then 'Status Changed to Resolved'
 			else if($Status_Code = 'Acknowledged')then 'Ticket Acknowledged' 
           else(fn:concat('Status changed to ', if($Status_Code = 'Resolved' and fn:exists(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ResolutionCode/text()))) then 'Concurrence Requested'  else ($Status)))}</DESCRIPTION>
 
 
          else if ((fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Customer/ns2:Name/text()) = 'OBS'))then
-		<DESCRIPTION>{  if (($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y')) then 'Status Changed to Resolved'
-		
+						<DESCRIPTION>{  if (($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:KillFlag/text()='Y')) then 'Status Changed to Resolved'
+
 		else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes))
           then(fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes))	
 		  else if($Status_Code = 'Acknowledged')then 'Ticket Acknowledged' 		  
@@ -335,55 +340,55 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
            }</ACT_LOG>)
         else()
 	}
-	
+
 	{
 	if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ERROR') 
 	then(<ACT_LOG>
-				<DESCRIPTION>
+						<DESCRIPTION>
 				{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments)}
-				</DESCRIPTION>
-		</ACT_LOG>)
+						</DESCRIPTION>
+					</ACT_LOG>)
 	else()
 	}
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-	<NCC>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentAsset/ns2:NCC)}</NCC>
+					<NCC>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentAsset/ns2:NCC)}</NCC>
             else ()
         }
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-	<IMPACT>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Impact', '')}</IMPACT>
+					<IMPACT>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Impact', '')}</IMPACT>
             else ()
         }
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-	<URGENCY>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Urgency', '')}</URGENCY>
+					<URGENCY>{dvmtr:lookup('OBS_INC/Resources/DVM/OBSOutboundImpactUrgency', 'Priority', $CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:Priority/text(), 'Urgency', '')}</URGENCY>
               else ()
         }
 
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-	<REPORT_METHOD>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ReportMethod)}</REPORT_METHOD>
+					<REPORT_METHOD>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:ReportMethod)}</REPORT_METHOD>
             else ()
         }
        {
         if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-	<TIME_STAMP>{fn:current-time()}</TIME_STAMP>
+					<TIME_STAMP>{fn:current-time()}</TIME_STAMP>
            else()
        }
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-	<OPEN_DATE>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:OpenDate)}</OPEN_DATE>
+					<OPEN_DATE>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:OpenDate)}</OPEN_DATE>
             else ()
         }
         {
             if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='CREATE')then
-	<SYMPTOM>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentLocation/ns2:Issue)}</SYMPTOM>
+					<SYMPTOM>{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentLocation/ns2:Issue)}</SYMPTOM>
             else ()
         }
 
 
-</ns1:TRANSACTION>
+				</ns1:TRANSACTION>
 };
 
 local:func($Status_Code,  $TravelTime , $TimeSpent ,$Status, $DefaultValues, $Resolution_Code,$CanonicalRequestMessage)
