@@ -1,5 +1,5 @@
 <DefaultValues>
-	<TimeDifference>720</TimeDifference>
-        <AzureTimeDifference>720</AzureTimeDifference>
-        <Recipients>rajulj@hexaware.com,sanchitm@hexaware.com</Recipients>
+	<TimeDifference>60</TimeDifference>
+        <AzureTimeDifference>780</AzureTimeDifference>
+        <Recipients>rajulj@hexaware.com,sanchitm@hexaware.com,MahadevK@hexaware.com</Recipients>
 </DefaultValues>
