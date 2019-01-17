@@ -788,11 +788,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout_FetchSHData@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout_FetchSHData@</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
