@@ -1,6 +1,0 @@
-<view_states>
-   <function arity="6" name="func">
-      <source_tree_view last.visible.row="31" last.visible.path="/sourceRoot[[0]]/TRANSACTION[[0]]/ID[[28]]" first.visible.path="/sourceRoot[[0]]/TRANSACTION[[0]]" expanded.paths="/sourceRoot[[0]]/TRANSACTION[[0]]&#xA;/sourceRoot[[0]]/TRANSACTION[[0]]/ACT_LOG[[22]]" first.visible.row="0" selected.paths=""/>
-      <target_tree_view last.visible.row="33" last.visible.path="/TargetRoot[[0]]/IncidentRequestMessage[[0]]/IncidentRequestBody[[1]]/IncidentDetails[[0]]/Conditional[[25]]" first.visible.path="/TargetRoot[[0]]/IncidentRequestMessage[[0]]/IncidentRequestBody[[1]]" expanded.paths="/TargetRoot[[0]]/IncidentRequestMessage[[0]]&#xA;/TargetRoot[[0]]/IncidentRequestMessage[[0]]/IncidentRequestBody[[1]]&#xA;/TargetRoot[[0]]/IncidentRequestMessage[[0]]/IncidentRequestBody[[1]]/IncidentDetails[[0]]&#xA;/TargetRoot[[0]]/IncidentRequestMessage[[0]]/IncidentRequestBody[[1]]/IncidentDetails[[0]]/Conditional[[4]]&#xA;/TargetRoot[[0]]/IncidentRequestMessage[[0]]/IncidentRequestBody[[1]]/IncidentDetails[[0]]/Conditional[[18]]&#xA;/TargetRoot[[0]]/IncidentRequestMessage[[0]]/IncidentRequestBody[[1]]/IncidentLocation[[3]]" first.visible.row="2" selected.paths=""/>
-   </function>
-</view_states>
