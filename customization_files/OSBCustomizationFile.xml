@@ -179,7 +179,7 @@
         <cus:owners>
             <xt:owner>
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPS</xt:path>
             </xt:owner>
         </cus:owners>
         <cus:actions>
@@ -233,7 +233,7 @@
         <cus:owners>
             <xt:owner>
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPS</xt:path>
             </xt:owner>
         </cus:owners>
         <cus:actions>
@@ -788,11 +788,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout_FetchSHData@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout_FetchSHData@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -3483,7 +3483,7 @@
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPS</xt:path>
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
@@ -3491,7 +3491,7 @@
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPS</xt:path>
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
@@ -3782,11 +3782,11 @@
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPS</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPS</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Pipeline</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPSPipeline</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPSPipeline</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
@@ -3798,11 +3798,11 @@
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPS</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPS</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Pipeline</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPSPipeline</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPSPipeline</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
@@ -4471,11 +4471,11 @@
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPSPipeline</xt:path>
             </xt:oldRef>
             <xt:newRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPSPipeline</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
@@ -4491,11 +4491,11 @@
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPSPipeline</xt:path>
             </xt:oldRef>
             <xt:newRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPSPipeline</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
