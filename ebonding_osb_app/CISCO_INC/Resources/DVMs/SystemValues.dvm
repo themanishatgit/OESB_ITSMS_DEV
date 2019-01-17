@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dvm name="SystemValues" xmlns="http://xmlns.oracle.com/dvm">
+<description/>
+<columns>
+<column name="InterfaceId"/>
+<column name="SystemName"/>
+<column name="Type"/>
+</columns>
+<rows>
+<row>
+<cell>ESP1</cell>
+<cell>ESP</cell>
+<cell>SUPPLIER</cell>
+</row>
+<row>
+<cell>IER</cell>
+<cell>IER</cell>
+<cell>SUPPLIER</cell>
+</row>
+<row>
+<cell>STEC</cell>
+<cell>SERVICETEC</cell>
+<cell>SUPPLIER</cell>
+</row>
+<row>
+<cell>ESSINTIALS</cell>
+<cell>ESSINTIAL</cell>
+<cell>SUPPLIER</cell>
+</row>
+<row>
+<cell>IBMAC</cell>
+<cell>IBM</cell>
+<cell>CUSTOMER</cell>
+</row>
+<row>
+<cell>JFKIAT</cell>
+<cell>JFK</cell>
+<cell>CUSTOMER</cell>
+</row>
+</rows>
+</dvm>

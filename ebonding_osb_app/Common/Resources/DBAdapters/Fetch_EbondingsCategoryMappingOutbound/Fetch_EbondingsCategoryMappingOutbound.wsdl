@@ -1,0 +1,24 @@
+<wsdl:definitions name="Fetch_EbondingsCategoryMappingOutbound" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsCategoryMappingOutbound" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsCategoryMappingOutbound" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsCategoryMappingOutbound" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="Fetch_EbondingsCategoryMappingOutbound_plt">
+    <plt:role name="Fetch_EbondingsCategoryMappingOutbound_role">
+      <plt:portType name="tns:Fetch_EbondingsCategoryMappingOutbound_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsCategoryMappingOutbound" schemaLocation="Fetch_EbondingsCategoryMappingOutbound_table.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Fetch_EbondingsCategoryMappingOutboundSelect_inputParameters">
+        <wsdl:part name="Fetch_EbondingsCategoryMappingOutboundSelect_inputParameters" element="top:Fetch_EbondingsCategoryMappingOutboundSelect_recType_snCategory_snSubCategory_isActiveInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="EbondingsCategoryMappingCollection_msg">
+        <wsdl:part name="EbondingsCategoryMappingCollection" element="top:EbondingsCategoryMappingCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="Fetch_EbondingsCategoryMappingOutbound_ptt">
+        <wsdl:operation name="Fetch_EbondingsCategoryMappingOutboundSelect">
+            <wsdl:input message="tns:Fetch_EbondingsCategoryMappingOutboundSelect_inputParameters"/>
+            <wsdl:output message="tns:EbondingsCategoryMappingCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

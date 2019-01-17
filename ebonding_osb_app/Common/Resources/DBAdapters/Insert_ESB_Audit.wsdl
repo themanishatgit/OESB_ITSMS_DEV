@@ -1,0 +1,20 @@
+<wsdl:definitions name="Insert_ESB_Audit" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Insert_ESB_Audit" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Insert_ESB_Audit" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/Insert_ESB_Audit" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="Insert_ESB_Audit_plt">
+    <plt:role name="Insert_ESB_Audit_role">
+      <plt:portType name="tns:Insert_ESB_Audit_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/Insert_ESB_Audit" schemaLocation="Insert_ESB_Audit_table.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="EsbAuditCollection_msg">
+        <wsdl:part name="EsbAuditCollection" element="top:EsbAuditCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="Insert_ESB_Audit_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:EsbAuditCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

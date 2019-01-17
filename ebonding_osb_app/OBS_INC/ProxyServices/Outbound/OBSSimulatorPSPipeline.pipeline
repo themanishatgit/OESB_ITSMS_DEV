@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="OBS_INC/Resources/WSDL/PH_B2B_EPH_TRILLIUM_TroubleTicket_source_services"/>
+            <con:binding>
+                <con:name>PH_B2B_EPH_TRILLIUM_TroubleTicket_source_servicesBinding</con:name>
+                <con:namespace>http://localhost/</con:namespace>
+            </con:binding>
+        </con:binding>
+        <oper:operations xmlns:oper="http://xmlns.oracle.com/servicebus/pipeline/operations"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-a013dc6.48096963.0.1650ebb5153.N8000">
+            <con:stage id="_StageId-a013dc6.48096963.0.1650ebb5153.N7ffe" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dc6.48096963.0.1650ebb5153.N7fff">
+            <con:stage id="_StageId-a013dc6.48096963.0.1650ebb5153.N7ffd" name="Stage1">
+                <con:context>
+                    <con1:userNsDecl prefix="typ" namespace="http://eai/Sav/Trillium/Types"/>
+                </con:context>
+                <con:actions>
+                    <con2:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-a013dc6.48096963.0.1650ebb5153.N7ffa</con1:id>
+                        <con2:location>
+                            <con1:xpathText>.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con1:xqueryText><![CDATA[<typ:RESPONSE>
+         <!--Optional:-->
+         <STATUS>SUCCESS</STATUS>
+         <!--Optional:-->
+         <TRANSACTION_ID>{$body/typ:TRANSACTION/ID/text()}</TRANSACTION_ID>
+         <!--Optional:-->
+         <ERROR_DESCRIPTION>SUCCESS</ERROR_DESCRIPTION>
+      </typ:RESPONSE>]]></con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-a013dc6.48096963.0.1650ebb5153.N8000</con:request>
+                <con:response>response-a013dc6.48096963.0.1650ebb5153.N7fff</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

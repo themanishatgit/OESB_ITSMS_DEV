@@ -1,0 +1,31 @@
+<wsdl:definitions name="NGOSSInbound" targetNamespace="http://www.sita.aero/WSDL/NGOSSInbound" xmlns:tns="http://www.sita.aero/WSDL/NGOSSInbound" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:include schemaLocation="../Schemas/NGOSSInboundMessage.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="RequestMessage" element="IncidentXML"/>
+    </wsdl:message>
+    <wsdl:message name="replyMessage">
+        <wsdl:part name="ResponseMesssage" element="IncidentResponseXML"/>
+    </wsdl:message>
+    <wsdl:portType name="execute_ptt">
+        <wsdl:operation name="execute">
+            <wsdl:input message="tns:requestMessage"/>
+            <wsdl:output message="tns:replyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="execute_bind" type="tns:execute_ptt">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="execute">
+            <soap:operation style="document" soapAction="execute"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://www.sita.aero/WSDL/NGOSSInbound"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://www.sita.aero/WSDL/NGOSSInbound"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,14 @@
+<adapter-config name="Fetch_EbondingsDataMapping" adapter="db" wsdlLocation="Fetch_EbondingsDataMapping.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="SITA_ESB_DEV" location="eis/DB/ESBDevDB"/>
+  <endpoint-interaction portType="Fetch_EbondingsDataMapping_ptt" operation="Fetch_EbondingsDataMappingSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="Fetch_EbondingsDataMapping.EbondingsDataMapping"/>
+      <property name="QueryName" value="Fetch_EbondingsDataMappingSelect"/>
+      <property name="MappingsMetaDataURL" value="Fetch_EbondingsDataMapping-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

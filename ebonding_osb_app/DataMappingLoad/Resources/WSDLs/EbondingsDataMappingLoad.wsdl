@@ -1,0 +1,31 @@
+<wsdl:definitions name="EbondingsDataMappingLoad" targetNamespace="http://www.sita.aero/WSDL/EbondingsDataMappingLoadV1" xmlns:tns="http://www.sita.aero/WSDL/EbondingsDataMappingLoadV1" xmlns:inp1="http://www.sita.aero/schema/EbondingsDataMappingLoadMessageV1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://www.sita.aero/schema/EbondingsDataMappingLoadMessageV1" schemaLocation="../Schemas/EbondingsDataMappingLoadMessage.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="EbondingsDataMappingLoadReq" element="inp1:EbondingsDataMappingLoadReq"/>
+    </wsdl:message>
+    <wsdl:message name="replyMessage">
+        <wsdl:part name="EbondingsDataMappingLoadRes" element="inp1:EbondingsDataMappingLoadRes"/>
+    </wsdl:message>
+    <wsdl:portType name="execute_ptt">
+        <wsdl:operation name="execute">
+            <wsdl:input message="tns:requestMessage"/>
+            <wsdl:output message="tns:replyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="execute_bind" type="tns:execute_ptt">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="execute">
+            <soap:operation style="document" soapAction="execute"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://www.sita.aero/WSDL/EbondingsDataMappingLoadV1"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://www.sita.aero/WSDL/EbondingsDataMappingLoadV1"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

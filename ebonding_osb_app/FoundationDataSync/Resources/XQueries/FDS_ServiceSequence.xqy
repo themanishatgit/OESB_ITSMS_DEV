@@ -1,0 +1,111 @@
+<Lookup>
+  <SplitRecordCount>200</SplitRecordCount>
+  <Object>
+    <Name>Location</Name>
+    <SHName>loc</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>1</Sequence>
+  </Object>
+  <Object>
+    <Name>Organization</Name>
+    <SHName>org</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>2</Sequence>
+  </Object>
+  <Object>
+    <Name>Vendor</Name>
+    <SHName>ca_cmpny</SHName>
+    <AdditionalFilter>company_type.sym='Vendor'</AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>3</Sequence>
+  </Object>
+  <Object>
+    <Name>Manufacturer</Name>
+    <SHName>ca_cmpny</SHName>
+    <AdditionalFilter>company_type.sym='Manufacturer'</AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>4</Sequence>
+  </Object>
+  <Object>
+    <Name>Contact</Name>
+    <SHName>cnt</SHName>
+    <AdditionalFilter>type != 2308</AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>5</Sequence>
+  </Object>
+  <Object>
+    <Name>Group</Name>
+    <SHName>cnt</SHName>
+    <AdditionalFilter>type = 2308</AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>6</Sequence>
+  </Object>
+  <Object>
+    <Name>GroupMember</Name>
+    <SHName>grpmem</SHName>
+    <AdditionalFilter>group.type=2308</AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>7</Sequence>
+  </Object>
+  <Object>
+    <Name>Model</Name>
+    <SHName>mfrmod</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>8</Sequence>
+  </Object>
+  <Object>
+    <Name>Service</Name>
+    <SHName>nr</SHName>
+    <AdditionalFilter>family.sym='Enterprise Service'</AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>9</Sequence>
+  </Object>
+  <Object>
+    <Name>CIObject</Name>
+    <SHName>nr</SHName>
+    <AdditionalFilter>family.sym!='Enterprise Service'</AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>10</Sequence>
+  </Object>
+  <Object>
+    <Name>ContactAssetRel</Name>
+    <SHName>lrel_cenv_cntref</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>11</Sequence>
+  </Object>
+
+<Object>
+    <Name>SpecialHandling</Name>
+    <SHName>special_handling</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>12</Sequence>
+  </Object>
+   
+  <Object>
+    <Name>SpecialHandlingContactRel</Name>
+    <SHName>contact_handling</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>13</Sequence>
+  </Object>
+  <Object>
+    <Name>CMDBCIRel</Name>
+    <SHName>bmhier</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>14</Sequence>
+  </Object>
+  <Object>
+    <Name>DeletedRecords</Name>
+    <SHName>zsnow_shub_sync_del</SHName>
+    <AdditionalFilter></AdditionalFilter>
+    <SNServiceURL>/u_sync_location.do?SOAP</SNServiceURL>
+    <Sequence>15</Sequence>
+  </Object>
+  
+</Lookup>

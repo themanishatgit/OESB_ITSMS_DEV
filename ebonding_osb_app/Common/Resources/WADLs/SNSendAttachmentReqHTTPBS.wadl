@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="SNSendAttachmentReqHTTPBS">RestReference</doc>
+   <resources>
+      <resource path="/api/now/attachment/file?table_name={table_name}&amp;table_sys_id={table_sys_id}&amp;file_name={file_name}">
+         <method name="POST" soa:name="SendAttachment">
+            <request>
+               <param name="table_name" style="template" type="xsd:string"/>
+               <param name="table_sys_id" style="template" type="xsd:string"/>
+               <param name="file_name" style="template" type="xsd:string"/>
+               <representation mediaType="*/*"/>
+            </request>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+            <response>
+               <representation mediaType="application/json"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

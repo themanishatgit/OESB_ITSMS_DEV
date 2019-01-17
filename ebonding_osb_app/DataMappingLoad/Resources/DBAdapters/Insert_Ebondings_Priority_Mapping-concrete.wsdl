@@ -1,0 +1,12 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/DataMappingLoad/Insert_Ebondings_Priority_Mapping" name="Insert_Ebondings_Priority_Mapping-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="Insert_Ebondings_Priority_Mapping.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/DataMappingLoad/Insert_Ebondings_Priority_Mapping"/>
+    <wsdl:binding name="Insert_Ebondings_Priority_Mapping_ptt-binding" type="ins:Insert_Ebondings_Priority_Mapping_ptt" xmlns:ins="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/DataMappingLoad/Insert_Ebondings_Priority_Mapping">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="merge">
+            <soap:operation soapAction="merge"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,24 @@
+<wsdl:definitions name="Fetch_EbondingsDataMapping" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsDataMapping" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SITA_Ebondings/Common/Fetch_EbondingsDataMapping" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsDataMapping" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="Fetch_EbondingsDataMapping_plt">
+    <plt:role name="Fetch_EbondingsDataMapping_role">
+      <plt:portType name="tns:Fetch_EbondingsDataMapping_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsDataMapping" schemaLocation="Fetch_EbondingsDataMapping_table.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Fetch_EbondingsDataMappingSelect_inputParameters">
+        <wsdl:part name="Fetch_EbondingsDataMappingSelect_inputParameters" element="top:Fetch_EbondingsDataMappingSelect_objectName_recType_source_destination_sourceValInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="EbondingsDataMappingCollection_msg">
+        <wsdl:part name="EbondingsDataMappingCollection" element="top:EbondingsDataMappingCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="Fetch_EbondingsDataMapping_ptt">
+        <wsdl:operation name="Fetch_EbondingsDataMappingSelect">
+            <wsdl:input message="tns:Fetch_EbondingsDataMappingSelect_inputParameters"/>
+            <wsdl:output message="tns:EbondingsDataMappingCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

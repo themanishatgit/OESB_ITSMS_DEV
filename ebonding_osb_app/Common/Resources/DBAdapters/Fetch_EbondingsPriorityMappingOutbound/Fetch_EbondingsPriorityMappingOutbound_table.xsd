@@ -1,0 +1,41 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsPriorityMappingOutbound" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/Fetch_EbondingsPriorityMappingOutbound" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="EbondingsPriorityMappingCollection" type="EbondingsPriorityMappingCollection"/>
+   <xs:complexType name="EbondingsPriorityMappingCollection">
+      <xs:sequence>
+         <xs:element name="EbondingsPriorityMapping" type="EbondingsPriorityMapping" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="EbondingsPriorityMapping">
+      <xs:sequence>
+         <xs:element name="recType" type="string80" minOccurs="0"/>
+         <xs:element name="priority" type="string40" minOccurs="0"/>
+         <xs:element name="impact" type="string40" minOccurs="0"/>
+         <xs:element name="urgency" type="string40" minOccurs="0"/>
+         <xs:element name="snId" type="string32"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="Fetch_EbondingsPriorityMappingOutboundSelect_rectype_impact_urgencyInputParameters" type="Fetch_EbondingsPriorityMappingOutboundSelect_rectype_impact_urgency"/>
+   <xs:complexType name="Fetch_EbondingsPriorityMappingOutboundSelect_rectype_impact_urgency">
+      <xs:sequence>
+         <xs:element name="rectype" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="impact" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="urgency" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="string80">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="80"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string40">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="40"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string32">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="32"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

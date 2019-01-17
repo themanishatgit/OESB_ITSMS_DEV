@@ -1,0 +1,15 @@
+<adapter-config name="UpdateFDSTransaction" adapter="db" wsdlLocation="UpdateFDSTransaction.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="ESBDevDB" location="eis/DB/ESBDevDB"/>
+  <endpoint-interaction portType="UpdateFDSTransaction_ptt" operation="merge">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="UpdateFDSTransaction.FdsTransactions"/>
+      <property name="DmlType" value="merge"/>
+      <property name="MappingsMetaDataURL" value="UpdateFDSTransaction-or-mappings.xml"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="OptimizeMerge" value="true"/>
+      <property name="DetectOmissions" value="true"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:fpm="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"
+            targetNamespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1" elementFormDefault="qualified">
+  <xsd:element name="FetchPriorityMappingRequest">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="RecType" type="xsd:string"/>
+
+        <xsd:element name="Priority" minOccurs="0" type="xsd:string"/>
+        <xsd:element name="Impact" minOccurs="0" type="xsd:string"/>
+        <xsd:element name="Urgency" minOccurs="0" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FetchPriorityMappingResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Status" type="xsd:string"/>
+        <xsd:element name="Description" minOccurs="0" type="xsd:string"/>
+        <xsd:element name="Result" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RecType" type="xsd:string"/>       
+              <xsd:element name="Priority" type="xsd:string"/>
+              <xsd:element name="Impact" type="xsd:string"/>
+              <xsd:element name="Urgency" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

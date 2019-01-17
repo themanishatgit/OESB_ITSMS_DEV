@@ -1,0 +1,13 @@
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="IncidentXML">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element type="xsd:string" name="IncidentID"/>
+        <xsd:element type="xsd:string" name="EventID"/>
+        <xsd:element type="xsd:string" name="Type"/>
+        <xsd:element type="xsd:string" name="IncidentStatus"/>
+        <xsd:element type="xsd:string" name="Description"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
