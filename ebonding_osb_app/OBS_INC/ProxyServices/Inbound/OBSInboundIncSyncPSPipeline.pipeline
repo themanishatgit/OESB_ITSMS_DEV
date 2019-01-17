@@ -88,6 +88,14 @@
                     <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
                 </con:context>
                 <con:actions>
+                    <con3:log>
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7f3a</con2:id>
+                        <con3:logLevel>error</con3:logLevel>
+                        <con3:expr>
+                            <con2:xqueryText>$fault</con2:xqueryText>
+                        </con3:expr>
+                        <con3:message>****OBSInbound.ServiceEH.Fault****</con3:message>
+                    </con3:log>
                     <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N7b68</con6:id>
                         <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
@@ -274,6 +282,14 @@
                     <con2:userNsDecl prefix="s0" namespace="http://tempuri.org/"/>
                 </con:context>
                 <con:actions>
+                    <con3:log>
+                        <con2:id>_ActionId-a00010f.N59807dd8.9.16736178bcc.N7fff</con2:id>
+                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$body</con:xqueryText>
+                        </con3:expr>
+                        <con3:message>****OBSInboundIncSyncPS..IncomingRequest****</con3:message>
+                    </con3:log>
                     <con1:replace contents-only="true" varName="body">
                         <con2:id>_ActionId-a013dc6.N58c75b7c.0.164f61508f7.N7ffe</con2:id>
                         <con1:location>
@@ -283,14 +299,6 @@
                             <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$body/s0:processTransaction/s0:s/text()</con:xqueryText>
                         </con1:expr>
                     </con1:replace>
-                    <con3:log>
-                        <con2:id>_ActionId-a00010f.N59807dd8.9.16736178bcc.N7fff</con2:id>
-                        <con3:logLevel>warning</con3:logLevel>
-                        <con3:expr>
-                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$body</con:xqueryText>
-                        </con3:expr>
-                        <con3:message>BODY1:</con3:message>
-                    </con3:log>
                     <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-a013dca.N3b3d8527.0.167310bb0e1.N7f37</con2:id>
                         <con1:location>
@@ -717,14 +725,6 @@ else($DefaultValues/SEVERITY/text())</con2:xqueryText>
                                     <con2:xqueryText>$SNResponse/*</con2:xqueryText>
                                 </con1:expr>
                             </con1:assign>
-                            <con4:log xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
-                                <con2:id>_ActionId-a013dc6.4ae34749.0.164fee26093.N7f2d</con2:id>
-                                <con4:logLevel>warning</con4:logLevel>
-                                <con4:expr>
-                                    <con2:xqueryText>$ServiceNowResponse</con2:xqueryText>
-                                </con4:expr>
-                                <con4:message>ServiceNowResponse</con4:message>
-                            </con4:log>
                         </con3:responseTransform>
                     </con3:route>
                 </con:actions>

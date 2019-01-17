@@ -15,6 +15,14 @@
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con3:log>
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7f36</con2:id>
+                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con3:expr>
+                        <con3:message>****OBSOutbound.IncomingRequest****</con3:message>
+                    </con3:log>
                     <con2:assign varName="IncomingRequest" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-N53e6a1ba.N47592837.0.1645a2c220b.N78af</con6:id>
                         <con2:expr>
@@ -506,6 +514,14 @@ else()</con:xqueryText>
                         <con4:service ref="OBS_INC/BusinessServices/Outbound/OBSIncReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con4:operation>handleTT</con4:operation>
                         <con4:outboundTransform>
+                            <con3:log>
+                                <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7f33</con2:id>
+                                <con3:logLevel>warning</con3:logLevel>
+                                <con3:expr>
+                                    <con2:xqueryText>$body</con2:xqueryText>
+                                </con3:expr>
+                                <con3:message>****OBSOutbound.Route.RequestSent****</con3:message>
+                            </con3:log>
                             <con6:routing-options xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-a013dca.N7c59a2d.0.1670d3ab2dd.N7fc3</con2:id>
                                 <con1:restOptions>
@@ -520,7 +536,7 @@ else()</con:xqueryText>
                                 <con3:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con3:expr>
-                                <con3:message>&lt;&lt; Response from OBS >></con3:message>
+                                <con3:message>****OBSOutbound.Route.ResponseReceived****</con3:message>
                             </con3:log>
                         </con4:responseTransform>
                     </con4:route>

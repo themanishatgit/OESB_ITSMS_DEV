@@ -15,6 +15,14 @@
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con5:log>
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7fb5</con2:id>
+                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>****CISCOOutboundIncAsyncPS.IncomingRequest****</con5:message>
+                    </con5:log>
                     <con1:assign varName="InputRequest">
                         <con2:id>_ActionId-a013b5e.3ef098c8.0.163ab1a1dd6.N7e29</con2:id>
                         <con1:expr>
@@ -430,7 +438,7 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                 <con5:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con5:expr>
-                                <con5:message>CISCORequest</con5:message>
+                                <con5:message>CISCOOutboundIncAsyncPS.Route.CISCORequest****</con5:message>
                             </con5:log>
                         </con3:outboundTransform>
                         <con3:responseTransform>
@@ -446,7 +454,7 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                 <con5:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con5:expr>
-                                <con5:message>CISCOResponse</con5:message>
+                                <con5:message>CISCOOutboundIncAsyncPS.Route.CISCOResponse****</con5:message>
                             </con5:log>
                         </con3:responseTransform>
                     </con3:route>

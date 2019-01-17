@@ -152,7 +152,7 @@ $TimeDifference, 'Minutes -', ' Last Update happped on ',$LastLoadedBatchTime)</
                 <con:actions>
                     <con3:log>
                         <con2:id>_ActionId-a012806.195be889.0.16836ec8881.N7eb4</con2:id>
-                        <con3:logLevel>warning</con3:logLevel>
+                        <con3:logLevel>error</con3:logLevel>
                         <con3:expr>
                             <con2:xqueryText><![CDATA[<Root>
 <LastLoadedBatchTime>{$LastLoadedBatchTime}</LastLoadedBatchTime>

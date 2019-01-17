@@ -20,6 +20,14 @@
                     <con2:userNsDecl prefix="ns1" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con4:log>
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7f27</con2:id>
+                        <con4:logLevel>warning</con4:logLevel>
+                        <con4:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con4:expr>
+                        <con4:message>****SNInboundSync.IncomingRequest****</con4:message>
+                    </con4:log>
                     <con1:assign varName="IncomingRequest">
                         <con2:id>_ActionId-a013b5c.40457e0b.0.163b6d4c107.N7ec0</con2:id>
                         <con1:expr>
@@ -631,7 +639,16 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                 <con4:message>&lt;&lt; ServiceNow Body >></con4:message>
                             </con4:log>
                         </con5:outboundTransform>
-                        <con5:responseTransform/>
+                        <con5:responseTransform>
+                            <con4:log>
+                                <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7f24</con2:id>
+                                <con4:logLevel>warning</con4:logLevel>
+                                <con4:expr>
+                                    <con2:xqueryText>$body</con2:xqueryText>
+                                </con4:expr>
+                                <con4:message>****SNInboundSync.Route.Response****</con4:message>
+                            </con4:log>
+                        </con5:responseTransform>
                     </con5:route>
                 </con:actions>
             </con:route-node>

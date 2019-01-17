@@ -301,6 +301,14 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con5:log>
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7ff8</con2:id>
+                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>****BAOutboundAsyncPS.IncomingRequest****</con5:message>
+                    </con5:log>
                     <con1:assign varName="CanonicalInput">
                         <con2:id>_ActionId-N3f57d45a.23576526.0.16320a038f4.N7d6a</con2:id>
                         <con1:expr>
@@ -593,6 +601,14 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                         <con4:service ref="BA_INC/BusinessServices/Outbound/BAIncReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con4:operation>itServicesDataMessage</con4:operation>
                         <con4:outboundTransform>
+                            <con5:log>
+                                <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7ff5</con2:id>
+                                <con5:logLevel>warning</con5:logLevel>
+                                <con5:expr>
+                                    <con2:xqueryText>$body</con2:xqueryText>
+                                </con5:expr>
+                                <con5:message>****BAOutboundIncAsyncPS.Route.RequestSent****</con5:message>
+                            </con5:log>
                             <con1:transport-headers>
                                 <con2:id>_ActionId-a013dc6.7a29203b.0.1646f67e245.N7f93</con2:id>
                                 <con1:header-set>outbound-request</con1:header-set>
@@ -604,7 +620,16 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                 </con1:header>
                             </con1:transport-headers>
                         </con4:outboundTransform>
-                        <con4:responseTransform/>
+                        <con4:responseTransform>
+                            <con5:log>
+                                <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7fc1</con2:id>
+                                <con5:logLevel>warning</con5:logLevel>
+                                <con5:expr>
+                                    <con2:xqueryText>$body</con2:xqueryText>
+                                </con5:expr>
+                                <con5:message>****BAOutboundIncAsyncPS.Route.ResponseReceived****</con5:message>
+                            </con5:log>
+                        </con4:responseTransform>
                     </con4:route>
                 </con:actions>
             </con:route-node>

@@ -20,6 +20,14 @@
                     <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7ffb</con2:id>
+                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>$fault</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>****BAInboundIncSyncPS.ServiceEH.Fault****</con5:message>
+                    </con5:log>
                     <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
                         <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-N3f57d45a.N23e4f0e2.0.163bb15afed.N7db0</con5:id>
                         <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
@@ -75,6 +83,14 @@
                     <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7ffe</con2:id>
+                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>****BAInboundSyncPS.IncomingRequest****</con5:message>
+                    </con5:log>
                     <con1:assign varName="IncomingRequest" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013b5c.21fa6e06.0.163cad9c471.N7e7e</con2:id>
                         <con1:expr>
@@ -437,7 +453,7 @@ else('CREATE')</con2:xqueryText>
                                 <con5:expr>
                                     <con1:xqueryText>$body</con1:xqueryText>
                                 </con5:expr>
-                                <con5:message>****ErrorHandlerRequest****</con5:message>
+                                <con5:message>****BAInboundSyncPS.Validate.EH.ErrorHandlerRequest****</con5:message>
                             </con5:log>
                         </con3:outboundTransform>
                     </con3:route>

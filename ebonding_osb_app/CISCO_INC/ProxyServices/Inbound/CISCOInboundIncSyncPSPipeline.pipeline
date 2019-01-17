@@ -170,6 +170,14 @@ else($InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:path>
                     <con6:userNsDecl prefix="tem" namespace="http://tempuri.org/" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
                 </con:context>
                 <con:actions>
+                    <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con1:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7fb8</con1:id>
+                        <con6:logLevel>error</con6:logLevel>
+                        <con6:expr>
+                            <con1:xqueryText>$fault</con1:xqueryText>
+                        </con6:expr>
+                        <con6:message>****CISCOInboundIncSyncPS.ServiceEH.Fault****</con6:message>
+                    </con6:log>
                     <con4:route>
                         <con1:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7dd2</con1:id>
                         <con4:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
@@ -238,6 +246,14 @@ else($InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:path>
                     <con6:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
                 </con:context>
                 <con:actions>
+                    <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con1:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7fbb</con1:id>
+                        <con6:logLevel>error</con6:logLevel>
+                        <con6:expr>
+                            <con1:xqueryText>$fault</con1:xqueryText>
+                        </con6:expr>
+                        <con6:message>****CISCOInboundIncSyncPS.ValidateEH.Fault****</con6:message>
+                    </con6:log>
                     <con4:route>
                         <con1:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N790b</con1:id>
                         <con4:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
@@ -305,6 +321,14 @@ else($InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:path>
                     <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
                 </con:context>
                 <con:actions>
+                    <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7fbe</con2:id>
+                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>****CISCOInboundIncSyncPS.IncomingRequest****</con5:message>
+                    </con5:log>
                     <con1:assign varName="InputRequest">
                         <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N79fb</con2:id>
                         <con1:expr>
@@ -711,7 +735,7 @@ else ''</con2:path>
                                 <con3:expr>
                                     <con1:xqueryText>$ServiceNowResponse</con1:xqueryText>
                                 </con3:expr>
-                                <con3:message>&lt;&lt; Response from SN >></con3:message>
+                                <con3:message>****CISCOInboundIncSyncPS.Route.Response****</con3:message>
                             </con3:log>
                         </con2:responseTransform>
                     </con2:route>
