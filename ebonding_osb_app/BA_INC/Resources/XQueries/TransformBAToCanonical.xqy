@@ -46,7 +46,7 @@ declare function local:func($IncidentRecord as element() (:: schema-element(Inci
 			<ns1:AssignmentGroup>{
                         if(fn:exists($ResolvedValues/Group/text()))
                         then($ResolvedValues/Group/text())
-                        else($IncidentRecord/IncidentDetails/PrimaryAssignGroup/text())
+                        else($DefaultValues/Group/text())
                         }</ns1:AssignmentGroup>
 			<ns1:Description>{$IncidentRecord/IncidentDetails/IncidentDescription/text()}</ns1:Description>
                         <ns1:ShortDescription>{$IncidentRecord/IncidentDetails/IncidentTitle/text()}</ns1:ShortDescription>
