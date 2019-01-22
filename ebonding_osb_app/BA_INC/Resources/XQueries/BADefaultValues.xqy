@@ -4,6 +4,7 @@
     <Category>Hardware</Category>
     <ResolutionCode>No Fault Found</ResolutionCode>
     <Issue>Failure</Issue>
+    <Group>BA-NCL-ITSC</Group>
   </Inbound>
   <Outbound>
     <UserLastName>BA-SITAWAN-CNT</UserLastName>
