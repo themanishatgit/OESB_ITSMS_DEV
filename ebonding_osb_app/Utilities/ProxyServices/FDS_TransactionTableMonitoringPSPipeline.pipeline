@@ -50,6 +50,19 @@ xs:QName('STATUS'),
                             </con2:xqueryTransform>
                         </con1:expr>
                     </con1:assign>
+                    <con1:assign varName="EnvironmentName">
+                        <con2:id>_ActionId-a013dd6.4315d72a.0.168838cec34.N7ffe</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
+"DEV"
+else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
+"QA"
+else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
+"PROD"
+else
+fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
                     <con1:ifThenElse>
                         <con2:id>_ActionId-a012806.12b338bb.0.168325635d8.N7ee9</con2:id>
                         <con1:case id="_BranchId-a012806.12b338bb.0.168325635d8.N7ee8">
@@ -65,10 +78,10 @@ xs:QName('STATUS'),
                                             <con2:id>_ActionId-a012806.12b338bb.0.168325635d8.N7e7c</con2:id>
                                             <con1:header-set>outbound-request</con1:header-set>
                                             <con1:header value="expression" name="Subject">
-                                                <con2:xqueryText>fn:concat('Foundation Data has not been LOADED since ',$TimeDifference, ' Minutes')</con2:xqueryText>
+                                                <con2:xqueryText>fn:concat($EnvironmentName, ':Foundation Data has not been LOADED since ',$TimeDifference, ' Minutes ' )</con2:xqueryText>
                                             </con1:header>
                                             <con6:header value="expression" name="To">
-                                                <con2:xqueryText>$DefaultValue//Recipients/text()</con2:xqueryText>
+                                                <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
                                             </con6:header>
                                         </con6:transport-headers>
                                         <con6:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
@@ -77,8 +90,8 @@ xs:QName('STATUS'),
                                                 <con2:xpathText>.</con2:xpathText>
                                             </con1:location>
                                             <con1:expr>
-                                                <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat('Foundation Data has not been LOADED since ',
-$TimeDifference, ' Minutes - Last Update happpened on ',$LastLoadedBatchTime)</con:xqueryText>
+                                                <con2:xqueryText>fn:concat($EnvironmentName,':Foundation Data has not been LOADED since ',
+$TimeDifference, ' Minutes - Last Update happpened on ',$LastLoadedBatchTime)</con2:xqueryText>
                                             </con1:expr>
                                         </con6:replace>
                                     </con3:outboundTransform>
