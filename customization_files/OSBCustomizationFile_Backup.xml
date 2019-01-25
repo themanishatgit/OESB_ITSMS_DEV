@@ -6,6 +6,65 @@
         <cus:owners>
             <xt:owner>
                 <xt:type>BusinessService</xt:type>
+                <xt:path>AzureADUserSync/BusinessServices/GetUsers</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_AzureGetUsers@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_AzureGetUsers@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
                 <xt:path>AzureADUserSync/BusinessServices/PushToAUS_GetUsersQ</xt:path>
             </xt:owner>
         </cus:owners>
@@ -179,7 +238,7 @@
         <cus:owners>
             <xt:owner>
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPS</xt:path>
             </xt:owner>
         </cus:owners>
         <cus:actions>
@@ -233,7 +292,7 @@
         <cus:owners>
             <xt:owner>
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPS</xt:path>
             </xt:owner>
         </cus:owners>
         <cus:actions>
@@ -321,11 +380,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Count</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_count@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_retry_interval@</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Work Manager</xt:envValueType>
@@ -333,11 +392,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -392,11 +451,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -451,11 +510,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -510,11 +569,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -788,11 +847,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout_FetchSHData@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout_FetchSHData@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -847,11 +906,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -906,11 +965,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -965,11 +1024,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1024,11 +1083,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1083,11 +1142,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1142,11 +1201,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1201,11 +1260,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1260,11 +1319,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1319,11 +1378,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1378,11 +1437,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1437,11 +1496,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1496,11 +1555,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1555,11 +1614,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1614,11 +1673,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1673,11 +1732,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1732,11 +1791,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -1791,11 +1850,11 @@
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
             <xt:replace>
                 <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
-                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
             </xt:replace>
         </cus:actions>
     </cus:customization>
@@ -3469,6 +3528,10 @@
             <xt:envValueTypes>Service URI Weight</xt:envValueTypes>
             <xt:envValueTypes>UDDI Auto Publish</xt:envValueTypes>
             <xt:envValueTypes>Work Manager</xt:envValueTypes>
+			 <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>AzureADUserSync/BusinessServices/GetUsers</xt:path>
+            </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>BusinessService</xt:type>
                 <xt:path>AzureADUserSync/BusinessServices/PushToAUS_GetUsersQ</xt:path>
@@ -3483,7 +3546,7 @@
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPS</xt:path>
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
@@ -3491,7 +3554,7 @@
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPS</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPS</xt:path>
             </xt:refsToSearch>
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>ProxyService</xt:type>
@@ -3782,11 +3845,11 @@
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPS</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPS</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Pipeline</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPSPipeline</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPSPipeline</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
@@ -3798,11 +3861,11 @@
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPS</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPS</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>Pipeline</xt:type>
-            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPSPipeline</xt:path>
+            <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPSPipeline</xt:path>
         </cus:refsToBeConsidered>
         <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>ProxyService</xt:type>
@@ -4471,11 +4534,11 @@
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPSPipeline</xt:path>
             </xt:oldRef>
             <xt:newRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersAsyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_GetUsersSyncPSPipeline</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
@@ -4491,11 +4554,11 @@
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPSPipeline</xt:path>
             </xt:oldRef>
             <xt:newRef>
                 <xt:type>Pipeline</xt:type>
-                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishAsyncPSPipeline</xt:path>
+                <xt:path>AzureADUserSync/ProxyServices/AUS_SNPublishSyncPSPipeline</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
         <cus:externalReferenceMap>
