@@ -26,7 +26,9 @@ declare function local:func($IncidentRequestMessage as element() (:: schema-elem
         <Description>{
         if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ACK')
         then('ACK')
-        else if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ERROR')
+		 else if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ERROR' and fn:string-length($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)!=0)
+        then(fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments))
+        else if(fn:data($IncidentRequestMessage/ns1:IncidentRequestHeader/ns1:TransactionType)='ERROR' and fn:string-length($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments)=0)
         then(fn:data($IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:WorkNotes))
         else('Update')
         }</Description>
