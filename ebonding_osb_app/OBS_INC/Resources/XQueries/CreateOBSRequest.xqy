@@ -345,7 +345,11 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 	if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ERROR') 
 	then(<ACT_LOG>
 						<DESCRIPTION>
-				{fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments)}
+				{if(fn:string-length($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments) > 0)then
+                                fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:AdditionalComments)
+                                else
+                                fn:data($CanonicalRequestMessage/ns2:IncidentRequestBody/ns2:IncidentDetails/ns2:WorkNotes)
+                                }
 						</DESCRIPTION>
 					</ACT_LOG>)
 	else()
