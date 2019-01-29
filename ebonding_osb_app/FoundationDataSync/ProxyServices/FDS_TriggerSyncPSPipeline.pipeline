@@ -195,19 +195,6 @@ xs:QName('TRANID'),
             <con:stage id="_StageId-N3f57fef5.8190007.0.1658ad4405f.N7f60" name="Service.EH" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                 <con:context/>
                 <con:actions>
-                    <con6:assign varName="EnvironmentName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con2:id>_ActionId-a013dd6.4315d72a.0.168838cec34.N7fca</con2:id>
-                        <con1:expr>
-                            <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
-"DEV"
-else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
-"QA"
-else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
-"PROD"
-else
-fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
-                        </con1:expr>
-                    </con6:assign>
                     <con4:route>
                         <con1:id>_ActionId-N3f57fef5.8190007.0.1658ad4405f.N7f5f</con1:id>
                         <con4:service ref="FoundationDataSync/BusinessServices/UpdateFDSTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
@@ -263,11 +250,24 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                         <con2:id>_ActionId-N3f57e0b8.14945bfc.0.165fb577417.N7f65</con2:id>
                         <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:outboundTransform>
+                            <con6:assign varName="EnvironmentName" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                                <con2:id>_ActionId-a013dd6.4315d72a.0.168838cec34.N7fca</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
+"DEV"
+else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
+"QA"
+else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
+"PROD"
+else
+fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
+                                </con1:expr>
+                            </con6:assign>
                             <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-N3f57e0b8.14945bfc.0.165fb577417.N7f64</con2:id>
                                 <con1:header-set>outbound-request</con1:header-set>
                                 <con1:header value="expression" name="Subject">
-                                    <con2:xqueryText>fn:concat($EnvironmentName, ':Error Occurred with Foundation Data Synchronization with Batch ID: ',$BatchId)</con2:xqueryText>
+                                    <con2:xqueryText>fn:concat($EnvironmentName, ' : Error Occurred with Foundation Data Synchronization with Batch ID: ',$BatchId)</con2:xqueryText>
                                 </con1:header>
                                 <con6:header value="expression" name="To">
                                     <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
