@@ -383,8 +383,8 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="TicketNumber">
-                                            <con6:path>if($body/executeResponse/ticket_number/text())then
-$body/executeResponse/ticket_number/text()
+                                            <con6:path>if($SNResponse/executeResponse/ticket_number/text())then
+$SNResponse/executeResponse/ticket_number/text()
 else
 $TicketNumber</con6:path>
                                         </con6:param>
@@ -595,7 +595,10 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="TicketNumber">
-                                            <con6:path>$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con6:path>
+                                            <con6:path>if($SNResponse/executeResponse/ticket_number/text())then
+$SNResponse/executeResponse/ticket_number/text()
+else
+$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
                                             <con6:path>'SNInboundIncReqAsyncPS'</con6:path>
