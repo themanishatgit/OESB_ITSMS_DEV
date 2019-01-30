@@ -628,7 +628,8 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                                 <con2:xpathText>.</con2:xpathText>
                                             </con1:location>
                                             <con1:expr>
-                                                <con2:xqueryText>fn:concat('An invalid status was received in ',$EnvironmentName,' environment for incoming update on ticket number ', $InputRequest/incidentData/INCIDENT_NUMBER/text(), ' with message transaction id ', $MsgTranId, '. Please refer audit logs for the complete payload.')</con2:xqueryText>
+                                                <con2:xqueryText>fn:concat('An invalid status was received for incoming update on ticket number :', $InputRequest/incidentData/INCIDENT_NUMBER/text(), ' with message transaction id :', $MsgTranId, fn:codepoints-to-string(10),fn:codepoints-to-string(10),
+'Please refer audit logs for the complete payload.')</con2:xqueryText>
                                             </con1:expr>
                                         </con1:replace>
                                     </con3:outboundTransform>

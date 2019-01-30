@@ -95,7 +95,7 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                                 <con2:xpathText>.</con2:xpathText>
                                             </con1:location>
                                             <con1:expr>
-                                                <con2:xqueryText>fn:concat('Foundation Data has not been LOADED in ',$EnvironmentName,' environment since ',
+                                                <con2:xqueryText>fn:concat('Foundation Data has not been LOADED since ',
 $TimeDifference, ' Minutes - Last Update happpened on ',$LastLoadedBatchTime)</con2:xqueryText>
                                             </con1:expr>
                                         </con6:replace>

@@ -128,17 +128,16 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                     <con2:xpathText>.</con2:xpathText>
                                 </con1:location>
                                 <con1:expr>
-                                    <con2:xqueryText>fn:concat('Environment Name: ',$EnvironmentName,
-'  Message Transaction Id: ',$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text(),
-'  SITA Ticket Number: ',$body/ErrorHandlerRequest/MessageDetails/IncidentId/text(),
-'  External Reference Number: ',$body/ErrorHandlerRequest/MessageDetails/ExternalRefNum/text(),
-'  Source System: ',$body/ErrorHandlerRequest/MessageDetails/Source/text(),
-'  Destination System: ',$body/ErrorHandlerRequest/MessageDetails/Destination/text(),
-'  Transaction Type: ',$body/ErrorHandlerRequest/MessageDetails/TransactionType/text(),
-'  Record Type: ',$body/ErrorHandlerRequest/MessageDetails/RecType/text(),
-'  Error Code: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text(),
-'  Error Message: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text(),
-'  Payload: 
+                                    <con2:xqueryText>fn:concat('Message Transaction Id: ',$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text(),fn:codepoints-to-string(10),
+'SITA Ticket Number: ',$body/ErrorHandlerRequest/MessageDetails/IncidentId/text(),fn:codepoints-to-string(10),
+'External Reference Number: ',$body/ErrorHandlerRequest/MessageDetails/ExternalRefNum/text(),fn:codepoints-to-string(10),
+'Source System: ',$body/ErrorHandlerRequest/MessageDetails/Source/text(),fn:codepoints-to-string(10),
+'Destination System: ',$body/ErrorHandlerRequest/MessageDetails/Destination/text(),fn:codepoints-to-string(10),
+'Transaction Type: ',$body/ErrorHandlerRequest/MessageDetails/TransactionType/text(),fn:codepoints-to-string(10),
+'Record Type: ',$body/ErrorHandlerRequest/MessageDetails/RecType/text(),fn:codepoints-to-string(10),
+'Error Code: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text(),fn:codepoints-to-string(10),
+'Error Message: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text(),fn:codepoints-to-string(10),
+'Payload: 
 ',fn-bea:serialize($body/ErrorHandlerRequest/MessageDetails/Payload/*))</con2:xqueryText>
                                 </con1:expr>
                             </con1:replace>

@@ -674,7 +674,7 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                     <con2:xpathText>.</con2:xpathText>
                                 </con1:location>
                                 <con1:expr>
-                                    <con2:xqueryText>fn:concat('Foundation Data Synchronization Failed in ',$EnvironmentName,' Environment With: 
+                                    <con2:xqueryText>fn:concat('Foundation Data Synchronization Failed With: 
 Error Code: ',if($fault/ctx:location/ctx:stage='Transform')
 then('FDS_ERR004')
 else if($fault/ctx:location/ctx:stage='CheckFollowingActions')

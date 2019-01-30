@@ -947,11 +947,11 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                     <con2:xpathText>.</con2:xpathText>
                                 </con1:location>
                                 <con1:expr>
-                                    <con2:xqueryText>fn:concat('Foundation Data Synchronization Failed in ',$EnvironmentName, ' Environment With: 
-Error Code: ',if($fault/ctx:location/ctx:stage='doQuery')
+                                    <con2:xqueryText>fn:concat('Foundation Data Synchronization Failed With below Error:',fn:codepoints-to-string(10), 
+'Error Code: ',if($fault/ctx:location/ctx:stage='doQuery')
 then('FDS_ERR002')
-else('FDS_ERR003'),'
-Error Message: ',fn:concat('Error occured while trying to sync ',$ObjectName, 'Error occured at ',$fault/ctx:location/ctx:stage))</con2:xqueryText>
+else('FDS_ERR003'),fn:codepoints-to-string(10),
+'Error Message: ',fn:concat('Error occured while trying to sync ',$ObjectName, 'Error occured at ',$fault/ctx:location/ctx:stage))</con2:xqueryText>
                                 </con1:expr>
                             </con1:replace>
                         </con3:outboundTransform>
