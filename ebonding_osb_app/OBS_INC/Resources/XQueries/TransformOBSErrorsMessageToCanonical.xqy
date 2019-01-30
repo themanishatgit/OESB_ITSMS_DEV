@@ -12,7 +12,7 @@ declare variable $Req as xs:string external;
 declare function local:func($Req as xs:string,$Request as element() (:: schema-element(ns1:TRANSACTION) ::)) as element() (:: schema-element(ns2:IncidentRequestMessage) ::) {
     <ns2:IncidentRequestMessage>
 <ns2:IncidentRequestHeader>
-            <ns2:TransactionId>{fn-bea:uuid()}</ns2:TransactionId>
+    <ns2:TransactionId>{fn:data($Request/TRANSACTION_ID)}</ns2:TransactionId>
             <ns2:TransactionType>ERROR</ns2:TransactionType>
             <ns2:RecType>INC</ns2:RecType>
             <ns2:SourceSystem>OBS</ns2:SourceSystem>
