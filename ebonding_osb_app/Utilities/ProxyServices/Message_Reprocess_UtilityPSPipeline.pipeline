@@ -139,10 +139,10 @@ xs:QName('Reprocess'),
                                     <con2:assign varName="Status">
                                         <con1:id>_ActionId-a013dd6.N26bcb2bd.0.168a3961ceb.N7fb2</con1:id>
                                         <con2:expr>
-                                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<mes:ConsolidateStatus>
-<mes:MessageTransId>{$MessageTranId}</mes:MessageTransId>
+                                            <con1:xqueryText><![CDATA[<mes:ConsolidateStatus>
+<mes:MessageTransId>{fn:concat('RP-',$MessageTranId)}</mes:MessageTransId>
 <mes:Status>Message Reprocess Sucessfully to {$destination}</mes:Status>
-</mes:ConsolidateStatus>]]></con:xqueryText>
+</mes:ConsolidateStatus>]]></con1:xqueryText>
                                         </con2:expr>
                                     </con2:assign>
                                 </con2:responseTransform>

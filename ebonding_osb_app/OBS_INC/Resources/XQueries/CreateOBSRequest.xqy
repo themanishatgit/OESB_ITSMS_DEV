@@ -28,7 +28,7 @@ declare function local:func($Status_Code as xs:string,$TravelTime as xs:string,$
 	<TRANSACTION_TYPE>Ack</TRANSACTION_TYPE>
 
 	else if(fn:data($CanonicalRequestMessage/ns2:IncidentRequestHeader/ns2:TransactionType)='ERROR')then
-	<TRANSACTION_TYPE>Error</TRANSACTION_TYPE>
+	<TRANSACTION_TYPE>Update</TRANSACTION_TYPE>
           else()
        } 
 
