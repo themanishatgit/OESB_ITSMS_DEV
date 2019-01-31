@@ -671,7 +671,7 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                             <con2:xpathText>.</con2:xpathText>
                                         </con1:location>
                                         <con1:expr>
-                                            <con2:xqueryText>fn:concat('AzureADUserSync Failed with: 
+                                            <con2:xqueryText>fn:concat('AzureADUserSync Failed With: 
 Error Code: ',$fault/ctx:errorCode/text(),'
 Error Message: ',$fault/ctx:reason/text())</con2:xqueryText>
                                         </con1:expr>
