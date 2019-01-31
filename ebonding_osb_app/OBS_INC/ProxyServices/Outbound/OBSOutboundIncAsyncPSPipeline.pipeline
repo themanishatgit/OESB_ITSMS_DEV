@@ -553,7 +553,7 @@ else()</con:xqueryText>
                                     <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-a000010.7b55dd86.1b.168a23d6c1d.N8000</con5:id>
                                     <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                     <con3:outboundTransform>
-                                        <con2:assign varName="Req">
+                                        <con2:assign varName="ErrorMessage">
                                             <con1:id>_ActionId-a000010.7b55dd86.1c.168a23da759.N7fff</con1:id>
                                             <con2:expr>
                                                 <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$Response/ERROR_DESCRIPTION/text()</con:xqueryText>
@@ -565,10 +565,10 @@ else()</con:xqueryText>
                                                 <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
                                             </con2:location>
                                             <con2:expr>
-                                                <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
+                                                <con1:xqueryText><![CDATA[<ErrorHandlerRequest>
 	<ErrorDetails>
 		<ErrorCode>ERR-APP</ErrorCode>
-		<ErrorMsg>{$Req}</ErrorMsg>
+		<ErrorMsg>{$ErrorMessage}</ErrorMsg>
 	</ErrorDetails>
 	<MessageDetails>
 		<Message_TransactionId>{$Message_TranId}</Message_TransactionId>
@@ -581,7 +581,7 @@ else()</con:xqueryText>
 		<IncidentId>{$TicketNumber}</IncidentId>
 		<ExternalRefNum>{$ExtRefNumber}</ExternalRefNum>
 	</MessageDetails>
-</ErrorHandlerRequest>]]></con:xqueryText>
+</ErrorHandlerRequest>]]></con1:xqueryText>
                                             </con2:expr>
                                         </con2:replace>
                                     </con3:outboundTransform>

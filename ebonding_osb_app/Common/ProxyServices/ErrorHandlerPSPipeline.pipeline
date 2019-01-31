@@ -201,7 +201,7 @@ else($body/ErrorHandlerRequest/MessageDetails/Destination/text())</con2:xqueryTe
                                 <con1:assign varName="ErrorRequest">
                                     <con2:id>_ActionId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ebd</con2:id>
                                     <con1:expr>
-                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ns1:IncidentRequestMessage 	xmlns="" xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
+                                        <con2:xqueryText><![CDATA[<ns1:IncidentRequestMessage 	xmlns="" xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
 	<ns1:IncidentRequestHeader>
 		<ns1:TransactionId>{$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text()}</ns1:TransactionId>
 		<ns1:TransactionType>ERROR</ns1:TransactionType>
@@ -223,7 +223,7 @@ else($body/ErrorHandlerRequest/MessageDetails/Destination/text())</con2:xqueryTe
 			}
 		</ns1:IncidentDetails>
 	</ns1:IncidentRequestBody>
-</ns1:IncidentRequestMessage>]]></con:xqueryText>
+</ns1:IncidentRequestMessage>]]></con2:xqueryText>
                                     </con1:expr>
                                 </con1:assign>
                                 <con1:insert varName="ErrorRequest">
