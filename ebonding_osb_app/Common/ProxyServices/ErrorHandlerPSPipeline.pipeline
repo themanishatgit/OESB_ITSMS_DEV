@@ -31,6 +31,12 @@
                         </con4:expr>
                         <con4:message>&lt;&lt; Error Handler PS Starts>></con4:message>
                     </con4:log>
+                    <con1:assign varName="Request">
+                        <con2:id>_ActionId-a000010.7b55dd86.1a.168a22d8aa7.N8000</con2:id>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$body/*</con:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-a013dc6.605c4ac1.0.163642f697b.N7e1f" name="Audit">
@@ -128,16 +134,17 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                     <con2:xpathText>.</con2:xpathText>
                                 </con1:location>
                                 <con1:expr>
-                                    <con2:xqueryText>fn:concat('Message Transaction Id: ',$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text(),fn:codepoints-to-string(10),
-'SITA Ticket Number: ',$body/ErrorHandlerRequest/MessageDetails/IncidentId/text(),fn:codepoints-to-string(10),
-'External Reference Number: ',$body/ErrorHandlerRequest/MessageDetails/ExternalRefNum/text(),fn:codepoints-to-string(10),
-'Source System: ',$body/ErrorHandlerRequest/MessageDetails/Source/text(),fn:codepoints-to-string(10),
-'Destination System: ',$body/ErrorHandlerRequest/MessageDetails/Destination/text(),fn:codepoints-to-string(10),
-'Transaction Type: ',$body/ErrorHandlerRequest/MessageDetails/TransactionType/text(),fn:codepoints-to-string(10),
-'Record Type: ',$body/ErrorHandlerRequest/MessageDetails/RecType/text(),fn:codepoints-to-string(10),
-'Error Code: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text(),fn:codepoints-to-string(10),
-'Error Message: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text(),fn:codepoints-to-string(10),
-'Payload: 
+                                    <con2:xqueryText>fn:concat('Environment Name: ',$EnvironmentName,
+'  Message Transaction Id: ',$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text(),
+'  SITA Ticket Number: ',$body/ErrorHandlerRequest/MessageDetails/IncidentId/text(),
+'  External Reference Number: ',$body/ErrorHandlerRequest/MessageDetails/ExternalRefNum/text(),
+'  Source System: ',$body/ErrorHandlerRequest/MessageDetails/Source/text(),
+'  Destination System: ',$body/ErrorHandlerRequest/MessageDetails/Destination/text(),
+'  Transaction Type: ',$body/ErrorHandlerRequest/MessageDetails/TransactionType/text(),
+'  Record Type: ',$body/ErrorHandlerRequest/MessageDetails/RecType/text(),
+'  Error Code: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text(),
+'  Error Message: ',$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text(),
+'  Payload: 
 ',fn-bea:serialize($body/ErrorHandlerRequest/MessageDetails/Payload/*))</con2:xqueryText>
                                 </con1:expr>
                             </con1:replace>
@@ -154,6 +161,12 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                         <con2:id>_ActionId-N3f57ffbc.384a654d.0.16396e1cad9.N7fc3</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$body/ErrorHandlerRequest/MessageDetails/Source/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="DestinationSystem">
+                        <con2:id>_ActionId-a000010.7b55dd86.19.168a225d179.N7fff</con2:id>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$body/ErrorHandlerRequest/MessageDetails/Destination/text()</con:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:assign varName="InterfaceQueueList">
@@ -188,7 +201,7 @@ else($body/ErrorHandlerRequest/MessageDetails/Destination/text())</con2:xqueryTe
                                 <con1:assign varName="ErrorRequest">
                                     <con2:id>_ActionId-a013b4a.Na7d1ac6.0.163d5a07ae8.N7ebd</con2:id>
                                     <con1:expr>
-                                        <con2:xqueryText><![CDATA[<ns1:IncidentRequestMessage 	xmlns="" xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ns1:IncidentRequestMessage 	xmlns="" xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
 	<ns1:IncidentRequestHeader>
 		<ns1:TransactionId>{$body/ErrorHandlerRequest/MessageDetails/Message_TransactionId/text()}</ns1:TransactionId>
 		<ns1:TransactionType>ERROR</ns1:TransactionType>
@@ -200,7 +213,7 @@ else($body/ErrorHandlerRequest/MessageDetails/Destination/text())</con2:xqueryTe
 		<ns1:IncidentDetails>
 			<ns1:TicketNumber>{$body/ErrorHandlerRequest/MessageDetails/IncidentId/text()}</ns1:TicketNumber>
 			{
-            if($body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text()='ERR-APP')
+            if($body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text()='ERR-APP' and $DestinationSystem!='OBS')
 			then(
 			<ns1:AdditionalComments>{fn:concat($body/ErrorHandlerRequest/ErrorDetails/ErrorCode/text(),': ',$body/ErrorHandlerRequest/ErrorDetails/ErrorMsg/text())}</ns1:AdditionalComments>
 			)
@@ -210,7 +223,7 @@ else($body/ErrorHandlerRequest/MessageDetails/Destination/text())</con2:xqueryTe
 			}
 		</ns1:IncidentDetails>
 	</ns1:IncidentRequestBody>
-</ns1:IncidentRequestMessage>]]></con2:xqueryText>
+</ns1:IncidentRequestMessage>]]></con:xqueryText>
                                     </con1:expr>
                                 </con1:assign>
                                 <con1:insert varName="ErrorRequest">
@@ -220,7 +233,9 @@ else($body/ErrorHandlerRequest/MessageDetails/Destination/text())</con2:xqueryTe
                                     </con1:location>
                                     <con1:where>after</con1:where>
                                     <con1:expr>
-                                        <con2:xqueryText><![CDATA[if($PartnerType='CUSTOMER')
+                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config"><![CDATA[if($DestinationSystem!='OBS')
+then(
+if($PartnerType='CUSTOMER')
 then(
 <ns1:Customer>
       <ns1:Name>{$Partner}</ns1:Name>
@@ -230,7 +245,22 @@ else(
 <ns1:Supplier>
       <ns1:Name>{$Partner}</ns1:Name>
       <ns1:RefNumber>{$body/ErrorHandlerRequest/MessageDetails/ExternalRefNum/text()}</ns1:RefNumber>
-</ns1:Supplier>)]]></con2:xqueryText>
+</ns1:Supplier>))
+else
+(
+if($Request/MessageDetails/Payload/ns1:IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Customer/ns1:RefNumber/text())
+then(
+<ns1:Customer>
+      <ns1:Name>{$Request/MessageDetails/Payload/ns1:IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Customer/ns1:Name/text()}</ns1:Name>
+      <ns1:RefNumber>{$Request/MessageDetails/Payload/ns1:IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Customer/ns1:RefNumber/text()}</ns1:RefNumber>
+</ns1:Customer>)
+else
+(
+
+<ns1:Supplier>
+      <ns1:Name>{$Request/MessageDetails/Payload/ns1:IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Supplier/ns1:Name/text()}</ns1:Name>
+      <ns1:RefNumber>{$Request/MessageDetails/Payload/ns1:IncidentRequestMessage/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Supplier/ns1:RefNumber/text()}</ns1:RefNumber>
+</ns1:Supplier>))]]></con:xqueryText>
                                     </con1:expr>
                                 </con1:insert>
                                 <con1:replace contents-only="true" varName="body">
