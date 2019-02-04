@@ -157,6 +157,16 @@ xs:QName('Reprocess'),
                                     <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$Status</con:xqueryText>
                                 </con2:expr>
                             </con2:insert>
+                            <con2:javaCallout varName="JavaResponse">
+                                <con1:id>_ActionId-a013bcf.7aab1662.0.168b7ccea1b.N7ffe</con1:id>
+                                <con2:archive ref="Utilities/Resources/Jar/SleepThreadUtility"/>
+                                <con2:className>aero.sita.utilities.SleepThread</con2:className>
+                                <con2:method>public static java.lang.String sleepMethod(long)</con2:method>
+                                <con2:expr>
+                                    <con1:xqueryText>10</con1:xqueryText>
+                                </con2:expr>
+                                <con2:return-param-as-ref>false</con2:return-param-as-ref>
+                            </con2:javaCallout>
                         </con2:actions>
                     </con2:foreach>
                 </con:actions>
