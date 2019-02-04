@@ -152,7 +152,7 @@ xs:QName('Reprocess'),
                                 <con2:location>
                                     <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">.</con:xpathText>
                                 </con2:location>
-                                <con2:where>first-child</con2:where>
+                                <con2:where>last-child</con2:where>
                                 <con2:expr>
                                     <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$Status</con:xqueryText>
                                 </con2:expr>
