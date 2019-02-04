@@ -369,13 +369,13 @@ xs:QName('STATUS'),
                                     <con3:expr>
                                         <con2:xqueryText>if(
 fn:contains($Groups,'AZR-AG-ALL Comnet-DYN-Security') or 
-fn:contains($Groups,'AZR-AG-All ERM Externals-DYN-Security-Group') or 
-fn:contains($Groups,'AZR-AG-All JV_Aviareto-DYN-Security-Group') or 
-fn:contains($Groups,'AZR-AG-All JV_Champs-DYN-Security-Group') or 
-fn:contains($Groups,'AZR-AG-All JV_OnAir-DYN-Security-Group') or 
-fn:contains($Groups,'AZR-AG-All Permanents-DYN-Security-Group') or 
-fn:contains($Groups,'AZR-AG-All Permanents Includes the JV (SITAOnAir)-DYN-Security-Group') or 
-fn:contains($Groups,'AZR-AG-All Third Party Externals-DYN-Security-Group')
+fn:contains($Groups,'AZR-AG-All ERM Externals-DYN-Security-Group_Includes Unlicensed') or 
+fn:contains($Groups,'AZR-AG-All JV_Aviareto-DYN-Security-Group_Includes Unlicensed') or 
+fn:contains($Groups,'AZR-AG-All JV_Champs-DYN-Security-Group_Includes Unlicensed') or 
+fn:contains($Groups,'AZR-AG-All JV_OnAir-DYN-Security-Group_Includes Unlicensed') or 
+fn:contains($Groups,'AZR-AG-All Permanents-DYN-Security-Group_Includes Unlicensed') or 
+fn:contains($Groups,'AZR-AG-All Third Party Externals-DYN-Security-Group_Includes Unlicensed') or 
+fn:contains($Groups,'AZR-AG-All Permanents Includes the JV (SITAOnAir)-DYN-Security-Group_Includes Unlicensed')
 )
 then('Y')
 else('N')</con2:xqueryText>
