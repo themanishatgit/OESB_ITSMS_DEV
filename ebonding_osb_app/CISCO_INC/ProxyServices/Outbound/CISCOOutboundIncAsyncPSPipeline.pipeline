@@ -35,7 +35,7 @@
                             <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:TransactionId/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:ifThenElse>
+		    <con1:ifThenElse>
                         <con2:id>_ActionId-a01926a.5f0a053a.0.168aacf9167.N7ffa</con2:id>
                         <con1:case id="_BranchId-a01926a.5f0a053a.0.168aacf9167.N7ff9">
                             <con1:condition>
@@ -48,7 +48,7 @@
                             </con1:actions>
                         </con1:case>
                         <con1:default/>
-                    </con1:ifThenElse>
+                    </con1:ifThenElse>		
                     <con1:assign varName="ExtRefNumber">
                         <con2:id>_ActionId-a013dc6.N56af25d6.0.1656b10d911.N7f6a</con2:id>
                         <con1:expr>
