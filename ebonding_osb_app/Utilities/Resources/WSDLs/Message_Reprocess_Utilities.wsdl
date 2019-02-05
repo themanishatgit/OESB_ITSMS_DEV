@@ -1,0 +1,60 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions name="Message_Reprocess_Utility"
+                  targetNamespace="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility"
+                  xmlns:tns="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility"
+            elementFormDefault="qualified">
+      <element name="RootElement">
+        <complexType>
+          <sequence>
+            <element name="EsbTranId" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="RootElementResponse">
+        <complexType>
+          <sequence>
+            <element name="ConsolidateStatus" maxOccurs="unbounded">
+              <complexType>
+                <sequence>
+                  <element name="MessageTransId" type="xsd:string"/>
+                  <element name="Status" type="xsd:string"/>
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="requestMessage">
+    <wsdl:part name="executeSync" element="tns:RootElement"/>
+  </wsdl:message>
+  <wsdl:message name="replyMessage">
+    <wsdl:part name="executeResponse" element="tns:RootElementResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="execute_ptt">
+    <wsdl:operation name="execute">
+      <wsdl:input message="tns:requestMessage"/>
+      <wsdl:output message="tns:replyMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NewPortTypeSOAP11Binding" type="tns:execute_ptt">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="execute">
+      <soap:operation style="document" soapAction="execute"/>
+      <wsdl:input>
+        <soap:body use="literal"
+                   namespace="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"
+                   namespace="http://xmlns.oracle.com/ebonding_osb_app/FoundationDataSync/FDS_TransactionTableMonitoringPS"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

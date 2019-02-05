@@ -642,12 +642,28 @@ xs:QName('STATUS'),
                                 <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7de8</con2:id>
                                 <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                 <con3:outboundTransform>
+                                    <con6:assign varName="EnvironmentName" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                        <con2:id>_ActionId-a013dd4.4fb81c68.0.168842c769c.N7fb6</con2:id>
+                                        <con6:expr>
+                                            <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
+"DEV"
+else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
+"QA"
+else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
+"PROD"
+else
+fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
+                                        </con6:expr>
+                                    </con6:assign>
                                     <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                                         <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7de7</con2:id>
                                         <con1:header-set>outbound-request</con1:header-set>
                                         <con1:header value="expression" name="Subject">
-                                            <con2:xqueryText>fn:concat('Error Occurred with AzureADUserSync with Batch ID: ',$BatchId)</con2:xqueryText>
+                                            <con2:xqueryText>fn:concat($EnvironmentName,' : Error Occurred with AzureADUserSync with Batch ID: ',$BatchId)</con2:xqueryText>
                                         </con1:header>
+                                        <con6:header value="expression" name="To">
+                                            <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
+                                        </con6:header>
                                     </con1:transport-headers>
                                     <con1:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
                                         <con2:id>_ActionId-a013dc6.N63963d34.0.1663ab9f05c.N7de6</con2:id>

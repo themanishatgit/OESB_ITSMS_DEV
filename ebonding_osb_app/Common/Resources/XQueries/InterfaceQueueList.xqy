@@ -48,7 +48,7 @@
   </Interface>
 <Interface>
     <Name>OBS</Name>
-    <SendLogComment>Y</SendLogComment>
+    <SendLogComment>N</SendLogComment>
     <QueueName>jms:///EbondingIncConnectionFactory/OBSOutboundIncQ</QueueName>
   </Interface>
 </Lookup>

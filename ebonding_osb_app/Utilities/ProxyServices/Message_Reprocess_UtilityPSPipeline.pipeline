@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="Utilities/Resources/WSDLs/Message_Reprocess_Utilities"/>
+            <con:binding>
+                <con:name>NewPortTypeSOAP11Binding</con:name>
+                <con:namespace>http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="response" name="response-a013dd6.1841cf8.0.1689802b90b.N7fff">
+            <con:stage id="_StageId-a013dd6.1841cf8.0.1689802b90b.N7ffd" name="Response">
+                <con:comment/>
+                <con:context>
+                    <con1:userNsDecl prefix="mes" namespace="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility"/>
+                </con:context>
+                <con:actions>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-a013dd6.N26bcb2bd.0.168a3961ceb.N7fc7</con1:id>
+                        <con2:location>
+                            <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">.</con:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$ResponseStructure</con:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-a013dd6.1841cf8.0.1689802b90b.N8000">
+            <con:stage id="_StageId-a013dd6.1841cf8.0.1689802b90b.N7ffe" name="VariableFetch">
+                <con:comment/>
+                <con:context>
+                    <con1:userNsDecl prefix="mes" namespace="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility"/>
+                </con:context>
+                <con:actions>
+                    <con2:assign varName="Request">
+                        <con1:id>_ActionId-a013dd6.1841cf8.0.1689802b90b.N7ffa</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>$body/*</con1:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="ResponseStructure">
+                        <con1:id>_ActionId-a013dd6.N26bcb2bd.0.168a3961ceb.N7fc1</con1:id>
+                        <con2:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">&lt;mes:RootElementResponse xmlns:mes="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility">&lt;/mes:RootElementResponse></con:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="DefaultValue">
+                        <con1:id>_ActionId-a013dd4.2aac9627.0.168bc85260d.N7ffe</con1:id>
+                        <con2:expr>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="Utilities/Resources/XQueries/DefaultValues"/>
+                            </con1:xqueryTransform>
+                        </con2:expr>
+                    </con2:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dd6.1841cf8.0.1689802b90b.N7ff1" name="ReprocessMsg">
+                <con:comment/>
+                <con:context>
+                    <con1:userNsDecl prefix="mes" namespace="http://xmlns.oracle.com/ebonding_osb_app/utility/Message_Reprocess_Utility"/>
+                    <con1:userNsDecl prefix="ns1" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con2:foreach>
+                        <con1:id>_ActionId-a013dd6.1841cf8.0.1689802b90b.N7ff0</con1:id>
+                        <con2:variable>body</con2:variable>
+                        <con2:expression>
+                            <con1:xpathText>./mes:RootElement/mes:EsbTranId</con1:xpathText>
+                        </con2:expression>
+                        <con2:index-variable>var</con2:index-variable>
+                        <con2:actions>
+                            <con2:assign varName="EsbTranID">
+                                <con1:id>_ActionId-a013dd6.1841cf8.0.1689802b90b.N7faa</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryText>$body/mes:RootElement/mes:EsbTranId[$var]/text()</con1:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:assign varName="Payload">
+                                <con1:id>_ActionId-a013dd6.1841cf8.0.1689802b90b.N7fea</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
+xs:QName('Reprocess'),
+'SELECT PAYLOAD FROM ESB_AUDIT WHERE ESB_TRAN_ID=?',$EsbTranID
+)/PAYLOAD/text()</con1:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:assign varName="PayloadXML">
+                                <con1:id>_ActionId-a000010.7b55dd86.12.1689d54995b.N8000</con1:id>
+                                <con2:expr>
+                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn-bea:inlinedXML($Payload)</con:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:assign varName="destination">
+                                <con1:id>_ActionId-a013dd6.N26bcb2bd.0.168a3961ceb.N7fb5</con1:id>
+                                <con2:expr>
+                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$PayloadXML/ns1:IncidentRequestHeader/ns1:DestinationSystem/text()</con:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:assign varName="MessageTranId">
+                                <con1:id>_ActionId-a013dd6.N26bcb2bd.0.168a3961ceb.N7fb8</con1:id>
+                                <con2:expr>
+                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$PayloadXML/ns1:IncidentRequestHeader/ns1:TransactionId/text()</con:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:replace varName="PayloadXML" contents-only="true">
+                                <con1:id>_ActionId-a013dd6.447a4c29.0.168984bd5a5.N7f09</con1:id>
+                                <con2:location>
+                                    <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">./ns1:IncidentRequestHeader/ns1:TransactionId</con:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn:concat('RP-',$MessageTranId)</con:xqueryText>
+                                </con2:expr>
+                            </con2:replace>
+                            <con2:wsCallout>
+                                <con1:id>_ActionId-a000010.7b55dd86.14.1689d6248b4.N7ffe</con1:id>
+                                <con2:service ref="Common/BusinessServices/PartnerOutboundIncQJMSBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con2:request>
+                                    <con2:payload wrapped="false">PayloadXML</con2:payload>
+                                </con2:request>
+                                <con2:response>
+                                    <con2:payload wrapped="false">Res1</con2:payload>
+                                </con2:response>
+                                <con2:requestTransform>
+                                    <con2:assign varName="InterfaceQueueList" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                        <con1:id>_ActionId-a000010.7b55dd86.18.1689d8a8812.N8000</con1:id>
+                                        <con2:expr>
+                                            <con1:xqueryTransform>
+                                                <con1:resource ref="Common/Resources/XQueries/InterfaceQueueList"/>
+                                            </con1:xqueryTransform>
+                                        </con2:expr>
+                                    </con2:assign>
+                                    <con2:routing-options xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                        <con1:id>_ActionId-a000010.7b55dd86.14.1689d6248b4.N7ffd</con1:id>
+                                        <con2:uriExpr>
+                                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$InterfaceQueueList/Interface[Name=$destination]/QueueName/text()</con:xqueryText>
+                                        </con2:uriExpr>
+                                    </con2:routing-options>
+                                </con2:requestTransform>
+                                <con2:responseTransform>
+                                    <con2:assign varName="Status">
+                                        <con1:id>_ActionId-a013dd6.N26bcb2bd.0.168a3961ceb.N7fb2</con1:id>
+                                        <con2:expr>
+                                            <con1:xqueryText><![CDATA[<mes:ConsolidateStatus>
+<mes:MessageTransId>{fn:concat('RP-',$MessageTranId)}</mes:MessageTransId>
+<mes:Status>Message Reprocess Sucessfully to {$destination}</mes:Status>
+</mes:ConsolidateStatus>]]></con1:xqueryText>
+                                        </con2:expr>
+                                    </con2:assign>
+                                </con2:responseTransform>
+                            </con2:wsCallout>
+                            <con2:insert varName="ResponseStructure">
+                                <con1:id>_ActionId-a013dd6.N26bcb2bd.0.168a3961ceb.N7f7c</con1:id>
+                                <con2:location>
+                                    <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">.</con:xpathText>
+                                </con2:location>
+                                <con2:where>last-child</con2:where>
+                                <con2:expr>
+                                    <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$Status</con:xqueryText>
+                                </con2:expr>
+                            </con2:insert>
+                            <con2:javaCallout varName="JavaResponse">
+                                <con1:id>_ActionId-a013bcf.7aab1662.0.168b7ccea1b.N7ffe</con1:id>
+                                <con2:archive ref="Utilities/Resources/Jar/SleepThreadUtility"/>
+                                <con2:className>aero.sita.utilities.SleepThread</con2:className>
+                                <con2:method>public static java.lang.String sleepMethod(long)</con2:method>
+                                <con2:expr>
+                                    <con1:xqueryText>$DefaultValue//ReprocessDelay/text()</con1:xqueryText>
+                                </con2:expr>
+                                <con2:return-param-as-ref>false</con2:return-param-as-ref>
+                            </con2:javaCallout>
+                        </con2:actions>
+                    </con2:foreach>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-a013dd6.1841cf8.0.1689802b90b.N8000</con:request>
+                <con:response>response-a013dd6.1841cf8.0.1689802b90b.N7fff</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>
