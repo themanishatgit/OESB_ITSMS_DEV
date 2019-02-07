@@ -416,7 +416,9 @@ $IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Incident
 	<inc:TicketNumber>{$body/executeResponse/ticket_number/text()}</inc:TicketNumber>
         <inc:Status>Success</inc:Status>
         <inc:ErrorCode>{$body/executeResponse/transaction_status/text()}</inc:ErrorCode>
-	<inc:Description>{$body/executeResponse/msg/text()}</inc:Description>
+	<inc:Description>{if($body/executeResponse/error/text()) then
+$body/executeResponse/error/text()
+else $body/executeResponse/msg/text()}</inc:Description>
 </inc:IncidentResponseMessage>]]></con2:xqueryText>
                                     </con1:expr>
                                 </con5:replace>
