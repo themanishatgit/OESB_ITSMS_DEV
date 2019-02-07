@@ -525,24 +525,26 @@ $TicketNumber</con6:path>
                                         </con2:location>
                                         <con2:expr>
                                             <con1:xqueryText><![CDATA[<ErrorHandlerRequest>
-	<ErrorDetails>
-		<ErrorCode>ERR-APP</ErrorCode>
-		<ErrorMsg>{$body/executeResponse/error/text()}</ErrorMsg>
-	</ErrorDetails>
-	<MessageDetails>
-		<Message_TransactionId>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId/text()}</Message_TransactionId>
-		<TransactionType>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType/text()}</TransactionType>
-		<RecType>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()}</RecType>
-		<ProxyService>SNInboundIncReqAsyncPS</ProxyService>
-		<Payload>{$IncomingRequest/*}</Payload>
-		<Source>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()}</Source>
-		<Destination>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()}</Destination>
-		<IncidentId>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()}</IncidentId>
-		<ExternalRefNum>{if($SourceSystem=$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:Name/text())
+    <ErrorDetails>
+        <ErrorCode>ERR-APP</ErrorCode>
+        <ErrorMsg>{if($body/executeResponse/error/text()) then
+$body/executeResponse/error/text()
+else $body/executeResponse/msg/text()}</ErrorMsg>
+    </ErrorDetails>
+    <MessageDetails>
+        <Message_TransactionId>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId/text()}</Message_TransactionId>
+        <TransactionType>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType/text()}</TransactionType>
+        <RecType>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:RecType/text()}</RecType>
+        <ProxyService>SNInboundIncReqAsyncPS</ProxyService>
+        <Payload>{$IncomingRequest/*}</Payload>
+        <Source>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem/text()}</Source>
+        <Destination>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()}</Destination>
+        <IncidentId>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()}</IncidentId>
+        <ExternalRefNum>{if($SourceSystem=$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:Name/text())
 then($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text())
 else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text())
 }</ExternalRefNum>
-	</MessageDetails>
+    </MessageDetails>
 </ErrorHandlerRequest>]]></con1:xqueryText>
                                         </con2:expr>
                                     </con2:replace>
