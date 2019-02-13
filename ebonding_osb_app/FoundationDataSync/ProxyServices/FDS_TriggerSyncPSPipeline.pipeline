@@ -55,7 +55,7 @@ xs:QName('STATUS'),
                                 <con2:expr>
                                     <con1:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('BATCHID'),
-'select FDS_BATCH_ID_SEQ.nextval from dual')//NEXTVAL/text()</con1:xqueryText>
+'select to_char(FDS_BATCH_ID_SEQ.nextval) from dual')//text()</con1:xqueryText>
                                 </con2:expr>
                             </con2:assign>
                             <con2:assign varName="TransactionId">
@@ -63,7 +63,7 @@ xs:QName('BATCHID'),
                                 <con2:expr>
                                     <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select FDS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text()</con:xqueryText>
+'select to_char(FDS_TRAN_ID_SEQ.nextval) from dual')//text()</con:xqueryText>
                                 </con2:expr>
                             </con2:assign>
                         </con2:default>

@@ -35,7 +35,7 @@ declare function local:func($Message_TranId as xs:string,
       <ns1:EsbAudit>
         <ns1:esbTranId>{fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select ESB_AUDIT_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text()}</ns1:esbTranId>
+'select to_char(ESB_AUDIT_TRAN_ID_SEQ.nextval) from dual')//text()}</ns1:esbTranId>
         <ns1:messageTranId>{
         if($Message_TranId)
         then($Message_TranId)
