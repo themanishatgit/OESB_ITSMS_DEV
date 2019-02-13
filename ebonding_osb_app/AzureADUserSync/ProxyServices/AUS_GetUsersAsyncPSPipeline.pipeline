@@ -54,7 +54,7 @@ xs:QName('STATUS'),
                         <con2:expr>
                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select AUS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text()</con6:xqueryText>
+'select to_char(AUS_TRAN_ID_SEQ.nextval) from dual')//text()</con6:xqueryText>
                         </con2:expr>
                     </con5:assign>
                     <con3:assign varName="NextLink">

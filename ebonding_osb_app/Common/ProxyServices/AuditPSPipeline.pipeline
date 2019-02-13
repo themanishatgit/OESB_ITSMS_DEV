@@ -31,13 +31,13 @@
                                     <con2:xqueryText>&lt;RESULT>{
 fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select ESB_AUDIT_TRAN_ID_SEQ.nextval from dual')}&lt;/RESULT></con2:xqueryText>
+'select to_char(ESB_AUDIT_TRAN_ID_SEQ.nextval) from dual')}&lt;/RESULT></con2:xqueryText>
                                 </con3:expr>
                             </con3:assign>
                             <con3:assign varName="ESBTranId">
                                 <con2:id>_ActionId-a013dc6.N208622f7.0.1633b365cf8.N7f62</con2:id>
                                 <con3:expr>
-                                    <con2:xqueryText>$ESBTranIdFetch/TRANID/NEXTVAL/text()</con2:xqueryText>
+                                    <con2:xqueryText>$ESBTranIdFetch/TRANID//text()</con2:xqueryText>
                                 </con3:expr>
                             </con3:assign>
                             <con3:assign varName="AuditRequest">

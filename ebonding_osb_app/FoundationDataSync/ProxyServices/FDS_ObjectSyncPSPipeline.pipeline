@@ -199,7 +199,7 @@ xs:QName('EXECUTION_TIME'),
                                     <con2:expr>
                                         <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select FDS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text()</con5:xqueryText>
+'select to_char(FDS_TRAN_ID_SEQ.nextval) from dual')//text()</con5:xqueryText>
                                     </con2:expr>
                                 </con2:assign>
                                 <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
@@ -512,7 +512,7 @@ return &lt;Iteration/>
                                         <con2:expr>
                                             <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select FDS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text()</con5:xqueryText>
+'select to_char(FDS_TRAN_ID_SEQ.nextval) from dual')//text()</con5:xqueryText>
                                         </con2:expr>
                                     </con2:assign>
                                     <con1:assign varName="StartIndex">
@@ -753,7 +753,7 @@ xs:QName('TRANID'),
 'select TRANSACTION_ID from FDS_TRANSACTIONS where BATCH_ID=? AND OBJECT_NAME=?',$BatchId,$ObjectName)//TRANSACTION_ID/text())
 else(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('TRANID'),
-'select FDS_TRAN_ID_SEQ.nextval from dual')//NEXTVAL/text())</con1:xqueryText>
+'select to_char(FDS_TRAN_ID_SEQ.nextval) from dual')//text())</con1:xqueryText>
                         </con2:expr>
                     </con2:assign>
                     <con5:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
