@@ -406,7 +406,7 @@ fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
                                             <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7882</con2:id>
                                             <con1:header-set>outbound-request</con1:header-set>
                                             <con1:header value="expression" name="Subject">
-                                                <con2:xqueryText>fn:concat($EnvironmentName,' : Invalid status received in inbound transaction with ticket number ', $TicketNumber)</con2:xqueryText>
+                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $TicketNumber)</con2:xqueryText>
                                             </con1:header>
                                             <con5:header value="expression" name="To">
                                                 <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
