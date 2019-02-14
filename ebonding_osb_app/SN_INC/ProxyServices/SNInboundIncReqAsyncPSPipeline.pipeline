@@ -527,7 +527,9 @@ $TicketNumber</con6:path>
                                             <con1:xqueryText><![CDATA[<ErrorHandlerRequest>
 	<ErrorDetails>
 		<ErrorCode>ERR-APP</ErrorCode>
-		<ErrorMsg>{$body/executeResponse/error/text()}</ErrorMsg>
+		<ErrorMsg>{if($body/executeResponse/error/text()) then
+$body/executeResponse/error/text()
+else $body/executeResponse/msg/text()}</ErrorMsg>
 	</ErrorDetails>
 	<MessageDetails>
 		<Message_TransactionId>{$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionId/text()}</Message_TransactionId>
