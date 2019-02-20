@@ -80,12 +80,16 @@
                         <con1:expr>
                             <con2:xqueryText>if(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('EXECUTION_TIME'),
-'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM FDS_TRANSACTIONS WHERE OBJECT_NAME=? and STATUS=?)',$ObjectName, 'PROCESSED'
-)/EXECUTION_TIME/text())
+'SELECT to_char(EXECUTION_TIME) FROM FDS_TRANSACTIONS 
+WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM FDS_TRANSACTIONS 
+WHERE OBJECT_NAME=? and STATUS=? and BATCH_ID=(SELECT batch_id FROM FDS_TRANSACTIONS where OBJECT_NAME=? and STATUS=? ORDER BY TIMESTAMP DESC OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY))',$ObjectName, 'PROCESSED', 'OVERALL', 'LOADED'
+)//text())
 then(fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('EXECUTION_TIME'),
-'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM FDS_TRANSACTIONS WHERE OBJECT_NAME=? and STATUS=?)',$ObjectName, 'PROCESSED'
-)/EXECUTION_TIME/text())
+'SELECT to_char(EXECUTION_TIME) FROM FDS_TRANSACTIONS 
+WHERE TIMESTAMP=(SELECT MAX(TIMESTAMP) FROM FDS_TRANSACTIONS 
+WHERE OBJECT_NAME=? and STATUS=? and BATCH_ID=(SELECT batch_id FROM FDS_TRANSACTIONS where OBJECT_NAME=? and STATUS=? ORDER BY TIMESTAMP DESC OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY))',$ObjectName, 'PROCESSED', 'OVERALL', 'LOADED'
+)//text())
 else(
 if($ObjectName='DeletedRecords')
 then(
@@ -97,8 +101,8 @@ xs:QName('EXECUTION_TIME'),
 else(
 (fn-bea:execute-sql('jdbc/ESBDevDB',  
 xs:QName('EXECUTION_TIME'),
-'SELECT EXECUTION_TIME FROM FDS_TRANSACTIONS WHERE BATCH_ID=?','x'
-)/EXECUTION_TIME/text())
+'SELECT to_char(EXECUTION_TIME) FROM FDS_TRANSACTIONS WHERE BATCH_ID=?','x'
+)//text())
 )
 )</con2:xqueryText>
                         </con1:expr>
@@ -870,6 +874,39 @@ else('FDS_ERR003')</con1:path>
                             </con2:replace>
                         </con4:outboundTransform>
                     </con5:route>
+                    <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <con2:id>_ActionId-a013dd4.7bfcb08e.0.1690b943a23.N7f96</con2:id>
+                        <con1:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>freeListHandles</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="false">freeListHandlesReq</con1:body>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="false">freeListHandlesReq</con1:body>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:assign varName="freeListHandlesReq">
+                                <con2:id>_ActionId-a013dd4.7bfcb08e.0.1690b943a23.N7f95</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText><![CDATA[<ser:freeListHandles xmlns:ser="http://www.ca.com/UnicenterServicePlus/ServiceDesk">
+    <sid>{$SessionId}</sid>
+    <handles>
+       <integer>{$ListHandle}</integer>
+    </handles>
+</ser:freeListHandles>]]></con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
+                            <con3:log>
+                                <con2:id>_ActionId-a013dd4.7bfcb08e.0.1690b943a23.N7f94</con2:id>
+                                <con3:logLevel>error</con3:logLevel>
+                                <con3:expr>
+                                    <con2:xqueryText>$freeListHandlesReq</con2:xqueryText>
+                                </con3:expr>
+                                <con3:message>****ObjectSyncPS.FreeListHandlesReq****</con3:message>
+                            </con3:log>
+                        </con1:requestTransform>
+                        <con1:responseTransform/>
+                    </con1:wsCallout>
                     <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <con2:id>_ActionId-N3f57fef5.6e5d8a02.0.1658b5720db.N7ebb</con2:id>
                         <con1:service ref="FoundationDataSync/BusinessServices/Providers/ServiceHub/FetchSHData" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
