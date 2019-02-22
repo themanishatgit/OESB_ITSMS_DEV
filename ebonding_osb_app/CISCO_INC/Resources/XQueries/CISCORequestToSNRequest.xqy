@@ -153,11 +153,11 @@ declare function local:func($MsgTranId as xs:string,
 						
 							then
 			
-			<ns1:SupplierComments>{ if ($CISCORequest/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS') then  fn:concat(fn:data($CISCORequest/ACTLOG_DESC),if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text()))) then fn:concat('TIME SPENT: ',(fn:data($CISCORequest/TIME_SPENT/text()))) else())
+			<ns1:SupplierComments>{ if ($CISCORequest/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS') then  fn:concat(fn:data($CISCORequest/ACTLOG_DESC),if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text()))) then fn:concat(', TIME SPENT: ',(fn:data($CISCORequest/TIME_SPENT/text()))) else())
 			else
 			fn:data($CISCORequest/ACTLOG_DESC)}</ns1:SupplierComments>
                         else(<ns1:SupplierComments>{if ($CISCORequest/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS') then 
-						fn:concat(fn:data($CISCORequest/COMMENTS),if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text()))) then fn:concat('TIME SPENT: ',(fn:data($CISCORequest/TIME_SPENT/text()))) else())
+						fn:concat(fn:data($CISCORequest/COMMENTS),if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text()))) then fn:concat(', TIME SPENT: ',(fn:data($CISCORequest/TIME_SPENT/text()))) else())
 						else
 						fn:data($CISCORequest/COMMENTS)}</ns1:SupplierComments>
 						)
