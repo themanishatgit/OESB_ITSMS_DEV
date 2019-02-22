@@ -67,7 +67,7 @@ declare function local:func($MsgTranId as xs:string,
                         let $nl := "&#10;"
                         return
 			<ns1:SupplierComments>{fn:concat(fn:data($CISCORequest/ACTLOG_DESC),'. ',
-                        (if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text())))  then  fn:concat($nl,'Time Spent:',' ',<ns1:TimeSpent>{fn:data($CISCORequest/TIME_SPENT)}</ns1:TimeSpent>) else()))}</ns1:SupplierComments>
+                        (if (fn:exists(fn:data($CISCORequest/TIME_SPENT/text())))  then  fn:concat($nl,', Time Spent:',' ',<ns1:TimeSpent>{fn:data($CISCORequest/TIME_SPENT)}</ns1:TimeSpent>) else()))}</ns1:SupplierComments>
                         )
                         else()
                       }
