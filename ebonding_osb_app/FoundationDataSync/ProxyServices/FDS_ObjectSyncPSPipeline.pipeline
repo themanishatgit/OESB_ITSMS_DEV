@@ -902,7 +902,7 @@ else('FDS_ERR003')</con1:path>
                                 <con3:expr>
                                     <con2:xqueryText>$freeListHandlesReq</con2:xqueryText>
                                 </con3:expr>
-                                <con3:message>****ObjectSyncPS.FreeListHandlesReq****</con3:message>
+                                <con3:message>****ObjectSyncPS.EH.FreeListHandlesReq****</con3:message>
                             </con3:log>
                         </con1:requestTransform>
                         <con1:responseTransform/>
