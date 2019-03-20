@@ -1,0 +1,12 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ServiceBusApplication1/Common/Merge_EbondingTransaction" name="Merge_EbondingTransaction-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="Merge_EbondingTransaction.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ServiceBusApplication1/Common/Merge_EbondingTransaction"/>
+    <wsdl:binding name="Merge_EbondingTransaction_ptt-binding" type="mer:Merge_EbondingTransaction_ptt" xmlns:mer="http://xmlns.oracle.com/pcbpel/adapter/db/ServiceBusApplication1/Common/Merge_EbondingTransaction">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="merge">
+            <soap:operation soapAction="merge"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,65 @@
+<wsdl:definitions xmlns:tns="http://www.sita.aero/WSDL/ServiceTecInboundIncSyncV1"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="http://www.sita.aero/WSDL/ServiceTecInboundIncSyncV1">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="CALL">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:string" name="CallStates.Name"/>
+            <xs:element type="xs:string" name="ProblemTypes.Name"/>
+            <xs:element type="xs:string" name="Calls.CustCallID"/>
+            <xs:element type="xs:string" name="Calls.SPCallID"/>
+            <xs:element type="xs:string" name="Calls.MainCompName"/>
+            <xs:element type="xs:string" name="Impact.Name"/>
+            <xs:element type="xs:string" name="Severities.Name"/>
+            <xs:element type="xs:string" name="Calls.ShortDescription"/>
+            <xs:element type="xs:string" name="Calls.Description"/>
+            <xs:element type="xs:string" name="Calls.Remarks"/>
+            <xs:element type="xs:string" name="Calls.CallerLastName"/>
+            <xs:element type="xs:string" name="Calls.CallerFirstName"/>
+            <xs:element type="xs:string" name="Calls.CallerMiddleName"/>
+            <xs:element type="xs:string" name="Calls.CallerEmail"/>
+            <xs:element type="xs:string" name="Calls.CHDLastName"/>
+            <xs:element type="xs:string" name="Calls.CHDLocation"/>
+            <xs:element type="xs:string" name="Calls.SubCompName"/>
+            <xs:element type="xs:string" name="Calls.CallerRoom"/>
+            <xs:element type="xs:string" name="Calls.CCPTitle"/>
+            <xs:element type="xs:string" name="Calls.SysSpecField1"/>
+            <xs:element type="xs:string" name="Calls.SysSpecField2"/>
+            <xs:element type="xs:string" name="Calls.SysSpecField3"/>
+            <xs:element type="xs:string" name="Calls.SysSpecField4"/>
+            <xs:element type="xs:string" name="Calls.Diagnosis"/>
+            <xs:element type="xs:string" name="Calls.CallOpenTime"/>
+            <xs:element type="xs:string" name="Calls.CallAcknowlegeTime"/>
+            <xs:element type="xs:string" name="Calls.CustomerRequestedStartTime"/>
+            <xs:element type="xs:string" name="Calls.CCPRoom"/>
+            <xs:element type="xs:string" name="Calls.CCPProvince"/>
+            <xs:element type="xs:string" name="Calls.CCPEMail"/>
+            <xs:element type="xs:string" name="Calls.CustomerRequestedEndTime"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessIncidentSoapIn">
+    <wsdl:part name="parameters" element="CALL"/>
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="ProcessIncident">
+      <wsdl:input message="tns:ProcessIncidentSoapIn"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ProcessIncident">
+      <soap:operation soapAction="ServiceTecInboundIncSync" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

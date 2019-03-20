@@ -1,0 +1,20 @@
+<wsdl:definitions name="Merge_EbondingTransaction" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ServiceBusApplication1/Common/Merge_EbondingTransaction" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ServiceBusApplication1/Common/Merge_EbondingTransaction" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/Merge_EbondingTransaction" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="Merge_EbondingTransaction_plt">
+    <plt:role name="Merge_EbondingTransaction_role">
+      <plt:portType name="tns:Merge_EbondingTransaction_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/Merge_EbondingTransaction" schemaLocation="Merge_EbondingTransaction_table.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="EbondingsTransactionsCollection_msg">
+        <wsdl:part name="EbondingsTransactionsCollection" element="top:EbondingsTransactionsCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="Merge_EbondingTransaction_ptt">
+        <wsdl:operation name="merge">
+            <wsdl:input message="tns:EbondingsTransactionsCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

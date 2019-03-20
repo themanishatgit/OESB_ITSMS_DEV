@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="EssintialEndpoint" targetNamespace="http://net4.essintial.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://net4.essintial.com" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://net4.essintial.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://net4.essintial.com/SitaTicket_1.xsd"/>
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Essintial.MetaInfoTranslator"/>
+      <xs:element name="HandleTicket">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="serviceTicket" type="q1:ServiceTicketType" xmlns:q1="http://net4.essintial.com/SitaTicket_1.xsd"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HandleTicketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="HandleTicketResult" type="tns:EssintialSitaAcknowledgement"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="EssintialSitaAcknowledgement">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="ExceptionOccured" type="xs:boolean"/>
+          <xs:element minOccurs="0" maxOccurs="1" name="ExceptionDetails" type="tns:EssintialSitaException"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="Acknowledgement" nillable="true" type="xs:int"/>
+          <xs:element minOccurs="0" maxOccurs="1" name="VordID" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="EssintialSitaException">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EssintialGreeting">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="EssintialGreetingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="EssintialGreetingResult" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendUpdateToSita">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="dataTable">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax"/>
+                  <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendUpdateToSitaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="SendUpdateToSitaResult" type="tns:EssintialSitaAcknowledgement"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessFailedTransactions">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="transactionException" nillable="true" type="q2:FieldDetail" xmlns:q2="http://schemas.datacontract.org/2004/07/Essintial.MetaInfoTranslator"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessFailedTransactionsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="transactionException" nillable="true" type="q3:FieldDetail" xmlns:q3="http://schemas.datacontract.org/2004/07/Essintial.MetaInfoTranslator"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://net4.essintial.com/SitaTicket_1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://net4.essintial.com/SitaTicket_1.xsd">
+      <xs:complexType name="ServiceTicketType">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="LocationCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="EndUserOrganization" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="AddressDetails" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="AddressCity" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="AddressState" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="AddressZip" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="AddressCountry" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" maxOccurs="1" name="ServiceGroup" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="Priority" type="tns:PriorityType"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="CustomerReference4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="CustomerReference3" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="VORDID" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="Comments" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="CustomerReference2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="StatusCode" type="tns:StatusCodeType"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="ReceivedMethod" type="tns:ReceivedMethodType"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="CustomerReceivedDate" type="xs:dateTime"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="ScheduledDS" type="xs:dateTime"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="TechOnSite" type="xs:dateTime"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="TechCheckedOut" type="xs:dateTime"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="TotalLaborTime" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="TotalTravelTime" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="FinalAction" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="CustomerName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="1" name="Notes" nillable="true" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute form="qualified" name="Version" type="xs:int" use="required"/>
+        <xs:attribute form="qualified" name="AcknowledgementNumber" type="xs:string"/>
+        <xs:attribute form="qualified" name="PreviousVORDID" type="xs:string"/>
+      </xs:complexType>
+      <xs:simpleType name="PriorityType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="one"/>
+          <xs:enumeration value="two"/>
+          <xs:enumeration value="three"/>
+          <xs:enumeration value="four"/>
+          <xs:enumeration value="five"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="StatusCodeType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Open"/>
+          <xs:enumeration value="WHAccepted"/>
+          <xs:enumeration value="Onsite"/>
+          <xs:enumeration value="CustomerOK"/>
+          <xs:enumeration value="Closed"/>
+          <xs:enumeration value="Cancelled"/>
+          <xs:enumeration value="Hold"/>
+          <xs:enumeration value="SlaHold"/>
+          <xs:enumeration value="Update"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ReceivedMethodType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EDI"/>
+          <xs:enumeration value="InternalEDI"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+      <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+      <xs:element name="byte" nillable="true" type="xs:byte"/>
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+      <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+      <xs:element name="double" nillable="true" type="xs:double"/>
+      <xs:element name="float" nillable="true" type="xs:float"/>
+      <xs:element name="int" nillable="true" type="xs:int"/>
+      <xs:element name="long" nillable="true" type="xs:long"/>
+      <xs:element name="QName" nillable="true" type="xs:QName"/>
+      <xs:element name="short" nillable="true" type="xs:short"/>
+      <xs:element name="string" nillable="true" type="xs:string"/>
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+      <xs:element name="char" nillable="true" type="tns:char"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName"/>
+      <xs:attribute name="Id" type="xs:ID"/>
+      <xs:attribute name="Ref" type="xs:IDREF"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Essintial.MetaInfoTranslator" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Essintial.MetaInfoTranslator">
+      <xs:complexType name="FieldDetail">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EDIReferences" nillable="true" type="tns:ArrayOfEDIReference"/>
+          <xs:element minOccurs="0" name="FieldDetailPk" type="xs:long"/>
+          <xs:element minOccurs="0" name="ForeignPrimeKey" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ForeignString" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="LocalPrimeKey" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="LocalString" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="TemplateReferences" nillable="true" type="tns:ArrayOfTemplateReference"/>
+          <xs:element minOccurs="0" name="value" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="FieldDetail" nillable="true" type="tns:FieldDetail"/>
+      <xs:complexType name="ArrayOfEDIReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="EDIReference" nillable="true" type="tns:EDIReference"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfEDIReference" nillable="true" type="tns:ArrayOfEDIReference"/>
+      <xs:complexType name="EDIReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DateAdded" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="EDI" nillable="true" type="tns:EDI"/>
+          <xs:element minOccurs="0" name="EDIFk" nillable="true" type="xs:long"/>
+          <xs:element minOccurs="0" name="EDIReferencesPk" type="xs:long"/>
+          <xs:element minOccurs="0" name="FieldDetail" nillable="true" type="tns:FieldDetail"/>
+          <xs:element minOccurs="0" name="FieldDetailFk" nillable="true" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EDIReference" nillable="true" type="tns:EDIReference"/>
+      <xs:complexType name="EDI">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EDIPk" type="xs:long"/>
+          <xs:element minOccurs="0" name="EDIReferences" nillable="true" type="tns:ArrayOfEDIReference"/>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Templates" nillable="true" type="tns:ArrayOfTemplate"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EDI" nillable="true" type="tns:EDI"/>
+      <xs:complexType name="ArrayOfTemplate">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Template" nillable="true" type="tns:Template"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTemplate" nillable="true" type="tns:ArrayOfTemplate"/>
+      <xs:complexType name="Template">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ContractID" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="EDI" nillable="true" type="tns:EDI"/>
+          <xs:element minOccurs="0" name="EDIFk" type="xs:long"/>
+          <xs:element minOccurs="0" name="Segment" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="TemplatePk" type="xs:long"/>
+          <xs:element minOccurs="0" name="TemplateReferences" nillable="true" type="tns:ArrayOfTemplateReference"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Template" nillable="true" type="tns:Template"/>
+      <xs:complexType name="ArrayOfTemplateReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TemplateReference" nillable="true" type="tns:TemplateReference"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTemplateReference" nillable="true" type="tns:ArrayOfTemplateReference"/>
+      <xs:complexType name="TemplateReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DateAdded" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="FieldDetail" nillable="true" type="tns:FieldDetail"/>
+          <xs:element minOccurs="0" name="FieldDetailFk" nillable="true" type="xs:long"/>
+          <xs:element minOccurs="0" name="Template" nillable="true" type="tns:Template"/>
+          <xs:element minOccurs="0" name="TemplateFk" nillable="true" type="xs:long"/>
+          <xs:element minOccurs="0" name="TemplateReferencesPk" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TemplateReference" nillable="true" type="tns:TemplateReference"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="EssintialEndpoint_HandleTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:HandleTicket"/>
+  </wsdl:message>
+  <wsdl:message name="EssintialEndpoint_HandleTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HandleTicketResponse"/>
+  </wsdl:message>
+  <wsdl:message name="EssintialEndpoint_EssintialGreeting_InputMessage">
+    <wsdl:part name="parameters" element="tns:EssintialGreeting"/>
+  </wsdl:message>
+  <wsdl:message name="EssintialEndpoint_EssintialGreeting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EssintialGreetingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="EssintialEndpoint_SendUpdateToSita_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendUpdateToSita"/>
+  </wsdl:message>
+  <wsdl:message name="EssintialEndpoint_SendUpdateToSita_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendUpdateToSitaResponse"/>
+  </wsdl:message>
+  <wsdl:message name="EssintialEndpoint_ProcessFailedTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessFailedTransactions"/>
+  </wsdl:message>
+  <wsdl:message name="EssintialEndpoint_ProcessFailedTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessFailedTransactionsResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="EssintialEndpoint">
+    <wsdl:operation name="HandleTicket">
+      <wsdl:input wsaw:Action="HandleTicket" message="tns:EssintialEndpoint_HandleTicket_InputMessage"/>
+      <wsdl:output wsaw:Action="http://net4.essintial.com/EssintialEndpoint/HandleTicketResponse" message="tns:EssintialEndpoint_HandleTicket_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="EssintialGreeting">
+      <wsdl:input wsaw:Action="http://net4.essintial.com/EssintialEndpoint/EssintialGreeting" message="tns:EssintialEndpoint_EssintialGreeting_InputMessage"/>
+      <wsdl:output wsaw:Action="http://net4.essintial.com/EssintialEndpoint/EssintialGreetingResponse" message="tns:EssintialEndpoint_EssintialGreeting_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SendUpdateToSita">
+      <wsdl:input wsaw:Action="http://net4.essintial.com/EssintialEndpoint/SendUpdateToSita" message="tns:EssintialEndpoint_SendUpdateToSita_InputMessage"/>
+      <wsdl:output wsaw:Action="http://net4.essintial.com/EssintialEndpoint/SendUpdateToSitaResponse" message="tns:EssintialEndpoint_SendUpdateToSita_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessFailedTransactions">
+      <wsdl:input wsaw:Action="http://net4.essintial.com/EssintialEndpoint/ProcessFailedTransactions" message="tns:EssintialEndpoint_ProcessFailedTransactions_InputMessage"/>
+      <wsdl:output wsaw:Action="http://net4.essintial.com/EssintialEndpoint/ProcessFailedTransactionsResponse" message="tns:EssintialEndpoint_ProcessFailedTransactions_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicEssintialService" type="tns:EssintialEndpoint">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="HandleTicket">
+      <soap:operation soapAction="HandleTicket" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EssintialGreeting">
+      <soap:operation soapAction="http://net4.essintial.com/EssintialEndpoint/EssintialGreeting" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUpdateToSita">
+      <soap:operation soapAction="http://net4.essintial.com/EssintialEndpoint/SendUpdateToSita" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessFailedTransactions">
+      <soap:operation soapAction="http://net4.essintial.com/EssintialEndpoint/ProcessFailedTransactions" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EssintialEndpoint">
+    <wsdl:port name="BasicEssintialService" binding="tns:BasicEssintialService">
+      <soap:address location="http://rajuljoshi7-eval-test.apigee.net/essintialmock"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

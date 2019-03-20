@@ -1,0 +1,70 @@
+<wsdl:definitions xmlns:tns="http://www.sita.aero/WSDL/EssintialInboundIncSyncV1"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="http://www.sita.aero/WSDL/EssintialInboundIncSyncV1">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:s="http://net4.essintial.com/SitaTicket_1.xsd">
+      <xs:import namespace="http://net4.essintial.com/SitaTicket_1.xsd"/>
+      <xs:element name="CallData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" ref="s:ServiceTicket"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+               targetNamespace="http://net4.essintial.com/SitaTicket_1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="ServiceTicket">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:string" name="LocationCode" nillable="true"/>
+            <xs:element type="xs:string" name="EndUserOrganization" nillable="true"/>
+            <xs:element type="xs:string" name="AddressDetails"/>
+            <xs:element type="xs:string" name="AddressCity"/>
+            <xs:element type="xs:string" name="AddressState"/>
+            <xs:element type="xs:string" name="AddressZip"/>
+            <xs:element type="xs:string" name="AddressCountry"/>
+            <xs:element type="xs:string" name="Priority"/>
+            <xs:element type="xs:string" name="CustomerReference4"/>
+            <xs:element type="xs:string" name="CustomerReference3"/>
+            <xs:element type="xs:string" name="VORDID"/>
+            <xs:element type="xs:string" name="Comments"/>
+            <xs:element type="xs:string" name="CustomerReference2"/>
+            <xs:element type="xs:string" name="StatusCode"/>
+            <xs:element type="xs:string" name="ReceivedMethod"/>
+            <xs:element type="xs:dateTime" name="CustomerReceivedDate"/>
+            <xs:element type="xs:dateTime" name="ScheduledDS"/>
+            <xs:element type="xs:dateTime" name="TechOnSite"/>
+            <xs:element type="xs:dateTime" name="TechCheckedOut"/>
+            <xs:element type="xs:string" name="TotalLaborTime"/>
+            <xs:element type="xs:string" name="TotalTravelTime"/>
+            <xs:element type="xs:string" name="FinalAction"/>
+            <xs:element type="xs:string" name="CustomerName"/>
+            <xs:element type="xs:string" name="Notes"/>
+          </xs:sequence>
+          <xs:attribute type="xs:string" name="Version"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessIncidentSoapIn">
+    <wsdl:part name="parameters" element="CallData"/>
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="ProcessIncident">
+      <wsdl:input message="tns:ProcessIncidentSoapIn"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ProcessIncident">
+      <soap:operation soapAction="ServiceSoap" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>
