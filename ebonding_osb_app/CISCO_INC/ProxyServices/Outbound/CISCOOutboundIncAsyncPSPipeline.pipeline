@@ -8,7 +8,7 @@
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
     </con:coreEntry>
-    <con:router>
+    <con:router errorHandler="error-a013dcc.N65f23ab8.0.169b9bbaf48.N7fcf">
         <con:pipeline type="request" name="request-a013b5e.3ef098c8.0.163ab1a1dd6.N7fe0">
             <con:stage id="_StageId-a013b5e.3ef098c8.0.163ab1a1dd6.N7fde" name="Init_Request_Stg">
                 <con:context>
@@ -400,6 +400,79 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                         </con2:case>
                         <con2:default/>
                     </con2:ifThenElse>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dcc.N65f23ab8.0.169b9bbaf48.N7fcf">
+            <con:stage id="_StageId-a013dcc.N65f23ab8.0.169b9bbaf48.N7fce" name="Service_EH_stg">
+                <con:context>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con5:log>
+                        <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7f9b</con2:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>'A runtime fault was received for ticket number ', 
+$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(), 
+' with message transaction id ', $MsgTranId,
+'. Below is the fault received from ',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),
+': ', fn:codepoints-to-string(10),fn:codepoints-to-string(10),$fault</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>*****CISCOOutboundIncAsyncPS.EH.Fault****</con5:message>
+                    </con5:log>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7f66</con2:id>
+                        <con1:case id="_BranchId-a013dcc.N65f23ab8.0.169b9bbaf48.N7f65">
+                            <con1:condition>
+                                <con2:xqueryText>$inbound/ctx:transport/ctx:request/tp:headers/jms:JMSXDeliveryCount > '2'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con3:route xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                    <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef5</con2:id>
+                                    <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:outboundTransform>
+                                        <con5:assign varName="EnvironmentName">
+                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef4</con2:id>
+                                            <con5:expr>
+                                                <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
+"DEV"
+else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
+"QA"
+else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
+"PROD"
+else
+fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
+                                            </con5:expr>
+                                        </con5:assign>
+                                        <con1:transport-headers>
+                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef3</con2:id>
+                                            <con1:header-set>outbound-request</con1:header-set>
+                                            <con1:header value="expression" name="Subject">
+                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text(),'-',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),' : Run-time fault occurred for ticket number ', $TicketNumber)</con2:xqueryText>
+                                            </con1:header>
+                                            <con5:header value="expression" name="To">
+                                                <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
+                                            </con5:header>
+                                        </con1:transport-headers>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef2</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText>fn:concat('A runtime fault was received for ticket number ', 
+$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(), 
+' with message transaction id ', $MsgTranId, 
+'. Below is the fault received from ',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),': ', fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault))</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default/>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>

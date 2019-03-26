@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/Merge_EbondingTransaction" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/Merge_EbondingTransaction" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="EbondingsTransactionsCollection" type="EbondingsTransactionsCollection"/>
+   <xs:complexType name="EbondingsTransactionsCollection">
+      <xs:sequence>
+         <xs:element name="EbondingsTransactions" type="EbondingsTransactions" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="EbondingsTransactions">
+      <xs:sequence>
+         <xs:element name="tranId" type="string20"/>
+         <xs:element name="ticketNum" type="string40" minOccurs="0"/>
+         <xs:element name="externalRefnum" type="string40" minOccurs="0" nillable="true"/>
+         <xs:element name="isFirstRefnum" type="string20" minOccurs="0" nillable="true"/>
+         <xs:element name="currentStatus" type="string20" minOccurs="0"/>
+         <xs:element name="source" type="xs:string" minOccurs="0" nillable="true"/>
+         <xs:element name="destination" type="string20" minOccurs="0"/>
+         <xs:element name="creationTime" type="xs:dateTime" minOccurs="0"/>
+         <xs:element name="updateTime" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="payload" type="xs:string" minOccurs="0" nillable="true"/>
+         <xs:element name="messageTransId" type="string40" minOccurs="0" nillable="true"/>
+         <xs:element name="custom1" type="string20" minOccurs="0" nillable="true"/>
+         <xs:element name="custom2" type="string20" minOccurs="0" nillable="true"/>
+         <xs:element name="custom3" type="string20" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="string20">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="20"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string40">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="40"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>
