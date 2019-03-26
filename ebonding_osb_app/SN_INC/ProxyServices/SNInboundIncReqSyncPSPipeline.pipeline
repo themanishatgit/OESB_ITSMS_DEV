@@ -519,6 +519,17 @@ $IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Incident
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
+                    <con5:log xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                        <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N78f1</con2:id>
+                        <con5:logLevel>error</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>'A runtime fault was received for ticket number ',$TicketNumber, 
+' with message transaction id ', $Message_TranId,
+'. Below is the fault received from ',$IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text(),
+': ', fn:codepoints-to-string(10),fn:codepoints-to-string(10),$fault</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>*****SNInboundIncSyncPS.EH.Fault****</con5:message>
+                    </con5:log>
                     <con6:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/publish/config">
                         <con7:id xmlns:con7="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b5c.40457e0b.0.163b6d4c107.N7e44</con7:id>
                         <con4:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
