@@ -354,14 +354,7 @@ else($IncomingRequest/inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:Inc
                                         <con5:assign varName="EnvironmentName">
                                             <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7a4a</con2:id>
                                             <con5:expr>
-                                                <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
-"DEV"
-else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
-"QA"
-else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
-"PROD"
-else
-fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
+                                                <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EnvironmentName'),'select ENVIRONMENT from ESB_DEPLOYMENT_CONFIG OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY')//text()</con2:xqueryText>
                                             </con5:expr>
                                         </con5:assign>
                                         <con1:transport-headers>
