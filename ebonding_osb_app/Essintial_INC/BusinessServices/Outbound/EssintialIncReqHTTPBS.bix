@@ -24,7 +24,7 @@
         <tran:provider-id>http</tran:provider-id>
         <tran:inbound>false</tran:inbound>
         <tran:URI>
-            <env:value>http://rajuljoshi7-eval-test.apigee.net/essintialmock</env:value>
+            <env:value>http://net4.essintial.com:8000/Essintial.svc</env:value>
         </tran:URI>
         <tran:outbound-properties>
             <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>

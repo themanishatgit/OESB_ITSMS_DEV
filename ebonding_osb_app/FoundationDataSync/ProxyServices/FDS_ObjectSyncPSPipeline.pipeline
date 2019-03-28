@@ -958,14 +958,7 @@ else('FDS_ERR003')</con1:path>
                             <con4:assign varName="EnvironmentName" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con2:id>_ActionId-a013dd6.4315d72a.0.168838cec34.N7fc6</con2:id>
                                 <con1:expr>
-                                    <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
-"DEV"
-else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
-"QA"
-else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
-"PROD"
-else
-fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
+                                    <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EnvironmentName'),'select ENVIRONMENT from ESB_DEPLOYMENT_CONFIG OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY')//text()</con2:xqueryText>
                                 </con1:expr>
                             </con4:assign>
                             <con1:transport-headers xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">

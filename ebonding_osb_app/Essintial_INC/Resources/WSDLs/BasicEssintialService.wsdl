@@ -340,7 +340,7 @@
   </wsdl:binding>
   <wsdl:service name="EssintialEndpoint">
     <wsdl:port name="BasicEssintialService" binding="tns:BasicEssintialService">
-      <soap:address location="http://rajuljoshi7-eval-test.apigee.net/essintialmock"/>
+      <soap:address location="http://net4.essintial.com:8000/Essintial.svc"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
