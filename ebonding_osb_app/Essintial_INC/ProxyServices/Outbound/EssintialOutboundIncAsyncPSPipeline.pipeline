@@ -235,7 +235,7 @@ else
                                             <con2:xqueryText><![CDATA[<fetdm:FetchDataMappingRequest>
     <fetdm:RecType>{$RecType}</fetdm:RecType>
     <fetdm:Source>{$SourceSystem}</fetdm:Source>
-    <fetdm:Destination>{$DestinationSystem}</fetdm:Destination>
+    <fetdm:Destination>{fn:concat($DestinationSystem,'_DIRECT')}</fetdm:Destination>
     <!--1 or more repetitions:-->
     <fetdm:FetchData>
         <fetdm:ObjectName>STATUS</fetdm:ObjectName>
@@ -288,9 +288,6 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                 </con2:param>
                                 <con2:param name="ExternalRefNum">
                                     <con2:path>$ExtRefNumber</con2:path>
-                                </con2:param>
-                                <con2:param name="MsgTranId">
-                                    <con2:path>$MsgTranId</con2:path>
                                 </con2:param>
                             </con2:xqueryTransform>
                         </con1:expr>
