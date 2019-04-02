@@ -49,6 +49,13 @@ $TransactionType as xs:string,$Payload as element(*)
             <ns1:custom3></ns1:custom3>
         </ns1:EbondingsTransactions>
     
+    else if($TransactionType='UPDATE_REFNUMBER')then
+        <ns1:EbondingsTransactions>
+            <ns1:tranId>{fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('TRAN_ID'),'SELECT TRAN_ID FROM EBONDINGS_TRANSACTIONS where TICKET_NUM=? ORDER BY UPDATE_TIME DESC OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY',$TicketNumber)//text()}</ns1:tranId>
+            <ns1:externalRefnum>{$ExtRefNumber}</ns1:externalRefnum>
+            <ns1:currentStatus>{$CurrentStatus}</ns1:currentStatus>
+            <ns1:updateTime>{fn:current-dateTime()}</ns1:updateTime>
+        </ns1:EbondingsTransactions>
     else
     
         <ns1:EbondingsTransactions>

@@ -28,7 +28,7 @@ declare function local:func($StatusDestinationValue as xs:string,
     
     let $InitialCreateRequest := fn-bea:inlinedXML(fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('PAYLOAD'),'SELECT PAYLOAD FROM EBONDINGS_TRANSACTIONS where TICKET_NUM=? and IS_FIRST_REFNUM=?',fn:string($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber/text()),'Y')//text())
     return
-       <ns2:serviceTicket sit:Version="1" sit:AcknowledgementNumber="{fn:substring(fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber), 3)}" sit:PreviousVORDID="{fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EXTERNAL_REFNUM'),'SELECT EXTERNAL_REFNUM FROM EBONDINGS_TRANSACTIONS where TICKET_NUM=? ORDER BY UPDATE_TIME DESC OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY',fn:string($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber/text()))//text()}">
+       <ns2:serviceTicket sit:Version="1" sit:AcknowledgementNumber="{fn:substring(fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber), 4)}" sit:PreviousVORDID="{fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EXTERNAL_REFNUM'),'SELECT EXTERNAL_REFNUM FROM EBONDINGS_TRANSACTIONS where TICKET_NUM=? ORDER BY UPDATE_TIME DESC OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY',fn:string($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber/text()))//text()}">
            <sit:LocationCode>{fn:substring(fn:concat(fn:data($InitialCreateRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Location),' ',fn:data($InitialCreateRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Street)),0,50)}</sit:LocationCode>
             <sit:EndUserOrganization>{fn:data($InitialCreateRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Company)}</sit:EndUserOrganization>
             <sit:AddressDetails>{fn:data($InitialCreateRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Street)}</sit:AddressDetails>
@@ -62,7 +62,7 @@ declare function local:func($StatusDestinationValue as xs:string,
         
         else
         
-        <ns2:serviceTicket sit:Version="1" sit:AcknowledgementNumber="{fn:substring(fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber), 3)}" sit:PreviousVORDID="{fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EXTERNAL_REFNUM'),'SELECT EXTERNAL_REFNUM FROM EBONDINGS_TRANSACTIONS where TICKET_NUM=? ORDER BY UPDATE_TIME DESC OFFSET 1 ROWS FETCH FIRST 1 ROWS ONLY',fn:string($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber/text()))//text()}">
+        <ns2:serviceTicket sit:Version="1" sit:AcknowledgementNumber="{fn:substring(fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber), 4)}" sit:PreviousVORDID="{fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EXTERNAL_REFNUM'),'SELECT EXTERNAL_REFNUM FROM EBONDINGS_TRANSACTIONS where TICKET_NUM=? ORDER BY UPDATE_TIME DESC OFFSET 1 ROWS FETCH FIRST 1 ROWS ONLY',fn:string($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber/text()))//text()}">
            <sit:LocationCode>{fn:substring(fn:concat(fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Location),' ',fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Street)),0,50)}</sit:LocationCode>
             <sit:EndUserOrganization>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Company)}</sit:EndUserOrganization>
             <sit:AddressDetails>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentLocation/ns1:Street)}</sit:AddressDetails>

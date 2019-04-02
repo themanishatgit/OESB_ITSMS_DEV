@@ -472,16 +472,16 @@ else
                                 <con1:expr>
                                     <con2:xqueryText><![CDATA[<fetdm:FetchDataMappingRequest>
     <fetdm:RecType>INC</fetdm:RecType>
-    <fetdm:Source>{$SourceSystem}</fetdm:Source>
+    <fetdm:Source>{fn:concat($SourceSystem,'_DIRECT')}</fetdm:Source>
     <fetdm:Destination>{$DestinationSystem}</fetdm:Destination>
     <!--1 or more repetitions:-->
     <fetdm:FetchData>
         <fetdm:ObjectName>STATUS</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/STATUS/text())}</fetdm:SourceValue>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/CallStates.Name/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
 	<fetdm:FetchData>
         <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/incidentData/RESOLUTION_CODE/text())}</fetdm:SourceValue>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/Calls.CCPRoom/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
@@ -505,13 +505,42 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7e66</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7e65">
                             <con1:condition>
-                                <con2:xqueryText>$InputRequest/incidentData/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS' and fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
+                                <con2:xqueryText>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con1:assign varName="SNRequest">
-                                    <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7f03</con2:id>
+                                    <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7774</con2:id>
                                     <con1:expr>
-                                        <con2:xqueryText><![CDATA[<ns1:IncidentRequestMessage xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
+                                        <con2:xqueryTransform>
+                                            <con2:resource ref="ServiceTec_INC/Resources/XQueries/ServiceTecRequestToSNRequest"/>
+                                            <con2:param name="TransactionType">
+                                                <con2:path>$TransactionType</con2:path>
+                                            </con2:param>
+                                            <con2:param name="StatusDestinationValue">
+                                                <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="ResolutionCodeDestinationValue">
+                                                <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text()</con2:path>
+                                            </con2:param>
+                                            <con2:param name="SERVICETECRequest">
+                                                <con2:path>$InputRequest</con2:path>
+                                            </con2:param>
+                                            <con2:param name="SourceSystem">
+                                                <con2:path>$SourceSystem</con2:path>
+                                            </con2:param>
+                                            <con2:param name="MsgTranId">
+                                                <con2:path>$MsgTranId</con2:path>
+                                            </con2:param>
+                                        </con2:xqueryTransform>
+                                    </con1:expr>
+                                </con1:assign>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:assign varName="SNRequest">
+                                <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7f03</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText><![CDATA[<ns1:IncidentRequestMessage xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
 	<ns1:IncidentRequestHeader>
 		<ns1:TransactionId>{$MsgTranId}</ns1:TransactionId>
 		<ns1:TransactionType>ERROR</ns1:TransactionType>
@@ -521,58 +550,15 @@ else
 	</ns1:IncidentRequestHeader>
 	<ns1:IncidentRequestBody>
 		<ns1:IncidentDetails>
-			<ns1:TicketNumber>{$InputRequest/incidentData/INCIDENT_NUMBER/text()}</ns1:TicketNumber>
-			{
-                        if(dvm:lookup('ServiceTec_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER')
-                        then
-                        <ns1:Customer>
-                            <ns1:Name>{$SourceSystem}</ns1:Name>
-                            <ns1:RefNumber>{$InputRequest/incidentData/CUSTOMER_EXTERNAL_REFERENCE/text()}</ns1:RefNumber>
-                        </ns1:Customer>
-                      else()
-                      }
-                      {
-                        if(dvm:lookup('ServiceTec_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER')
-                        then
+			<ns1:TicketNumber>{$TicketNumber}</ns1:TicketNumber>
                         <ns1:Supplier>
                           <ns1:Name>{$SourceSystem}</ns1:Name>
-                          <ns1:RefNumber>{$InputRequest/incidentData/SUPPLIER_EXTERNAL_REFERENCE/text()}</ns1:RefNumber>
+                          <ns1:RefNumber>{$ExtRefNumber}</ns1:RefNumber>
                         </ns1:Supplier>
-                        else()
-                      }
 			<ns1:WorkNotes>ERR-APP: An invalid status was received in the incoming update on this ticket. Therefore, updates from the transaction have been ignored.</ns1:WorkNotes>
 		</ns1:IncidentDetails>
 	</ns1:IncidentRequestBody>
 </ns1:IncidentRequestMessage>]]></con2:xqueryText>
-                                    </con1:expr>
-                                </con1:assign>
-                            </con1:actions>
-                        </con1:case>
-                        <con1:default>
-                            <con1:assign varName="SNRequest">
-                                <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7774</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryTransform>
-                                        <con2:resource ref="ServiceTec_INC/Resources/XQueries/ServiceTecRequestToSNRequest"/>
-                                        <con2:param name="TransactionType">
-                                            <con2:path>$TransactionType</con2:path>
-                                        </con2:param>
-                                        <con2:param name="StatusDestinationValue">
-                                            <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ResolutionCodeDestinationValue">
-                                            <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text()</con2:path>
-                                        </con2:param>
-                                        <con2:param name="SERVICETECRequest">
-                                            <con2:path>$InputRequest</con2:path>
-                                        </con2:param>
-                                        <con2:param name="SourceSystem">
-                                            <con2:path>$SourceSystem</con2:path>
-                                        </con2:param>
-                                        <con2:param name="MsgTranId">
-                                            <con2:path>$MsgTranId</con2:path>
-                                        </con2:param>
-                                    </con2:xqueryTransform>
                                 </con1:expr>
                             </con1:assign>
                         </con1:default>
@@ -589,44 +575,44 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N77e3</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N77e2">
                             <con1:condition>
-                                <con2:xqueryText>$InputRequest/incidentData/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS' and fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
+                                <con2:xqueryText>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
-                            <con1:actions>
-                                <con3:route>
-                                    <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a35</con2:id>
-                                    <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                                    <con3:outboundTransform>
-                                        <con1:assign varName="EnvironmentName">
-                                            <con2:id>_ActionId-a013dd4.4fb81c68.0.168842c769c.N7fc7</con2:id>
-                                            <con1:expr>
-                                                <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EnvironmentName'),'select ENVIRONMENT from ESB_DEPLOYMENT_CONFIG OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY')//text()</con2:xqueryText>
-                                            </con1:expr>
-                                        </con1:assign>
-                                        <con1:transport-headers>
-                                            <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a34</con2:id>
-                                            <con1:header-set>outbound-request</con1:header-set>
-                                            <con1:header value="expression" name="Subject">
-                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:xqueryText>
-                                            </con1:header>
-                                            <con1:header value="expression" name="To">
-                                                <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
-                                            </con1:header>
-                                        </con1:transport-headers>
-                                        <con1:replace varName="body" contents-only="true">
-                                            <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a33</con2:id>
-                                            <con1:location>
-                                                <con2:xpathText>.</con2:xpathText>
-                                            </con1:location>
-                                            <con1:expr>
-                                                <con2:xqueryText>fn:concat('An invalid status was received in the incoming update on ticket number :', $InputRequest/incidentData/INCIDENT_NUMBER/text(), ' with message transaction id :', $MsgTranId, fn:codepoints-to-string(10),fn:codepoints-to-string(10),
-'Please refer audit logs for the complete payload.')</con2:xqueryText>
-                                            </con1:expr>
-                                        </con1:replace>
-                                    </con3:outboundTransform>
-                                </con3:route>
-                            </con1:actions>
+                            <con1:actions></con1:actions>
                         </con1:case>
-                        <con1:default/>
+                        <con1:default>
+                            <con3:route>
+                                <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a35</con2:id>
+                                <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con3:outboundTransform>
+                                    <con1:assign varName="EnvironmentName">
+                                        <con2:id>_ActionId-a013dd4.4fb81c68.0.168842c769c.N7fc7</con2:id>
+                                        <con1:expr>
+                                            <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EnvironmentName'),'select ENVIRONMENT from ESB_DEPLOYMENT_CONFIG OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY')//text()</con2:xqueryText>
+                                        </con1:expr>
+                                    </con1:assign>
+                                    <con1:transport-headers>
+                                        <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a34</con2:id>
+                                        <con1:header-set>outbound-request</con1:header-set>
+                                        <con1:header value="expression" name="Subject">
+                                            <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:xqueryText>
+                                        </con1:header>
+                                        <con1:header value="expression" name="To">
+                                            <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
+                                        </con1:header>
+                                    </con1:transport-headers>
+                                    <con1:replace varName="body" contents-only="true">
+                                        <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a33</con2:id>
+                                        <con1:location>
+                                            <con2:xpathText>.</con2:xpathText>
+                                        </con1:location>
+                                        <con1:expr>
+                                            <con2:xqueryText>fn:concat('An invalid status was received in the incoming update on ticket number :', $InputRequest/incidentData/INCIDENT_NUMBER/text(), ' with message transaction id :', $MsgTranId, fn:codepoints-to-string(10),fn:codepoints-to-string(10),
+'Please refer audit logs for the complete payload.')</con2:xqueryText>
+                                        </con1:expr>
+                                    </con1:replace>
+                                </con3:outboundTransform>
+                            </con3:route>
+                        </con1:default>
                     </con1:ifThenElse>
                 </con:actions>
             </con:stage>
@@ -658,11 +644,7 @@ else
                                             <con2:path>$DestinationSystem</con2:path>
                                         </con2:param>
                                         <con2:param name="ExtRefNumber">
-                                            <con2:path>if(dvm:lookup('ServiceTec_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER')
-then $InputRequest/incidentData/CUSTOMER_EXTERNAL_REFERENCE/text()
-else if(dvm:lookup('ServiceTec_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER')
-then $InputRequest/incidentData/SUPPLIER_EXTERNAL_REFERENCE/text()
-else ''</con2:path>
+                                            <con2:path>$ExtRefNumber</con2:path>
                                         </con2:param>
                                         <con2:param name="ErrMessage">
                                             <con2:path>''</con2:path>
@@ -674,7 +656,7 @@ else ''</con2:path>
                                             <con2:path>''</con2:path>
                                         </con2:param>
                                         <con2:param name="TicketNumber">
-                                            <con2:path>$InputRequest/incidentData/INCIDENT_NUMBER/text()</con2:path>
+                                            <con2:path>$TicketNumber</con2:path>
                                         </con2:param>
                                         <con2:param name="ProxyService">
                                             <con2:path>'ServiceTecInboundIncSyncPS'</con2:path>
@@ -683,7 +665,7 @@ else ''</con2:path>
                                             <con2:path>'REQUEST_SENT'</con2:path>
                                         </con2:param>
                                         <con2:param name="RecType">
-                                            <con2:path>$InputRequest/incidentData/REC_TYPE/text()</con2:path>
+                                            <con2:path>$RecType</con2:path>
                                         </con2:param>
                                         <con2:param name="Payload">
                                             <con2:path>$SNRequest</con2:path>
@@ -691,6 +673,59 @@ else ''</con2:path>
                                     </con2:xqueryTransform>
                                 </con1:expr>
                             </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dcc.N5deda374.0.169c4367e80.N7c86" name="UpdateEbondingTransactionTable" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="net4" namespace="http://net4.essintial.com"/>
+                </con:context>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c85</con2:id>
+                        <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>merge</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c84</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
+                                        <con2:param name="Message_TranId">
+                                            <con2:path>$MsgTranId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Destination">
+                                            <con2:path>$DestinationSystem</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TransactionType">
+                                            <con2:path>$TransactionType</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ExtRefNumber">
+                                            <con2:path>$ExtRefNumber</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TicketNumber">
+                                            <con2:path>$TicketNumber</con2:path>
+                                        </con2:param>
+                                        <con2:param name="CurrentStatus">
+                                            <con2:path>$Status</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Payload">
+                                            <con2:path>$InputRequest</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Source">
+                                            <con2:path>$SourceSystem</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                            <con1:routing-options>
+                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c83</con2:id>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
+                            </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
                 </con:actions>
