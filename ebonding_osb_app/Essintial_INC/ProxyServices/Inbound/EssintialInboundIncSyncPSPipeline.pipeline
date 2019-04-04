@@ -20,6 +20,7 @@
                     <con2:userNsDecl prefix="tem" namespace="http://www.sita.aero/WSDL/EssintialInboundIncSyncV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con3:route>
                         <con2:id>_ActionId-a013dc6.N4a5f3b08.0.164f9f5c9af.N7f96</con2:id>
