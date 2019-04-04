@@ -123,7 +123,7 @@
                             </con2:replace>
                         </con4:outboundTransform>
                     </con4:route>
-                    <con1:reply isError="true" xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                    <con1:reply isError="false" xmlns:con6="http://www.bea.com/wli/sb/stages/config">
                         <con6:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7dcf</con6:id>
                     </con1:reply>
                 </con:actions>
@@ -175,7 +175,7 @@
                             </con2:replace>
                         </con4:outboundTransform>
                     </con4:route>
-                    <con1:reply isError="true" xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                    <con1:reply isError="false" xmlns:con6="http://www.bea.com/wli/sb/stages/config">
                         <con6:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7908</con6:id>
                     </con1:reply>
                 </con:actions>
@@ -362,7 +362,10 @@ else
     </fetdm:FetchData>
 	<fetdm:FetchData>
         <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/sit:ServiceTicket/sit:FinalAction/text())}</fetdm:SourceValue>
+        <fetdm:SourceValue>{if($InputRequest/sit:ServiceTicket/sit:FinalAction/text()='Swap')then
+        "GENERAL"
+        else
+        fn:upper-case($InputRequest/sit:ServiceTicket/sit:FinalAction/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
@@ -635,7 +638,7 @@ else
                 <con:request>request-a013b64.N7b3ae3c1.0.163cffb80dd.N7d39</con:request>
                 <con:response>response-a013b64.N7b3ae3c1.0.163cffb80dd.N7d38</con:response>
             </con:pipeline-node>
-            <con:route-node name="SNInboundIncReqSync_RN">
+            <con:route-node name="SNInboundIncQ_RN">
                 <con:context/>
                 <con:actions>
                     <con2:route>

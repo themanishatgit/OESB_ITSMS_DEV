@@ -118,7 +118,7 @@ else
                                         <con2:xpathText>./inc:IncidentRequestBody/inc:IncidentDetails/inc:Status</con2:xpathText>
                                     </con1:location>
                                     <con1:expr>
-                                        <con2:xqueryText>'Closed'</con2:xqueryText>
+                                        <con2:xqueryText>'Cancelled'</con2:xqueryText>
                                     </con1:expr>
                                 </con1:replace>
                                 <con1:replace contents-only="true" varName="InputRequest">
@@ -241,13 +241,8 @@ else
         <fetdm:ObjectName>STATUS</fetdm:ObjectName>
         <fetdm:SourceValue>{fn:upper-case($Status)}</fetdm:SourceValue>
     </fetdm:FetchData>
-	
 	<fetdm:FetchData>
         <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text())}</fetdm:SourceValue>
-    </fetdm:FetchData>
-	<fetdm:FetchData>
-        <fetdm:ObjectName>CAUSE_CODE</fetdm:ObjectName>
         <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
