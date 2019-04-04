@@ -770,7 +770,9 @@ $TicketNumber, ' with message transaction id ', $MsgTranId,
                                         <con5:assign varName="EnvironmentName">
                                             <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ce4</con2:id>
                                             <con5:expr>
-                                                <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EnvironmentName'),'select ENVIRONMENT from ESB_DEPLOYMENT_CONFIG OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY')//text()</con2:xqueryText>
+                                                <con2:xqueryTransform>
+                                                    <con2:resource ref="Common/Resources/XQueries/GetEnvironmentName"/>
+                                                </con2:xqueryTransform>
                                             </con5:expr>
                                         </con5:assign>
                                         <con1:transport-headers>
