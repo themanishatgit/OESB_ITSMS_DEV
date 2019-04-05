@@ -26,7 +26,7 @@
                         </con2:location>
                         <con2:expr>
                             <con1:xqueryText><![CDATA[<IncidentResponseXML>
-                <EventID>{$IncomingRequest/Calls.CustCallID/text()}</EventID>
+                <EventID>{$InputRequest/Calls.CustCallID/text()}</EventID>
                 <Status>Success</Status>
                <Description>Incident Request Accepted Successfully</Description>
 </IncidentResponseXML>]]></con1:xqueryText>
@@ -285,7 +285,6 @@
                 <con:context>
                     <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
                 </con:context>
-                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con2:validate>
                         <con1:id>_ActionId-a013dc7.N3ec26f90.0.169e1bb65d5.N77d4</con1:id>

@@ -59,6 +59,7 @@
                       </xsd:sequence>
                     </xsd:complexType>
                   </xsd:element>
+  <xsd:element name="FailureTypes" type="xsd:string"/>
                   <xsd:element name="ProblemTypes">
                     <xsd:complexType>
                       <xsd:sequence>
@@ -67,6 +68,7 @@
                       </xsd:sequence>
                     </xsd:complexType>
                   </xsd:element>
+                
                   <xsd:element name="Priorities">
                     <xsd:complexType>
                       <xsd:sequence>
