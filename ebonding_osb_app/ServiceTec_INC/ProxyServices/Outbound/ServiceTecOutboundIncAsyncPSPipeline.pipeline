@@ -8,7 +8,7 @@
             <con:snippetVersion>1.0</con:snippetVersion>
         </con:xqConfiguration>
     </con:coreEntry>
-    <con:router errorHandler="error-a013dcc.N65f23ab8.0.169b9bbaf48.N7fcf">
+    <con:router errorHandler="error-a013dcc.N65f23ab8.0.169b9bbaf48.N79de">
         <con:pipeline type="request" name="request-a013b5e.3ef098c8.0.163ab1a1dd6.N7fe0">
             <con:stage id="_StageId-a013b5e.3ef098c8.0.163ab1a1dd6.N7fde" name="Init_Request_Stg">
                 <con:context>
@@ -21,8 +21,14 @@
                         <con5:expr>
                             <con2:xqueryText>$body</con2:xqueryText>
                         </con5:expr>
-                        <con5:message>****CISCOOutboundIncAsyncPS.IncomingRequest****</con5:message>
+                        <con5:message>****ServiceTecOutboundIncAsyncPS.IncomingRequest****</con5:message>
                     </con5:log>
+                    <con1:assign varName="CanonicalInput" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7e57</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
                     <con1:assign varName="InputRequest">
                         <con2:id>_ActionId-a013b5e.3ef098c8.0.163ab1a1dd6.N7e29</con2:id>
                         <con1:expr>
@@ -35,28 +41,40 @@
                             <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:TransactionId/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-		    <con1:ifThenElse>
-                        <con2:id>_ActionId-a01926a.5f0a053a.0.168aacf9167.N7ffa</con2:id>
-                        <con1:case id="_BranchId-a01926a.5f0a053a.0.168aacf9167.N7ff9">
-                            <con1:condition>
-                                <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:ReOpenFlag/text()='Y' and $InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text()='IER'</con2:xqueryText>
-                            </con1:condition>
-                            <con1:actions>
-                                <con2:reply>
-                                    <con2:id>_ActionId-a01926a.5f0a053a.0.168aacf9167.N7ff6</con2:id>
-                                </con2:reply>
-                            </con1:actions>
-                        </con1:case>
-                        <con1:default/>
-                    </con1:ifThenElse>		
                     <con1:assign varName="ExtRefNumber">
                         <con2:id>_ActionId-a013dc6.N56af25d6.0.1656b10d911.N7f6a</con2:id>
                         <con1:expr>
-                            <con2:xqueryText>if(dvm:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(), 'Type', '')='CUSTOMER')
-then $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Customer/inc:RefNumber/text()
-else if(dvm:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(), 'Type', '')='SUPPLIER')
-then $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text()
-else()</con2:xqueryText>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text()</con:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="TransactionType" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ed4</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:TransactionType/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="SourceSystem" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ed1</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="DestinationSystem" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7e54</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="TicketNumber" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ece</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="RecType" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ecb</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/inc:IncidentRequestHeader/inc:RecType/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con1:ifThenElse>
@@ -109,28 +127,28 @@ else()</con2:xqueryText>
                                     <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
                                         <con6:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
                                         <con6:param name="TranType">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:TransactionType/text()</con6:path>
+                                            <con6:path>$TransactionType</con6:path>
                                         </con6:param>
                                         <con6:param name="Message_TranId">
                                             <con6:path>$MsgTranId</con6:path>
                                         </con6:param>
                                         <con6:param name="Destination">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text()</con6:path>
+                                            <con6:path>$DestinationSystem</con6:path>
                                         </con6:param>
                                         <con6:param name="ExtRefNumber">
                                             <con6:path>$ExtRefNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="TicketNumber">
-                                            <con6:path>$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con6:path>
+                                            <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'CISCOOutboundIncAsyncPS'</con6:path>
+                                            <con6:path>'ServiceTecOutboundIncAsyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'START'</con6:path>
                                         </con6:param>
                                         <con6:param name="RecType">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:RecType/text()</con6:path>
+                                            <con6:path>$RecType</con6:path>
                                         </con6:param>
                                         <con6:param name="Payload">
                                             <con6:path>$InputRequest</con6:path>
@@ -139,7 +157,7 @@ else()</con2:xqueryText>
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="Source">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text()</con6:path>
+                                            <con6:path>$SourceSystem</con6:path>
                                         </con6:param>
                                         <con6:param name="ErrCode">
                                             <con6:path>''</con6:path>
@@ -187,22 +205,13 @@ else()</con2:xqueryText>
                                         <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7311</con2:id>
                                         <con1:expr>
                                             <con2:xqueryText><![CDATA[<fetdm:FetchDataMappingRequest>
-    <fetdm:RecType>{$InputRequest/inc:IncidentRequestHeader/inc:RecType/text()}</fetdm:RecType>
-    <fetdm:Source>{$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text()}</fetdm:Source>
-    <fetdm:Destination>{$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text()}</fetdm:Destination>
+    <fetdm:RecType>{$RecType}</fetdm:RecType>
+    <fetdm:Source>{$SourceSystem}</fetdm:Source>
+    <fetdm:Destination>{fn:concat($DestinationSystem,'_DIRECT')}</fetdm:Destination>
     <!--1 or more repetitions:-->
     <fetdm:FetchData>
         <fetdm:ObjectName>STATUS</fetdm:ObjectName>
         <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status/text())}</fetdm:SourceValue>
-    </fetdm:FetchData>
-	
-	<fetdm:FetchData>
-        <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text())}</fetdm:SourceValue>
-    </fetdm:FetchData>
-	<fetdm:FetchData>
-        <fetdm:ObjectName>CAUSE_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
                                         </con1:expr>
@@ -214,37 +223,27 @@ else()</con2:xqueryText>
                     </con1:ifThenElse>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N7306" name="CreateCISCORequest_Stg">
+            <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N7306" name="CreateServiceTecRequest_Stg">
                 <con:context>
                     <con2:userNsDecl prefix="fetdm" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
-                    <con1:assign varName="CISCORequest">
-                        <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7297</con2:id>
+                    <con1:assign varName="ServiceTecRequest">
+                        <con2:id>_ActionId-a013dcc.3057d296.0.1696cde6423.N7fce</con2:id>
                         <con1:expr>
                             <con2:xqueryTransform>
-                                <con2:resource ref="CISCO_INC/Resources/XQueries/SNRequestToCISCORequest"/>
-                                <con2:param name="StatusDestinationValue">
-                                    <con2:path>if($InputRequest/inc:IncidentRequestHeader/inc:KillFlag/text()='Y')then
-$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status/text()
-else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:path>
-                                </con2:param>
+                                <con2:resource ref="ServiceTec_INC/Resources/XQueries/SNRequestToServiceTecRequest"/>
                                 <con2:param name="SNRequest">
                                     <con2:path>$InputRequest</con2:path>
-                                </con2:param>
-                                <con2:param name="ResolutionCodeDestinationValue">
-                                    <con2:path>if($InputRequest/inc:IncidentRequestHeader/inc:KillFlag/text()='Y')then
-$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text()
-else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='RESOLUTION_CODE']/fetdm:DestinationValue/text())</con2:path>
                                 </con2:param>
                             </con2:xqueryTransform>
                         </con1:expr>
                     </con1:assign>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N729c" name="Audit_CISCORequest_Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N729c" name="Audit_ServiceTecRequest_Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
                 <con:context>
                     <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
                 </con:context>
@@ -263,33 +262,33 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                     <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
                                         <con6:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
                                         <con6:param name="TranType">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:TransactionType/text()</con6:path>
+                                            <con6:path>$TransactionType</con6:path>
                                         </con6:param>
                                         <con6:param name="Message_TranId">
                                             <con6:path>$MsgTranId</con6:path>
                                         </con6:param>
                                         <con6:param name="Destination">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text()</con6:path>
+                                            <con6:path>$DestinationSystem</con6:path>
                                         </con6:param>
                                         <con6:param name="ExtRefNumber">
                                             <con6:path>$ExtRefNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="TicketNumber">
-                                            <con6:path>$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con6:path>
+                                            <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'CISCOOutboundIncAsyncPS'</con6:path>
+                                            <con6:path>'ServiceTecOutboundIncAsyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'REQUEST_SENT'</con6:path>
                                         </con6:param>
                                         <con6:param name="RecType">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:RecType/text()</con6:path>
+                                            <con6:path>$RecType</con6:path>
                                         </con6:param>
                                         <con6:param name="Payload">
                                             <con6:path>&lt;soapenv:Envelope xmlns:typ="http://eai/Sav/Trillium/Types" xmlns:soapenv="http://Schemas.xmlsoap.org/soap/envelope/">
 			&lt;soapenv:Body>
-                            {$CISCORequest}
+                            {$ServiceTecRequest}
 			&lt;/soapenv:Body>
 		&lt;/soapenv:Envelope></con6:path>
                                         </con6:param>
@@ -297,7 +296,7 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="Source">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text()</con6:path>
+                                            <con6:path>$SourceSystem</con6:path>
                                         </con6:param>
                                         <con6:param name="ErrCode">
                                             <con6:path>''</con6:path>
@@ -313,12 +312,79 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                     </con4:route>
                 </con:actions>
             </con:stage>
+            <con:stage id="_StageId-a013dcc.N5deda374.0.169c4367e80.N7d2d" name="UpdateEbondingTransactionTable" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context>
+                    <con2:userNsDecl prefix="net4" namespace="http://net4.essintial.com"/>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a0209a1.1770cd43.0.169ec2df717.N7ff7</con2:id>
+                        <con1:case id="_BranchId-a0209a1.1770cd43.0.169ec2df717.N7ff6">
+                            <con1:condition>
+                                <con2:xqueryText>$TransactionType='CREATE'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions/>
+                        </con1:case>
+                        <con1:default>
+                            <con3:route>
+                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d2a</con2:id>
+                                <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con3:operation>merge</con3:operation>
+                                <con3:outboundTransform>
+                                    <con1:replace varName="body" contents-only="true">
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d29</con2:id>
+                                        <con1:location>
+                                            <con2:xpathText>.</con2:xpathText>
+                                        </con1:location>
+                                        <con1:expr>
+                                            <con2:xqueryTransform>
+                                                <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
+                                                <con2:param name="Message_TranId">
+                                                    <con2:path>$MsgTranId</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Destination">
+                                                    <con2:path>$DestinationSystem</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TransactionType">
+                                                    <con2:path>$TransactionType</con2:path>
+                                                </con2:param>
+                                                <con2:param name="ExtRefNumber">
+                                                    <con2:path>$ExtRefNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TicketNumber">
+                                                    <con2:path>$TicketNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="CurrentStatus">
+                                                    <con2:path>$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status/text()</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Payload">
+                                                    <con2:path>$InputRequest</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Source">
+                                                    <con2:path>$SourceSystem</con2:path>
+                                                </con2:param>
+                                            </con2:xqueryTransform>
+                                        </con1:expr>
+                                    </con1:replace>
+                                    <con1:routing-options>
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d28</con2:id>
+                                        <con1:qualityOfService>best-effort</con1:qualityOfService>
+                                    </con1:routing-options>
+                                </con3:outboundTransform>
+                            </con3:route>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-a013b5e.3ef098c8.0.163ab1a1dd6.N7fdf">
-            <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N7463" name="CISCOResp_Audit_Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N7463" name="ServiceTecResp_Audit_Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
                 <con:context>
-                    <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
+                    <con6:userNsDecl prefix="net4" namespace="http://net4.ServiceTec.com" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
+                    <con6:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
                 </con:context>
+                <con:disabled>true</con:disabled>
                 <con:actions>
                     <con4:route>
                         <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7462</con6:id>
@@ -334,37 +400,39 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                                     <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
                                         <con6:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
                                         <con6:param name="TranType">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:TransactionType/text()</con6:path>
+                                            <con6:path>$TransactionType</con6:path>
                                         </con6:param>
                                         <con6:param name="Message_TranId">
                                             <con6:path>$MsgTranId</con6:path>
                                         </con6:param>
                                         <con6:param name="Destination">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text()</con6:path>
+                                            <con6:path>$DestinationSystem</con6:path>
                                         </con6:param>
                                         <con6:param name="ExtRefNumber">
-                                            <con6:path>$ExtRefNumber</con6:path>
+                                            <con6:path>if(fn:not($TransactionType='CREATE'))
+then($ExtRefNumber)
+else($ServiceTecResponse/net4:HandleTicketResult/net4:VordID/text())</con6:path>
                                         </con6:param>
                                         <con6:param name="TicketNumber">
-                                            <con6:path>$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text()</con6:path>
+                                            <con6:path>$TicketNumber</con6:path>
                                         </con6:param>
                                         <con6:param name="ProxyService">
-                                            <con6:path>'CISCOOutboundIncAsyncPS'</con6:path>
+                                            <con6:path>'ServiceTecOutboundIncAsyncPS'</con6:path>
                                         </con6:param>
                                         <con6:param name="Event">
                                             <con6:path>'RESPONSE_RECEIVED'</con6:path>
                                         </con6:param>
                                         <con6:param name="RecType">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:RecType/text()</con6:path>
+                                            <con6:path>$RecType</con6:path>
                                         </con6:param>
                                         <con6:param name="Payload">
-                                            <con6:path>$CISCOResponse</con6:path>
+                                            <con6:path>$ServiceTecResponse</con6:path>
                                         </con6:param>
                                         <con6:param name="ErrMessage">
                                             <con6:path>''</con6:path>
                                         </con6:param>
                                         <con6:param name="Source">
-                                            <con6:path>$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text()</con6:path>
+                                            <con6:path>$SourceSystem</con6:path>
                                         </con6:param>
                                         <con6:param name="ErrCode">
                                             <con6:path>''</con6:path>
@@ -380,86 +448,64 @@ else($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='
                     </con4:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013b64.Nfc29b77.0.163d46640c5.N7cfb" name="ErrorCISCOResp_Stg">
-                <con:context/>
-                <con:disabled>true</con:disabled>
-                <con:actions>
-                    <con2:ifThenElse xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
-                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b64.Nfc29b77.0.163d46640c5.N7d00</con6:id>
-                        <con2:case id="_BranchId-a013b64.Nfc29b77.0.163d46640c5.N7cff">
-                            <con2:condition>
-                                <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$CISCOResponse/STATUS!='SUCCESS'</con6:xqueryText>
-                            </con2:condition>
-                            <con2:actions>
-                                <con2:Error>
-                                    <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013b64.Nfc29b77.0.163d46640c5.N7cfc</con6:id>
-                                    <con2:errCode>ERROR-001</con2:errCode>
-                                    <con2:message>&lt;&lt; Error Received from CISCO while raising ticket>></con2:message>
-                                </con2:Error>
-                            </con2:actions>
-                        </con2:case>
-                        <con2:default/>
-                    </con2:ifThenElse>
-                </con:actions>
-            </con:stage>
         </con:pipeline>
-        <con:pipeline type="error" name="error-a013dcc.N65f23ab8.0.169b9bbaf48.N7fcf">
-            <con:stage id="_StageId-a013dcc.N65f23ab8.0.169b9bbaf48.N7fce" name="Service_EH_stg">
+        <con:pipeline type="error" name="error-a013dcc.N65f23ab8.0.169b9bbaf48.N79de">
+            <con:stage id="_StageId-a013dcc.N65f23ab8.0.169b9bbaf48.N7960" name="Service_EH_stg">
                 <con:context>
                     <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
                     <con5:log>
-                        <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7f9b</con2:id>
+                        <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N795f</con2:id>
                         <con5:logLevel>error</con5:logLevel>
                         <con5:expr>
                             <con2:xqueryText>'A runtime fault was received for ticket number ', 
-$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(), 
-' with message transaction id ', $MsgTranId,
-'. Below is the fault received from ',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),
+$TicketNumber, ' with message transaction id ', $MsgTranId,
+'. Below is the fault received from ',$DestinationSystem,
 ': ', fn:codepoints-to-string(10),fn:codepoints-to-string(10),$fault</con2:xqueryText>
                         </con5:expr>
-                        <con5:message>*****CISCOOutboundIncAsyncPS.EH.Fault****</con5:message>
+                        <con5:message>*****ServiceTecOutboundIncAsyncPS.EH.Fault****</con5:message>
                     </con5:log>
                     <con1:ifThenElse>
-                        <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7f66</con2:id>
-                        <con1:case id="_BranchId-a013dcc.N65f23ab8.0.169b9bbaf48.N7f65">
+                        <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N795e</con2:id>
+                        <con1:case id="_BranchId-a013dcc.N65f23ab8.0.169b9bbaf48.N795d">
                             <con1:condition>
                                 <con2:xqueryText>$inbound/ctx:transport/ctx:request/tp:headers/jms:JMSXDeliveryCount > '2'</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con3:route xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
-                                    <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef5</con2:id>
+                                    <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N795c</con2:id>
                                     <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                     <con3:outboundTransform>
                                         <con5:assign varName="EnvironmentName">
-                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef4</con2:id>
+                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N795b</con2:id>
                                             <con5:expr>
                                                 <con2:xqueryTransform>
                                                     <con2:resource ref="Common/Resources/XQueries/GetEnvironmentName"/>
-                                            </con2:xqueryTransform>
+                                                </con2:xqueryTransform>
                                             </con5:expr>
                                         </con5:assign>
                                         <con1:transport-headers>
-                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef3</con2:id>
+                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N795a</con2:id>
                                             <con1:header-set>outbound-request</con1:header-set>
                                             <con1:header value="expression" name="Subject">
-                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text(),'-',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),' : Run-time fault occurred for ticket number ', $TicketNumber)</con2:xqueryText>
+                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Run-time fault occurred for ticket number ', $TicketNumber)</con2:xqueryText>
                                             </con1:header>
                                             <con5:header value="expression" name="To">
                                                 <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
                                             </con5:header>
                                         </con1:transport-headers>
                                         <con1:replace varName="body" contents-only="true">
-                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef2</con2:id>
+                                            <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7959</con2:id>
                                             <con1:location>
                                                 <con2:xpathText>.</con2:xpathText>
                                             </con1:location>
                                             <con1:expr>
                                                 <con2:xqueryText>fn:concat('A runtime fault was received for ticket number ', 
-$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(), 
+$TicketNumber, 
 ' with message transaction id ', $MsgTranId, 
-'. Below is the fault received from ',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),': ', fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault))</con2:xqueryText>
+'. Below is the fault received from ',$DestinationSystem,': ',
+fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault))</con2:xqueryText>
                                             </con1:expr>
                                         </con1:replace>
                                     </con3:outboundTransform>
@@ -472,11 +518,11 @@ $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(
             </con:stage>
         </con:pipeline>
         <con:flow>
-            <con:pipeline-node name="CISCOOutboundIncAsync_PP">
+            <con:pipeline-node name="ServiceTecOutboundIncAsync_PP">
                 <con:request>request-a013b5e.3ef098c8.0.163ab1a1dd6.N7fe0</con:request>
                 <con:response>response-a013b5e.3ef098c8.0.163ab1a1dd6.N7fdf</con:response>
             </con:pipeline-node>
-            <con:route-node name="CISCO_Outbound_RN">
+            <con:route-node name="ServiceTec_Outbound_RN">
                 <con:context>
                     <con2:userNsDecl prefix="cus" namespace="urn:ws.solvedirect.com/webservices/custom"/>
                     <con2:userNsDecl prefix="typ" namespace="http://eai/Sav/Trillium/Types"/>
@@ -486,32 +532,22 @@ $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(
                 <con:actions>
                     <con3:route>
                         <con2:id>_ActionId-a013b5e.N9ad56c5.0.163c9b78efb.N7ffa</con2:id>
-                        <con3:service ref="CISCO_INC/BusinessServices/Outbound/CISCOIncReqHTTPBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>putCall</con3:operation>
+                        <con3:service ref="ServiceTec_INC/BusinessServices/Outbound/ServiceTecIncReqEmailBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:outboundTransform>
-                            <con1:assign varName="CISCOServiceAccount">
-                                <con2:id>_ActionId-a013dc6.c6ff418.0.165ebae15f7.N7ffe</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText>fn-bea:lookupBasicCredentials('CISCO_INC/Resources/ServiceAccounts/CISCO_ServiceAccount')</con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
+                            <con1:transport-headers>
+                                <con2:id>_ActionId-a013dcc.3057d296.0.1696cde6423.N7f39</con2:id>
+                                <con1:header-set>outbound-request</con1:header-set>
+                                <con1:header value="expression" name="Subject">
+                                    <con2:xqueryText>fn:concat("SITA Notification for Incident: ",$TicketNumber)</con2:xqueryText>
+                                </con1:header>
+                            </con1:transport-headers>
                             <con1:replace varName="body" contents-only="true">
                                 <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7294</con2:id>
                                 <con1:location>
                                     <con2:xpathText>.</con2:xpathText>
                                 </con1:location>
                                 <con1:expr>
-                                    <con2:xqueryText><![CDATA[<cus:putCall>
-	<username>{$CISCOServiceAccount/config:username/text()}</username>
-	<password>{$CISCOServiceAccount/config:password/text()}</password>
-	<CallData>
-		<soapenv:Envelope xmlns:typ="http://eai/Sav/Trillium/Types" xmlns:soapenv="http://Schemas.xmlsoap.org/soap/envelope/">
-			<soapenv:Body>
-                            {$CISCORequest}
-			</soapenv:Body>
-		</soapenv:Envelope>
-	</CallData>
-</cus:putCall>]]></con2:xqueryText>
+                                    <con2:xqueryText>$ServiceTecRequest</con2:xqueryText>
                                 </con1:expr>
                             </con1:replace>
                             <con5:log>
@@ -520,25 +556,10 @@ $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(
                                 <con5:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
                                 </con5:expr>
-                                <con5:message>CISCOOutboundIncAsyncPS.Route.CISCORequest****</con5:message>
+                                <con5:message>****ServiceTecOutboundIncAsyncPS.Route.ServiceTecRequest****</con5:message>
                             </con5:log>
                         </con3:outboundTransform>
-                        <con3:responseTransform>
-                            <con1:assign varName="CISCOResponse" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
-                                <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N74cd</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText>$body/*</con2:xqueryText>
-                                </con1:expr>
-                            </con1:assign>
-                            <con5:log>
-                                <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N728a</con2:id>
-                                <con5:logLevel>warning</con5:logLevel>
-                                <con5:expr>
-                                    <con2:xqueryText>$body/*</con2:xqueryText>
-                                </con5:expr>
-                                <con5:message>CISCOOutboundIncAsyncPS.Route.CISCOResponse****</con5:message>
-                            </con5:log>
-                        </con3:responseTransform>
+                        <con3:responseTransform/>
                     </con3:route>
                 </con:actions>
             </con:route-node>

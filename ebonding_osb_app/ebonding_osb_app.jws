@@ -32,10 +32,12 @@
       <hash><url n="URL" path="CISCO_INC/CISCO_INC.jpr"/></hash>
       <hash><url n="URL" path="Common/Common.jpr"/></hash>
       <hash><url n="URL" path="DataMappingLoad/DataMappingLoad.jpr"/></hash>
+      <hash><url n="URL" path="Essintial_INC/Essintial_INC.jpr"/></hash>
       <hash><url n="URL" path="FoundationDataSync/FoundationDataSync.jpr"/></hash>
       <hash><url n="URL" path="NGOSS_INC/NGOSS_INC.jpr"/></hash>
       <hash><url n="URL" path="OBS_INC/OBS_INC.jpr"/></hash>
       <hash><url n="URL" path="SBProject/SBProject.jpr"/></hash>
+      <hash><url n="URL" path="ServiceTec_INC/ServiceTec_INC.jpr"/></hash>
       <hash><url n="URL" path="SN_INC/SN_INC.jpr"/></hash>
       <hash><url n="URL" path="Utilities/Utilities.jpr"/></hash>
    </list>
@@ -56,6 +58,6 @@
       </hash>
    </hash>
    <hash n="oracle.sb.tooling.ide.core.internal.application.SbApplication">
-      <value n="configContextSessionName" v="OSB-IDE_build_1553791474867"/>
+      <value n="configContextSessionName" v="OSB-IDE_build_1554467789883"/>
    </hash>
 </jws:workspace>

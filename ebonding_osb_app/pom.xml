@@ -21,6 +21,8 @@
 		<!--<module>FoundationDataSync</module>
         <module>AzureADUserSync</module>
         <module>Utilities</module> -->
+        <module>ServiceTec_INC</module>
+        <module>Essintial_INC</module>
     </modules> 
 
 </project>

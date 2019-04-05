@@ -1,0 +1,31 @@
+<DataMap>
+	<Priorities>
+		<Priority>
+			<SN>1</SN>
+			<Essintial>one</Essintial>
+		</Priority>
+		<Priority>
+			<SN>2</SN>
+			<Essintial>two</Essintial>
+		</Priority>
+		<Priority>
+			<SN>3</SN>
+			<Essintial>three</Essintial>
+		</Priority>
+		<Priority>
+			<SN>4</SN>
+			<Essintial>four</Essintial>
+		</Priority>
+		<Priority>
+			<SN>5</SN>
+			<Essintial>five</Essintial>
+		</Priority>
+	</Priorities>
+	<ReceivedMethod>EDI</ReceivedMethod>
+        <CustomerReceivedDate>0001-01-01T00:00:00</CustomerReceivedDate>
+        <ScheduledDS>0001-01-01T00:00:00</ScheduledDS>
+        <TechOnSite>0001-01-01T00:00:00</TechOnSite>
+        <TechCheckedOut>0001-01-01T00:00:00</TechCheckedOut>
+        <TotalLaborTime>PTH0M0</TotalLaborTime>
+        <TotalTravelTime>PTH0M0</TotalTravelTime>
+</DataMap>
