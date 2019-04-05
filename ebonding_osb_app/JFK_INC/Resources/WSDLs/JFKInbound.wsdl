@@ -1,0 +1,140 @@
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:s="http://net4.essintial.com/SitaTicket_1.xsd"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="http://tempuri.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified">
+      <xsd:element name="CALL">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="RoleReceiver" type="xsd:string"/>
+            <xsd:element name="Contracts.ShortName" type="xsd:string"/>
+            <xsd:element name="ContractElements.ShortName" type="xsd:string"/>
+            <xsd:element name="Calls.CustCallID" type="xsd:string"/>
+            <xsd:element name="Calls.SPCallID" type="xsd:string"/>
+            <xsd:element name="Calls.ShortDescription" type="xsd:string"/>
+            <xsd:element name="Calls.Description" type="xsd:string"/>
+            <xsd:element name="Calls.Remarks" type="xsd:string"/>
+            <xsd:element name="Calls.Diagnosis" type="xsd:string"/>
+            <xsd:element name="Calls.Solution" type="xsd:string"/>
+            <xsd:element name="Calls.CallOpenTime" type="xsd:string"/>
+            <xsd:element name="Calls.CallResponseTime" type="xsd:string"/>
+            <xsd:element name="Calls.CallCloseTime" type="xsd:string"/>
+            <xsd:element name="Calls.CallStartSLATime" type="xsd:string"/>
+            <xsd:element name="Calls.CallRecoveryTime" type="xsd:string"/>
+            <xsd:element name="Calls.CallAcknowledgeTime" type="xsd:string"/>
+            <xsd:element name="Calls.CallerFirstName" type="xsd:string"/>
+            <xsd:element name="Calls.CallerLastName" type="xsd:string"/>
+            <xsd:element name="Calls.CallerTel" type="xsd:string"/>
+            <xsd:element name="Calls.CallerTel2" type="xsd:string"/>
+            <xsd:element name="Calls.CallerEMail" type="xsd:string"/>
+            <xsd:element name="Calls.CallerRoom" type="xsd:string"/>
+            <xsd:element name="Calls.CHDLastName" type="xsd:string"/>
+            <xsd:element name="Calls.CHDLocation" type="xsd:string"/>
+            <xsd:element name="Calls.CCPTitle" type="xsd:string"/>
+            <xsd:element name="Calls.CCPRoom" type="xsd:string"/>
+            <xsd:element name="Calls.MainCompName" type="xsd:string"/>
+            <xsd:element name="Calls.MainCompOpSys" type="xsd:string"/>
+            <xsd:element name="Calls.MainCompHostname" type="xsd:string"/>
+            <xsd:element name="PartnerCoreTicketXML">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="CallStates">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="ShortName" type="xsd:string"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="Severities">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="ShortName" type="xsd:string"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ProblemTypes">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="ShortName" type="xsd:string"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="Priorities">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="ShortName" type="xsd:string"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="Urgency">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="ShortName" type="xsd:string"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="Impacts">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="ShortName" type="xsd:string"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="CallStates.Name" type="xsd:string"/>
+            <xsd:element name="CallStates.ShortName" type="xsd:string"/>
+            <xsd:element name="FailureTypes.Name" type="xsd:string"/>
+            <xsd:element name="FailureTypes.ShortName" type="xsd:string"/>
+            <xsd:element name="Impacts.Name" type="xsd:string"/>
+            <xsd:element name="CustomerPriorities.Name" type="xsd:string"/>
+            <xsd:element name="CustomerPriorities.ShortName" type="xsd:string"/>
+            <xsd:element name="ProblemTypes.Name" type="xsd:string"/>
+            <xsd:element name="ProblemTypes.ShortName" type="xsd:string"/>
+            <xsd:element name="Severities.Name" type="xsd:string"/>
+            <xsd:element name="Severities.ShortName" type="xsd:string"/>
+            <xsd:element name="Urgency.Name" type="xsd:string"/>
+            <xsd:element name="Urgency.ShortName" type="xsd:string"/>
+            <xsd:element name="ExtTableValues.Field6" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessIncidentSoapIn">
+    <wsdl:part name="parameters" element="CALL"/>
+  </wsdl:message>
+  <wsdl:message name="ProcessIncidentSoapOut">
+    <wsdl:part name="parameters" element="CALL"/>
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="ProcessIncident">
+      <wsdl:input message="tns:ProcessIncidentSoapIn"/>
+      <wsdl:output message="tns:ProcessIncidentSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ProcessIncident">
+      <soap:operation soapAction="http://tempuri.org/ProcessIncident" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

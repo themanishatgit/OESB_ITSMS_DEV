@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ibm.com/maximo"
+            targetNamespace="http://www.ibm.com/maximo" elementFormDefault="qualified">
+  <xsd:element name="CreateSITA_WORKORDER">
+   
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="SITA_WORKORDERSet">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="WORKORDER">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ASSETNUM" type="xsd:string"/>
+                    <xsd:element name="DESCRIPTION" type="xsd:string"/>
+                    <xsd:element name="DESCRIPTION_LONGDESCRIPTION" type="xsd:string"/>
+                    <xsd:element name="EXTERNALREFID" type="xsd:string"/>
+                    <xsd:element name="OWNERGROUP" type="xsd:string"/>
+                    <xsd:element name="STATUS" type="xsd:string"/>
+                    <xsd:element name="SITEID" type="xsd:string"/>
+                    <xsd:element name="WOPRIORITY" type="xsd:string"/>
+                    <xsd:element name="WORKTYPE" type="xsd:string"/>
+                  </xsd:sequence>
+                  <xsd:attribute name="action" type="xsd:string"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UpdateSITA_WORKORDER">
+   
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="SITA_WORKORDERSet">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="WORKORDER">
+                <xsd:complexType>
+                  <xsd:sequence>
+                  <xsd:element name="MAXINTERRORMSG" type="xsd:string"/>
+                    <xsd:element name="ACTFINISH" type="xsd:string"/>
+                    <xsd:element name="ACTSTART" type="xsd:string"/>
+                    <xsd:element name="ASSETNUM" type="xsd:string"/>
+                    <xsd:element name="DESCRIPTION" type="xsd:string"/>
+                    <xsd:element name="DESCRIPTION_LONGDESCRIPTION" type="xsd:string"/>
+                    <xsd:element name="EXTERNALREFID" type="xsd:string"/>
+                    <xsd:element name="SITEID" type="xsd:string"/>
+                    <xsd:element name="STATUS" type="xsd:string"/>
+                    <xsd:element name="TARGSTARTDATE" type="xsd:string"/>
+                    <xsd:element name="WONUM" type="xsd:string"/>
+                    <xsd:element name="WOPRIORITY" type="xsd:string"/>
+                    <xsd:element name="WORKLOG" >
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="DESCRIPTION" type="xsd:string"/>
+                          <xsd:element name="DESCRIPTION_LONGDESCRIPTION" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+
+                   
+                    <xsd:element name="WORKTYPE" type="xsd:string"/>
+                  </xsd:sequence>
+                  <xsd:attribute name="action" type="xsd:string"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
