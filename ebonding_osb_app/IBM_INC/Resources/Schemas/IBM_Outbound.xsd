@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.service-now.com/u_integration_webservices_catalogtask"
+            targetNamespace="http://www.service-now.com/u_integration_webservices_catalogtask"
+            elementFormDefault="qualified">
+  <xsd:element name="insert">
+  <xsd:complexType >
+    <xsd:sequence>
+      <xsd:element name="template_import_log" type="xsd:string"/>
+      <xsd:element name="u_closecode" type="xsd:string"/>
+      <xsd:element name="u_comments" type="xsd:string"/>
+      <xsd:element name="u_servicenownumber" type="xsd:string"/>
+      <xsd:element name="u_vendor" type="xsd:string"/>
+      <xsd:element name="u_vendornumber" type="xsd:string"/>
+      <xsd:element name="u_state" type="xsd:string"/>
+      <xsd:element name="u_vendorclosed" type="xsd:string"/>
+      <xsd:element name="u_vendorworkstart" type="xsd:string"/>
+      <xsd:element name="u_vendorworkend" type="xsd:string"/>
+      <xsd:element name="u_category" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
