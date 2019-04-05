@@ -509,71 +509,89 @@ $TransactionType</con2:path>
                         </con1:expr>
                     </con1:assign>
                     <con1:ifThenElse>
-                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ee2</con2:id>
-                        <con1:case id="_BranchId-a013dd4.N57dc1963.0.169585d6810.N7ee1">
+                        <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ffa</con2:id>
+                        <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ff9">
                             <con1:condition>
-                                <con2:xqueryText>$TransactionType='CREATE' and $EssintialResponse/net4:HandleTicketResult/net4:ExceptionOccured/text()='false'</con2:xqueryText>
+                                <con2:xqueryText>$EssintialResponse/net4:HandleTicketResult/net4:ExceptionOccured/text()='false'</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
-                                <con1:replace varName="CanonicalInput" contents-only="true">
-                                    <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7edf</con2:id>
-                                    <con1:location>
-                                        <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType</con2:xpathText>
-                                    </con1:location>
-                                    <con1:expr>
-                                        <con2:xqueryText>'UPDATE_REFNUMBER'</con2:xqueryText>
-                                    </con1:expr>
-                                </con1:replace>
-                                <con1:replace varName="CanonicalInput" contents-only="true">
-                                    <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ede</con2:id>
-                                    <con1:location>
-                                        <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem</con2:xpathText>
-                                    </con1:location>
-                                    <con1:expr>
-                                        <con2:xqueryText>'ESSINTIAL'</con2:xqueryText>
-                                    </con1:expr>
-                                </con1:replace>
-                                <con1:replace varName="CanonicalInput" contents-only="true">
-                                    <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7edd</con2:id>
-                                    <con1:location>
-                                        <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem</con2:xpathText>
-                                    </con1:location>
-                                    <con1:expr>
-                                        <con2:xqueryText>$SourceSystem</con2:xqueryText>
-                                    </con1:expr>
-                                </con1:replace>
-                                <con1:replace varName="CanonicalInput" contents-only="true">
-                                    <con2:id>_ActionId-a013dcc.N458f26e9.0.1695d95cfcc.N7fca</con2:id>
-                                    <con1:location>
-                                        <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber</con2:xpathText>
-                                    </con1:location>
-                                    <con1:expr>
-                                        <con2:xqueryText>$EssintialRefNumber</con2:xqueryText>
-                                    </con1:expr>
-                                </con1:replace>
-                                <con1:replace varName="body" contents-only="true">
-                                    <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7edb</con2:id>
-                                    <con1:location>
-                                        <con2:xpathText>.</con2:xpathText>
-                                    </con1:location>
-                                    <con1:expr>
-                                        <con2:xqueryText>$CanonicalInput/*</con2:xqueryText>
-                                    </con1:expr>
-                                </con1:replace>
+                                <con1:ifThenElse>
+                                    <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ee2</con2:id>
+                                    <con1:case id="_BranchId-a013dd4.N57dc1963.0.169585d6810.N7ee1">
+                                        <con1:condition>
+                                            <con2:xqueryText>$TransactionType='CREATE'</con2:xqueryText>
+                                        </con1:condition>
+                                        <con1:actions>
+                                            <con1:replace varName="CanonicalInput" contents-only="true">
+                                                <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7edf</con2:id>
+                                                <con1:location>
+                                                    <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:TransactionType</con2:xpathText>
+                                                </con1:location>
+                                                <con1:expr>
+                                                    <con2:xqueryText>'UPDATE_REFNUMBER'</con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:replace>
+                                            <con1:replace varName="CanonicalInput" contents-only="true">
+                                                <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ede</con2:id>
+                                                <con1:location>
+                                                    <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:SourceSystem</con2:xpathText>
+                                                </con1:location>
+                                                <con1:expr>
+                                                    <con2:xqueryText>'ESSINTIAL'</con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:replace>
+                                            <con1:replace varName="CanonicalInput" contents-only="true">
+                                                <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7edd</con2:id>
+                                                <con1:location>
+                                                    <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem</con2:xpathText>
+                                                </con1:location>
+                                                <con1:expr>
+                                                    <con2:xqueryText>$SourceSystem</con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:replace>
+                                            <con1:replace varName="CanonicalInput" contents-only="true">
+                                                <con2:id>_ActionId-a013dcc.N458f26e9.0.1695d95cfcc.N7fca</con2:id>
+                                                <con1:location>
+                                                    <con2:xpathText>./inc:IncidentRequestMessage/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber</con2:xpathText>
+                                                </con1:location>
+                                                <con1:expr>
+                                                    <con2:xqueryText>$EssintialRefNumber</con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:replace>
+                                            <con1:replace varName="body" contents-only="true">
+                                                <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7edb</con2:id>
+                                                <con1:location>
+                                                    <con2:xpathText>.</con2:xpathText>
+                                                </con1:location>
+                                                <con1:expr>
+                                                    <con2:xqueryText>$CanonicalInput/*</con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:replace>
+                                        </con1:actions>
+                                    </con1:case>
+                                    <con1:default>
+                                        <con2:reply>
+                                            <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe8</con2:id>
+                                        </con2:reply>
+                                    </con1:default>
+                                </con1:ifThenElse>
                             </con1:actions>
                         </con1:case>
-                        <con1:case id="_BranchId-a013dcc.N5deda374.0.169c4367e80.N7c6f">
-                            <con1:condition>
-                                <con2:xqueryText>$TransactionType='CREATE' and $EssintialResponse/net4:HandleTicketResult/net4:ExceptionOccured/text()='true'</con2:xqueryText>
-                            </con1:condition>
-                            <con1:actions>
-                                <con1:replace varName="CanonicalInput" contents-only="true">
-                                    <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c6c</con2:id>
-                                    <con1:location>
-                                        <con2:xpathText>.</con2:xpathText>
-                                    </con1:location>
-                                    <con1:expr>
-                                        <con2:xqueryText><![CDATA[<inc:IncidentRequestMessage xmlns:inc="http://www.sita.aero/schema/IncidentEbondingMessageV1">
+                        <con1:default>
+                            <con1:ifThenElse>
+                                <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe1</con2:id>
+                                <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe0">
+                                    <con1:condition>
+                                        <con2:xqueryText>$TransactionType='CREATE'</con2:xqueryText>
+                                    </con1:condition>
+                                    <con1:actions>
+                                        <con1:replace varName="CanonicalInput" contents-only="true">
+                                            <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c6c</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText><![CDATA[<inc:IncidentRequestMessage xmlns:inc="http://www.sita.aero/schema/IncidentEbondingMessageV1">
 	<inc:IncidentRequestHeader>
 		<inc:TransactionId>{$MsgTranId}</inc:TransactionId>
 		<inc:TransactionType>ERROR</inc:TransactionType>
@@ -592,31 +610,31 @@ $TransactionType</con2:path>
 		</inc:IncidentDetails>
 	</inc:IncidentRequestBody>
 </inc:IncidentRequestMessage>]]></con2:xqueryText>
-                                    </con1:expr>
-                                </con1:replace>
-                                <con1:replace varName="body" contents-only="true">
-                                    <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c68</con2:id>
-                                    <con1:location>
-                                        <con2:xpathText>.</con2:xpathText>
-                                    </con1:location>
-                                    <con1:expr>
-                                        <con2:xqueryText>$CanonicalInput/*</con2:xqueryText>
-                                    </con1:expr>
-                                </con1:replace>
-                            </con1:actions>
-                        </con1:case>
-                        <con1:default>
-                            <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
-                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ed9</con6:id>
-                                <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                                <con3:outboundTransform>
-                                    <con2:replace contents-only="true" varName="body">
-                                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ed8</con6:id>
-                                        <con2:location>
-                                            <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
-                                        </con2:location>
-                                        <con2:expr>
-                                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
+                                            </con1:expr>
+                                        </con1:replace>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c68</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText>$CanonicalInput/*</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con1:actions>
+                                </con1:case>
+                                <con1:default>
+                                    <con3:route xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ed9</con6:id>
+                                        <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                        <con3:outboundTransform>
+                                            <con2:replace contents-only="true" varName="body">
+                                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ed8</con6:id>
+                                                <con2:location>
+                                                    <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                                                </con2:location>
+                                                <con2:expr>
+                                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ErrorHandlerRequest>
 	<ErrorDetails>
 		<ErrorCode>ERR-APP</ErrorCode>
 		<ErrorMsg>{$body/*:HandleTicketResponse/*:HandleTicketResult/*:ExceptionDetails/*:Message/text()}</ErrorMsg>
@@ -633,13 +651,15 @@ $TransactionType</con2:path>
 		<ExternalRefNum>{$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text()}</ExternalRefNum>
 	</MessageDetails>
 </ErrorHandlerRequest>]]></con6:xqueryText>
-                                        </con2:expr>
-                                    </con2:replace>
-                                </con3:outboundTransform>
-                            </con3:route>
-                            <con2:reply isError="false">
-                                <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7eda</con2:id>
-                            </con2:reply>
+                                                </con2:expr>
+                                            </con2:replace>
+                                        </con3:outboundTransform>
+                                    </con3:route>
+                                    <con2:reply isError="false">
+                                        <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7eda</con2:id>
+                                    </con2:reply>
+                                </con1:default>
+                            </con1:ifThenElse>
                         </con1:default>
                     </con1:ifThenElse>
                 </con:actions>
