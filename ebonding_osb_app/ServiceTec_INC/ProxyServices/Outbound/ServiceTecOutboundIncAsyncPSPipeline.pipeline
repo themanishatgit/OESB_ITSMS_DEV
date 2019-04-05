@@ -213,15 +213,6 @@
         <fetdm:ObjectName>STATUS</fetdm:ObjectName>
         <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
-	
-	<fetdm:FetchData>
-        <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text())}</fetdm:SourceValue>
-    </fetdm:FetchData>
-	<fetdm:FetchData>
-        <fetdm:ObjectName>CAUSE_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{fn:upper-case($InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:ResolutionCode/text())}</fetdm:SourceValue>
-    </fetdm:FetchData>
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
                                         </con1:expr>
                                     </con1:assign>
@@ -324,54 +315,66 @@
             <con:stage id="_StageId-a013dcc.N5deda374.0.169c4367e80.N7d2d" name="UpdateEbondingTransactionTable" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
                 <con:context>
                     <con2:userNsDecl prefix="net4" namespace="http://net4.essintial.com"/>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
                 </con:context>
                 <con:actions>
-                    <con3:route>
-                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d2a</con2:id>
-                        <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
-                        <con3:outboundTransform>
-                            <con1:replace varName="body" contents-only="true">
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d29</con2:id>
-                                <con1:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con1:location>
-                                <con1:expr>
-                                    <con2:xqueryTransform>
-                                        <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
-                                        <con2:param name="Message_TranId">
-                                            <con2:path>$MsgTranId</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Destination">
-                                            <con2:path>$DestinationSystem</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TransactionType">
-                                            <con2:path>$TransactionType</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ExtRefNumber">
-                                            <con2:path>$ExtRefNumber</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TicketNumber">
-                                            <con2:path>$TicketNumber</con2:path>
-                                        </con2:param>
-                                        <con2:param name="CurrentStatus">
-                                            <con2:path>$Status</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Payload">
-                                            <con2:path>$InputRequest</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Source">
-                                            <con2:path>$SourceSystem</con2:path>
-                                        </con2:param>
-                                    </con2:xqueryTransform>
-                                </con1:expr>
-                            </con1:replace>
-                            <con1:routing-options>
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d28</con2:id>
-                                <con1:qualityOfService>best-effort</con1:qualityOfService>
-                            </con1:routing-options>
-                        </con3:outboundTransform>
-                    </con3:route>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a0209a1.1770cd43.0.169ec2df717.N7ff7</con2:id>
+                        <con1:case id="_BranchId-a0209a1.1770cd43.0.169ec2df717.N7ff6">
+                            <con1:condition>
+                                <con2:xqueryText>$TransactionType='CREATE'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions/>
+                        </con1:case>
+                        <con1:default>
+                            <con3:route>
+                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d2a</con2:id>
+                                <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con3:operation>merge</con3:operation>
+                                <con3:outboundTransform>
+                                    <con1:replace varName="body" contents-only="true">
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d29</con2:id>
+                                        <con1:location>
+                                            <con2:xpathText>.</con2:xpathText>
+                                        </con1:location>
+                                        <con1:expr>
+                                            <con2:xqueryTransform>
+                                                <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
+                                                <con2:param name="Message_TranId">
+                                                    <con2:path>$MsgTranId</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Destination">
+                                                    <con2:path>$DestinationSystem</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TransactionType">
+                                                    <con2:path>$TransactionType</con2:path>
+                                                </con2:param>
+                                                <con2:param name="ExtRefNumber">
+                                                    <con2:path>$ExtRefNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TicketNumber">
+                                                    <con2:path>$TicketNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="CurrentStatus">
+                                                    <con2:path>$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Status/text()</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Payload">
+                                                    <con2:path>$InputRequest</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Source">
+                                                    <con2:path>$SourceSystem</con2:path>
+                                                </con2:param>
+                                            </con2:xqueryTransform>
+                                        </con1:expr>
+                                    </con1:replace>
+                                    <con1:routing-options>
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7d28</con2:id>
+                                        <con1:qualityOfService>best-effort</con1:qualityOfService>
+                                    </con1:routing-options>
+                                </con3:outboundTransform>
+                            </con3:route>
+                        </con1:default>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
@@ -445,59 +448,6 @@ else($ServiceTecResponse/net4:HandleTicketResult/net4:VordID/text())</con6:path>
                     </con4:route>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-a013dcc.N5deda374.0.169c4367e80.N7de1" name="UpdateEbondingTransactionTable" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
-                <con:context>
-                    <con2:userNsDecl prefix="net4" namespace="http://net4.essintial.com"/>
-                </con:context>
-                <con:actions>
-                    <con3:route>
-                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7dde</con2:id>
-                        <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
-                        <con3:outboundTransform>
-                            <con1:replace varName="body" contents-only="true">
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7ddd</con2:id>
-                                <con1:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con1:location>
-                                <con1:expr>
-                                    <con2:xqueryTransform>
-                                        <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
-                                        <con2:param name="Message_TranId">
-                                            <con2:path>$MsgTranId</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Destination">
-                                            <con2:path>$DestinationSystem</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TransactionType">
-                                            <con2:path>$TransactionType</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ExtRefNumber">
-                                            <con2:path>''</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TicketNumber">
-                                            <con2:path>$TicketNumber</con2:path>
-                                        </con2:param>
-                                        <con2:param name="CurrentStatus">
-                                            <con2:path>$Status</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Payload">
-                                            <con2:path>$InputRequest</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Source">
-                                            <con2:path>$SourceSystem</con2:path>
-                                        </con2:param>
-                                    </con2:xqueryTransform>
-                                </con1:expr>
-                            </con1:replace>
-                            <con1:routing-options>
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7ddc</con2:id>
-                                <con1:qualityOfService>best-effort</con1:qualityOfService>
-                            </con1:routing-options>
-                        </con3:outboundTransform>
-                    </con3:route>
-                </con:actions>
-            </con:stage>
         </con:pipeline>
         <con:pipeline type="error" name="error-a013dcc.N65f23ab8.0.169b9bbaf48.N79de">
             <con:stage id="_StageId-a013dcc.N65f23ab8.0.169b9bbaf48.N7960" name="Service_EH_stg">
@@ -532,7 +482,7 @@ $TicketNumber, ' with message transaction id ', $MsgTranId,
                                             <con5:expr>
                                                 <con2:xqueryTransform>
                                                     <con2:resource ref="Common/Resources/XQueries/GetEnvironmentName"/>
-                                            </con2:xqueryTransform>
+                                                </con2:xqueryTransform>
                                             </con5:expr>
                                         </con5:assign>
                                         <con1:transport-headers>
@@ -609,7 +559,7 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 <con5:message>****ServiceTecOutboundIncAsyncPS.Route.ServiceTecRequest****</con5:message>
                             </con5:log>
                         </con3:outboundTransform>
-                        <con3:responseTransform></con3:responseTransform>
+                        <con3:responseTransform/>
                     </con3:route>
                 </con:actions>
             </con:route-node>
