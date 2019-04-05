@@ -31,7 +31,7 @@ declare function local:func($MsgTranId as xs:string,
 		<ns1:DestinationSystem>SN</ns1:DestinationSystem>
 	</ns1:IncidentRequestHeader>
         {
-            if($TransactionType='LOGCOMMENT')then
+            if($ESSINTIALRequest/ns2:StatusCode/text()='Update' or $ESSINTIALRequest/ns2:StatusCode/text()='Partner and Customer' or $ESSINTIALRequest/ns2:StatusCode/text()='CustomerOK')then
 	<ns1:IncidentRequestBody>
 		<ns1:IncidentDetails>
 			<ns1:TicketNumber>{fn:data($ESSINTIALRequest/ns2:CustomerReference3)}</ns1:TicketNumber>

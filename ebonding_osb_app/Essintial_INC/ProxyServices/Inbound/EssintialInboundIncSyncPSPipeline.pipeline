@@ -231,8 +231,6 @@
                         <con2:expr>
                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Open')then
 'CREATE'
-else if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Update' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Partner and Customer' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='CustomerOK')then
-'LOGCOMMENT'
 else
 'UPDATE'</con6:xqueryText>
                         </con2:expr>
