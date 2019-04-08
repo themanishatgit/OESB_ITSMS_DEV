@@ -512,14 +512,14 @@ $TransactionType</con2:path>
                         <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ffa</con2:id>
                         <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ff9">
                             <con1:condition>
-                                <con2:xqueryText>$EssintialResponse/net4:HandleTicketResult/net4:ExceptionOccured/text()='false'</con2:xqueryText>
+                                <con2:xqueryText>$TransactionType='CREATE'</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con1:ifThenElse>
                                     <con2:id>_ActionId-a013dd4.N57dc1963.0.169585d6810.N7ee2</con2:id>
                                     <con1:case id="_BranchId-a013dd4.N57dc1963.0.169585d6810.N7ee1">
                                         <con1:condition>
-                                            <con2:xqueryText>$TransactionType='CREATE'</con2:xqueryText>
+                                            <con2:xqueryText>$EssintialResponse/net4:HandleTicketResult/net4:ExceptionOccured/text()='false'</con2:xqueryText>
                                         </con1:condition>
                                         <con1:actions>
                                             <con1:replace varName="CanonicalInput" contents-only="true">
@@ -570,21 +570,6 @@ $TransactionType</con2:path>
                                         </con1:actions>
                                     </con1:case>
                                     <con1:default>
-                                        <con2:reply>
-                                            <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe8</con2:id>
-                                        </con2:reply>
-                                    </con1:default>
-                                </con1:ifThenElse>
-                            </con1:actions>
-                        </con1:case>
-                        <con1:default>
-                            <con1:ifThenElse>
-                                <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe1</con2:id>
-                                <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe0">
-                                    <con1:condition>
-                                        <con2:xqueryText>$TransactionType='CREATE'</con2:xqueryText>
-                                    </con1:condition>
-                                    <con1:actions>
                                         <con1:replace varName="CanonicalInput" contents-only="true">
                                             <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7c6c</con2:id>
                                             <con1:location>
@@ -621,6 +606,21 @@ $TransactionType</con2:path>
                                                 <con2:xqueryText>$CanonicalInput/*</con2:xqueryText>
                                             </con1:expr>
                                         </con1:replace>
+                                    </con1:default>
+                                </con1:ifThenElse>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:ifThenElse>
+                                <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe1</con2:id>
+                                <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe0">
+                                    <con1:condition>
+                                        <con2:xqueryText>$EssintialResponse/net4:HandleTicketResult/net4:ExceptionOccured/text()='false'</con2:xqueryText>
+                                    </con1:condition>
+                                    <con1:actions>
+                                        <con2:reply>
+                                            <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fe8</con2:id>
+                                        </con2:reply>
                                     </con1:actions>
                                 </con1:case>
                                 <con1:default>
