@@ -1,0 +1,76 @@
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://net4.essintial.com/SitaTicket_1.xsd"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="http://tempuri.org/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+  <wsdl:types>
+     <xs:schema elementFormDefault="qualified"  >
+      <xs:element name="CallData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" ref="sita"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified"  >
+      <xs:element name="sita" >
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="recordtype" type="xs:string"/>
+            <xs:element name="servicenownumber" type="xs:string"/>
+            <xs:element name="servicenowstate" type="xs:string"/>
+            <xs:element name="shortdescription" type="xs:string"/>
+            <xs:element name="severity" type="xs:string"/>
+            <xs:element name="category" type="xs:string"/>
+            <xs:element name="ci" type="xs:string"/>
+            <xs:element name="ibmLocationid" type="xs:string"/>
+            <xs:element name="location" type="xs:string"/>
+            <xs:element name="servicetype" type="xs:string"/>
+            <xs:element name="serviceauthorization" type="xs:string"/>
+            <xs:element name="serviceponumber" type="xs:string"/>
+            <xs:element name="requiredonsite" type="xs:string"/>
+            <xs:element name="servicenowdetails" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="transaction"/>
+        </xs:complexType>
+      </xs:element>
+
+  <xs:element name="RESPONSE" >
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="STATUS" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessIncidentSoapIn">
+    <wsdl:part name="parameters" element="CallData"/>
+  </wsdl:message>
+  <wsdl:message name="ProcessIncidentSoapOut">
+    <wsdl:part name="parameters" element="CallData"/>
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="ProcessIncident">
+      <wsdl:input message="tns:ProcessIncidentSoapIn"/>
+      <wsdl:output message="tns:ProcessIncidentSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ProcessIncident">
+      <soap:operation soapAction="http://tempuri.org/ProcessIncident" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

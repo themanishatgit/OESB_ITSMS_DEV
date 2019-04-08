@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns="urn:ws.solvedirect.com/webservices/custom"
+            targetNamespace="urn:ws.solvedirect.com/webservices/custom" elementFormDefault="qualified">
+  <xsd:element name="CallData" >
+  <xsd:complexType >
+    <xsd:sequence>
+      <xsd:element name="sita" >
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="recordtype" type="xsd:string"/>
+            <xsd:element name="servicenownumber" type="xsd:string"/>
+            <xsd:element name="servicenowstate" type="xsd:string"/>
+            <xsd:element name="shortdescription" type="xsd:string"/>
+            <xsd:element name="severity" type="xsd:string"/>
+            <xsd:element name="category" type="xsd:string"/>
+            <xsd:element name="ci" type="xsd:string"/>
+            <xsd:element name="ibmLocationid" type="xsd:string"/>
+            <xsd:element name="location" type="xsd:string"/>
+            <xsd:element name="servicetype" type="xsd:string"/>
+            <xsd:element name="serviceauthorization" type="xsd:string"/>
+            <xsd:element name="serviceponumber" type="xsd:string"/>
+            <xsd:element name="requiredonsite" type="xsd:string"/>
+            <xsd:element name="servicenowdetails" type="xsd:string"/>
+          </xsd:sequence>
+          <xsd:attribute name="transaction"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RESPONSE" >
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="STATUS" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
