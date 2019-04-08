@@ -25,6 +25,7 @@
         <module>ServiceTec_INC</module>
         <module>IBM_INC</module>
         <module>JFK_INC</module>
+        <module>IER_INC</module>
     </modules> 
 
 </project>

@@ -1,0 +1,28 @@
+<xs:schema attributeFormDefault="unqualified" 
+elementFormDefault="qualified" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CallData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="Contracts.Name"/>
+        <xs:element type="xs:string" name="ContractElements.Name"/>
+        <xs:element type="xs:string" name="Calls.CustCallID"/>
+        <xs:element type="xs:string" name="Calls.SPCallID"/>
+        <xs:element type="xs:string" name="Calls.MainCompName"/>
+        <xs:element type="xs:string" name="Severities.Name"/>
+        <xs:element type="xs:string" name="Calls.ShortDescription"/>
+        <xs:element type="xs:string" name="Calls.Description" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element type="xs:string" name="Calls.Remarks"/>
+        <xs:element type="xs:string" name="Calls.CHDLocation"/>
+        <xs:element type="xs:string" name="Calls.SubCompName"/>
+        <xs:element type="xs:string" name="Calls.CallerRoom"/>
+        <xs:element type="xs:string" name="CallStates.Name"/>
+        <xs:element type="xs:string" name="Calls.CCPRoom"/>
+        <xs:element type="xs:string" name="Calls.CallOpenTime"/>
+        <xs:element type="xs:string" name="ExtTableValues.Field1"/>
+        <xs:element type="xs:string" name="ExtTableValues.Field2"/>
+        <xs:element type="xs:string" name="ExtTableValues.Field3"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> 
+</xs:schema>
