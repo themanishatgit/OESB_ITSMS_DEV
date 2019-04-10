@@ -621,14 +621,14 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                             <con5:expr>
                                                 <con2:xqueryTransform>
                                                     <con2:resource ref="Common/Resources/XQueries/GetEnvironmentName"/>
-                                            </con2:xqueryTransform>
+                                                </con2:xqueryTransform>
                                             </con5:expr>
                                         </con5:assign>
                                         <con1:transport-headers>
                                             <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7dd2</con2:id>
                                             <con1:header-set>outbound-request</con1:header-set>
                                             <con1:header value="expression" name="Subject">
-                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$CanonicalInput/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text(),' : Run-time fault occurred for ticket number ', $TicketNumber)</con2:xqueryText>
+                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$CanonicalInput/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text(),' : Run-time fault occurred with Transaction Id: ', $Message_TranId)</con2:xqueryText>
                                             </con1:header>
                                             <con5:header value="expression" name="To">
                                                 <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
@@ -640,7 +640,7 @@ else($body/axio:RESPONSE/axio:SR_ID/text())</con6:path>
                                                 <con2:xpathText>.</con2:xpathText>
                                             </con1:location>
                                             <con1:expr>
-                                                <con2:xqueryText>fn:concat('A runtime fault was received for ticket number ', 
+                                                <con2:xqueryText>fn:concat('A runtime fault was received in BAOutboundIncAsyncPS for ticket number ', 
 $TicketNumber, 
 ' with message transaction id ', $Message_TranId,'. Below is the fault received from ',
 $CanonicalInput/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text(),': ', fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault))</con2:xqueryText>
