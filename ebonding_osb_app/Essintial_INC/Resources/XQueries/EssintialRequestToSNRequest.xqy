@@ -25,7 +25,7 @@ declare function local:func($MsgTranId as xs:string,
 <ns1:IncidentRequestMessage>
 	<ns1:IncidentRequestHeader>
 		<ns1:TransactionId>{$MsgTranId}</ns1:TransactionId>
-		<ns1:TransactionType>{$TransactionType}</ns1:TransactionType>
+                <ns1:TransactionType>{$TransactionType}</ns1:TransactionType>
 		<ns1:RecType>INC</ns1:RecType>
 		<ns1:SourceSystem>{$SourceSystem}</ns1:SourceSystem>
 		<ns1:DestinationSystem>SN</ns1:DestinationSystem>

@@ -247,6 +247,15 @@ else
                             <con2:xqueryText>'INC'</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
+                    <con1:assign varName="LogComment">
+                        <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fa4</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Update' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Partner and Customer' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='CustomerOK')then
+'true'
+else
+'false'</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N798f" name="Start_Audit_Stg" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
@@ -380,6 +389,7 @@ else
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
                     <con2:userNsDecl prefix="tem" namespace="http://www.sita.aero/WSDL/EssintialInboundIncSyncV1"/>
                     <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
+                    <con2:userNsDecl prefix="sit" namespace="http://net4.essintial.com/SitaTicket_1.xsd"/>
                 </con:context>
                 <con:actions>
                     <con1:ifThenElse>
@@ -387,7 +397,8 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7e66</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7e65">
                             <con1:condition>
-                                <con2:xqueryText>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
+                                <con2:xqueryText>$LogComment='true'
+or $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con1:assign varName="Status">
@@ -463,7 +474,8 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N77e3</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N77e2">
                             <con1:condition>
-                                <con2:xqueryText>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
+                                <con2:xqueryText>$LogComment='true' or 
+$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
                             <con1:actions/>
                         </con1:case>
@@ -484,7 +496,7 @@ else
                                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a34</con2:id>
                                         <con1:header-set>outbound-request</con1:header-set>
                                         <con1:header value="expression" name="Subject">
-                                            <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:xqueryText>
+                                            <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $TicketNumber)</con2:xqueryText>
                                         </con1:header>
                                         <con1:header value="expression" name="To">
                                             <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
@@ -574,52 +586,63 @@ else
                     <con2:userNsDecl prefix="net4" namespace="http://net4.essintial.com"/>
                 </con:context>
                 <con:actions>
-                    <con3:route>
-                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7d</con2:id>
-                        <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
-                        <con3:outboundTransform>
-                            <con1:replace varName="body" contents-only="true">
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7c</con2:id>
-                                <con1:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con1:location>
-                                <con1:expr>
-                                    <con2:xqueryTransform>
-                                        <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
-                                        <con2:param name="Message_TranId">
-                                            <con2:path>$MsgTranId</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Destination">
-                                            <con2:path>$DestinationSystem</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TransactionType">
-                                            <con2:path>$TransactionType</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ExtRefNumber">
-                                            <con2:path>$ExtRefNumber</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TicketNumber">
-                                            <con2:path>$TicketNumber</con2:path>
-                                        </con2:param>
-                                        <con2:param name="CurrentStatus">
-                                            <con2:path>$Status</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Payload">
-                                            <con2:path>$InputRequest</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Source">
-                                            <con2:path>$SourceSystem</con2:path>
-                                        </con2:param>
-                                    </con2:xqueryTransform>
-                                </con1:expr>
-                            </con1:replace>
-                            <con1:routing-options>
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7b</con2:id>
-                                <con1:qualityOfService>best-effort</con1:qualityOfService>
-                            </con1:routing-options>
-                        </con3:outboundTransform>
-                    </con3:route>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7f9d</con2:id>
+                        <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7f9c">
+                            <con1:condition>
+                                <con2:xqueryText>$LogComment='true'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions/>
+                        </con1:case>
+                        <con1:default>
+                            <con3:route>
+                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7d</con2:id>
+                                <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con3:operation>merge</con3:operation>
+                                <con3:outboundTransform>
+                                    <con1:replace varName="body" contents-only="true">
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7c</con2:id>
+                                        <con1:location>
+                                            <con2:xpathText>.</con2:xpathText>
+                                        </con1:location>
+                                        <con1:expr>
+                                            <con2:xqueryTransform>
+                                                <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
+                                                <con2:param name="Message_TranId">
+                                                    <con2:path>$MsgTranId</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Destination">
+                                                    <con2:path>$DestinationSystem</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TransactionType">
+                                                    <con2:path>$TransactionType</con2:path>
+                                                </con2:param>
+                                                <con2:param name="ExtRefNumber">
+                                                    <con2:path>$ExtRefNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TicketNumber">
+                                                    <con2:path>$TicketNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="CurrentStatus">
+                                                    <con2:path>$Status</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Payload">
+                                                    <con2:path>$InputRequest</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Source">
+                                                    <con2:path>$SourceSystem</con2:path>
+                                                </con2:param>
+                                            </con2:xqueryTransform>
+                                        </con1:expr>
+                                    </con1:replace>
+                                    <con1:routing-options>
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7b</con2:id>
+                                        <con1:qualityOfService>best-effort</con1:qualityOfService>
+                                    </con1:routing-options>
+                                </con3:outboundTransform>
+                            </con3:route>
+                        </con1:default>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
