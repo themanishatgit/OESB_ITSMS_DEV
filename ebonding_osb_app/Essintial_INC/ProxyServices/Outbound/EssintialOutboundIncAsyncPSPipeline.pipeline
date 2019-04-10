@@ -799,7 +799,7 @@ $TicketNumber, ' with message transaction id ', $MsgTranId,
                                             <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ce3</con2:id>
                                             <con1:header-set>outbound-request</con1:header-set>
                                             <con1:header value="expression" name="Subject">
-                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Run-time fault occurred for ticket number ', $TicketNumber)</con2:xqueryText>
+                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Run-time fault occurred with Transaction Id: ', $MsgTranId)</con2:xqueryText>
                                             </con1:header>
                                             <con5:header value="expression" name="To">
                                                 <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
@@ -811,7 +811,7 @@ $TicketNumber, ' with message transaction id ', $MsgTranId,
                                                 <con2:xpathText>.</con2:xpathText>
                                             </con1:location>
                                             <con1:expr>
-                                                <con2:xqueryText>fn:concat('A runtime fault was received for ticket number ', 
+                                                <con2:xqueryText>fn:concat('A runtime fault was received in EssintialOutboundIncAsyncPS for ticket number ', 
 $TicketNumber, 
 ' with message transaction id ', $MsgTranId, 
 '. Below is the fault received from ',$DestinationSystem,': ',
