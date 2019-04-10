@@ -25,17 +25,13 @@ declare function local:func($MsgTranId as xs:string,
 <ns1:IncidentRequestMessage>
 	<ns1:IncidentRequestHeader>
 		<ns1:TransactionId>{$MsgTranId}</ns1:TransactionId>
-                {if($TransactionType='LOGCOMMENT')then
-		<ns1:TransactionType>UPDATE</ns1:TransactionType>
-                else
                 <ns1:TransactionType>{$TransactionType}</ns1:TransactionType>
-                }
 		<ns1:RecType>INC</ns1:RecType>
 		<ns1:SourceSystem>{$SourceSystem}</ns1:SourceSystem>
 		<ns1:DestinationSystem>SN</ns1:DestinationSystem>
 	</ns1:IncidentRequestHeader>
         {
-            if($TransactionType='LOGCOMMENT')then
+            if($ESSINTIALRequest/ns2:StatusCode/text()='Update' or $ESSINTIALRequest/ns2:StatusCode/text()='Partner and Customer' or $ESSINTIALRequest/ns2:StatusCode/text()='CustomerOK')then
 	<ns1:IncidentRequestBody>
 		<ns1:IncidentDetails>
 			<ns1:TicketNumber>{fn:data($ESSINTIALRequest/ns2:CustomerReference3)}</ns1:TicketNumber>

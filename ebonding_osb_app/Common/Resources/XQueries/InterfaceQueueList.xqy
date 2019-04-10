@@ -43,6 +43,7 @@
   </Interface>
   <Interface>
     <Name>JFK</Name>
+    <Type>CUSTOMER</Type>
     <SendLogComment>N</SendLogComment>
     <QueueName>jms:///EbondingIncConnectionFactory/CISCOOutboundIncQ</QueueName>
   </Interface>

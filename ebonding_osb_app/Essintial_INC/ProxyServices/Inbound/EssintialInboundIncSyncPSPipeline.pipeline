@@ -231,8 +231,6 @@
                         <con2:expr>
                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Open')then
 'CREATE'
-else if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Update' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Partner and Customer' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='CustomerOK')then
-'LOGCOMMENT'
 else
 'UPDATE'</con6:xqueryText>
                         </con2:expr>
@@ -247,6 +245,15 @@ else
                         <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f44</con2:id>
                         <con1:expr>
                             <con2:xqueryText>'INC'</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="LogComment">
+                        <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fa4</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Update' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Partner and Customer' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='CustomerOK')then
+'true'
+else
+'false'</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                 </con:actions>
@@ -382,6 +389,7 @@ else
                     <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
                     <con2:userNsDecl prefix="tem" namespace="http://www.sita.aero/WSDL/EssintialInboundIncSyncV1"/>
                     <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
+                    <con2:userNsDecl prefix="sit" namespace="http://net4.essintial.com/SitaTicket_1.xsd"/>
                 </con:context>
                 <con:actions>
                     <con1:ifThenElse>
@@ -389,7 +397,8 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7e66</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7e65">
                             <con1:condition>
-                                <con2:xqueryText>$TransactionType='LOGCOMMENT' or $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
+                                <con2:xqueryText>$LogComment='true'
+or $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con1:assign varName="Status">
@@ -465,7 +474,8 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N77e3</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N77e2">
                             <con1:condition>
-                                <con2:xqueryText>$TransactionType='LOGCOMMENT' or $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
+                                <con2:xqueryText>$LogComment='true' or 
+$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
                             <con1:actions/>
                         </con1:case>
