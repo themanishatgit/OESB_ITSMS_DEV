@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="IER_INC/Resources/WSDL/IERInboundIncSyncPS"/>
+            <con:binding>
+                <con:name>ServiceSoap</con:name>
+                <con:namespace>http://tempuri.org/</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-a013dca.Nba78bfc.0.169534cc372.N70af">
+        <con:pipeline type="request" name="request-a013dca.Nba78bfc.0.169534cc372.N7633">
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N75f2" name="Init_Request_Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                <con:context>
+                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                </con:context>
+                <con:actions>
+                    <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N75f1</con2:id>
+                        <con5:logLevel>warning</con5:logLevel>
+                        <con5:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con5:expr>
+                        <con5:message>****IERInboundIncSyncPS.IncomingRequest****</con5:message>
+                    </con5:log>
+                    <con1:assign varName="InputRequest" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N75f0</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/*</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con2:assign varName="SourceSystem" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.Nba78bfc.0.169534cc372.N75ef</con6:id>
+                        <con2:expr>
+                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">'IER'</con6:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="DestinationSystem" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.Nba78bfc.0.169534cc372.N75ee</con6:id>
+                        <con2:expr>
+                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">'SN'</con6:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="TransactionType" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.Nba78bfc.0.169534cc372.N75ed</con6:id>
+                        <con2:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">'UPDATE'</con:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="MsgTranId" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.Nba78bfc.0.169534cc372.N75ec</con6:id>
+                        <con2:expr>
+                            <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:uuid()</con6:xqueryText>
+                        </con2:expr>
+                    </con2:assign>
+                    <con1:assign varName="TicketNumber" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7069</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/Calls.SPCallID/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con5:assign varName="ExtRefNumber" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dca.N15136931.0.169c2f152c2.N7e7b</con2:id>
+                        <con5:expr>
+                            <con2:xqueryText>$body/CallData/Calls.CustCallID/text()</con2:xqueryText>
+                        </con5:expr>
+                    </con5:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N7582" name="Start_Audit_Stg" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7581</con2:id>
+                        <con3:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>insert</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7580</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N74fd" name="Validate_Stg" errorHandler="error-a013dca.Nba78bfc.0.169534cc372.N74fb" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                <con:context>
+                    <con1:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
+                <con:actions>
+                    <con2:validate xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N74fc</con1:id>
+                        <con6:wsdl ref="IER_INC/Resources/WSDL/IERInboundIncSyncPS"/>
+                        <con6:schemaElement>CallData</con6:schemaElement>
+                        <con2:varName>body</con2:varName>
+                        <con2:location>
+                            <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">./*</con1:xpathText>
+                        </con2:location>
+                    </con2:validate>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N748b" name="DataMapping_Stg" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="fetdm" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
+                    <con2:userNsDecl prefix="fetch" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
+                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                    <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N748a</con2:id>
+                        <con1:service ref="Common/ProxyServices/FetchDataMapping" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>execute</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="false">DataMappingRequest</con1:body>
+                            <con1:header/>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="false">DataMappingResponse</con1:body>
+                            <con1:header/>
+                        </con1:response>
+                        <con1:requestTransform>
+                            <con1:assign varName="DataMappingRequest">
+                                <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7489</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText><![CDATA[<fetdm:FetchDataMappingRequest>
+    <fetdm:RecType>INC</fetdm:RecType>
+    <fetdm:Source>{$SourceSystem}</fetdm:Source>
+    <fetdm:Destination>{$DestinationSystem}</fetdm:Destination>
+    <!--1 or more repetitions:-->
+    <fetdm:FetchData>
+        <fetdm:ObjectName>STATUS</fetdm:ObjectName>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/Calls.CallerRoom/text())}</fetdm:SourceValue>
+    </fetdm:FetchData>
+	<fetdm:FetchData>
+        <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/Calls.CCPRoom/text())}</fetdm:SourceValue>
+    </fetdm:FetchData>
+</fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
+                        </con1:requestTransform>
+                        <con1:responseTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-a013dca.611580a3.0.1699058e217.N7f23</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>./CallData/Calls.CallerRoom</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryText>$DataMappingResponse/fetch:Result/fetch:FetchData[fetch:ObjectName/text()='STATUS']/fetch:DestinationValue/text()</con2:xqueryText>
+                                </con1:expr>
+                            </con1:replace>
+                            <con1:assign varName="Status">
+                                <con2:id>_ActionId-a000010.7b55dd86.2a.1699a699a9b.N7ffc</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
+                        </con1:responseTransform>
+                    </con1:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N7415" name="CreateSNRequest_Stg" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="fetcm" namespace="http://www.sita.aero/schema/FetchCategoryMappingMessageV1"/>
+                    <con2:userNsDecl prefix="fetdm" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
+                    <con2:userNsDecl prefix="fet" namespace="http://www.sita.aero/schema/FetchPriorityMappingMessageV1"/>
+                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                    <con2:userNsDecl prefix="ba" namespace="http://www.ba.com/schema/mITServicesDataMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:comment>Checks for invalid status in update transactions</con2:comment>
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7414</con2:id>
+                        <con1:case id="_BranchId-a013dca.Nba78bfc.0.169534cc372.N7413">
+                            <con1:condition>
+                                <con2:xqueryText>fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:assign varName="SNRequest">
+                                    <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7412</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryText><![CDATA[<ns1:IncidentRequestMessage xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
+	<ns1:IncidentRequestHeader>
+		<ns1:TransactionId>{$MsgTranId}</ns1:TransactionId>
+		<ns1:TransactionType>ERROR</ns1:TransactionType>
+		<ns1:RecType>INC</ns1:RecType>
+		<ns1:SourceSystem>{$SourceSystem}</ns1:SourceSystem>
+		<ns1:DestinationSystem>{$DestinationSystem}</ns1:DestinationSystem>
+	</ns1:IncidentRequestHeader>
+	<ns1:IncidentRequestBody>
+		<ns1:IncidentDetails>
+			<ns1:TicketNumber>{$InputRequest/Calls.SPCallID/text()}</ns1:TicketNumber>	
+                 
+                        <ns1:Supplier>
+                          <ns1:Name>{$SourceSystem}</ns1:Name>
+                          <ns1:RefNumber>{$InputRequest/Calls.CustCallID/text()}</ns1:RefNumber>
+                        </ns1:Supplier>
+                   
+			<ns1:WorkNotes>ERR-APP: An invalid status was received in the incoming update on this ticket. Therefore, updates from the transaction have been ignored.</ns1:WorkNotes>
+		</ns1:IncidentDetails>
+	</ns1:IncidentRequestBody>
+</ns1:IncidentRequestMessage>]]></con2:xqueryText>
+                                    </con1:expr>
+                                </con1:assign>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:assign varName="Priorities">
+                                <con2:id>_ActionId-a013dca.611580a3.0.1699058e217.N7f29</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="IER_INC/Resources/Xqueries/InboundIERDefault"/>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:assign>
+                            <con1:assign varName="SNRequest">
+                                <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7411</con2:id>
+                                <con1:expr>
+                                    <con:xqueryTransform xmlns:con="http://www.bea.com/wli/sb/stages/config">
+                                        <con:resource ref="IER_INC/Resources/Xqueries/IERtoSNRequest"/>
+                                        <con:param name="Priorities">
+                                            <con:path>$Priorities</con:path>
+                                        </con:param>
+                                        <con:param name="TransactionType">
+                                            <con:path>$TransactionType</con:path>
+                                        </con:param>
+                                        <con:param name="Request">
+                                            <con:path>$body</con:path>
+                                        </con:param>
+                                        <con:param name="SourceSystem">
+                                            <con:path>$SourceSystem</con:path>
+                                        </con:param>
+                                        <con:param name="ResolutionCode">
+                                            <con:path>$RESOLUTION_CODE</con:path>
+                                        </con:param>
+                                        <con:param name="MsgTranId">
+                                            <con:path>$MsgTranId</con:path>
+                                        </con:param>
+                                    </con:xqueryTransform>
+                                </con1:expr>
+                            </con1:assign>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N7388" name="SendErrorMailStg" errorHandler="error-a013dca.Nba78bfc.0.169534cc372.N7381" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="fetdm" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
+                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                </con:context>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7387</con2:id>
+                        <con1:case id="_BranchId-a013dca.Nba78bfc.0.169534cc372.N7386">
+                            <con1:condition>
+                                <con2:xqueryText>fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con3:route>
+                                    <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7385</con2:id>
+                                    <con3:service ref="Common/BusinessServices/Send_Email" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:outboundTransform>
+                                        <con1:assign varName="EnvironmentName">
+                                            <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7384</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "dev"))then
+"DEV"
+else if(fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "qa")) then
+"QA"
+else if (fn:contains(fn:substring-before(fn-bea:getHostname(), "."), "prod")) then
+"PROD"
+else
+fn:substring-before(fn-bea:getHostname(),".")</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                        <con1:transport-headers>
+                                            <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7383</con2:id>
+                                            <con1:header-set>outbound-request</con1:header-set>
+                                            <con1:header value="expression" name="Subject">
+                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $InputRequest/Calls.SPCallID/text())</con2:xqueryText>
+                                            </con1:header>
+                                            <con1:header value="expression" name="To">
+                                                <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
+                                            </con1:header>
+                                        </con1:transport-headers>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7382</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText>fn:concat('An invalid status was received in the incoming update on ticket number :', 
+$InputRequest/Calls.SPCallID/text(), ' with message transaction id :', $MsgTranId, fn:codepoints-to-string(10),fn:codepoints-to-string(10),
+'Please refer audit logs for the complete payload.')</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:replace>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default/>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N7315" name="AuditSNRequest_Stg" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7314</con2:id>
+                        <con3:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>insert</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7313</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                        <con2:param name="TranType">
+                                            <con2:path>$TransactionType</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Message_TranId">
+                                            <con2:path>$MsgTranId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Destination">
+                                            <con2:path>$DestinationSystem</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ExtRefNumber">
+                                            <con2:path>if(dvm:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='CUSTOMER')
+then $InputRequest/incidentData/CUSTOMER_EXTERNAL_REFERENCE/text()
+else if(dvm:lookup('CISCO_INC/Resources/DVMs/SystemValues', 'SystemName', $SourceSystem, 'Type', '')='SUPPLIER')
+then $InputRequest/incidentData/SUPPLIER_EXTERNAL_REFERENCE/text()
+else ''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrMessage">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Source">
+                                            <con2:path>$SourceSystem</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ErrCode">
+                                            <con2:path>''</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TicketNumber">
+                                            <con2:path>$InputRequest/incidentData/INCIDENT_NUMBER/text()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ProxyService">
+                                            <con2:path>'CISCOInboundIncSyncPS'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Event">
+                                            <con2:path>'REQUEST_SENT'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RecType">
+                                            <con2:path>$InputRequest/incidentData/REC_TYPE/text()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Payload">
+                                            <con2:path>$SNRequest</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.N15136931.0.169c2f152c2.N7e81" name="UpdateEbondingTransactionTable" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="net4" namespace="http://net4.essintial.com"/>
+                </con:context>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a013dca.N15136931.0.169c2f152c2.N7e80</con2:id>
+                        <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>merge</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-a013dca.N15136931.0.169c2f152c2.N7e7f</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
+                                        <con2:param name="Message_TranId">
+                                            <con2:path>$MsgTranId</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Destination">
+                                            <con2:path>$DestinationSystem</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TransactionType">
+                                            <con2:path>$TransactionType</con2:path>
+                                        </con2:param>
+                                        <con2:param name="ExtRefNumber">
+                                            <con2:path>$ExtRefNumber</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TicketNumber">
+                                            <con2:path>$TicketNumber</con2:path>
+                                        </con2:param>
+                                        <con2:param name="CurrentStatus">
+                                            <con2:path>$Status</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Payload">
+                                            <con2:path>$InputRequest</con2:path>
+                                        </con2:param>
+                                        <con2:param name="Source">
+                                            <con2:path>$SourceSystem</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                            <con1:routing-options>
+                                <con2:id>_ActionId-a013dca.N15136931.0.169c2f152c2.N7e7e</con2:id>
+                                <con1:qualityOfService>best-effort</con1:qualityOfService>
+                            </con1:routing-options>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a013dca.Nba78bfc.0.169534cc372.N7632">
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N722e" name="PrepareResponse_Stg" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                <con:context>
+                    <con2:userNsDecl prefix="fetdm" namespace="http://www.sita.aero/schema/FetchDataMappingMessageV1"/>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con1:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N722d</con2:id>
+                        <con1:case id="_BranchId-a013dca.Nba78bfc.0.169534cc372.N722c">
+                            <con1:condition>
+                                <con2:xqueryText>$InputRequest/incidentData/TRANSACTION_TYPE/text()='UPDATEINCIDENTSTATUS' and fn:not($DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text())</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con2:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                    <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.Nba78bfc.0.169534cc372.N722b</con6:id>
+                                    <con2:location>
+                                        <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                    </con2:location>
+                                    <con2:expr>
+                                        <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
+       <ProcessIncidentResult xmlns="">
+          <STATUS>ERROR</STATUS>
+          <DESCRIPTION>An invalid status was received in the request. Therefore, updates from the transaction have been ignored.</DESCRIPTION>
+        </ProcessIncidentResult>
+</ProcessIncidentResponse>]]></con6:xqueryText>
+                                    </con2:expr>
+                                </con2:replace>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con2:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a013dca.Nba78bfc.0.169534cc372.N722a</con6:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config"><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
+       <ProcessIncidentResult xmlns="">
+       {
+        if($ServiceNowResponse/inc:Status/text()!='Success') then
+          <STATUS>ERROR</STATUS>
+        else()
+       }
+       {
+        if($ServiceNowResponse/inc:Status/text()!='Success') then
+          <DESCRIPTION>{$ServiceNowResponse/inc:Description/text()}</DESCRIPTION>
+        else()
+       }
+       
+       {
+        if($TransactionType='CREATE' and $ServiceNowResponse/inc:Status/text()='Success') then
+          <STATUS>SUCCESS CREATION</STATUS>
+        else()
+       }
+       {
+        if($TransactionType='CREATE' and $ServiceNowResponse/inc:Status/text()='Success') then
+          <DESCRIPTION>{$ServiceNowResponse/inc:TicketNumber/text()}</DESCRIPTION>
+        else()
+       }
+       
+       {
+        if(($TransactionType='UPDATE' or $TransactionType='UPDATE_REFNUMBER') and $ServiceNowResponse/inc:Status/text()='Success') then
+          <STATUS>SUCCESS</STATUS>
+        else()
+       }
+       {
+        if(($TransactionType='UPDATE' or $TransactionType='UPDATE_REFNUMBER') and $ServiceNowResponse/inc:Status/text()='Success') then
+          <DESCRIPTION>Your request has been processed successfully</DESCRIPTION>
+        else()
+       }
+       
+           
+       </ProcessIncidentResult>
+</ProcessIncidentResponse>]]></con6:xqueryText>
+                                </con2:expr>
+                            </con2:replace>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N7119" name="AuditResponseEnd_Stg" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con:context>
+                    <con2:userNsDecl prefix="tem" namespace="http://tempuri.org/"/>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7118</con2:id>
+                        <con3:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>insert</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7117</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con:xqueryTransform xmlns:con="http://www.bea.com/wli/sb/stages/config">
+                                        <con:resource ref="Common/Resources/XQueries/CreateAuditRequest"/>
+                                        <con:param name="TranType">
+                                            <con:path>$TransactionType</con:path>
+                                        </con:param>
+                                        <con:param name="Message_TranId">
+                                            <con:path>$MsgTranId</con:path>
+                                        </con:param>
+                                        <con:param name="Destination">
+                                            <con:path>$DestinationSystem</con:path>
+                                        </con:param>
+                                        <con:param name="ExtRefNumber">
+                                            <con:path>'ExtRefNumber'</con:path>
+                                        </con:param>
+                                        <con:param name="TicketNumber">
+                                            <con:path>$TicketNumber</con:path>
+                                        </con:param>
+                                        <con:param name="ProxyService">
+                                            <con:path>'IERInboundIncSyncPS'</con:path>
+                                        </con:param>
+                                        <con:param name="Event">
+                                            <con:path>'END'</con:path>
+                                        </con:param>
+                                        <con:param name="RecType">
+                                            <con:path>'INC'</con:path>
+                                        </con:param>
+                                        <con:param name="Payload">
+                                            <con:path>$body/*</con:path>
+                                        </con:param>
+                                        <con:param name="ErrMessage">
+                                            <con:path>''</con:path>
+                                        </con:param>
+                                        <con:param name="Source">
+                                            <con:path>$SourceSystem</con:path>
+                                        </con:param>
+                                        <con:param name="ErrCode">
+                                            <con:path>''</con:path>
+                                        </con:param>
+                                    </con:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dca.Nba78bfc.0.169534cc372.N74fb" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N74fa" name="Validate.EH">
+                <con:context>
+                    <con6:userNsDecl prefix="tem" namespace="http://tempuri.org/" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
+                    <con6:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
+                <con:actions>
+                    <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N74f9</con1:id>
+                        <con6:logLevel>error</con6:logLevel>
+                        <con6:expr>
+                            <con1:xqueryText>$fault</con1:xqueryText>
+                        </con6:expr>
+                        <con6:message>****IERInboundIncSyncPS.ValidateEH.Fault****</con6:message>
+                    </con6:log>
+                    <con4:route>
+                        <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N74f8</con1:id>
+                        <con4:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N74f7</con1:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con1:xqueryText><![CDATA[<ErrorHandlerRequest>
+	<ErrorDetails>
+		<ErrorCode>ERR001</ErrorCode>
+		<ErrorMsg>Schema Validation Failure</ErrorMsg>
+	</ErrorDetails>
+	<MessageDetails>
+		<Message_TransactionId>{$MsgTranId}</Message_TransactionId>
+		<TransactionType>{$TransactionType}</TransactionType>
+		<RecType>INC</RecType>
+		<ProxyService>{fn:tokenize($inbound/@name, '\$')[last()]}</ProxyService>
+		<Payload>{$InputRequest/*}</Payload>
+		<Source>{$SourceSystem}</Source>
+		<Destination>{$DestinationSystem}</Destination>
+		<IncidentId>{$InputRequest/Calls.SPCallID/text()}</IncidentId>
+		<ExternalRefNum>{
+                
+                if(fn:string-length($InputRequest/tem:incidentData/tem:CUSTOMER_EXTERNAL_REFERENCE/text())>0)
+                then($InputRequest/tem:incidentData/tem:CUSTOMER_EXTERNAL_REFERENCE/text())
+               	else
+		(	
+                if(fn:string-length($InputRequest/tem:incidentData/tem:SUPPLIER_EXTERNAL_REFERENCE/text())>0)
+                then($InputRequest/tem:incidentData/tem:SUPPLIER_EXTERNAL_REFERENCE/text())
+                else()
+		)
+                }</ExternalRefNum>
+	</MessageDetails>
+</ErrorHandlerRequest>]]></con1:xqueryText>
+                                </con2:expr>
+                            </con2:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con2:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N74f6</con1:id>
+                        <con2:location>
+                            <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con1:xqueryText><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
+       <ProcessIncidentResult xmlns="">
+           <STATUS>Failure</STATUS>
+           <DESCRIPTION>Schema Validation Failure</DESCRIPTION>
+       </ProcessIncidentResult>
+</ProcessIncidentResponse>]]></con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                    <con1:reply xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                        <con6:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N74f5</con6:id>
+                    </con1:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dca.Nba78bfc.0.169534cc372.N70af">
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N7071" name="Service_EH_Stg" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                <con:context>
+                    <con6:userNsDecl prefix="tem" namespace="http://tempuri.org/" xmlns:con6="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
+                <con:actions>
+                    <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N7070</con1:id>
+                        <con6:logLevel>error</con6:logLevel>
+                        <con6:expr>
+                            <con1:xqueryText>$fault</con1:xqueryText>
+                        </con6:expr>
+                        <con6:message>****IERInboundIncSyncPS.ServiceEH.Fault****</con6:message>
+                    </con6:log>
+                    <con4:route>
+                        <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N706f</con1:id>
+                        <con4:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:outboundTransform>
+                            <con2:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N706e</con1:id>
+                                <con2:location>
+                                    <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                    <con1:xqueryText><![CDATA[<ErrorHandlerRequest>
+	<ErrorDetails>
+		<ErrorCode>ERR002</ErrorCode>
+		<ErrorMsg>Technical Failure</ErrorMsg>
+	</ErrorDetails>
+	<MessageDetails>
+		<Message_TransactionId>{$MsgTranId}</Message_TransactionId>
+		<TransactionType>{$TransactionType}</TransactionType>
+		<RecType>INC</RecType>
+		<ProxyService>IERInboundIncSyncPS</ProxyService>
+		<Payload>{$InputRequest/*}</Payload>
+		<Source>{$SourceSystem}</Source>
+		<Destination>{$DestinationSystem}</Destination>
+		<IncidentId>{$InputRequest/Calls.SPCallID/text()}</IncidentId>
+		<ExternalRefNum>{
+                
+                if(fn:string-length($InputRequest/incidentData/CUSTOMER_EXTERNAL_REFERENCE/text())>0)
+                then($InputRequest/incidentData/CUSTOMER_EXTERNAL_REFERENCE/text())
+               	else
+		(	
+                if(fn:string-length($InputRequest/tem:incidentData/tem:SUPPLIER_EXTERNAL_REFERENCE/text())>0)
+                then($InputRequest/tem:incidentData/tem:SUPPLIER_EXTERNAL_REFERENCE/text())
+                else()
+		)
+                }</ExternalRefNum>
+	</MessageDetails>
+</ErrorHandlerRequest>]]></con1:xqueryText>
+                                </con2:expr>
+                            </con2:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con2:replace varName="body" contents-only="true" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N706d</con1:id>
+                        <con2:location>
+                            <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con1:xqueryText><![CDATA[<tem:ProcessIncidentResponse>
+       <ProcessIncidentResult>
+           <STATUS>Failure</STATUS>
+           <DESCRIPTION>Technical Failure</DESCRIPTION>
+       </ProcessIncidentResult>
+</tem:ProcessIncidentResponse>]]></con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                    <con1:reply xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                        <con6:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N706c</con6:id>
+                    </con1:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a013dca.Nba78bfc.0.169534cc372.N7381" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+            <con:stage id="_StageId-a013dca.Nba78bfc.0.169534cc372.N7380" name="SendEmail.EH">
+                <con:context/>
+                <con:actions>
+                    <con2:resume>
+                        <con2:id>_ActionId-a013dca.Nba78bfc.0.169534cc372.N737f</con2:id>
+                    </con2:resume>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-a013dca.Nba78bfc.0.169534cc372.N7633</con:request>
+                <con:response>response-a013dca.Nba78bfc.0.169534cc372.N7632</con:response>
+            </con:pipeline-node>
+            <con:route-node name="RouteNode1">
+                <con:context/>
+                <con:actions>
+                    <con2:route>
+                        <con1:id>_ActionId-a013dca.3345a12c.0.1697c22e983.N7d03</con1:id>
+                        <con2:service ref="Common/BusinessServices/PartnerOutboundIncQJMSBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con2:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-a013dca.3345a12c.0.1697c22e983.N7cf7</con1:id>
+                                <con3:location>
+                                    <con1:xpathText>.</con1:xpathText>
+                                </con3:location>
+                                <con3:expr>
+                                    <con1:xqueryText>$SNRequest</con1:xqueryText>
+                                </con3:expr>
+                            </con3:replace>
+                            <con3:assign varName="InterfaceQueueList">
+                                <con1:id>_ActionId-a013dca.3345a12c.0.1697c22e983.N7d00</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="Common/Resources/XQueries/InterfaceQueueList"/>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:routing-options>
+                                <con1:id>_ActionId-a013dca.3345a12c.0.1697c22e983.N7cfd</con1:id>
+                                <con3:uriExpr>
+                                    <con1:xqueryText>$InterfaceQueueList/Interface[Name='SN']/QueueName/text()</con1:xqueryText>
+                                </con3:uriExpr>
+                            </con3:routing-options>
+                        </con2:outboundTransform>
+                        <con2:responseTransform>
+                            <con3:assign varName="ServiceNowResponse">
+                                <con1:id>_ActionId-a013dca.3345a12c.0.1697c22e983.N7cfa</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText>$SNResponse/*</con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con2:responseTransform>
+                    </con2:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+    <aler:alertRules xsi:nil="true" xmlns:aler="http://xmlns.oracle.com/servicebus/monitoring/alert"/>
+</con:pipelineEntry>

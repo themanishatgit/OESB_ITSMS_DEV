@@ -34,6 +34,8 @@
       <hash><url n="URL" path="DataMappingLoad/DataMappingLoad.jpr"/></hash>
       <hash><url n="URL" path="Essintial_INC/Essintial_INC.jpr"/></hash>
       <hash><url n="URL" path="FoundationDataSync/FoundationDataSync.jpr"/></hash>
+      <hash><url n="URL" path="IBM_INC/IBM_INC.jpr"/></hash>
+      <hash><url n="URL" path="IER_INC/IER_INC.jpr"/></hash>
       <hash><url n="URL" path="NGOSS_INC/NGOSS_INC.jpr"/></hash>
       <hash><url n="URL" path="OBS_INC/OBS_INC.jpr"/></hash>
       <hash><url n="URL" path="SBProject/SBProject.jpr"/></hash>
@@ -58,6 +60,6 @@
       </hash>
    </hash>
    <hash n="oracle.sb.tooling.ide.core.internal.application.SbApplication">
-      <value n="configContextSessionName" v="OSB-IDE_build_1554890407326"/>
+      <value n="configContextSessionName" v="OSB-IDE_build_1554898107913"/>
    </hash>
 </jws:workspace>

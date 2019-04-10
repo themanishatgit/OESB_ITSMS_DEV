@@ -1,0 +1,162 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/EBoundingWebservices"
+             targetNamespace="urn:microsoft-dynamics-schemas/codeunit/EBoundingWebservices">
+  <types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+            targetNamespace="urn:microsoft-dynamics-schemas/codeunit/EBoundingWebservices">
+      <element name="CreateServiceRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="language" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="user" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="password" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="supervisionAgent" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="customerCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="sRNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="serialNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="externalReference" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="systemNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="sRType" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="status" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="siteCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="contractCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="urgency" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="gravity" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="summary" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="incidentDate" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="reportedDate" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="problemDescription" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="errorCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="respondBy" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="resolveBy" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="customerTicketNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="pONumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address1" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address2" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address3" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address4" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="postalCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="city" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="department" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="country" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="contactName" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="contactFirstName" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="taskDetails" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="note" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="customField01" type="string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateServiceRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateServiceRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="language" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="user" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="password" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="supervisionAgent" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="customerCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="sRNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="serialNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="externalReference" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="systemNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="sRType" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="status" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="siteCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="contractCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="urgency" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="gravity" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="summary" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="incidentDate" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="reportedDate" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="problemDescription" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="errorCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="respondBy" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="resolveBy" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="customerTicketNumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="pONumber" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address1" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address2" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address3" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="address4" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="postalCode" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="city" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="department" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="country" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="contactName" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="contactFirstName" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="taskDetails" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="note" type="string"/>
+            <element minOccurs="1" maxOccurs="1" name="customField01" type="string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateServiceRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="CreateServiceRequest">
+    <part name="parameters" element="tns:CreateServiceRequest"/>
+  </message>
+  <message name="CreateServiceRequest_Result">
+    <part name="parameters" element="tns:CreateServiceRequest_Result"/>
+  </message>
+  <message name="UpdateServiceRequest">
+    <part name="parameters" element="tns:UpdateServiceRequest"/>
+  </message>
+  <message name="UpdateServiceRequest_Result">
+    <part name="parameters" element="tns:UpdateServiceRequest_Result"/>
+  </message>
+  <portType name="EBoundingWebservices_Port">
+    <operation name="CreateServiceRequest">
+      <input name="CreateServiceRequest" message="tns:CreateServiceRequest"/>
+      <output name="CreateServiceRequest_Result" message="tns:CreateServiceRequest_Result"/>
+    </operation>
+    <operation name="UpdateServiceRequest">
+      <input name="UpdateServiceRequest" message="tns:UpdateServiceRequest"/>
+      <output name="UpdateServiceRequest_Result" message="tns:UpdateServiceRequest_Result"/>
+    </operation>
+  </portType>
+  <binding name="EBoundingWebservices_Binding" type="tns:EBoundingWebservices_Port">
+    <binding xmlns="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="CreateServiceRequest">
+      <operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/"
+                 soapAction="urn:microsoft-dynamics-schemas/codeunit/EBoundingWebservices:CreateServiceRequest"
+                 style="document"/>
+      <input name="CreateServiceRequest">
+        <body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+      </input>
+      <output name="CreateServiceRequest_Result">
+        <body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+      </output>
+    </operation>
+    <operation name="UpdateServiceRequest">
+      <operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/"
+                 soapAction="urn:microsoft-dynamics-schemas/codeunit/EBoundingWebservices:UpdateServiceRequest"
+                 style="document"/>
+      <input name="UpdateServiceRequest">
+        <body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+      </input>
+      <output name="UpdateServiceRequest_Result">
+        <body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="EBoundingWebservices">
+    <port name="EBoundingWebservices_Port" binding="tns:EBoundingWebservices_Binding">
+      <address xmlns="http://schemas.xmlsoap.org/wsdl/soap/"
+               location="https://nav.ier-services.de:7147/nav_test/WS/IER%20GmbH%20Live/Codeunit/EBoundingWebservices"/>
+    </port>
+  </service>
+</definitions>

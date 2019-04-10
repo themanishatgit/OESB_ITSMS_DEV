@@ -20,9 +20,11 @@
 		<module>OBS_INC</module>
 		<module>FoundationDataSync</module>
         <module>AzureADUserSync</module>
-        <module>Utilities</module>
-        <module>ServiceTec_INC</module> -->
+        <module>Utilities</module> -->
+        <module>ServiceTec_INC</module>
         <module>Essintial_INC</module>
+        <module>IER_INC</module>
+        <module>IBM_INC</module>
     </modules> 
 
 </project>

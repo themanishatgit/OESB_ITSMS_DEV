@@ -1,0 +1,44 @@
+<DataMap>
+	<Inbound>
+		<Priority>			
+			<IER>High</IER>
+                        <SN>1</SN>
+		</Priority>
+		<Priority>			
+			<IER>Medium</IER>
+                        <SN>3</SN>
+		</Priority>
+		<Priority>			
+			<IER>Low</IER>
+                        <SN>5</SN>
+		</Priority>
+		<Priority>			
+			<IER>Default</IER>
+                        <SN>5</SN>
+		</Priority>	
+	</Inbound>
+        <Outbound>
+		<Priority>			
+			
+                        <SN>1</SN>
+                        <IER>High</IER>
+		</Priority>
+		<Priority>			
+			      <SN>2</SN>
+                        <IER>High</IER>
+		</Priority>
+		<Priority>			
+			      <SN>3</SN>
+                        <IER>Medium</IER>
+		</Priority>
+		<Priority>			
+			      <SN>4</SN>
+                        <IER>Low</IER>
+		</Priority>
+                <Priority>			
+			      <SN>5</SN>
+                        <IER>Low</IER>
+		</Priority>
+	</Outbound>
+	
+</DataMap>
