@@ -586,52 +586,63 @@ $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATU
                     <con2:userNsDecl prefix="net4" namespace="http://net4.essintial.com"/>
                 </con:context>
                 <con:actions>
-                    <con3:route>
-                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7d</con2:id>
-                        <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con3:operation>merge</con3:operation>
-                        <con3:outboundTransform>
-                            <con1:replace varName="body" contents-only="true">
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7c</con2:id>
-                                <con1:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con1:location>
-                                <con1:expr>
-                                    <con2:xqueryTransform>
-                                        <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
-                                        <con2:param name="Message_TranId">
-                                            <con2:path>$MsgTranId</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Destination">
-                                            <con2:path>$DestinationSystem</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TransactionType">
-                                            <con2:path>$TransactionType</con2:path>
-                                        </con2:param>
-                                        <con2:param name="ExtRefNumber">
-                                            <con2:path>$ExtRefNumber</con2:path>
-                                        </con2:param>
-                                        <con2:param name="TicketNumber">
-                                            <con2:path>$TicketNumber</con2:path>
-                                        </con2:param>
-                                        <con2:param name="CurrentStatus">
-                                            <con2:path>$Status</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Payload">
-                                            <con2:path>$InputRequest</con2:path>
-                                        </con2:param>
-                                        <con2:param name="Source">
-                                            <con2:path>$SourceSystem</con2:path>
-                                        </con2:param>
-                                    </con2:xqueryTransform>
-                                </con1:expr>
-                            </con1:replace>
-                            <con1:routing-options>
-                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7b</con2:id>
-                                <con1:qualityOfService>best-effort</con1:qualityOfService>
-                            </con1:routing-options>
-                        </con3:outboundTransform>
-                    </con3:route>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7f9d</con2:id>
+                        <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7f9c">
+                            <con1:condition>
+                                <con2:xqueryText>$LogComment='true'</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions/>
+                        </con1:case>
+                        <con1:default>
+                            <con3:route>
+                                <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7d</con2:id>
+                                <con3:service ref="Common/BusinessServices/Merge_EbondingTransaction" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                <con3:operation>merge</con3:operation>
+                                <con3:outboundTransform>
+                                    <con1:replace varName="body" contents-only="true">
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7c</con2:id>
+                                        <con1:location>
+                                            <con2:xpathText>.</con2:xpathText>
+                                        </con1:location>
+                                        <con1:expr>
+                                            <con2:xqueryTransform>
+                                                <con2:resource ref="Common/Resources/XQueries/CreateEbondingTransactionRequest"/>
+                                                <con2:param name="Message_TranId">
+                                                    <con2:path>$MsgTranId</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Destination">
+                                                    <con2:path>$DestinationSystem</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TransactionType">
+                                                    <con2:path>$TransactionType</con2:path>
+                                                </con2:param>
+                                                <con2:param name="ExtRefNumber">
+                                                    <con2:path>$ExtRefNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="TicketNumber">
+                                                    <con2:path>$TicketNumber</con2:path>
+                                                </con2:param>
+                                                <con2:param name="CurrentStatus">
+                                                    <con2:path>$Status</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Payload">
+                                                    <con2:path>$InputRequest</con2:path>
+                                                </con2:param>
+                                                <con2:param name="Source">
+                                                    <con2:path>$SourceSystem</con2:path>
+                                                </con2:param>
+                                            </con2:xqueryTransform>
+                                        </con1:expr>
+                                    </con1:replace>
+                                    <con1:routing-options>
+                                        <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f7b</con2:id>
+                                        <con1:qualityOfService>best-effort</con1:qualityOfService>
+                                    </con1:routing-options>
+                                </con3:outboundTransform>
+                            </con3:route>
+                        </con1:default>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
