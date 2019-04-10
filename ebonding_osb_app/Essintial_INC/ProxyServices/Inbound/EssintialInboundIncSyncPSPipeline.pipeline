@@ -231,6 +231,8 @@
                         <con2:expr>
                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Open')then
 'CREATE'
+else if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Update' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Partner and Customer' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='CustomerOK')then
+'LOGCOMMENT'
 else
 'UPDATE'</con6:xqueryText>
                         </con2:expr>
@@ -387,7 +389,7 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7e66</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N7e65">
                             <con1:condition>
-                                <con2:xqueryText>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
+                                <con2:xqueryText>$TransactionType='LOGCOMMENT' or $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con1:assign varName="Status">
@@ -463,7 +465,7 @@ else
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N77e3</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N77e2">
                             <con1:condition>
-                                <con2:xqueryText>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
+                                <con2:xqueryText>$TransactionType='LOGCOMMENT' or $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATUS']/fetdm:DestinationValue/text()</con2:xqueryText>
                             </con1:condition>
                             <con1:actions/>
                         </con1:case>
@@ -484,7 +486,7 @@ else
                                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N7a34</con2:id>
                                         <con1:header-set>outbound-request</con1:header-set>
                                         <con1:header value="expression" name="Subject">
-                                            <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $InputRequest/incidentData/INCIDENT_NUMBER/text())</con2:xqueryText>
+                                            <con2:xqueryText>fn:concat($EnvironmentName,' : ',$SourceSystem,'-',$DestinationSystem,' : Invalid status received in inbound transaction with ticket number ', $TicketNumber)</con2:xqueryText>
                                         </con1:header>
                                         <con1:header value="expression" name="To">
                                             <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>

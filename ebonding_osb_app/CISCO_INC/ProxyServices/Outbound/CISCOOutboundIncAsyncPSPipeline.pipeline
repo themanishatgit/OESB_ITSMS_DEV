@@ -437,14 +437,14 @@ $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text(
                                             <con5:expr>
                                                 <con2:xqueryTransform>
                                                     <con2:resource ref="Common/Resources/XQueries/GetEnvironmentName"/>
-                                            </con2:xqueryTransform>
+                                                </con2:xqueryTransform>
                                             </con5:expr>
                                         </con5:assign>
                                         <con1:transport-headers>
                                             <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ef3</con2:id>
                                             <con1:header-set>outbound-request</con1:header-set>
                                             <con1:header value="expression" name="Subject">
-                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text(),'-',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),' : Run-time fault occurred for ticket number ', $TicketNumber)</con2:xqueryText>
+                                                <con2:xqueryText>fn:concat($EnvironmentName,' : ',$InputRequest/inc:IncidentRequestHeader/inc:SourceSystem/text(),'-',$InputRequest/inc:IncidentRequestHeader/inc:DestinationSystem/text(),' : Run-time fault occurred for ticket number ', $InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:TicketNumber/text())</con2:xqueryText>
                                             </con1:header>
                                             <con5:header value="expression" name="To">
                                                 <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB', xs:QName('MAILTO'), 'SELECT VALUE FROM ESB_DEPLOYMENT_CONFIG WHERE KEY=?','bs_mailto_Send_Email')/VALUE/text()</con2:xqueryText>
