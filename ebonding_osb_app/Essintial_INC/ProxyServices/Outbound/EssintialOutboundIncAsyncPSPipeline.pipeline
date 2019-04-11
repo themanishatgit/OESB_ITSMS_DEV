@@ -640,7 +640,7 @@ $TransactionType</con2:path>
 		<ErrorMsg>{$body/*:HandleTicketResponse/*:HandleTicketResult/*:ExceptionDetails/*:Message/text()}</ErrorMsg>
 	</ErrorDetails>
 	<MessageDetails>
-		<Message_TransactionId>{$Message_TranId}</Message_TransactionId>
+		<Message_TransactionId>{$MsgTranId}</Message_TransactionId>
 		<TransactionType>{$TransactionType}</TransactionType>
 		<RecType>{$RecType}</RecType>
 		<ProxyService>EssintialOutboundIncAsyncPS</ProxyService>
@@ -780,6 +780,69 @@ $TicketNumber, ' with message transaction id ', $MsgTranId,
                         <con2:id>_ActionId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ce7</con2:id>
                         <con1:case id="_BranchId-a013dcc.N65f23ab8.0.169b9bbaf48.N7ce6">
                             <con1:condition>
+                                <con2:xqueryText>fn:exists($body/*:Fault)</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con3:route xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                    <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ee6</con2:id>
+                                    <con3:service ref="Common/BusinessServices/PartnerOutboundIncQJMSBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:outboundTransform>
+                                        <con2:assign varName="InterfaceQueueList" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                            <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ee5</con6:id>
+                                            <con2:expr>
+                                                <con1:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                                                    <con1:resource ref="Common/Resources/XQueries/InterfaceQueueList"/>
+                                                </con1:xqueryTransform>
+                                            </con2:expr>
+                                        </con2:assign>
+                                        <con1:assign varName="QueueName">
+                                            <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ee4</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>$InterfaceQueueList/Interface[Name=$SourceSystem]/QueueName/text()</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ee0</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText><![CDATA[<ns1:IncidentRequestMessage xmlns:ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1">
+	<ns1:IncidentRequestHeader>
+		<ns1:TransactionId>{$MsgTranId}</ns1:TransactionId>
+		<ns1:TransactionType>ERROR</ns1:TransactionType>
+		<ns1:RecType>INC</ns1:RecType>
+		<ns1:SourceSystem>ESSINTIAL</ns1:SourceSystem>
+		<ns1:DestinationSystem>SN</ns1:DestinationSystem>
+	</ns1:IncidentRequestHeader>
+	<ns1:IncidentRequestBody>
+		<ns1:IncidentDetails>
+			<ns1:TicketNumber>{$TicketNumber}</ns1:TicketNumber>
+                        <ns1:Supplier>
+                          <ns1:Name>ESSINTIAL</ns1:Name>
+                          <ns1:RefNumber>{$InputRequest/inc:IncidentRequestBody/inc:IncidentDetails/inc:Supplier/inc:RefNumber/text()}</ns1:RefNumber>
+                        </ns1:Supplier>
+			<ns1:WorkNotes>{fn:data($body/*:Fault/*:detail/*:ExceptionDetail/*:InnerException/*:InnerException/*:Message)}</ns1:WorkNotes>
+		</ns1:IncidentDetails>
+	</ns1:IncidentRequestBody>
+</ns1:IncidentRequestMessage>]]></con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:replace>
+                                        <con2:routing-options xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                                            <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7ee3</con6:id>
+                                            <con2:uriExpr>
+                                                <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">$InterfaceQueueList/Interface[Name=$SourceSystem]/QueueName/text()</con6:xqueryText>
+                                            </con2:uriExpr>
+                                        </con2:routing-options>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                                <con2:reply>
+                                    <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7edd</con2:id>
+                                </con2:reply>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:case id="_BranchId-a0209a4.3de1ab48.0.169ed6dd7bd.N7f89">
+                            <con1:condition>
                                 <con2:xqueryText>$inbound/ctx:transport/ctx:request/tp:headers/jms:JMSXDeliveryCount > '2'</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
@@ -815,7 +878,8 @@ $TicketNumber, ' with message transaction id ', $MsgTranId,
 $TicketNumber, 
 ' with message transaction id ', $MsgTranId, 
 '. Below is the fault received from ',$DestinationSystem,': ',
-fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault))</con2:xqueryText>
+fn:codepoints-to-string(10),fn:codepoints-to-string(10),'Fault: ',fn-bea:serialize($fault),
+fn:codepoints-to-string(10),fn:codepoints-to-string(10),'Body: ',fn-bea:serialize($body))</con2:xqueryText>
                                             </con1:expr>
                                         </con1:replace>
                                     </con3:outboundTransform>
