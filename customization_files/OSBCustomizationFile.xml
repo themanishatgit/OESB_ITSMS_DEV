@@ -1,6 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cus:Customizations xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
 
+ <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Inbound/IBMInboundIncSyncPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_IBMInboundIncSyncPS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Outbound/IBMOutboundIncAsyncPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@jms_url_IBMOutboundIncQ@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+     <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>BusinessService</xt:type>
+                <xt:path>IER_INC/BusinessService/Outbound/IERIncReqHttpBS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                        <oper:throttling enabled="false"/>
+                        <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+                    </oper:operations>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Weight</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:location>0</xt:location>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@bs_url_IERIncReqHttpBS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service URI Table</xt:envValueType>
+                <xt:value xsi:type="tran:URITableType" xmlns:tran="http://www.bea.com/wli/sb/transports">
+                    <tran:tableElement>
+                        <tran:URI>@bs_url_IERIncReqHttpBS@</tran:URI>
+                        <tran:weight>0</tran:weight>
+                    </tran:tableElement>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Count</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_count@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_retry_interval@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Work Manager</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">SBDefaultResponseWorkManager</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Read Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_read_timeout@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Connection Timeout for HTTP Outbound Transport Provider</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@http_connection_timeout@</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+    <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
+        <cus:description/>
+        <cus:owners>
+            <xt:owner>
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IER_INC/ProxyService/Inbound/IERInboundIncSyncPS</xt:path>
+            </xt:owner>
+        </cus:owners>
+        <cus:actions>
+            <xt:replace>
+                <xt:envValueType>Service URI</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">@ps_url_IERInboundIncSyncPS@</xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>Service Operational Settings</xt:envValueType>
+                <xt:value>
+                    <oper:operations enabled="true" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:env="http://www.bea.com/wli/config/env" xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+                </xt:value>
+            </xt:replace>
+            <xt:replace>
+                <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+                <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+            </xt:replace>
+        </cus:actions>
+    </cus:customization>
+   
+
   <cus:customization xsi:type="cus:EnvValueActionsCustomizationType">
         <cus:description/>
         <cus:owners>
@@ -3588,6 +3729,31 @@
             <xt:envValueTypes>Service URI Weight</xt:envValueTypes>
             <xt:envValueTypes>UDDI Auto Publish</xt:envValueTypes>
             <xt:envValueTypes>Work Manager</xt:envValueTypes>
+			  <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>BusinessService</xt:type>
+                <xt:path>IER_INC/BusinessService/Outbound/IERIncReqHttpBS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IER_INC/ProxyService/Inbound/IERInboundIncSyncPS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IER_INC/ProxyService/Outbound/IEROutboundIncAsyncPS</xt:path>
+            </xt:refsToSearch>
+			 <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Inbound/IBMInboundIncSyncPS</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Inbound/ProxyService</xt:path>
+            </xt:refsToSearch>
+            <xt:refsToSearch xsi:type="xt:ResourceRefType">
+                <xt:type>ProxyService</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Outbound/IBMOutboundIncAsyncPS</xt:path>
+            </xt:refsToSearch>
+			
             <xt:refsToSearch xsi:type="xt:ResourceRefType">
                 <xt:type>BusinessService</xt:type>
                 <xt:path>AzureADUserSync/BusinessServices/PushToAUS_GetUsersQ</xt:path>
@@ -3895,6 +4061,71 @@
     </cus:customization>
     <cus:customization xsi:type="cus:ReferenceCustomizationType">
         <cus:description/>
+		 <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>BusinessService</xt:type>
+            <xt:path>IER_INC/BusinessService/Outbound/IERIncReqHttpBS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>IER_INC/ProxyService/Inbound/IERInboundIncSyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>IER_INC/ProxyService/Inbound/IERInboundIncSyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>IER_INC/ProxyService/Outbound/IEROutboundIncAsyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>IER_INC/ProxyService/Outbound/IEROutboundIncAsyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>IER_INC/Resources/Xqueries/CreateIERRequest</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>IER_INC/Resources/Xqueries/IERtoSNRequest</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>IER_INC/Resources/Xqueries/UpdateIERRequest</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>IER_INC/Resources/Xqueries/UpdateSNtoIERRequest</xt:path>
+        </cus:refsToBeConsidered>
+		 <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>IBM_INC/ProxyServices/Inbound/IBMInboundIncSyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>IBM_INC/ProxyServices/Inbound/IBMInboundIncSyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>IBM_INC/ProxyServices/Inbound/ProxyService</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>ProxyService</xt:type>
+            <xt:path>IBM_INC/ProxyServices/Outbound/IBMOutboundIncAsyncPS</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Pipeline</xt:type>
+            <xt:path>IBM_INC/ProxyServices/Outbound/IBMOutboundIncAsyncPSPipeline</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>IBM_INC/Resources/XQueries/IBMRequestToSNRequest</xt:path>
+        </cus:refsToBeConsidered>
+        <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+            <xt:type>Xquery</xt:type>
+            <xt:path>IBM_INC/Resources/XQueries/SNRequestToIBMRequest</xt:path>
+        </cus:refsToBeConsidered>
+		
 		 <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
             <xt:type>BusinessService</xt:type>
             <xt:path>AzureADUserSync/BusinessServices/UpdateAUSTransaction</xt:path>
@@ -4585,6 +4816,80 @@
             <xt:type>Xquery</xt:type>
             <xt:path>Essintial_INC/Resources/XQueries/SNRequestToEssintialRequest</xt:path>
         </cus:refsToBeConsidered>
+
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Inbound/IBMInboundIncSyncPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Inbound/IBMInboundIncSyncPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Outbound/IBMOutboundIncAsyncPSPipeline</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Pipeline</xt:type>
+                <xt:path>IBM_INC/ProxyServices/Outbound/IBMOutboundIncAsyncPSPipeline</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>IBM_INC/Resources/Schemas/IBM_Inbound</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>IBM_INC/Resources/Schemas/IBM_Inbound</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>IBM_INC/Resources/Schemas/IBM_Outbound</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>XMLSchema</xt:type>
+                <xt:path>IBM_INC/Resources/Schemas/IBM_Outbound</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>IBM_INC/Resources/WSDLs/IBM_Inbound</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>WSDL</xt:type>
+                <xt:path>IBM_INC/Resources/WSDLs/IBM_Inbound</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>IBM_INC/Resources/XQueries/IBMRequestToSNRequest</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>IBM_INC/Resources/XQueries/IBMRequestToSNRequest</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+        <cus:externalReferenceMap>
+            <xt:oldRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>IBM_INC/Resources/XQueries/SNRequestToIBMRequest</xt:path>
+            </xt:oldRef>
+            <xt:newRef>
+                <xt:type>Xquery</xt:type>
+                <xt:path>IBM_INC/Resources/XQueries/SNRequestToIBMRequest</xt:path>
+            </xt:newRef>
+        </cus:externalReferenceMap>
+		 
+		 
 		 <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>BusinessService</xt:type>
@@ -4655,16 +4960,7 @@
                 <xt:path>AzureADUserSync/ProxyServices/AUS_TriggerSyncPSPipeline</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
-        <cus:externalReferenceMap>
-            <xt:oldRef>
-                <xt:type>BusinessService</xt:type>
-                <xt:path>Common/BusinessServices/Send_Email</xt:path>
-            </xt:oldRef>
-            <xt:newRef>
-                <xt:type>BusinessService</xt:type>
-                <xt:path>Common/BusinessServices/Send_Email</xt:path>
-            </xt:newRef>
-        </cus:externalReferenceMap>
+        
         <cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>BusinessService</xt:type>
