@@ -6904,7 +6904,7 @@
                 <xt:path>FoundationDataSync/Resources/WSDLs/SNPublish/SNVendorPublish</xt:path>
             </xt:newRef>
         </cus:externalReferenceMap>
-		        <cus:externalReferenceMap>
+	<cus:externalReferenceMap>
             <xt:oldRef>
                 <xt:type>BusinessService</xt:type>
                 <xt:path>Common/BusinessServices/Merge_EbondingTransaction</xt:path>
