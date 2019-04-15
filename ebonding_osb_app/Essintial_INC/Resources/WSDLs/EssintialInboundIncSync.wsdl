@@ -1,6 +1,7 @@
 <wsdl:definitions xmlns:tns="http://www.sita.aero/WSDL/EssintialInboundIncSyncV1"
-                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:new="urn:ws.solvedirect.com/webservices/custom"
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   targetNamespace="http://www.sita.aero/WSDL/EssintialInboundIncSyncV1">
   <wsdl:types>
@@ -20,42 +21,82 @@
       <xs:element name="ServiceTicket">
         <xs:complexType>
           <xs:sequence>
-            <xs:element type="xs:string" name="LocationCode" nillable="true"/>
-            <xs:element type="xs:string" name="EndUserOrganization" nillable="true"/>
-            <xs:element type="xs:string" name="AddressDetails"/>
-            <xs:element type="xs:string" name="AddressCity"/>
-            <xs:element type="xs:string" name="AddressState"/>
-            <xs:element type="xs:string" name="AddressZip"/>
-            <xs:element type="xs:string" name="AddressCountry"/>
-            <xs:element type="xs:string" name="Priority"/>
-            <xs:element type="xs:string" name="CustomerReference4"/>
-            <xs:element type="xs:string" name="CustomerReference3"/>
-            <xs:element type="xs:string" name="VORDID"/>
-            <xs:element type="xs:string" name="Comments"/>
-            <xs:element type="xs:string" name="CustomerReference2"/>
-            <xs:element type="xs:string" name="StatusCode"/>
-            <xs:element type="xs:string" name="ReceivedMethod"/>
-            <xs:element type="xs:dateTime" name="CustomerReceivedDate"/>
-            <xs:element type="xs:dateTime" name="ScheduledDS"/>
-            <xs:element type="xs:dateTime" name="TechOnSite"/>
-            <xs:element type="xs:dateTime" name="TechCheckedOut"/>
-            <xs:element type="xs:string" name="TotalLaborTime"/>
-            <xs:element type="xs:string" name="TotalTravelTime"/>
-            <xs:element type="xs:string" name="FinalAction"/>
-            <xs:element type="xs:string" name="CustomerName"/>
-            <xs:element type="xs:string" name="Notes"/>
+            <xs:element type="xs:string" name="LocationCode" minOccurs="0" nillable="true"/>
+            <xs:element type="xs:string" name="EndUserOrganization" minOccurs="0" nillable="true"/>
+            <xs:element type="xs:string" name="AddressDetails" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressCity" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressState" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressZip" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressCountry" minOccurs="0"/>
+            <xs:element type="xs:string" name="Priority" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerReference4" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerReference3" minOccurs="0"/>
+            <xs:element type="xs:string" name="VORDID" minOccurs="0"/>
+            <xs:element type="xs:string" name="Comments" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerReference2" minOccurs="0"/>
+            <xs:element type="xs:string" name="StatusCode" minOccurs="0"/>
+            <xs:element type="xs:string" name="ReceivedMethod" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="CustomerReceivedDate" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="ScheduledDS" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="TechOnSite" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="TechCheckedOut" minOccurs="0"/>
+            <xs:element type="xs:string" name="TotalLaborTime" minOccurs="0"/>
+            <xs:element type="xs:string" name="TotalTravelTime" minOccurs="0"/>
+            <xs:element type="xs:string" name="FinalAction" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerName" minOccurs="0"/>
+            <xs:element type="xs:string" name="Notes" minOccurs="0"/>
           </xs:sequence>
           <xs:attribute type="xs:string" name="Version"/>
         </xs:complexType>
       </xs:element>
     </xs:schema>
+    <xs:schema xmlns:tns="urn:ws.solvedirect.com/webservices/custom" elementFormDefault="qualified"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0"
+               targetNamespace="urn:ws.solvedirect.com/webservices/custom"
+               xmlns:s="http://net4.essintial.com/SitaTicket_1.xsd">
+      <xs:import namespace="http://net4.essintial.com/SitaTicket_1.xsd"/>
+      <xs:element name="CallData" type="tns:callData"/>
+      <xs:element name="SDWebServiceException" type="tns:SDWebServiceException"/>
+      <xs:element name="putCall" type="tns:putCall"/>
+      <xs:element name="putCallResponse" type="tns:putCallResponse"/>
+      <xs:complexType name="putCall">
+        <xs:sequence>
+          <xs:element name="username" type="xs:string" minOccurs="0"/>
+          <xs:element name="password" type="xs:string" minOccurs="0"/>
+          <xs:element name="CallData" type="tns:callData" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="callData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" ref="s:ServiceTicket"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="putCallResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="SDWebServiceException">
+        <xs:sequence>
+          <xs:element name="message" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
   </wsdl:types>
   <wsdl:message name="ProcessIncidentSoapIn">
     <wsdl:part name="parameters" element="CallData"/>
   </wsdl:message>
+  <wsdl:message name="putCallResponse">
+    <wsdl:part name="parameters" element="new:putCallResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SDWebServiceException">
+    <wsdl:part name="fault" element="new:SDWebServiceException"/>
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="ProcessIncident">
       <wsdl:input message="tns:ProcessIncidentSoapIn"/>
+      <wsdl:output wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCallResponse"
+                   message="tns:putCallResponse"/>
+      <wsdl:fault message="tns:SDWebServiceException" name="SDWebServiceException"
+                  wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCall:Fault:SDWebServiceException"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
@@ -65,6 +106,12 @@
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SDWebServiceException">
+        <soap:fault name="SDWebServiceException" use="literal"/>
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
 </wsdl:definitions>
