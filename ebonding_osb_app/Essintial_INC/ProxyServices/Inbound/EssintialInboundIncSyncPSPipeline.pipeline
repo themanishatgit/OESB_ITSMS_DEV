@@ -217,17 +217,17 @@
                             <con2:xqueryText>$body/*</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
+                    <con1:assign varName="TicketNumber">
+                        <con2:id>_ActionId-a013dcc.3057d296.0.1696cde6423.N7dd2</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$InputRequest/sit:ServiceTicket/sit:CustomerReference3/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
                     <con1:assign varName="ExtRefNumber">
                         <con2:id>_ActionId-a013dcc.3057d296.0.1696cde6423.N7dd5</con2:id>
                         <con1:expr>
                             <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EXTERNAL_REFNUM'),
 'SELECT EXTERNAL_REFNUM FROM EBONDINGS_TRANSACTIONS where TICKET_NUM=? and IS_FIRST_REFNUM=?',$TicketNumber,'Y')//text()</con2:xqueryText>
-                        </con1:expr>
-                    </con1:assign>
-                    <con1:assign varName="TicketNumber">
-                        <con2:id>_ActionId-a013dcc.3057d296.0.1696cde6423.N7dd2</con2:id>
-                        <con1:expr>
-                            <con2:xqueryText>$InputRequest/sit:ServiceTicket/sit:CustomerReference3/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
                     <con2:assign varName="SourceSystem" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
