@@ -15,6 +15,20 @@
                     <con2:userNsDecl prefix="axio" namespace="http://sita.ba.integration.axiossystems.com/"/>
                 </con:context>
                 <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-a013dd6.4794e374.0.16a111fc5ea.N7fc9</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
+<ProcessIncidentResult xmlns="">
+<STATUS>SUCCESS</STATUS>
+<DESCRIPTION>Your request has been processed successfully</DESCRIPTION>
+</ProcessIncidentResult>
+</ProcessIncidentResponse>]]></con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
                     <con3:route>
                         <con2:id>_ActionId-N3f57fdfd.453ba8c2.0.163c60c2d2b.N7d23</con2:id>
                         <con3:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
@@ -503,7 +517,7 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                 <con:actions>
                     <con4:route>
                         <con2:id>_ActionId-N3f57d45a.4ccebf95.0.16372a61423.N7eed</con2:id>
-                        <con2:disabled>true</con2:disabled>
+                        <con4:service ref="IBM_INC/BusinessService/Outbound/IBMIncReqHttpBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con4:outboundTransform>
                             <con5:log>
                                 <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7ff5</con2:id>
@@ -513,9 +527,18 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 </con5:expr>
                                 <con5:message>****IBMOutboundIncAsyncPS.Route.RequestSent****</con5:message>
                             </con5:log>
+                            <con1:insert varName="outbound">
+                                <con2:id>_ActionId-a013dd6.4794e374.0.16a111fc5ea.N7fcc</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>./ctx:transport/ctx:request</con2:xpathText>
+                                </con1:location>
+                                <con1:where>first-child</con1:where>
+                                <con1:expr>
+                                    <con2:xqueryText>&lt;http:http-method>PUT&lt;/http:http-method></con2:xqueryText>
+                                </con1:expr>
+                            </con1:insert>
                             <con1:transport-headers>
                                 <con2:id>_ActionId-a013dc6.7a29203b.0.1646f67e245.N7f93</con2:id>
-                                <con2:disabled>true</con2:disabled>
                                 <con1:header-set>outbound-request</con1:header-set>
                                 <con1:header value="expression" name="SOAPAction">
                                     <con2:xqueryText>'" "'</con2:xqueryText>
@@ -534,7 +557,7 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 </con5:expr>
                                 <con5:message>****IBMOutboundIncAsyncPS.Route.ResponseReceived****</con5:message>
                             </con5:log>
-                            <con1:assign varName="CISCOResponse" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                            <con1:assign varName="IBMResponse" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
                                 <con2:id>_ActionId-N3f57ff98.N2dd03961.0.1696da877cc.N7ffb</con2:id>
                                 <con1:expr>
                                     <con2:xqueryText>$body/*</con2:xqueryText>
