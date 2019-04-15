@@ -17,6 +17,7 @@
                 <con:actions>
                     <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-a013dd6.4794e374.0.16a111fc5ea.N7fc9</con2:id>
+                        <con2:disabled>true</con2:disabled>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
                         </con1:location>
@@ -27,6 +28,15 @@
 <DESCRIPTION>Your request has been processed successfully</DESCRIPTION>
 </ProcessIncidentResult>
 </ProcessIncidentResponse>]]></con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ff7</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>$IBMResponse</con2:xqueryText>
                         </con1:expr>
                     </con1:replace>
                     <con3:route>
@@ -87,6 +97,55 @@
                             </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ff0</con2:id>
+                        <con1:case id="_BranchId-a013dd6.N3c3e0ff4.0.16a217beec4.N7fef">
+                            <con1:condition>
+                                <con2:xqueryText>$IBMResponse/error_message/text()</con2:xqueryText>
+                            </con1:condition>
+                            <con1:actions>
+                                <con3:route>
+                                    <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f52</con2:id>
+                                    <con3:service ref="Common/ProxyServices/ErrorHandlerPS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:outboundTransform>
+                                        <con1:replace varName="body" contents-only="true">
+                                            <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f4f</con2:id>
+                                            <con1:location>
+                                                <con2:xpathText>.</con2:xpathText>
+                                            </con1:location>
+                                            <con1:expr>
+                                                <con2:xqueryText><![CDATA[<ErrorHandlerRequest>
+	<ErrorDetails>
+		<ErrorCode>ERR-APP</ErrorCode>
+		<ErrorMsg>{$IBMResponse/error_message/text()}</ErrorMsg>
+	</ErrorDetails>
+	<MessageDetails>
+		<Message_TransactionId>{$Message_TranId}</Message_TransactionId>
+		<TransactionType>{$TransactionType}</TransactionType>
+		<RecType>INC</RecType>
+		<ProxyService>IBMOutboundIncAsyncPS</ProxyService>
+                <Payload>{$CanonicalInput/*}</Payload>
+		<Source>{$SourceSystem}</Source>
+		<Destination>IBM</Destination>
+		<IncidentId>{$TicketNumber}</IncidentId>
+		<ExternalRefNum>{$ExtRefNumber}</ExternalRefNum>
+	</MessageDetails>
+</ErrorHandlerRequest>]]></con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:replace>
+                                        <con2:reply isError="false">
+                                            <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f4c</con2:id>
+                                        </con2:reply>
+                                    </con3:outboundTransform>
+                                </con3:route>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con2:reply isError="false">
+                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f19</con2:id>
+                            </con2:reply>
+                        </con1:default>
+                    </con1:ifThenElse>
                 </con:actions>
             </con:stage>
         </con:pipeline>
@@ -513,7 +572,10 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                 <con:response>response-N3f57d45a.23576526.0.16320a038f4.N7da0</con:response>
             </con:pipeline-node>
             <con:route-node name="RouteNode1" error-handler="error-a013dce.2cafda84.0.165337dfb1c.N7efc">
-                <con:context/>
+                <con:context>
+                    <con2:userNsDecl prefix="config" namespace="http://www.bea.com/wli/sb/services/security/config"/>
+                    <con2:userNsDecl prefix="inc" namespace="http://www.sita.aero/schema/IncidentEbondingMessageV1"/>
+                </con:context>
                 <con:actions>
                     <con4:route>
                         <con2:id>_ActionId-N3f57d45a.4ccebf95.0.16372a61423.N7eed</con2:id>
@@ -527,6 +589,22 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 </con5:expr>
                                 <con5:message>****IBMOutboundIncAsyncPS.Route.RequestSent****</con5:message>
                             </con5:log>
+                            <con6:assign varName="ServiceAccountUserCredentials" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ffe</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>fn-bea:lookupBasicCredentials(concat('IBM_INC/Resources/ServiceAccounts/',fn:upper-case($CanonicalInput/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()),'_ServiceAccount'))</con2:xqueryText>
+                                </con1:expr>
+                            </con6:assign>
+                            <con6:javaCallout varName="AuthEncodedCredentials" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ffa</con2:id>
+                                <con1:archive ref="SN_INC/Resources/JARs/utils"/>
+                                <con1:className>aero.sita.utilities.Utility</con1:className>
+                                <con1:method>public static java.lang.String encodeBase64(java.lang.String)</con1:method>
+                                <con1:expr>
+                                    <con2:xqueryText>concat($ServiceAccountUserCredentials/config:username/text(),':',$ServiceAccountUserCredentials/config:password/text())</con2:xqueryText>
+                                </con1:expr>
+                                <con1:return-param-as-ref>false</con1:return-param-as-ref>
+                            </con6:javaCallout>
                             <con1:insert varName="outbound">
                                 <con2:id>_ActionId-a013dd6.4794e374.0.16a111fc5ea.N7fcc</con2:id>
                                 <con1:location>
@@ -534,19 +612,33 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 </con1:location>
                                 <con1:where>first-child</con1:where>
                                 <con1:expr>
-                                    <con2:xqueryText>&lt;http:http-method>PUT&lt;/http:http-method></con2:xqueryText>
+                                    <con2:xqueryText>&lt;http:http-method>POST&lt;/http:http-method></con2:xqueryText>
                                 </con1:expr>
                             </con1:insert>
                             <con1:transport-headers>
                                 <con2:id>_ActionId-a013dc6.7a29203b.0.1646f67e245.N7f93</con2:id>
                                 <con1:header-set>outbound-request</con1:header-set>
-                                <con1:header value="expression" name="SOAPAction">
-                                    <con2:xqueryText>'" "'</con2:xqueryText>
-                                </con1:header>
                                 <con1:header value="expression" name="Content-Type">
                                     <con2:xqueryText>'text/xml'</con2:xqueryText>
                                 </con1:header>
+                                <con1:header value="expression" name="Authorization">
+                                    <con2:xqueryText>fn:concat('Basic  ',$AuthEncodedCredentials)</con2:xqueryText>
+                                </con1:header>
                             </con1:transport-headers>
+                            <con6:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f14</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>.</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryText>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:u="http://www.service-now.com/u_integration_webservices_catalogtask">
+&lt;soapenv:Header />
+&lt;soapenv:Body>
+{$body/*}
+&lt;/soapenv:Body>
+&lt;/soapenv:Envelope></con2:xqueryText>
+                                </con1:expr>
+                            </con6:replace>
                         </con4:outboundTransform>
                         <con4:responseTransform>
                             <con5:log>
