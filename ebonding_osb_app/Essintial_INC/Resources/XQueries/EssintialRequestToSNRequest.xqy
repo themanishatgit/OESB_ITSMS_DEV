@@ -9,6 +9,7 @@ declare namespace ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 
 
 declare variable $SourceSystem as xs:string external;
+declare variable $ExtRefNumber as xs:string external;
 declare variable $MsgTranId as xs:string external;
 declare variable $StatusDestinationValue as xs:string external;
 declare variable $ResolutionCodeDestinationValue as xs:string external;
@@ -17,6 +18,7 @@ declare variable $ESSINTIALRequest as element() (:: schema-element(ns2:ServiceTi
 
 declare function local:func($MsgTranId as xs:string,
                             $SourceSystem as xs:string,
+							$ExtRefNumber as xs:string,
                             $TransactionType as xs:string,
                             $StatusDestinationValue as xs:string, 
                             $ResolutionCodeDestinationValue as xs:string,
@@ -37,7 +39,7 @@ declare function local:func($MsgTranId as xs:string,
 			<ns1:TicketNumber>{fn:data($ESSINTIALRequest/ns2:CustomerReference3)}</ns1:TicketNumber>
 			<ns1:Supplier>
 				<ns1:Name>{$SourceSystem}</ns1:Name>
-				<ns1:RefNumber>{fn:data($ESSINTIALRequest/ns2:VORDID)}</ns1:RefNumber>
+				<ns1:RefNumber>{$ExtRefNumber}</ns1:RefNumber>
 			</ns1:Supplier>
                       {
                         
@@ -80,7 +82,7 @@ declare function local:func($MsgTranId as xs:string,
 
 			<ns1:Supplier>
 				<ns1:Name>{$SourceSystem}</ns1:Name>
-				<ns1:RefNumber>{fn:data($ESSINTIALRequest/ns2:VORDID)}</ns1:RefNumber>
+				<ns1:RefNumber>{$ExtRefNumber}</ns1:RefNumber>
 			</ns1:Supplier>
 
                       {
@@ -147,4 +149,4 @@ declare function local:func($MsgTranId as xs:string,
 </ns1:IncidentRequestMessage>
 };
 
-local:func($MsgTranId,$SourceSystem,$TransactionType, $StatusDestinationValue,$ResolutionCodeDestinationValue,$ESSINTIALRequest)
+local:func($MsgTranId,$SourceSystem,$ExtRefNumber,$TransactionType, $StatusDestinationValue,$ResolutionCodeDestinationValue,$ESSINTIALRequest)
