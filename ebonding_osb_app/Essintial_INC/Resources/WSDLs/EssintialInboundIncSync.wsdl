@@ -1,38 +1,111 @@
-<definitions targetNamespace="urn:ws.solvedirect.com/webservices/custom" name="CallServiceService" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:ws.solvedirect.com/webservices/custom" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/">
-	<types>
-		<xsd:schema>
-			<xsd:import namespace="urn:ws.solvedirect.com/webservices/custom" schemaLocation="../Schemas/EssintialCallService.xsd"/>
-		</xsd:schema>
-	</types>
-	<message name="SDWebServiceException">
-		<part name="fault" element="tns:SDWebServiceException"/>
-	</message>
-	<message name="putCall">
-		<part name="parameters" element="tns:putCall"/>
-	</message>
-	<message name="putCallResponse">
-		<part name="parameters" element="tns:putCallResponse"/>
-	</message>
-	<portType name="CallService">
-		<operation name="putCall">
-			<input wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCallRequest" message="tns:putCall"/>
-			<output wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCallResponse" message="tns:putCallResponse"/>
-			<fault message="tns:SDWebServiceException" name="SDWebServiceException" wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCall:Fault:SDWebServiceException"/>
-		</operation>
-	</portType>
-	<binding name="CallServicePortBinding" type="tns:CallService">
-		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-		<operation name="putCall">
-			<soap:operation soapAction=""/>
-			<input>
-				<soap:body use="literal"/>
-			</input>
-			<output>
-				<soap:body use="literal"/>
-			</output>
-			<fault name="SDWebServiceException">
-				<soap:fault name="SDWebServiceException" use="literal"/>
-			</fault>
-		</operation>
-	</binding>
+<definitions targetNamespace="urn:ws.solvedirect.com/webservices/custom" name="CallServiceService"
+             xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+             xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+             xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:ws.solvedirect.com/webservices/custom"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema version="1.0" elementFormDefault="qualified" targetNamespace="urn:ws.solvedirect.com/webservices/custom"
+               xmlns:tns="urn:ws.solvedirect.com/webservices/custom" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:s="http://net4.essintial.com/SitaTicket_1.xsd">
+      <xs:import namespace="http://net4.essintial.com/SitaTicket_1.xsd"/>
+      <xs:element name="CallData" type="tns:callData"/>
+      <xs:element name="Messages" type="tns:callsData"/>
+      <xs:element name="SDWebServiceException" type="tns:SDWebServiceException"/>
+      <xs:element name="putCall" type="tns:putCall"/>
+      <xs:element name="putCallResponse" type="tns:putCallResponse"/>
+      <xs:complexType name="putCall">
+        <xs:sequence>
+          <xs:element name="username" type="xs:string" minOccurs="0"/>
+          <xs:element name="password" type="xs:string" minOccurs="0"/>
+          <xs:element name="CallData" type="tns:callData" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="callData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" ref="s:ServiceTicket"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="putCallResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="SDWebServiceException">
+        <xs:sequence>
+          <xs:element name="message" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="callsData">
+        <xs:sequence>
+          <xs:any processContents="skip" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+               targetNamespace="http://net4.essintial.com/SitaTicket_1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="ServiceTicket">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:string" name="LocationCode" minOccurs="0" nillable="true"/>
+            <xs:element type="xs:string" name="EndUserOrganization" minOccurs="0" nillable="true"/>
+            <xs:element type="xs:string" name="AddressDetails" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressCity" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressState" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressZip" minOccurs="0"/>
+            <xs:element type="xs:string" name="AddressCountry" minOccurs="0"/>
+            <xs:element type="xs:string" name="Priority" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerReference4" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerReference3" minOccurs="0"/>
+            <xs:element type="xs:string" name="VORDID" minOccurs="0"/>
+            <xs:element type="xs:string" name="Comments" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerReference2" minOccurs="0"/>
+            <xs:element type="xs:string" name="StatusCode" minOccurs="0"/>
+            <xs:element type="xs:string" name="ReceivedMethod" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="CustomerReceivedDate" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="ScheduledDS" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="TechOnSite" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="TechCheckedOut" minOccurs="0"/>
+            <xs:element type="xs:string" name="TotalLaborTime" minOccurs="0"/>
+            <xs:element type="xs:string" name="TotalTravelTime" minOccurs="0"/>
+            <xs:element type="xs:string" name="FinalAction" minOccurs="0"/>
+            <xs:element type="xs:string" name="CustomerName" minOccurs="0"/>
+            <xs:element type="xs:string" name="Notes" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute type="xs:string" name="Version"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="SDWebServiceException">
+    <part name="fault" element="tns:SDWebServiceException"/>
+  </message>
+  <message name="putCall">
+    <part name="parameters" element="tns:putCall"/>
+  </message>
+  <message name="putCallResponse">
+    <part name="parameters" element="tns:putCallResponse"/>
+  </message>
+  <portType name="CallService">
+    <operation name="putCall">
+      <input wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCallRequest" message="tns:putCall"/>
+      <output wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCallResponse"
+              message="tns:putCallResponse"/>
+      <fault message="tns:SDWebServiceException" name="SDWebServiceException"
+             wsam:Action="urn:ws.solvedirect.com/webservices/custom:CallService:putCall:Fault:SDWebServiceException"/>
+    </operation>
+  </portType>
+  <binding name="CallServicePortBinding" type="tns:CallService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="putCall">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SDWebServiceException">
+        <soap:fault name="SDWebServiceException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
 </definitions>

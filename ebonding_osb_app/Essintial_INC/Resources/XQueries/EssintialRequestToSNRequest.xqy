@@ -3,7 +3,7 @@ xquery version "1.0" encoding "utf-8";
 (:: OracleAnnotationVersion "1.0" ::)
 
 declare namespace ns2="http://net4.essintial.com/SitaTicket_1.xsd";
-(:: import schema at "../Schemas/EssinitialInboundMessage.xsd" ::)
+(:: import schema at "../WSDLs/EssintialInboundIncSync.wsdl" ::)
 declare namespace ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 (:: import schema at "../../../Common/Resources/Schemas/IncidentEbondingMessage.xsd" ::)
 

@@ -343,8 +343,8 @@ else
                 <con:actions>
                     <con2:validate>
                         <con1:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N790e</con1:id>
-                        <con2:schema ref="Essintial_INC/Resources/Schemas/EssintialCallService"/>
-                        <con2:schemaElement xmlns:cus="urn:ws.solvedirect.com/webservices/custom">cus:CallData</con2:schemaElement>
+                        <con2:wsdl ref="Essintial_INC/Resources/WSDLs/EssintialInboundIncSync"/>
+                        <con2:schemaElement xmlns:cus="urn:ws.solvedirect.com/webservices/custom">cus:putCall</con2:schemaElement>
                         <con2:varName>body</con2:varName>
                         <con2:location>
                             <con1:xpathText xmlns:con6="http://www.bea.com/wli/sb/stages/config">./*</con1:xpathText>
