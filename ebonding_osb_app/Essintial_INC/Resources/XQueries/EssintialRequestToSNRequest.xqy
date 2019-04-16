@@ -3,10 +3,9 @@ xquery version "1.0" encoding "utf-8";
 (:: OracleAnnotationVersion "1.0" ::)
 
 declare namespace ns2="http://net4.essintial.com/SitaTicket_1.xsd";
-(:: import schema at "../WSDLs/EssintialInboundIncSync.wsdl" ::)
+(:: import schema at "../Schemas/EssinitialInboundMessage.xsd" ::)
 declare namespace ns1="http://www.sita.aero/schema/IncidentEbondingMessageV1";
 (:: import schema at "../../../Common/Resources/Schemas/IncidentEbondingMessage.xsd" ::)
-
 
 declare variable $SourceSystem as xs:string external;
 declare variable $ExtRefNumber as xs:string external;
@@ -18,7 +17,7 @@ declare variable $ESSINTIALRequest as element() (:: schema-element(ns2:ServiceTi
 
 declare function local:func($MsgTranId as xs:string,
                             $SourceSystem as xs:string,
-							$ExtRefNumber as xs:string,
+                            $ExtRefNumber as xs:string,
                             $TransactionType as xs:string,
                             $StatusDestinationValue as xs:string, 
                             $ResolutionCodeDestinationValue as xs:string,

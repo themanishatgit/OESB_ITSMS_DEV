@@ -5,8 +5,8 @@
         <ser:binding type="SOAP" xsi:type="con:SoapBindingType" isSoap12="false" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
             <con:wsdl ref="Essintial_INC/Resources/WSDLs/EssintialInboundIncSync"/>
             <con:binding>
-                <con:name>ServiceSoap</con:name>
-                <con:namespace>http://www.sita.aero/WSDL/EssintialInboundIncSyncV1</con:namespace>
+                <con:name>CallServicePortBinding</con:name>
+                <con:namespace>urn:ws.solvedirect.com/webservices/custom</con:namespace>
             </con:binding>
             <con:selector type="SOAP body"/>
         </ser:binding>
