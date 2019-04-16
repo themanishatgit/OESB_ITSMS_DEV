@@ -14,9 +14,11 @@ declare function local:func($status as xs:string,$SNRequest as element() (:: sch
     <ns2:insert>
        {
          
-         
+         if($SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType='ACK') then 
+          <ns2:u_comments></ns2:u_comments>
+         else 
             if (fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Status)='Resolved') then
-                if (true()) then
+                if (fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Status)) then
                     <ns2:u_comments>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Status)}</ns2:u_comments>
                 else
                     <ns2:u_comments></ns2:u_comments>
@@ -30,6 +32,10 @@ declare function local:func($status as xs:string,$SNRequest as element() (:: sch
         <ns2:u_vendornumber>{fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:TicketNumber)}</ns2:u_vendornumber>
         <ns2:u_state>{$status}</ns2:u_state>
         {
+        if( $SNRequest/ns1:IncidentRequestHeader/ns1:TransactionType='ACK'  ) then
+                 <ns2:u_vendorclosed></ns2:u_vendorclosed>
+            
+            else
             if (fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:Status)='Resolved' or fn:string-length(fn:data($SNRequest/ns1:IncidentRequestBody/ns1:IncidentDetails/ns1:AdditionalComments))>0  ) then
                 <ns2:u_vendorclosed>X</ns2:u_vendorclosed>
             else
