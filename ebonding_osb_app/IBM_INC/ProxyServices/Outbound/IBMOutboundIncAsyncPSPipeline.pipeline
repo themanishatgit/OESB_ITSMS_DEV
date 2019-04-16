@@ -135,7 +135,7 @@ if ( $IBMResponse/*:Body/*:insertResponse/*:status/text()) then
                                 </con2:reply>
                             </con1:actions>
                         </con1:case>
-                        <con1:default></con1:default>
+                        <con1:default/>
                     </con1:ifThenElse>
                 </con:actions>
             </con:stage>
@@ -594,22 +594,6 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 </con5:expr>
                                 <con5:message>****IBMOutboundIncAsyncPS.Route.RequestSent****</con5:message>
                             </con5:log>
-                            <con6:assign varName="ServiceAccountUserCredentials" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
-                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ffe</con2:id>
-                                <con1:expr>
-                                    <con2:xqueryText>fn-bea:lookupBasicCredentials('IBM_INC/Resources/ServiceAccounts/IBM_ServiceAccount')</con2:xqueryText>
-                                </con1:expr>
-                            </con6:assign>
-                            <con6:javaCallout varName="AuthEncodedCredentials" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
-                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ffa</con2:id>
-                                <con1:archive ref="SN_INC/Resources/JARs/utils"/>
-                                <con1:className>aero.sita.utilities.Utility</con1:className>
-                                <con1:method>public static java.lang.String encodeBase64(java.lang.String)</con1:method>
-                                <con1:expr>
-                                    <con2:xqueryText>concat($ServiceAccountUserCredentials/config:username/text(),':',$ServiceAccountUserCredentials/config:password/text())</con2:xqueryText>
-                                </con1:expr>
-                                <con1:return-param-as-ref>false</con1:return-param-as-ref>
-                            </con6:javaCallout>
                             <con1:insert varName="outbound">
                                 <con2:id>_ActionId-a013dd6.4794e374.0.16a111fc5ea.N7fcc</con2:id>
                                 <con1:location>
@@ -621,13 +605,10 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 </con1:expr>
                             </con1:insert>
                             <con1:transport-headers>
-                                <con2:id>_ActionId-a013dc6.7a29203b.0.1646f67e245.N7f93</con2:id>
+                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7e9d</con2:id>
                                 <con1:header-set>outbound-request</con1:header-set>
                                 <con1:header value="expression" name="Content-Type">
                                     <con2:xqueryText>'text/xml'</con2:xqueryText>
-                                </con1:header>
-                                <con1:header value="expression" name="Authorization">
-                                    <con2:xqueryText>fn:concat('Basic  ',$AuthEncodedCredentials)</con2:xqueryText>
                                 </con1:header>
                             </con1:transport-headers>
                         </con4:outboundTransform>
