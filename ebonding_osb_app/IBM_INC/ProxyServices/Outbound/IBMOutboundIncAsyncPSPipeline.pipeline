@@ -16,21 +16,6 @@
                 </con:context>
                 <con:actions>
                     <con1:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-a013dd6.4794e374.0.16a111fc5ea.N7fc9</con2:id>
-                        <con2:disabled>true</con2:disabled>
-                        <con1:location>
-                            <con2:xpathText>.</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText><![CDATA[<ProcessIncidentResponse xmlns="http://tempuri.org/">
-<ProcessIncidentResult xmlns="">
-<STATUS>SUCCESS</STATUS>
-<DESCRIPTION>Your request has been processed successfully</DESCRIPTION>
-</ProcessIncidentResult>
-</ProcessIncidentResponse>]]></con2:xqueryText>
-                        </con1:expr>
-                    </con1:replace>
-                    <con1:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ff7</con2:id>
                         <con1:location>
                             <con2:xpathText>.</con2:xpathText>
@@ -97,16 +82,21 @@
                             </con1:routing-options>
                         </con3:outboundTransform>
                     </con3:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ed9" name="CheckResponse">
+                <con:context/>
+                <con:actions>
                     <con1:ifThenElse>
                         <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ff0</con2:id>
                         <con1:case id="_BranchId-a013dd6.N3c3e0ff4.0.16a217beec4.N7fef">
                             <con1:condition>
-                                <con2:xqueryText>$IBMResponse/error_message/text()</con2:xqueryText>
+                                <con2:xqueryText>$IBMResponse/error_message/text() or $IBMResponse/*:Body/*:insertResponse/*:status='ignored'</con2:xqueryText>
                             </con1:condition>
                             <con1:actions>
                                 <con3:route>
                                     <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f52</con2:id>
-                                    <con3:service ref="Common/ProxyServices/ErrorHandlerPS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                    <con3:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                                     <con3:outboundTransform>
                                         <con1:replace varName="body" contents-only="true">
                                             <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f4f</con2:id>
@@ -117,14 +107,19 @@
                                                 <con2:xqueryText><![CDATA[<ErrorHandlerRequest>
 	<ErrorDetails>
 		<ErrorCode>ERR-APP</ErrorCode>
-		<ErrorMsg>{$IBMResponse/error_message/text()}</ErrorMsg>
+		{
+if ( $IBMResponse/*:Body/*:insertResponse/*:status/text()) then 
+                     <ErrorMsg>{$IBMResponse/*:Body/*:insertResponse/*:status_message/text()}</ErrorMsg>
+               else
+                    <ErrorMsg>{$IBMResponse/error_message/text()}</ErrorMsg>
+                 }
 	</ErrorDetails>
 	<MessageDetails>
 		<Message_TransactionId>{$Message_TranId}</Message_TransactionId>
 		<TransactionType>{$TransactionType}</TransactionType>
 		<RecType>INC</RecType>
 		<ProxyService>IBMOutboundIncAsyncPS</ProxyService>
-                <Payload>{$CanonicalInput/*}</Payload>
+                <Payload>{$CanonicalInput}</Payload>
 		<Source>{$SourceSystem}</Source>
 		<Destination>IBM</Destination>
 		<IncidentId>{$TicketNumber}</IncidentId>
@@ -133,18 +128,14 @@
 </ErrorHandlerRequest>]]></con2:xqueryText>
                                             </con1:expr>
                                         </con1:replace>
-                                        <con2:reply isError="false">
-                                            <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f4c</con2:id>
-                                        </con2:reply>
                                     </con3:outboundTransform>
                                 </con3:route>
+                                <con2:reply isError="false">
+                                    <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f19</con2:id>
+                                </con2:reply>
                             </con1:actions>
                         </con1:case>
-                        <con1:default>
-                            <con2:reply isError="false">
-                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f19</con2:id>
-                            </con2:reply>
-                        </con1:default>
+                        <con1:default></con1:default>
                     </con1:ifThenElse>
                 </con:actions>
             </con:stage>
@@ -430,6 +421,20 @@ else 'SN'</con:path>
                             </con2:xqueryTransform>
                         </con1:expr>
                     </con1:replace>
+                    <con6:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                        <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f14</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" >
+&lt;soapenv:Header />
+&lt;soapenv:Body>
+{$body/*}
+&lt;/soapenv:Body>
+&lt;/soapenv:Envelope></con2:xqueryText>
+                        </con1:expr>
+                    </con6:replace>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-N3f57d45a.N23e4f0e2.0.163bb15afed.N7d19" name="AuditRequestSent">
@@ -592,7 +597,7 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                             <con6:assign varName="ServiceAccountUserCredentials" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
                                 <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ffe</con2:id>
                                 <con1:expr>
-                                    <con2:xqueryText>fn-bea:lookupBasicCredentials(concat('IBM_INC/Resources/ServiceAccounts/',fn:upper-case($CanonicalInput/inc:IncidentRequestMessage/inc:IncidentRequestHeader/inc:DestinationSystem/text()),'_ServiceAccount'))</con2:xqueryText>
+                                    <con2:xqueryText>fn-bea:lookupBasicCredentials('IBM_INC/Resources/ServiceAccounts/IBM_ServiceAccount')</con2:xqueryText>
                                 </con1:expr>
                             </con6:assign>
                             <con6:javaCallout varName="AuthEncodedCredentials" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
@@ -625,20 +630,6 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                     <con2:xqueryText>fn:concat('Basic  ',$AuthEncodedCredentials)</con2:xqueryText>
                                 </con1:header>
                             </con1:transport-headers>
-                            <con6:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
-                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f14</con2:id>
-                                <con1:location>
-                                    <con2:xpathText>.</con2:xpathText>
-                                </con1:location>
-                                <con1:expr>
-                                    <con2:xqueryText>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:u="http://www.service-now.com/u_integration_webservices_catalogtask">
-&lt;soapenv:Header />
-&lt;soapenv:Body>
-{$body/*}
-&lt;/soapenv:Body>
-&lt;/soapenv:Envelope></con2:xqueryText>
-                                </con1:expr>
-                            </con6:replace>
                         </con4:outboundTransform>
                         <con4:responseTransform>
                             <con5:log>

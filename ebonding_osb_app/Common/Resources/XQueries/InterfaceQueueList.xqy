@@ -38,8 +38,9 @@
   </Interface>
   <Interface>
     <Name>IBM</Name>
+    <Type>CUSTOMER</Type>
     <SendLogComment>N</SendLogComment>
-    <QueueName>jms:///EbondingIncConnectionFactory/CISCOOutboundIncQ</QueueName>
+    <QueueName>jms:///EbondingIncConnectionFactory/IBMOutboundIncQ</QueueName>
   </Interface>
   <Interface>
     <Name>JFK</Name>
