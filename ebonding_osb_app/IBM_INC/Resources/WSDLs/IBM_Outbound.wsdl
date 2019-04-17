@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:IBM_Outbound" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:IBM_Outbound"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.service-now.com/u_integration_webservices_catalogtask">
+  <types>
+   <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.service-now.com/u_integration_webservices_catalogtask"
+            targetNamespace="http://www.service-now.com/u_integration_webservices_catalogtask"
+            elementFormDefault="qualified">
+  <xsd:element name="insert">
+  <xsd:complexType >
+    <xsd:sequence>
+      <xsd:element name="template_import_log" type="xsd:string"/>
+      <xsd:element name="u_closecode" type="xsd:string"/>
+      <xsd:element name="u_comments" type="xsd:string"/>
+      <xsd:element name="u_servicenownumber" type="xsd:string"/>
+      <xsd:element name="u_vendor" type="xsd:string"/>
+      <xsd:element name="u_vendornumber" type="xsd:string"/>
+      <xsd:element name="u_state" type="xsd:string"/>
+      <xsd:element name="u_vendorclosed" type="xsd:string"/>
+      <xsd:element name="u_vendorworkstart" type="xsd:string"/>
+      <xsd:element name="u_vendorworkend" type="xsd:string"/>
+      <xsd:element name="u_category" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+   <xsd:element name="insertResponse">
+  <xsd:complexType >
+    <xsd:sequence>
+      <xsd:element name="sys_id" type="xsd:string"/>
+      <xsd:element name="table" type="xsd:string"/>
+      <xsd:element name="display_name" type="xsd:string"/>
+      <xsd:element name="display_value" type="xsd:string"/>
+      <xsd:element name="status" type="xsd:string"/>
+      <xsd:element name="status_message" type="xsd:string"/>
+      <xsd:element name="error_message" type="xsd:string"/>
+     
+    </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+  
+</xsd:schema></types>
+
+<message name="ProcessIncidentSoapIn">
+    <part name="parameters" element="xs:insert"/>
+  </message>
+  <message name="ProcessIncidentSoapOut">
+    <part name="parameters" element="xs:insertResponse"/>
+  </message>
+  <portType name="ServiceSoap">
+    <operation name="ProcessIncident">
+      <input message="tns:ProcessIncidentSoapIn"/>
+      <output message="tns:ProcessIncidentSoapOut"/>
+    </operation>
+  </portType>
+  <binding name="ServiceSoapSOAP11Binding" type="tns:ServiceSoap">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="ProcessIncident">
+      <soap:operation style="document" soapAction="urn:IBM_Outbound/ProcessIncident"/>
+      <input>
+        <soap:body use="literal" parts="parameters"/>
+      </input>
+      <output>
+        <soap:body use="literal" parts="parameters"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ServiceSoap">
+    <port name="ServiceSoapPort" binding="tns:ServiceSoapSOAP11Binding">
+      <soap:address location="https://aircanadatest.service-now.com/u_integration_webservices_incidenttask.do?SOAP"/>
+    </port>
+  </service>
+</definitions>
