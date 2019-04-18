@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
     <con:coreEntry>
         <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
             <con:wsdl ref="Essintial_INC/Resources/WSDLs/EssintialInboundIncSync"/>
@@ -41,7 +41,7 @@
                         <con3:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:operation>insert</con3:operation>
                         <con3:outboundTransform>
-                            <con1:replace varName="body" contents-only="true">
+                            <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-a013dc6.N4a5f3b08.0.164f9f5c9af.N7f95</con2:id>
                                 <con1:location>
                                     <con2:xpathText>.</con2:xpathText>
@@ -111,6 +111,24 @@
                         <con1:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7dd2</con1:id>
                         <con4:service ref="Common/BusinessServices/Publish_ErrorQ" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con4:outboundTransform>
+                            <con2:assign varName="ErrorCode">
+                                <con1:id>_ActionId-N53e6b7ce.4c3e3a0d.0.16a2fed247c.N7f83</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryText>if($fault/ctx:errorCode)then
+$fault/ctx:errorCode/text()
+else
+"ERR002"</con1:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
+                            <con2:assign varName="ErrorMessage">
+                                <con1:id>_ActionId-N53e6b7ce.4c3e3a0d.0.16a2fed247c.N7f80</con1:id>
+                                <con2:expr>
+                                    <con1:xqueryText>if($fault/ctx:reason)then
+$fault/ctx:reason/text()
+else
+"Technical Failure"</con1:xqueryText>
+                                </con2:expr>
+                            </con2:assign>
                             <con2:replace varName="body" contents-only="true">
                                 <con1:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7dd1</con1:id>
                                 <con2:location>
@@ -119,8 +137,8 @@
                                 <con2:expr>
                                     <con1:xqueryText><![CDATA[<ErrorHandlerRequest>
 	<ErrorDetails>
-		<ErrorCode>ERR002</ErrorCode>
-		<ErrorMsg>Technical Failure</ErrorMsg>
+		<ErrorCode>{$ErrorCode}</ErrorCode>
+		<ErrorMsg>{$ErrorMessage}</ErrorMsg>
 	</ErrorDetails>
 	<MessageDetails>
 		<Message_TransactionId>{$MsgTranId}</Message_TransactionId>
@@ -220,19 +238,19 @@
                         </con5:expr>
                         <con5:message>****EssintialInboundIncSyncPS.IncomingRequest****</con5:message>
                     </con5:log>
-                    <con1:assign varName="InputRequest">
+                    <con1:assign varName="InputRequest" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N79fb</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$body/tem:putCall/tem:CallData</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="TicketNumber">
+                    <con1:assign varName="TicketNumber" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013dcc.3057d296.0.1696cde6423.N7dd2</con2:id>
                         <con1:expr>
                             <con2:xqueryText>$InputRequest/sit:ServiceTicket/sit:CustomerReference3/text()</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="ExtRefNumber">
+                    <con1:assign varName="ExtRefNumber" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013dcc.3057d296.0.1696cde6423.N7dd5</con2:id>
                         <con1:expr>
                             <con2:xqueryText>fn-bea:execute-sql('jdbc/ESBDevDB',xs:QName('EXTERNAL_REFNUM'),
@@ -266,13 +284,13 @@ else
                             <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">fn-bea:uuid()</con6:xqueryText>
                         </con2:expr>
                     </con2:assign>
-                    <con1:assign varName="RecType">
+                    <con1:assign varName="RecType" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a013dcc.N5deda374.0.169c4367e80.N7f44</con2:id>
                         <con1:expr>
                             <con2:xqueryText>'INC'</con2:xqueryText>
                         </con1:expr>
                     </con1:assign>
-                    <con1:assign varName="LogComment">
+                    <con1:assign varName="LogComment" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-a0209a4.3de1ab48.0.169ed6dd7bd.N7fa4</con2:id>
                         <con1:expr>
                             <con2:xqueryText>if($InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Update' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='Partner and Customer' or $InputRequest/sit:ServiceTicket/sit:StatusCode/text()='CustomerOK')then
@@ -294,7 +312,7 @@ else
                         <con3:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:operation>insert</con3:operation>
                         <con3:outboundTransform>
-                            <con1:replace varName="body" contents-only="true">
+                            <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N798d</con2:id>
                                 <con1:location>
                                     <con2:xpathText>.</con2:xpathText>
@@ -343,6 +361,37 @@ else
                             </con1:replace>
                         </con3:outboundTransform>
                     </con3:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N53e6b7ce.4c3e3a0d.0.16a2fed247c.N8000" name="Credential_Validation">
+                <con:context>
+                    <con1:userNsDecl prefix="tem" namespace="urn:ws.solvedirect.com/webservices/custom"/>
+                    <con1:userNsDecl prefix="config" namespace="http://www.bea.com/wli/sb/services/security/config"/>
+                </con:context>
+                <con:actions>
+                    <con6:assign varName="EssintialInboundServiceAccount" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-N53e6b7ce.4c3e3a0d.0.16a2fed247c.N7fc1</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn-bea:lookupBasicCredentials('Essintial_INC\Resources\ServiceAccount\ESSINTIALInbound_ServiceAccount')</con2:xqueryText>
+                        </con1:expr>
+                    </con6:assign>
+                    <con4:ifThenElse>
+                        <con1:id>_ActionId-N53e6b7ce.4c3e3a0d.0.16a2fed247c.N7ff6</con1:id>
+                        <con4:case id="_BranchId-N53e6b7ce.4c3e3a0d.0.16a2fed247c.N7ff5">
+                            <con4:condition>
+                                <con1:xqueryText>($body/tem:putCall/*:username/text()=$EssintialInboundServiceAccount/config:username/text()) 
+and ($body/tem:putCall/*:password/text()=$EssintialInboundServiceAccount/config:password/text())</con1:xqueryText>
+                            </con4:condition>
+                            <con4:actions/>
+                        </con4:case>
+                        <con4:default>
+                            <con4:Error>
+                                <con1:id>_ActionId-N53e6b7ce.4c3e3a0d.0.16a2fed247c.N7f86</con1:id>
+                                <con4:errCode>ESSINTIAL_ERR001</con4:errCode>
+                                <con4:message>Credential Validation Failure</con4:message>
+                            </con4:Error>
+                        </con4:default>
+                    </con4:ifThenElse>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-a013b64.N7b3ae3c1.0.163cffb80dd.N790f" name="Validate_Stg" errorHandler="error-a013b64.N7b3ae3c1.0.163cffb80dd.N790d" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
@@ -498,7 +547,7 @@ or $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='ST
                     <con2:userNsDecl prefix="tem" namespace="urn:ws.solvedirect.com/webservices/custom"/>
                 </con:context>
                 <con:actions>
-                    <con1:ifThenElse>
+                    <con1:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                         <con2:id>_ActionId-3904ea71.N4f618a99.0.16682fe4c3d.N77e3</con2:id>
                         <con1:case id="_BranchId-3904ea71.N4f618a99.0.16682fe4c3d.N77e2">
                             <con1:condition>
@@ -558,7 +607,7 @@ $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATU
                         <con3:service ref="Common/BusinessServices/Insert_ESBAudit" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con3:operation>insert</con3:operation>
                         <con3:outboundTransform>
-                            <con1:replace varName="body" contents-only="true">
+                            <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N76d1</con2:id>
                                 <con1:location>
                                     <con2:xpathText>.</con2:xpathText>
@@ -696,7 +745,7 @@ $DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='STATU
                         <con1:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7c32</con1:id>
                         <con2:service ref="Common/BusinessServices/PartnerOutboundIncQJMSBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con2:outboundTransform>
-                            <con1:replace contents-only="true" varName="body" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+                            <con1:replace contents-only="true" varName="body" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
                                 <con2:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7ad0</con2:id>
                                 <con1:location>
                                     <con2:xpathText>.</con2:xpathText>
