@@ -192,9 +192,12 @@ else($Ticket_Num)</con2:path>
     <!--1 or more repetitions:-->
     <fetdm:FetchData>
         <fetdm:ObjectName>STATUS</fetdm:ObjectName>
+        <fetdm:SourceValue>{fn:upper-case($InputRequest/sita/category/text())}</fetdm:SourceValue>
+    </fetdm:FetchData>
+     <fetdm:FetchData>
+        <fetdm:ObjectName>CATEGORY</fetdm:ObjectName>
         <fetdm:SourceValue>{fn:upper-case($InputRequest/sita/servicenowstate/text())}</fetdm:SourceValue>
     </fetdm:FetchData>
-	
 </fetdm:FetchDataMappingRequest>]]></con2:xqueryText>
                                 </con1:expr>
                             </con1:assign>
@@ -232,6 +235,9 @@ $Ticket_Num</con2:path>
                                 </con2:param>
                                 <con2:param name="IBMRequest">
                                     <con2:path>$InputRequest</con2:path>
+                                </con2:param>
+                                <con2:param name="category">
+                                    <con2:path>$DataMappingResponse/fetdm:Result/fetdm:FetchData[fetdm:ObjectName/text()='CATEGORY']/fetdm:DestinationValue/text()</con2:path>
                                 </con2:param>
                                 <con2:param name="SourceSystem">
                                     <con2:path>$SourceSystem</con2:path>
