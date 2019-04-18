@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:businessServiceEntry xmlns:con="http://xmlns.oracle.com/servicebus/business/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http">
     <con:coreEntry>
-        <con1:binding type="native REST" xsi:type="con:NativeRestBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:con1="http://xmlns.oracle.com/servicebus/business/config"/>
+        <con1:binding type="SOAP" xsi:type="con:SoapBindingType" isSoap12="false" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:con1="http://xmlns.oracle.com/servicebus/business/config">
+            <con:wsdl ref="IBM_INC/Resources/WSDLs/IBM_Outbound"/>
+            <con:port>
+                <con:name>ServiceSoapPort</con:name>
+                <con:namespace>urn:IBM_Outbound</con:namespace>
+            </con:port>
+        </con1:binding>
         <oper:operations enabled="true">
             <oper:throttling enabled="false"/>
             <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
@@ -27,12 +33,13 @@
         </tran:outbound-properties>
         <tran:provider-specific xsi:type="http:HttpEndPointConfiguration">
             <http:outbound-properties>
+                <http:request-method>POST</http:request-method>
                 <http:timeout>0</http:timeout>
                 <http:connection-timeout>0</http:connection-timeout>
                 <http:outbound-authentication xsi:type="http:HttpBasicAuthenticationType"/>
                 <http:service-account ref="IBM_INC/Resources/ServiceAccounts/IBM_ServiceAccount"/>
                 <http:follow-redirects>false</http:follow-redirects>
-                <http:chunked-streaming-mode>false</http:chunked-streaming-mode>
+                <http:chunked-streaming-mode>true</http:chunked-streaming-mode>
                 <http:session-sctikiness enabled="false" session-id-name="JSESSIONID"/>
             </http:outbound-properties>
             <http:dispatch-policy>SBDefaultResponseWorkManager</http:dispatch-policy>
