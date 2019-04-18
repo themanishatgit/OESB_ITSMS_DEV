@@ -138,6 +138,15 @@
                             </con2:replace>
                         </con4:outboundTransform>
                     </con4:route>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-a0209a1.24817840.0.16a26b192ed.N7fcc</con1:id>
+                        <con2:location>
+                            <con1:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">&lt;ns2:putCallResponse xmlns:ns2="urn:ws.solvedirect.com/webservices/custom"/></con5:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
                     <con1:reply isError="false" xmlns:con6="http://www.bea.com/wli/sb/stages/config">
                         <con6:id>_ActionId-a013b64.N7b3ae3c1.0.163cffb80dd.N7dcf</con6:id>
                     </con1:reply>
@@ -385,7 +394,7 @@ else
     </fetdm:FetchData>
 	<fetdm:FetchData>
         <fetdm:ObjectName>RESOLUTION_CODE</fetdm:ObjectName>
-        <fetdm:SourceValue>{if($InputRequest/sit:ServiceTicket/sit:FinalAction/text()='Swap')then
+        <fetdm:SourceValue>{if(fn:upper-case($InputRequest/sit:ServiceTicket/sit:FinalAction/text())='SWAP')then
         "GENERAL"
         else
         fn:upper-case($InputRequest/sit:ServiceTicket/sit:FinalAction/text())}</fetdm:SourceValue>

@@ -16,8 +16,8 @@
       <xs:element name="putCallResponse" type="tns:putCallResponse"/>
       <xs:complexType name="putCall">
         <xs:sequence>
-          <xs:element name="username" type="xs:string" minOccurs="0"/>
-          <xs:element name="password" type="xs:string" minOccurs="0"/>
+          <xs:element name="username" type="xs:string" minOccurs="0" form="unqualified"/>
+          <xs:element name="password" type="xs:string" minOccurs="0" form="unqualified"/>
           <xs:element name="CallData" type="tns:callData" minOccurs="0"/>
         </xs:sequence>
       </xs:complexType>

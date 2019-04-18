@@ -86,15 +86,15 @@ declare function local:func($MsgTranId as xs:string,
 
                       {
                       if($ESSINTIALRequest/ns2:ScheduledDS/text() != '0001-01-01T00:00:00')then
-                      <ns1:ETA>{fn:data($ESSINTIALRequest/ns2:ScheduledDS)}</ns1:ETA>
+                      <ns1:ETA>{fn:replace($ESSINTIALRequest/ns2:ScheduledDS/text(),'T',' ')}</ns1:ETA>
                       else ()
                       }{
                       if($ESSINTIALRequest/ns2:TechOnSite/text() != '0001-01-01T00:00:00')then
-                      <ns1:ATA>{fn:data($ESSINTIALRequest/ns2:TechOnSite)}</ns1:ATA>
+                      <ns1:ATA>{fn:replace($ESSINTIALRequest/ns2:TechOnSite/text(),'T',' ')}</ns1:ATA>
                       else ()
                       }{
                       if($ESSINTIALRequest/ns2:TechCheckedOut/text() != '0001-01-01T00:00:00')then
-                      <ns1:AFT>{fn:data($ESSINTIALRequest/ns2:TechCheckedOut)}</ns1:AFT>
+                      <ns1:AFT>{fn:replace($ESSINTIALRequest/ns2:TechCheckedOut/text(),'T',' ')}</ns1:AFT>
                       else ()
                       }
                    {
@@ -102,21 +102,23 @@ declare function local:func($MsgTranId as xs:string,
                         let $nl := "&#10;"
                         return
 			
-                   if(fn:data($ESSINTIALRequest/ns2:Notes/text()) !='')then
-                    (if($ESSINTIALRequest/ns2:TotalLaborTime/text() !='')then
-                      <ns1:SupplierComments>{ fn:concat($ESSINTIALRequest/ns2:Notes/text(),$nl,'TIME SPENT: ',$ESSINTIALRequest/ns2:TotalLaborTime/text()) }</ns1:SupplierComments>	
-                      else
-                      <ns1:SupplierComments>{ fn:data($ESSINTIALRequest/ns2:Notes/text()) }</ns1:SupplierComments>
-                      )
-                      else
-                    <ns1:SupplierComments>{ fn:data($ESSINTIALRequest/ns2:Notes) }</ns1:SupplierComments>
-                    }
+                        <ns1:SupplierComments>{ 
+fn:concat(if($ESSINTIALRequest/ns2:FinalAction/text() = 'Swap')then
+fn:concat('Please notice a SWAP happened. Please choose the SWAP resolution code.',$nl)
+else(),
+if(fn:data($ESSINTIALRequest/ns2:Notes/text()) !='')then
+fn:concat(fn:data($ESSINTIALRequest/ns2:Notes),$nl)
+else(),
+if($ESSINTIALRequest/ns2:TotalLaborTime/text() !='')then
+fn:concat('TIME SPENT: ',$ESSINTIALRequest/ns2:TotalLaborTime/text())
+else())}</ns1:SupplierComments>
+                         }
 
-                        {if(fn:data($ESSINTIALRequest/ns2:TotalLaborTime))then
+                        {if(fn:data($ESSINTIALRequest/ns2:TotalLaborTime) !='00:00:00')then
                         <ns1:TimeSpent>{fn:data($ESSINTIALRequest/ns2:TotalLaborTime)}</ns1:TimeSpent>
                         else()
                         }{
-                        if(fn:data($ESSINTIALRequest/ns2:TotalTravelTime))then
+                        if(fn:data($ESSINTIALRequest/ns2:TotalTravelTime) !='00:00:00')then
                         <ns1:TravelTime>{fn:data($ESSINTIALRequest/ns2:TotalTravelTime)}</ns1:TravelTime>
                         else()
                         }{
