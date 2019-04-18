@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ser:proxyServiceEntry xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:oper="http://xmlns.oracle.com/servicebus/proxy/operations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env">
-    <ser:coreEntry isAutoPublish="false">
+    <ser:coreEntry>
         <ser:binding type="abstract XML"/>
-        <oper:operations enabled="true" xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xt="http://www.bea.com/wli/config/xmltypes"/>
+        <oper:operations enabled="true"/>
         <ser:invoke ref="IBM_INC/ProxyServices/Outbound/IBMOutboundIncAsyncPSPipeline" xsi:type="con:PipelineRef" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
         <ser:xqConfiguration>
             <ser:snippetVersion>1.0</ser:snippetVersion>
@@ -20,7 +20,7 @@
             <jms:is-secure>false</jms:is-secure>
             <jms:inbound-properties>
                 <jms:response-required>false</jms:response-required>
-                <jms:XA-required>true</jms:XA-required>
+                <jms:XA-required>false</jms:XA-required>
                 <jms:transaction-timeout>600</jms:transaction-timeout>
             </jms:inbound-properties>
             <jms:request-encoding>UTF-8</jms:request-encoding>

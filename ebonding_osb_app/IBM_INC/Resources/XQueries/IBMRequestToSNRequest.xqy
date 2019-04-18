@@ -107,7 +107,7 @@ ServicePoNumber:','
            </ns1:IncidentContact>
         <ns1:IncidentAsset>
                            <ns1:CI>{fn:substring-before($IBMRequest/sita/ci,'-')}</ns1:CI>
-                           <ns1:BusinessService>{'DESKTOP SERVICES'}</ns1:BusinessService>
+                           <ns1:BusinessService>DESKTOP SERVICES</ns1:BusinessService>
                            </ns1:IncidentAsset>
                            
         </ns1:IncidentRequestBody>

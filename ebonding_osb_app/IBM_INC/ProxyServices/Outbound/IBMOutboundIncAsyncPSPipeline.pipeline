@@ -421,20 +421,6 @@ else 'SN'</con:path>
                             </con2:xqueryTransform>
                         </con1:expr>
                     </con1:replace>
-                    <con6:replace contents-only="true" varName="body" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
-                        <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7f14</con2:id>
-                        <con1:location>
-                            <con2:xpathText>.</con2:xpathText>
-                        </con1:location>
-                        <con1:expr>
-                            <con2:xqueryText>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" >
-&lt;soapenv:Header />
-&lt;soapenv:Body>
-{$body/*}
-&lt;/soapenv:Body>
-&lt;/soapenv:Envelope></con2:xqueryText>
-                        </con1:expr>
-                    </con6:replace>
                 </con:actions>
             </con:stage>
             <con:stage id="_StageId-N3f57d45a.N23e4f0e2.0.163bb15afed.N7d19" name="AuditRequestSent">
@@ -585,6 +571,7 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                     <con4:route>
                         <con2:id>_ActionId-N3f57d45a.4ccebf95.0.16372a61423.N7eed</con2:id>
                         <con4:service ref="IBM_INC/BusinessService/Outbound/IBMIncReqHttpBS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>ProcessIncident</con4:operation>
                         <con4:outboundTransform>
                             <con5:log>
                                 <con2:id>_ActionId-N3f575e6b.1023ba33.0.1685c134ad2.N7ff5</con2:id>
@@ -605,7 +592,7 @@ fn:codepoints-to-string(10),fn:codepoints-to-string(10),fn-bea:serialize($fault)
                                 </con1:expr>
                             </con1:insert>
                             <con1:transport-headers>
-                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7ea0</con2:id>
+                                <con2:id>_ActionId-a013dd6.N3c3e0ff4.0.16a217beec4.N7e9d</con2:id>
                                 <con1:header-set>outbound-request</con1:header-set>
                                 <con1:header value="expression" name="Content-Type">
                                     <con2:xqueryText>'text/xml'</con2:xqueryText>
