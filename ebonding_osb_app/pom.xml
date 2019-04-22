@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!--<module>System</module>
+        <module>System</module>
 		<module>Common</module>
 		<module>DataMappingLoad</module>
 		<module>SN_INC</module>
@@ -24,7 +24,7 @@
         <module>ServiceTec_INC</module>
         <module>Essintial_INC</module>
        <module>IER_INC</module>
-        <module>IBM_INC</module> -->
+        <module>IBM_INC</module>
     </modules> 
 
 </project>
